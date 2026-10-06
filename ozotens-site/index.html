@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ОЗОТЭНС - метод для спины, шеи и суставов</title>
+<meta name="description" content="Демо-страница метода ОЗОТЭНС: карманный прибор ТЭНС, крем OZOTENS 30% и фигурный электрод. Материалы с источниками, предупреждения, заявка-демо.">
+<link rel="stylesheet" href="../ozotens-demo/fonts/local.css">
+<style>
+:root{--ink:#0b1024;--soft:#4b5270;--paper:#f4f7fb;--white:#fff;--ultra:#2335ff;--coral:#ff4a1c;--sky:#8fd0ff;--line:rgba(11,16,36,.12);
+--fd:"Dela Gothic One","Arial Black",sans-serif;--fb:"Onest","Segoe UI",system-ui,sans-serif;--fm:"JetBrains Mono",ui-monospace,monospace;--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--fb);-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--ultra);outline-offset:3px;border-radius:6px}
+a{color:var(--ultra)}
+.wrap{width:min(1120px,100% - 40px);margin:0 auto}
+.mono{font:500 12px/1 var(--fm);letter-spacing:.12em;text-transform:uppercase}
+.nav{position:sticky;top:0;z-index:20;background:rgba(244,247,251,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
+.brand{font:400 20px/1 var(--fd);color:var(--ink);text-decoration:none;letter-spacing:.02em}
+.brand b{color:var(--coral);font-weight:400}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+.nav ul a{color:var(--ink);text-decoration:none;font-size:15px;font-weight:500}
+.nav ul a:hover{color:var(--ultra)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:999px;border:0;font:600 16px/1 var(--fb);cursor:pointer;text-decoration:none;transition:transform .2s var(--ease),background .2s}
+.btn:active{transform:scale(.97)}
+.btn-p{background:var(--ultra);color:#fff}.btn-p:hover{background:#1824c9}
+.btn-g{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}.btn-g:hover{background:var(--ink);color:#fff}
+.warn{background:var(--ink);color:#fff;text-align:center;padding:10px 20px;font-size:14px}
+section{padding:clamp(56px,9vw,112px) 0}
+h1,h2,h3{font-family:var(--fd);font-weight:400;line-height:1.05;margin:0 0 .5em}
+h1{font-size:clamp(40px,7vw,88px)}h1 .hot{color:var(--coral)}
+h2{font-size:clamp(30px,4.5vw,52px)}h3{font-size:22px}
+.lead{font-size:clamp(19px,2.2vw,24px);color:var(--soft);max-width:34em}
+.hero{padding-top:clamp(40px,7vw,88px);background:radial-gradient(900px 500px at 85% 10%,rgba(143,208,255,.45),transparent 60%)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chips span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:500}
+.device{position:relative;aspect-ratio:1;border-radius:32px;background:linear-gradient(160deg,#fff,#dfe9f5);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.device svg{width:78%;height:auto}
+.pulse{transform-origin:center;animation:pl 2.6s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.12);opacity:.55}}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px}
+.steps .card{counter-increment:s}
+.steps .card::before{content:"0" counter(s);font:400 15px var(--fm);color:var(--ultra);display:block;margin-bottom:16px}
+.card p{margin:0;color:var(--soft)}
+.kit{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.spec{width:100%;border-collapse:collapse;margin-top:28px;background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.spec th,.spec td{padding:14px 20px;text-align:left;border-bottom:1px solid var(--line);font-size:16px}
+.spec th{width:42%;color:var(--soft);font-weight:500}.spec tr:last-child *{border:0}
+.note{font-size:14px;color:var(--soft);margin-top:14px}
+.dark{background:var(--ink);color:#fff}
+.dark .lead,.dark .card p{color:#b9c0dd}
+.dark .card{background:#141b3a;border-color:rgba(255,255,255,.12)}
+.dark a{color:var(--sky)}
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.doc{border:1px dashed var(--line);border-radius:20px;padding:22px;background:#fff}
+.doc .st{display:inline-block;background:#fff1ec;color:#b3320f;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;margin-top:10px}
+.zones{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.zones a{display:block;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 16px;text-decoration:none;color:var(--ink);font-weight:600;transition:transform .25s var(--ease),border-color .2s}
+.zones a:hover{transform:translateY(-4px);border-color:var(--ultra)}
+.zones small{display:block;font-weight:400;color:var(--soft);margin-top:6px;font-size:14px}
+.src{columns:2;gap:32px;padding-left:20px}.src li{margin-bottom:8px;break-inside:avoid}
+details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:0 24px;margin-bottom:10px}
+summary{cursor:pointer;padding:20px 0;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--ultra);font-size:24px;line-height:1}
+details[open] summary::after{content:"-"}
+details p{margin:0 0 20px;color:var(--soft)}
+form{display:grid;gap:16px;max-width:560px}
+label{font-weight:600;font-size:15px;display:grid;gap:8px}
+input,select{font:400 17px var(--fb);padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:#fff;color:var(--ink);min-height:52px}
+input:focus,select:focus{border-color:var(--ultra);outline:none;box-shadow:0 0 0 4px rgba(35,53,255,.15)}
+.check{display:flex;gap:12px;align-items:flex-start;font-weight:400;font-size:15px}
+.check input{min-height:0;width:22px;height:22px;margin-top:2px;flex:none}
+.ok{display:none;background:#e7f7ec;border:1px solid #9bd8ae;border-radius:16px;padding:16px 20px;font-weight:500}
+.ok.on{display:block}
+footer{padding:40px 0;border-top:1px solid var(--line);font-size:14px;color:var(--soft)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+.burger{display:none;width:48px;height:48px;border-radius:14px;border:1.5px solid var(--line);background:#fff;cursor:pointer;place-items:center}
+.burger span,.burger span::before,.burger span::after{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;position:relative;content:""}
+.burger span::before{position:absolute;top:-6px}.burger span::after{position:absolute;top:6px}
+.menu{display:none}
+.dock{display:none}
+.zones a .ar{display:none}
+@media(max-width:860px){
+ body{font-size:17px;padding-bottom:96px}
+ .nav .btn{display:none}
+ .burger{display:grid}
+ .menu{display:block;position:fixed;inset:60px 0 auto 0;z-index:19;background:#fff;border-bottom:1px solid var(--line);padding:8px 20px 20px;transform:translateY(-120%);transition:transform .3s var(--ease);visibility:hidden}
+ .menu.open{transform:none;visibility:visible}
+ .menu a{display:flex;align-items:center;min-height:56px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:600;font-size:18px}
+ .hero-grid{gap:28px}.device{display:none}
+ .cta .btn{width:100%}
+ .zones{grid-template-columns:minmax(0,1fr);gap:8px}
+ .zones a{display:flex;align-items:center;min-height:64px;padding:12px 18px;border-radius:16px}
+ .zones a::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--sky);box-shadow:0 0 0 5px rgba(58,160,255,.25);margin-right:16px;flex:none}
+ .zones small{margin:0 0 0 auto;font-size:14px;text-align:right}
+ .zones a .ar{display:block;margin-left:12px;color:var(--ultra)}
+ .card{padding:22px}
+ .dock{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;gap:8px;padding:8px;background:rgba(11,16,36,.94);backdrop-filter:blur(10px);border-radius:22px;box-shadow:0 12px 32px rgba(11,16,36,.3);transition:transform .3s var(--ease),opacity .3s}
+ .dock.hide{transform:translateY(140%);opacity:0;pointer-events:none}
+ .dock a{flex:1;min-height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:600;text-decoration:none;font-size:16px}
+ .dock .d1{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}.dock .d2{background:var(--ultra);color:#fff}
+}
+@media(max-width:860px){.nav ul{display:none}.hero-grid,.steps,.kit,.docs{grid-template-columns:1fr}.src{columns:1}.device{max-width:360px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="warn">Имеются противопоказания. Необходимо проконсультироваться со специалистом. Это демонстрационная страница: заказы не принимаются.</div>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#top">ОЗО<b>ТЭНС</b></a>
+  <nav aria-label="Разделы"><ul>
+    <li><a href="#how">Как это устроено</a></li><li><a href="#kit">Комплект</a></li><li><a href="#zones">Зоны</a></li><li><a href="#safety">Безопасность</a></li><li><a href="#docs">Документы</a></li><li><a href="#faq">Вопросы</a></li>
+  </ul></nav>
+  <a class="btn btn-p" href="#request">Оставить заявку</a>
+  <button class="burger" id="bg" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mn"><span></span></button>
+</div></header>
+<nav class="menu" id="mn" aria-label="Разделы (телефон)">
+  <a href="#how">Как это устроено</a><a href="#kit">Комплект</a><a href="#zones">Зоны</a><a href="#safety">Безопасность</a><a href="#docs">Документы</a><a href="#faq">Вопросы</a>
+</nav>
+<div class="dock" id="dock"><a class="d1" href="../ozotens-demo/">Где болит?</a><a class="d2" href="#request">Заявка</a></div>
+
+<main id="top">
+<section class="hero"><div class="wrap hero-grid">
+  <div class="reveal">
+    <p class="mono" style="color:var(--ultra)">Знакомство с ОЗОТЭНС</p>
+    <h1>Где <span class="hot">болит?</span></h1>
+    <p class="lead">ОЗОТЭНС - метод, где слабые электрические импульсы (ТЭНС) и озонсодержащий крем используют вместе за один сеанс. Характеристики прибора уточняются по официальному паспорту.</p>
+    <div class="cta">
+      <a class="btn btn-p" href="../ozotens-demo/">Показать на карте тела</a>
+      <a class="btn btn-g" href="#how">Как это работает</a>
+    </div>
+    <div class="chips"><span>Спина</span><span>Шея</span><span>Плечо</span><span>Колено</span><span>Стопа</span></div>
+  </div>
+  <div class="device reveal" aria-hidden="true">
+    <span>Прибор · крем · электрод<br>Фото комплекта ожидается</span>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2 class="reveal">Как это устроено</h2>
+  <p class="lead reveal">Три шага. Без записи в кабинет и без дороги.</p>
+  <div class="steps" style="margin-top:36px">
+    <div class="card reveal"><h3>Крем на электрод</h3><p>Озонсодержащий крем OZOTENS 30% наносят на фигурный электрод.</p></div>
+    <div class="card reveal"><h3>Электрод на зону</h3><p>Электрод проводит ток и ложится на зону, где вы чувствуете дискомфорт.</p></div>
+    <div class="card reveal"><h3>Сеанс с прибором</h3><p>Прибор подаёт слабые импульсы по выбранной программе. Режимы и время - по инструкции к прибору.</p></div>
+  </div>
+  <p class="note">Описание метода дано по материалам разработчика. Формулировки проходят проверку юристом по рекламе до публичного запуска.</p>
+</div></section>
+
+<section id="kit" style="background:#fff"><div class="wrap">
+  <h2 class="reveal">Из чего состоит комплект</h2>
+  <div class="kit" style="margin-top:32px">
+    <div class="card reveal"><h3>Прибор ТЭНС</h3><p>Характеристики и программы уточняются по официальному паспорту прибора.</p></div>
+    <div class="card reveal"><h3>Крем OZOTENS 30%</h3><p>Озонсодержащий крем, который наносят на электрод перед сеансом.</p></div>
+    <div class="card reveal"><h3>Фигурный электрод</h3><p>Форма подбирается под зону. Для некоторых зон форма электрода уточняется у производителя.</p></div>
+  </div>
+  <p class="note">Характеристики будут опубликованы после сверки с паспортом прибора.</p>
+</div></section>
+
+<section id="zones"><div class="wrap">
+  <h2 class="reveal">Выберите зону</h2>
+  <p class="lead reveal">Для каждой зоны - отдельная справочная страница с первоисточником. Для шеи доступно только предупреждение о применении.</p>
+  <div class="zones reveal" style="margin-top:32px">
+    <a href="zones/back/">Спина<small>поясница</small><span class="ar" aria-hidden="true">&rsaquo;</span></a>
+    <a href="zones/neck/">Шея<small>справка NHS</small><span class="ar" aria-hidden="true">&rsaquo;</span></a>
+    <a href="zones/shoulder/">Плечо<small>справка NHS</small><span class="ar" aria-hidden="true">&rsaquo;</span></a>
+    <a href="zones/knee/">Колено<small>справка NHS</small><span class="ar" aria-hidden="true">&rsaquo;</span></a>
+    <a href="zones/leg/">Нога<small>боль с отдачей</small><span class="ar" aria-hidden="true">&rsaquo;</span></a>
+  </div>
+</div></section>
+
+<section id="safety" class="dark"><div class="wrap">
+  <h2 class="reveal">Кому метод может не подойти</h2>
+  <p class="lead reveal">ТЭНС подходит не всем. Прежде чем пробовать, проверьте безопасность с врачом и прочитайте инструкцию к конкретному прибору.</p>
+  <div class="steps" style="margin-top:36px">
+    <div class="card reveal"><h3>Сначала врач</h3><p>Обсудите применение со специалистом. Особенно при хронических заболеваниях, имплантированных устройствах, беременности или если вы не уверены.</p></div>
+    <div class="card reveal"><h3>Шея</h3><p>Общая памятка NHS не рекомендует ТЭНС на шее. Для ОЗОТЭНС это уточняется у производителя, до ответа совет по шее не даём.</p></div>
+    <div class="card reveal"><h3>Когда срочно к врачу</h3><p>Резкая сильная боль, слабость или онемение в ноге, травма, лихорадка, нарушение контроля мочевого пузыря или кишечника.</p></div>
+  </div>
+  <p class="note" style="color:#b9c0dd">Полный список противопоказаний придёт от производителя. Здесь он будет опубликован до запуска приёма заявок.</p>
+</div></section>
+
+<section id="docs"><div class="wrap">
+  <h2 class="reveal">Документы</h2>
+  <p class="lead reveal">Каждое утверждение о методе должно опираться на документ. Пока их нет на руках, карточки так и помечены.</p>
+  <p class="note">Документы появятся после получения и проверки оригиналов.</p>
+  <h3 style="margin-top:56px">Источники ознакомительных материалов</h3>
+  <ul class="src">
+    <li><a href="https://www.nhs.uk/conditions/back-pain/" rel="noopener">NHS: боль в спине</a></li>
+    <li><a href="https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/" rel="noopener">NHS: боль в шее</a></li>
+    <li><a href="https://www.nhs.uk/conditions/shoulder-pain/" rel="noopener">NHS: боль в плече</a></li>
+    <li><a href="https://www.nhs.uk/conditions/sciatica/" rel="noopener">NHS: ишиас</a></li>
+    <li><a href="https://www.nhs.uk/conditions/knee-pain/" rel="noopener">NHS: боль в колене</a></li>
+    <li><a href="https://www.nhs.uk/tests-and-treatments/transcutaneous-electrical-nerve-stimulation-tens/" rel="noopener">NHS: ТЭНС</a></li>
+  </ul>
+  <p class="note">Это общие материалы британской службы здравоохранения, а не российские рекомендации и не доказательство эффективности ОЗОТЭНС.</p>
+</div></section>
+
+<section id="faq" style="background:#fff"><div class="wrap" style="max-width:820px">
+  <h2 class="reveal">Частые вопросы</h2>
+  <details><summary>Это замена врачу или лекарствам?</summary><p>Нет. Сайт не ставит диагноз и не назначает лечение. Если боль сильная или не проходит, обратитесь к врачу.</p></details>
+  <details><summary>Результат у всех одинаковый?</summary><p>Нет. Ощущения и результат индивидуальны. Мы не обещаем конкретный эффект и срок.</p></details>
+  <details><summary>Сколько стоит комплект?</summary><p>Цены пока не опубликованы: ждём подтверждения от продавца.</p></details>
+  <details><summary>Кто продаёт и как оформить заказ?</summary><p>Продавец и маршрут заявки уточняются. Сейчас форма ниже - демонстрационная и ничего не отправляет.</p></details>
+  <details><summary>Можно ли использовать на шее?</summary><p>Пока нет рекомендации: ждём официальную инструкцию производителя и заключение специалиста.</p></details>
+</div></section>
+
+<section id="request"><div class="wrap">
+  <h2 class="reveal">Оставить заявку</h2>
+  <p class="lead reveal">Демо: поле контакта отключено. Можно проверить выбор зоны и кнопку; заявка не отправляется.</p>
+  <form id="f" style="margin-top:32px" novalidate>
+    <label>Где болит
+      <select name="zone" required><option value="">Выберите зону</option><option>Спина</option><option>Шея</option><option>Плечо</option><option>Колено</option><option>Стопа</option><option>Другое</option></select>
+    </label>
+    <label>Пример контакта (ввод отключён)
+      <input name="contact" type="text" readonly value="demo@example.com" inputmode="text" placeholder="Демонстрационный контакт" autocomplete="off" required>
+    </label>
+    <input type="hidden" name="source" id="src" value="unknown">
+    <label class="check"><input type="checkbox" name="agree" required> <span>Понимаю, что имеются противопоказания, и обсужу применение со специалистом.</span></label>
+    <button class="btn btn-p" type="submit">Отправить (демо)</button>
+    <div class="ok" id="ok" role="status">Спасибо. Это демонстрационная форма: заявка не отправлена.</div>
+  </form>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <p><b>ОЗОТЭНС</b> - демонстрационный макет. Имеются противопоказания. Необходимо проконсультироваться со специалистом. Материалы не заменяют консультацию врача. Результат индивидуален.</p>
+</div></footer>
+
+<script>
+(function(){
+  try{var u=new URLSearchParams(location.search).get('utm_source');if(u)document.getElementById('src').value=u.slice(0,60)}catch(e){}
+  var f=document.getElementById('f'),ok=document.getElementById('ok');
+  f.addEventListener('submit',function(e){e.preventDefault();
+    var bad=!f.zone.value||!f.contact.value.trim()||!f.agree.checked;
+    ok.textContent=bad?'Заполните зону, контакт и подтвердите пункт про специалиста.':'Спасибо. Это демонстрационная форма: заявка не отправлена, источник: '+f.source.value+'.';
+    ok.classList.add('on');if(!bad)f.reset()});
+  var bg=document.getElementById('bg'),mn=document.getElementById('mn');
+  function tg(o){mn.classList.toggle('open',o);bg.setAttribute('aria-expanded',o)}
+  bg.addEventListener('click',function(){tg(!mn.classList.contains('open'))});
+  mn.addEventListener('click',function(e){if(e.target.tagName==='A')tg(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')tg(false)});
+  var dock=document.getElementById('dock');
+  if('IntersectionObserver' in window){new IntersectionObserver(function(en){dock.classList.toggle('hide',en[0].isIntersecting)},{threshold:.2}).observe(document.getElementById('request'))}
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});els.forEach(function(e){io.observe(e)})}
+  else els.forEach(function(e){e.classList.add('in')});
+})();
+</script>
+</body>
+</html>

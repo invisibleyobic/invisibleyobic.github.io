@@ -476,6 +476,8 @@ document.getElementById('reset').addEventListener('click', () => close(false));
 addEventListener('keydown', e => { if (e.key === 'Escape') close(true); });
 reducedMotion.addEventListener('change', () => { if (active) focusZone(active); });
 renderShot();
+const initialZone = new URLSearchParams(location.search).get('zone');
+if (ORDER.includes(initialZone)) open(initialZone, false);
 </script>
 </body>
 </html>
