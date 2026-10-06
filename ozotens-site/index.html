@@ -21,7 +21,7 @@ h1{font-size:clamp(46px,10vw,132px);line-height:.94}h1 em{font-style:normal;colo
 @media(min-width:900px){.hero h1{font-size:clamp(72px,8vw,120px)}.hero h1 em{display:block}.hero .lead,.hero .wrap>p.mono{max-width:min(560px,48vw)}}
 h2{font-size:clamp(30px,5vw,56px)}h3{font-size:22px}
 .lead{color:var(--soft);font-size:clamp(18px,2.1vw,23px);max-width:34em}
-.warn{padding:10px 16px;font-size:13px;color:var(--soft);text-align:center;border-bottom:1px solid var(--line);background:#0a0f26}
+.warn{padding:8px 16px;font-size:12px;line-height:1.35;color:var(--soft);text-align:center;border-bottom:1px solid var(--line);background:#0a0f26}
 .nav{position:sticky;top:0;z-index:20;background:var(--glass);backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
 .brand{font:400 20px/1 var(--fd);color:#fff;text-decoration:none}.brand b{color:var(--coral);font-weight:400}
@@ -123,6 +123,50 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
  .dock .d1{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}.dock .d2{background:var(--ultra)}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+/* ---- v5.2: спокойная премиальная подача (референсы Mobbin: Biograph, Hims, Superpower, Function) ---- */
+:root{--paper:#f5f2ec;--ln:rgba(11,16,36,.12)}
+h2,h3{font-family:var(--fb);font-weight:600;letter-spacing:-.03em}
+h2{font-size:clamp(34px,5.4vw,66px);line-height:1.02}
+h3{font-size:21px;letter-spacing:-.01em}
+.mono{letter-spacing:.16em;font-weight:500}
+.btn{font-weight:600}
+.btn-p{background:#fff;color:var(--ink);box-shadow:none}.btn-p:hover{background:#e8ecfa}
+.hero .btn-p,.nav .btn-p,.dock .d2{background:#fff;color:var(--ink)}
+.dock .d2{color:var(--ink)}
+.light{background:var(--paper);color:var(--ink);border:0}
+.light .lead,.light .card p,.light .note,.light .doc p,.light details p{color:#4b5270}
+.light .mono{color:#b3320f}
+.light .btn-p{background:var(--ink);color:#fff}.light .btn-p:hover{background:#1a2142}
+.light .btn-g{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.light a{color:#2335ff}
+.light .card{background:#fff;border:1px solid var(--ln);backdrop-filter:none;box-shadow:0 1px 0 rgba(11,16,36,.04)}
+.light .steps .card::before{color:#b3320f}
+.light .flow path{stroke:var(--ink);opacity:.5}
+.light .flow circle{fill:var(--coral)}
+.light .doc{border:1px solid var(--ln);background:#fff}
+.light .doc .st{background:#fff1ec;color:#b3320f}
+.light details{background:#fff;border:1px solid var(--ln)}
+.light summary::after{color:var(--ink)}
+.light input,.light select{background:#fff;border-color:rgba(11,16,36,.2);color:var(--ink)}
+.light input:focus,.light select:focus{border-color:var(--ink);box-shadow:0 0 0 4px rgba(11,16,36,.1)}
+.light .check{color:#4b5270}
+.light .ok{background:#e7f7ec;border-color:#9bd8ae;color:var(--ink)}
+.light .src a{color:#2335ff}
+/* зоны: фото-карточки с подписью снизу */
+.zgrid{gap:16px}
+.z{aspect-ratio:3/4;border-radius:22px;border:0}
+.z span{font:600 22px/1.1 var(--fb);letter-spacing:-.02em}
+.z i{background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.35)}
+.z i::after{border-color:#fff}
+/* документы списком */
+.docs{grid-template-columns:1fr;gap:0;border-top:1px solid var(--ln)}
+.doc{display:grid;grid-template-columns:1.2fr 1.4fr auto;gap:16px;align-items:center;border:0!important;border-bottom:1px solid var(--ln)!important;border-radius:0;background:transparent!important;padding:20px 4px}
+.doc h3{margin:0}.doc .st{margin:0;justify-self:end}
+@media(max-width:700px){.doc{grid-template-columns:1fr auto}.doc p{grid-column:1/2;grid-row:2}.doc .st{grid-row:1/3;grid-column:2}}
+.spec{background:transparent;border-color:var(--line)}
+.light .z,.light .z:hover{color:#fff}.light .z small{color:#e3e8f7}
+.nav{background:rgba(7,11,28,.92)}
 .product-photo{display:block;width:100%;height:300px;object-fit:contain;background:#fff;border-radius:22px;margin-bottom:24px;padding:12px}.product-set{margin:24px 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:24px;background:#fff;border-radius:26px}.product-set>div{min-width:0;text-align:center;color:var(--ink)}.product-set img{width:100%;height:300px;object-fit:contain}.product-set span{display:block;font-weight:600;font-size:18px;margin-top:16px}.story-bridge{border-block:1px solid var(--line);background:radial-gradient(ellipse at 80% 50%,rgba(143,208,255,.15),transparent 65%)}.body-map-frame{display:block;width:min(1200px,100%);height:850px;border:1px solid var(--line);border-radius:26px;margin:28px auto}.body-map-frame+div{margin-top:20px}@media(max-width:700px){.product-set{padding:16px 8px;gap:8px}.product-set img{height:160px}.product-set span{font-size:13px}.body-map-frame{border-radius:0;height:780px}}
 </style>
 </head>
@@ -131,13 +175,13 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
 <header class="nav"><div class="wrap">
   <a class="brand" href="#top">ОЗО<b>ТЭНС</b></a>
   <nav aria-label="Разделы"><ul>
-    <li><a href="#how">Как устроено</a></li><li><a href="#kit">Комплект</a></li><li><a href="#zones">Зоны</a></li><li><a href="#safety">Безопасность</a></li><li><a href="#docs">Документы</a></li><li><a href="#faq">Вопросы</a></li>
+    <li><a href="#how">Как устроено</a></li><li><a href="#kit">Комплект</a></li><li><a href="#body-map">Зоны</a></li><li><a href="#safety">Безопасность</a></li><li><a href="#docs">Документы</a></li><li><a href="#faq">Вопросы</a></li>
   </ul></nav>
   <a class="btn btn-p" href="#request">Оставить заявку</a>
   <button class="burger" id="bg" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mn"><span></span></button>
 </div></header>
 <nav class="menu" id="mn" aria-label="Разделы (телефон)">
-  <a href="#how">Как устроено</a><a href="#kit">Комплект</a><a href="#zones">Зоны</a><a href="#safety">Безопасность</a><a href="#docs">Документы</a><a href="#faq">Вопросы</a>
+  <a href="#how">Как устроено</a><a href="#kit">Комплект</a><a href="#body-map">Зоны</a><a href="#safety">Безопасность</a><a href="#docs">Документы</a><a href="#faq">Вопросы</a>
 </nav>
 <div class="dock" id="dock"><a class="d1" href="#body-map">Где болит?</a><a class="d2" href="#request">Заявка</a></div>
 
@@ -157,7 +201,7 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
   <div class="scroll" aria-hidden="true"></div>
 </section>
 
-<section class="story-bridge" id="story-bridge"><div class="wrap"><p class="mono">Узнаёшь себя?</p><h2>Когда боль меняет планы</h2><p class="lead">Сидячая работа. Напряжение. Страх снова почувствовать боль. История о том, как хочется вернуться к своим планам.</p><a class="btn btn-p" href="story/">Посмотреть историю</a></div></section><section id="body-map"><div class="wrap"><p class="mono">Живая карта тела</p><h2>Покажи, где болит</h2><p class="lead">Выбери область: камера приблизит её. Кнопка закрытия или Escape вернут общий план.</p></div><iframe class="body-map-frame" src="../ozotens-demo/?embed=1" title="Интерактивная карта тела с приближением и возвратом к общему плану" loading="lazy"></iframe><div class="wrap"><a class="btn btn-g" href="../ozotens-demo/">Открыть карту на весь экран</a></div></section><section id="how"><div class="wrap">
+<section class="story-bridge" id="story-bridge"><div class="wrap"><p class="mono">Узнаёшь себя?</p><h2>Когда боль меняет планы</h2><p class="lead">Сидячая работа. Напряжение. Страх снова почувствовать боль. История о том, как хочется вернуться к своим планам.</p><a class="btn btn-p" href="story/">Посмотреть историю</a></div></section><section id="body-map" class="light"><div class="wrap"><p class="mono">Выбор области</p><h2>Где болит?</h2><p class="lead">Выбери область: камера приблизит её не более чем в 2,3 раза. Закрытие панели или Escape вернут общий вид.</p></div><iframe class="body-map-frame" src="../ozotens-demo/?embed=1" title="Выбор области тела с крупными планами и справочной информацией" loading="lazy"></iframe><div class="wrap"><a class="btn btn-g" href="../ozotens-demo/">Открыть карту на весь экран</a></div></section><section id="how" class="light"><div class="wrap">
   <p class="mono">Три шага</p>
   <h2 class="reveal">Как это устроено</h2>
   <p class="lead reveal">Без записи в кабинет и без дороги.</p>
@@ -181,19 +225,7 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
   <p class="note">Характеристики будут опубликованы после сверки с паспортом прибора.</p>
 </div></section>
 
-<section id="zones"><div class="wrap">
-  <p class="mono">Выберите область</p>
-  <h2 class="reveal">Где у вас болит</h2>
-  <p class="lead reveal">Для каждой области - справка с первоисточником и мягкие советы про движение и нагрузку. Не диагноз и не назначение.</p>
-</div>
-<div class="wrap"><div class="zgrid">
-  <a class="z reveal" href="zones/back/index.html"><img src="../ozotens-demo/images/details/back.png" alt="" loading="lazy"><i></i><span>Спина<small>поясница</small></span></a>
-  <a class="z reveal" href="zones/neck/index.html"><img src="../ozotens-demo/images/details/neck.png" alt="" loading="lazy"><i></i><span>Шея<small>предупреждение</small></span></a>
-  <a class="z reveal" href="zones/shoulder/index.html"><img src="../ozotens-demo/images/details/shoulder.png" alt="" loading="lazy"><i></i><span>Плечо<small>справка NHS</small></span></a>
-  <a class="z reveal" href="zones/knee/index.html"><img src="../ozotens-demo/images/details/knee.png" alt="" loading="lazy"><i></i><span>Колено<small>справка NHS</small></span></a>
-  <a class="z reveal" href="zones/leg/index.html"><img src="../ozotens-demo/images/details/sciatic.png" alt="" loading="lazy"><i></i><span>Нога<small>боль с отдачей</small></span></a>
-</div>
-<p class="note" style="margin-top:16px">Иллюстративные кадры, не схема размещения электрода.</p></div></section>
+
 
 <section id="safety" class="safe"><div class="wrap">
   <p class="mono" style="color:#ffb59f">Важно</p>
@@ -207,7 +239,7 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
   <p class="note">Полный список противопоказаний придёт от производителя. Здесь он будет опубликован до запуска приёма заявок.</p>
 </div></section>
 
-<section id="docs"><div class="wrap">
+<section id="docs" class="light"><div class="wrap">
   <p class="mono">Подтверждения</p>
   <h2 class="reveal">Документы</h2>
   <p class="lead reveal">Каждое утверждение о методе должно опираться на документ. Пока их нет на руках, карточки так и помечены.</p>
@@ -233,7 +265,7 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
   <details><summary>Можно ли использовать на шее?</summary><p>Пока нет рекомендации: ждём официальную инструкцию производителя и заключение специалиста.</p></details>
 </div></section>
 
-<section id="request"><div class="wrap">
+<section id="request" class="light"><div class="wrap">
   <p class="mono">Демо-форма</p>
   <h2 class="reveal">Оставить заявку</h2>
   <p class="lead reveal">Данные никуда не отправляются и нигде не сохраняются.</p>
