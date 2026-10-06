@@ -151,6 +151,11 @@ h1 .hot { color: var(--coral); }
 .zone .dot { box-shadow:0 0 0 4px rgba(255,90,54,.35); }
 .zone.on .dot { background:var(--coral); }
 .zone .lbl { display:none; }
+.detail { position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .65s var(--ease); overflow:hidden; }
+.detail img { width:100%; height:100%; object-fit:cover; }
+.detail-view .detail { opacity:1; }
+.detail-glow { position:absolute; left:50%; top:50%; width:120px; height:120px; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(closest-side,rgba(255,176,74,.55),rgba(255,90,54,.3) 50%,transparent); animation:detail-pulse 2.4s ease-in-out infinite; }
+@keyframes detail-pulse { 50% { opacity:.45; transform:translate(-50%,-50%) scale(1.2); } }
 .scene-caption { position:absolute; left:16px; top:16px; z-index:2; max-width:calc(100% - 32px); margin:0; padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.92); font-size:14px; pointer-events:none; }
 .image-state { position:absolute; bottom:18px; left:18px; right:18px; padding:12px; border-radius:14px; background:rgba(255,255,255,.94); font-size:16px; }
 .image-state[hidden] { display:none; }
@@ -223,6 +228,7 @@ h1 span + span::before { content:' '; }
     <div class="visual">
       <div class="stage">
         <div class="layer" id="layer"><img id="photo" alt="Человек со спины - кадр-заглушка, сгенерирован для макета"></div>
+        <div class="detail" id="detail" aria-hidden="true"><img id="detail-photo" alt=""><span class="detail-glow"></span></div>
         <p class="scene-caption" id="scene-caption">Выберите область на фото или в списке</p>
         <p class="image-state" id="image-state" role="status">Загружаем фотографию…</p>
       </div>
@@ -271,6 +277,7 @@ h1 span + span::before { content:' '; }
 <script>
 // Кадры Higgsfield (GPT Image 2.5, 2K). Координаты зон - доли кадра 16:9, размечены по превью.
 const BASE = 'images/';
+const DETAILS = new Set(['neck', 'shoulder', 'back', 'sciatic', 'knee']);
 const SHOTS = [
   { id: '533309ad-56a8-4a6e-8965-3713ab8aca37', cx: 77, zones: {
     neck: [77.2, 17.5, 4.2], shoulder: [72.5, 21.5, 5], back: [77.2, 38, 6.5], sciatic: [77.2, 52, 7],
@@ -297,6 +304,25 @@ const ORDER = ['back', 'sciatic', 'neck', 'shoulder', 'knee', 'foot'];
 
 const hero = document.getElementById('hero'), layer = document.getElementById('layer'), photo = document.getElementById('photo'), info = document.getElementById('info');
 const stage = document.querySelector('.stage');
+const detailPhoto = document.getElementById('detail-photo');
+let detailKey = null;
+function updateDetail(key) {
+  const next = shot === 1 && DETAILS.has(key) ? key : null;
+  if (next === detailKey) return;
+  detailKey = next; stage.classList.remove('detail-view');
+  if (!next) return;
+  const glow = document.querySelector('.detail-glow');
+  glow.style.left = (next === 'sciatic' ? 40 : next === 'knee' ? 62 : 50) + '%';
+  glow.style.top = (next === 'sciatic' ? 40 : next === 'knee' ? 55 : 50) + '%';
+  detailPhoto.onload = () => {
+    if (detailKey === next && shot === 1 && active === next) {
+      stage.classList.add('detail-view');
+      caption.textContent = `${ZONES[next].title} · отдельный крупный план`;
+    }
+  };
+  detailPhoto.onerror = () => { stage.classList.remove('detail-view'); };
+  detailPhoto.src = BASE + 'details/' + next + '.png';
+}
 const imageState = document.getElementById('image-state');
 const caption = document.getElementById('scene-caption');
 const toast = document.getElementById('toast');
@@ -365,6 +391,8 @@ function focusZone(key) {
   layer.style.setProperty('--marker-scale', 1 / zoom);
   hero.dataset.activeZone = key || '';
   caption.textContent = key ? `${ZONES[key].title} · крупный план фотографии` : 'Выберите область на фото или в списке';
+  updateDetail(key);
+  if (stage.classList.contains('detail-view') && key) caption.textContent = `${ZONES[key].title} · отдельный крупный план`;
 }
 new ResizeObserver(() => focusZone(active)).observe(stage);
 photo.addEventListener('load', () => { imageState.hidden = true; });
