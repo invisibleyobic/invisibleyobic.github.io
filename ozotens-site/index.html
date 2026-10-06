@@ -123,7 +123,7 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
  .dock .d1{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}.dock .d2{background:var(--ultra)}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
-.product-photo{display:block;width:100%;height:240px;object-fit:contain;background:#fff;border-radius:18px;margin-bottom:20px}.product-kit{margin:24px 0 32px}.product-kit img{display:block;width:100%;max-height:520px;object-fit:contain;background:white;border-radius:24px}.product-kit figcaption{font-size:14px;color:var(--soft);margin-top:12px}
+.product-photo{display:block;width:100%;height:300px;object-fit:contain;background:#fff;border-radius:22px;margin-bottom:24px;padding:12px}.product-set{margin:24px 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:24px;background:#fff;border-radius:26px}.product-set>div{min-width:0;text-align:center;color:var(--ink)}.product-set img{width:100%;height:300px;object-fit:contain}.product-set span{display:block;font-weight:600;font-size:18px;margin-top:16px}.story-bridge{border-block:1px solid var(--line);background:radial-gradient(ellipse at 80% 50%,rgba(143,208,255,.15),transparent 65%)}.body-map-frame{display:block;width:min(1200px,100%);height:850px;border:1px solid var(--line);border-radius:26px;margin:28px auto}.body-map-frame+div{margin-top:20px}@media(max-width:700px){.product-set{padding:16px 8px;gap:8px}.product-set img{height:160px}.product-set span{font-size:13px}.body-map-frame{border-radius:0;height:780px}}
 </style>
 </head>
 <body>
@@ -139,7 +139,7 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
 <nav class="menu" id="mn" aria-label="Разделы (телефон)">
   <a href="#how">Как устроено</a><a href="#kit">Комплект</a><a href="#zones">Зоны</a><a href="#safety">Безопасность</a><a href="#docs">Документы</a><a href="#faq">Вопросы</a>
 </nav>
-<div class="dock" id="dock"><a class="d1" href="../ozotens-demo/">Где болит?</a><a class="d2" href="#request">Заявка</a></div>
+<div class="dock" id="dock"><a class="d1" href="#body-map">Где болит?</a><a class="d2" href="#request">Заявка</a></div>
 
 <main id="top">
 <section class="hero">
@@ -149,7 +149,7 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
     <h1>Где <em>болит?</em></h1>
     <p class="lead">ОЗОТЭНС - метод, где слабые электрические импульсы (ТЭНС) и озонсодержащий крем используют вместе за один сеанс. Характеристики прибора уточняются по официальному паспорту.</p>
     <div class="cta">
-      <a class="btn btn-p" href="../ozotens-demo/">Показать на карте тела</a><a class="btn btn-g" href="story/">Жизнь в ограничениях</a>
+      <a class="btn btn-p" href="#body-map">Показать на карте тела</a><a class="btn btn-g" href="story/">Жизнь в ограничениях</a>
       <a class="btn btn-g" href="#how">Как это работает</a>
     </div>
     <div class="chips"><span>Спина</span><span>Шея</span><span>Плечо</span><span>Колено</span><span>Стопа</span></div>
@@ -157,7 +157,7 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
   <div class="scroll" aria-hidden="true"></div>
 </section>
 
-<section id="how"><div class="wrap">
+<section class="story-bridge" id="story-bridge"><div class="wrap"><p class="mono">Узнаёшь себя?</p><h2>Когда боль меняет планы</h2><p class="lead">Сидячая работа. Напряжение. Страх снова почувствовать боль. История о том, как хочется вернуться к своим планам.</p><a class="btn btn-p" href="story/">Посмотреть историю</a></div></section><section id="body-map"><div class="wrap"><p class="mono">Живая карта тела</p><h2>Покажи, где болит</h2><p class="lead">Выбери область: камера приблизит её. Кнопка закрытия или Escape вернут общий план.</p></div><iframe class="body-map-frame" src="../ozotens-demo/?embed=1" title="Интерактивная карта тела с приближением и возвратом к общему плану" loading="lazy"></iframe><div class="wrap"><a class="btn btn-g" href="../ozotens-demo/">Открыть карту на весь экран</a></div></section><section id="how"><div class="wrap">
   <p class="mono">Три шага</p>
   <h2 class="reveal">Как это устроено</h2>
   <p class="lead reveal">Без записи в кабинет и без дороги.</p>
@@ -172,7 +172,7 @@ footer{padding:36px 0 40px;border-top:1px solid var(--line);font-size:14px;color
 
 <section id="kit" style="background:rgba(10,14,34,.6);border-block:1px solid var(--line)"><div class="wrap">
   <p class="mono">Состав</p>
-  <h2 class="reveal">Из чего состоит комплект</h2><figure class="product-kit"><img src="product-images/kit.jpg" alt="Фотокомпозиция с сайта Медозонс: прибор, крем и электроды" loading="lazy"><figcaption>Фото материалов ОЗОТЭНС с сайта <a href="https://www.medozons.ru/products/ozotens/ozotens-therapy/">Медозонс</a>. Это иллюстрация состава, не инструкция по применению. Форму электрода и комплектацию уточняют по официальной инструкции.</figcaption></figure>
+  <h2 class="reveal">Из чего состоит комплект</h2><figure class="product-set" aria-label="Прибор, крем и электрод"><div><img src="product-images/device.jpg" alt="Фотография прибора RoovJoy с сайта Медозонс" loading="lazy"><span>Прибор ТЭНС</span></div><div><img src="product-images/cream.jpg" alt="Фотография крема OZOTENS с сайта Медозонс" loading="lazy"><span>Крем OZOTENS 30%</span></div><div><img src="product-images/electrode.jpg" alt="Фотография примера формы электрода с сайта Медозонс" loading="lazy"><span>Фигурный электрод</span></div></figure><p class="note">Фотографии из материалов <a href="https://www.medozons.ru/products/ozotens/ozotens-therapy/">Медозонс</a>. Пример состава; форму электрода и комплектацию сверяют с официальной инструкцией.</p>
   <div class="kit">
     <div class="card reveal"><img class="product-photo" src="product-images/device.jpg" alt="Фотография прибора RoovJoy с сайта Медозонс" loading="lazy"><h3>Прибор ТЭНС</h3><p>Характеристики и программы уточняются по официальному паспорту прибора.</p></div>
     <div class="card reveal"><img class="product-photo" src="product-images/cream.jpg" alt="Фотография крема OZOTENS с сайта Медозонс" loading="lazy"><h3>Крем OZOTENS 30%</h3><p>Озонсодержащий крем, который наносят на электрод перед сеансом.</p></div>

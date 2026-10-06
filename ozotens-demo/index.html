@@ -66,6 +66,7 @@ body.focus .title{opacity:0;transform:translateY(-14px)}
  .dock{left:40px;right:auto;width:min(620px,calc(100vw - 80px));padding:0 0 28px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.embedded .top{display:none}
 </style>
 </head>
 <body>
@@ -75,7 +76,7 @@ body.focus .title{opacity:0;transform:translateY(-14px)}
   <canvas id="fx" aria-hidden="true"></canvas>
   <div class="pts" id="pts"></div>
 </div>
-<div class="top"><a class="brand" href="../ozotens-site/">ОЗО<b>ТЭНС</b></a><a class="about" href="../ozotens-site/">О методе</a></div>
+<div class="top"><a class="brand" target="_top" href="../ozotens-site/">ОЗО<b>ТЭНС</b></a><a class="about" target="_top" href="../ozotens-site/">О методе</a></div>
 <div class="title" id="title"><h1>Где <em>болит?</em></h1><p>Коснитесь области. Камера приблизит её и откроет справку с первоисточником.</p></div>
 <div class="dock">
   <div class="hint" id="hint"><b></b><span>Экскурсия по зонам. Коснитесь любой, чтобы остановить.</span></div>
@@ -172,8 +173,8 @@ function show(k){
  var h='<button class="x" type="button" aria-label="Закрыть">&times;</button><span class="num">Область '+z.n+'</span><h2></h2><p></p><div class="row"></div>';
  sheet.innerHTML=h;sheet.querySelector('h2').textContent=z.t;sheet.querySelector('p').textContent=z.txt;
  var row=sheet.querySelector('.row');
- if(z.page){var a=document.createElement('a');a.className='btn p';a.href='../ozotens-site/zones/'+z.page+'/';a.textContent='Открыть страницу области';row.appendChild(a)}
- if(z.nhs){var a2=document.createElement('a');a2.className='btn g';a2.href=z.nhs;a2.rel='noopener';a2.textContent='Первоисточник';row.appendChild(a2)}
+ if(z.page){var a=document.createElement('a');a.className='btn p';a.target='_top';a.href='../ozotens-site/zones/'+z.page+'/';a.textContent='Открыть страницу области';row.appendChild(a)}
+ if(z.nhs){var a2=document.createElement('a');a2.className='btn g';a2.href=z.nhs;a2.rel='noopener';a2.target='_blank';a2.textContent='Первоисточник';row.appendChild(a2)}
  sheet.querySelector('.x').addEventListener('click',function(){stopTour();show(null)});
  var ch=chips.querySelector('[data-k="'+k+'"]');if(ch&&ch.scrollIntoView)try{ch.scrollIntoView({inline:'center',block:'nearest',behavior:RM?'auto':'smooth'})}catch(e){}
 }
@@ -188,7 +189,7 @@ addEventListener('keydown',function(e){if(e.key==='Escape'){stopTour();show(null
 addEventListener('resize',function(){measure();tgt=compute(active);if(RM){cam=Object.assign({},tgt)}});
 build();
 function start(){measure();cam=compute(null);tgt=Object.assign({},cam);requestAnimationFrame(frame);
- var initial=new URLSearchParams(location.search).get('zone');if(ORDER.indexOf(initial)>=0){stopTour();show(initial)}else if(tour){hint.hidden=false;tourTimer=setTimeout(runTour,1600)}else hint.hidden=true}
+ if(new URLSearchParams(location.search).get('embed')==='1'){stopTour();document.body.classList.add('embedded')}var initial=new URLSearchParams(location.search).get('zone');if(ORDER.indexOf(initial)>=0){stopTour();show(initial)}else if(tour){hint.hidden=false;tourTimer=setTimeout(runTour,1600)}else hint.hidden=true}
 if(photo.complete&&photo.naturalWidth)start();else{photo.addEventListener('load',start);photo.addEventListener('error',start)}
 })();
 </script>
