@@ -5,7 +5,7 @@
  let paused=false;const reduced=matchMedia('(prefers-reduced-motion:reduce)');
  function update(visible){steps.classList.toggle('playing',visible&&!paused&&!reduced.matches)}
  let visible=false;
- const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;update(visible)},{threshold:.15});observer.observe(section);
+ if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;update(visible)},{threshold:.15});observer.observe(section)}else{visible=true;update(visible)}
  control.addEventListener('click',()=>{paused=!paused;control.textContent=paused?'Включить анимацию схем':'Остановить анимацию схем';control.setAttribute('aria-pressed',String(!paused));update(visible)});
- reduced.addEventListener('change',()=>update(visible));
+ if(reduced.addEventListener)reduced.addEventListener('change',()=>update(visible));else if(reduced.addListener)reduced.addListener(()=>update(visible));
 })();

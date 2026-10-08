@@ -20,3 +20,7 @@
 
 .area-loading{position:absolute;inset:160px 16px 380px;display:none;place-items:center;text-align:center;color:var(--soft)}.detail-pending .area-loading{display:grid}.detail-pending .layer,.detail-pending #fx,.detail-pending #pts{visibility:hidden}
 @media(min-width:900px){.area-loading{inset:155px 40px 230px 340px}}
+
+/* A readable first screen does not depend on modern viewport units. */
+.hero{height:100vh;height:100svh}html{overflow-x:hidden}
+@media(max-width:360px){.hcta .btn{max-width:100%;font-size:15px;padding-inline:12px}.hcta .btn span{min-width:0}.hcta .watch{max-width:100%}}
