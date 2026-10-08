@@ -2,9 +2,11 @@
 .pimg{height:clamp(240px,38svh,360px);padding:16px;display:block}
 .pimg img{display:block;width:100%;height:100%;max-width:none;max-height:none;min-height:0;object-fit:contain}
 .hs .bgimg img,.hs.wide .bgimg img{transform:scale(1);transition:transform 6s linear;will-change:transform}
-.hs.on .bgimg img,.hs.wide.on .bgimg img{transform:scale(1.08)}
+.hs.on .bgimg img,.hs.wide.on .bgimg img{animation:story-in 6s linear both}
 .hs:nth-child(2) .bgimg img{transform:scale(1.08)}
-.hs:nth-child(2).on .bgimg img{transform:scale(1)}
+.hs:nth-child(2).on .bgimg img{animation-name:story-out}
+@keyframes story-in{from{transform:scale(1)}to{transform:scale(1.08)}}
+@keyframes story-out{from{transform:scale(1.08)}to{transform:scale(1)}}
 .trip-fear{display:block;margin-top:.25em;font:700 .85em/1.15 var(--fb);color:#ffc1a8;letter-spacing:-.02em}
 .mapscene{height:100vh;height:100svh;overflow:hidden}
 .area-detail{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .4s ease;display:block}
@@ -16,7 +18,7 @@
 .detail-view .pop::after{display:none}
 .pcta,.pop.compact .pcta{min-height:48px}
 @media(min-width:900px){.area-detail img{object-fit:contain;background:#1c3029}.detail-view .pop{top:185px!important;left:32px!important}}
-@media(prefers-reduced-motion:reduce){.hs .bgimg img,.hs.on .bgimg img,.hs.wide.on .bgimg img{transform:none!important;transition:none}.area-detail{transition:none}}
+@media(prefers-reduced-motion:reduce){.hs .bgimg img,.hs.on .bgimg img,.hs.wide.on .bgimg img{transform:none!important;transition:none;animation:none}.area-detail{transition:none}}
 .scheme-control{margin-top:24px;min-height:48px;background:transparent;border:1px solid currentColor;color:inherit;border-radius:999px;padding:10px 18px;font:inherit;cursor:pointer}
 .steps.playing .stp:nth-child(1) .ico circle{animation:cream-drop 2.8s ease-in-out infinite}
 .steps.playing .stp:nth-child(2) .ico rect{animation:electrode-place 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
