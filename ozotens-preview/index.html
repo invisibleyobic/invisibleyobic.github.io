@@ -255,6 +255,9 @@ footer{padding:44px 20px 130px}
 .pimg{background:#fff;border-radius:18px;height:200px;display:grid;place-items:center;margin:10px 0 14px;overflow:hidden}.pimg img{max-width:100%;max-height:100%;object-fit:contain}
 .pp{font:400 15px/1.5 var(--fb);color:var(--soft);margin:8px 0}
 .stp .ico{width:140px;height:84px;margin:8px 0 6px;color:var(--ink,#0f3d2e)}.stp .ico svg{width:100%;height:100%;display:block}
+.pimg.is3d{height:290px;background:radial-gradient(ellipse at 50% 60%,#eef4f2,#d3e0dd)}.pimg.is3d img{display:none}.pimg canvas{border-radius:18px}
+.p3bar{display:flex;gap:6px;margin:-4px 0 6px}.p3bar button{all:unset;cursor:pointer;box-sizing:border-box;min-width:64px;min-height:44px;display:grid;place-items:center;padding:0 16px;border-radius:999px;border:1px solid var(--line);font:600 14px var(--fb);color:var(--soft)}.p3bar button.on{background:#fff;color:#0a1c17}.p3bar button:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.p3hint{margin:0 0 10px}.p3bar[hidden],.p3hint[hidden]{display:none!important}
 </style>
 <link rel="stylesheet" href="visuals.css?v=6edee55903d7"></head>
 <body>
@@ -552,9 +555,12 @@ var PROD={
  electrode:{t:'Фигурный электрод',s:'Форма зависит от области',p:['Электрод проводит ток от прибора к коже. У разработчика есть формы под разные области, например «СПИНА», «ПЛЕЧО», «КОЛЕНО», «СТОПА».','Это пример формы, а не личный подбор. Для шеи совет по применению не даём, пока нет ответа производителя.'],c:'Фото: Медозонс'}
 };
 function loadOrb(cb){if(window.OzoOrb){cb();return}var s=document.createElement('script');s.src='orb.js';s.onload=cb;s.onerror=cb;document.head.appendChild(s)}
+function loadV3D(cb){if(window.Ozo3D){cb();return}var inl=document.getElementById('v3d-inline');if(inl){var q=document.createElement('script');q.text=inl.textContent;document.head.appendChild(q);cb();return}var s=document.createElement('script');s.src='view3d.js';s.onload=cb;s.onerror=function(){cb()};document.head.appendChild(s)}
+function kill3d(){if(window.__v3d){try{window.__v3d.dispose()}catch(e){}window.__v3d=null}}
 function openProd(key,back){
+ kill3d();
  var d=PROD[key];if(!d)return;
- var h='<button class="x" type="button" aria-label="Закрыть">&times;</button><button class="bk" type="button" id="pback">&lsaquo; К набору</button><div class="pimg"><img src="'+IMGS[key]+'" alt="'+d.t+'"></div><h3></h3><p class="lead2"></p>'+d.p.map(function(){return '<p class="pp"></p>'}).join('')+'<p class="note"></p><p class="note">Не диагноз и не назначение. Имеются противопоказания. Необходимо проконсультироваться со специалистом.</p>';
+ var h='<button class="x" type="button" aria-label="Закрыть">&times;</button><button class="bk" type="button" id="pback">&lsaquo; К набору</button><div class="pimg" id="p3d"><img src="'+IMGS[key]+'" alt="'+d.t+'"></div><div class="p3bar" id="p3bar" hidden><button type="button" data-m="3d" class="on">3D</button><button type="button" data-m="photo">Фото</button></div><p class="sm p3hint" id="p3hint" hidden></p><h3></h3><p class="lead2"></p>'+d.p.map(function(){return '<p class="pp"></p>'}).join('')+'<p class="note"></p><p class="note">Не диагноз и не назначение. Имеются противопоказания. Необходимо проконсультироваться со специалистом.</p>';
  sheet.className='sheet';sheet.innerHTML=h;
  sheet.querySelector('h3').textContent=d.t;sheet.querySelector('.lead2').textContent=d.s;
  sheet.querySelectorAll('.pp').forEach(function(e,i){e.textContent=d.p[i]});
@@ -562,8 +568,17 @@ function openProd(key,back){
  sheet.querySelector('.x').addEventListener('click',closeSheet);
  $('pback').addEventListener('click',function(){if(back)back();else closeSheet()});
  swp.classList.add('on');sheet.scrollTop=0;$('pback').focus();
+ start3d(key);
+}
+function start3d(key){
+ var box=$('p3d'),bar=$('p3bar'),hint=$('p3hint');if(!box)return;
+ function on(){kill3d();if(!box.isConnected)return;try{window.__v3d=Ozo3D.mount(box,key,{label:PROD[key].t+', 3D-модель, можно вращать'});box.classList.add('is3d');bar.hidden=false;hint.hidden=false;hint.textContent='Крути пальцем, щипком приближай. Приблизительная 3D-модель по фото Медозонс: размеры и скрытые стороны не измерены.';setMode('3d')}catch(e){kill3d();bar.hidden=true;hint.hidden=true;box.classList.remove('is3d')}}
+ function setMode(m){bar.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.m===m)})}
+ bar.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.m==='photo'){kill3d();box.classList.remove('is3d');setMode('photo');hint.textContent='Фото: Медозонс.'}else on()})});
+ loadV3D(function(){if(window.Ozo3D&&$('p3d')===box)on()});
 }
 function openSheet(step){
+ kill3d();
  var k=ORDER[active],z=ZONES[k],el=ELECTRODE[k];lastFocus=document.activeElement;sheet.className='sheet'+(z.warn?' warn':'');
  var h='<button class="x" type="button" aria-label="Закрыть">&times;</button><span class="mono">Область '+(active+1)+' из '+ORDER.length+'</span><h3></h3>';
  if(!el){
@@ -604,7 +619,7 @@ function openSheet(step){
  if(el){sheet.querySelectorAll('.ki input').forEach(function(i){i.addEventListener('change',recalc)});sheet.querySelectorAll('.kd').forEach(function(b){b.addEventListener('click',function(){openProd(b.dataset.prod,function(){openSheet()})})});recalc();showAct();if(step==='form')showForm()}
  sheet.querySelector('.x').addEventListener('click',closeSheet);swp.classList.add('on');sheet.scrollTop=0;sheet.querySelector('.x').focus();
 }
-function closeSheet(){if(window.__payT){clearInterval(window.__payT);window.__payT=0}if(window.__payH){try{window.__payH.unmount()}catch(e){}window.__payH=null}swp.classList.remove('on');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+function closeSheet(){kill3d();if(window.__payT){clearInterval(window.__payT);window.__payT=0}if(window.__payH){try{window.__payH.unmount()}catch(e){}window.__payH=null}swp.classList.remove('on');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
 swp.addEventListener('click',function(e){if(e.target===swp)closeSheet()});
 document.querySelectorAll('.cards .card[data-prod]').forEach(function(c){function o(){lastFocus=c;openProd(c.dataset.prod,null)}c.addEventListener('click',o);c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();o()}})});
 $('more').addEventListener('click',function(){openSheet()});
