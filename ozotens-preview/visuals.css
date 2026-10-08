@@ -1,14 +1,22 @@
 /* Keep the current design; display entire real products and original close-ups. */
 .pimg{height:clamp(240px,38svh,360px);padding:16px;display:block}
 .pimg img{display:block;width:100%;height:100%;max-width:none;max-height:none;min-height:0;object-fit:contain}
-.hs .bgimg img,.hs.on .bgimg img,.hs.wide.on .bgimg img{transform:none;transition:none}
-.area-detail{position:absolute;inset:160px 16px 380px;display:none;place-items:center}
-.area-detail img{display:block;width:100%;height:100%;min-height:0;object-fit:contain;border-radius:20px}
-.detail-view .area-detail{display:grid}.detail-view .layer,.detail-view #fx,.detail-view #pts{visibility:hidden}
-.detail-view .cam::after{display:none}
-.detail-view .pop{top:auto!important;bottom:260px;left:16px!important;width:calc(100% - 32px);max-width:340px;animation:none}
-.detail-view .pop::before,.detail-view .pop::after{display:none}
-@media(min-width:900px){.area-detail{inset:155px 40px 230px 340px}.detail-view .pop{top:155px!important;bottom:auto;left:32px!important;width:280px}}
+.hs .bgimg img,.hs.wide .bgimg img{transform:scale(1);transition:transform 6s linear;will-change:transform}
+.hs.on .bgimg img,.hs.wide.on .bgimg img{transform:scale(1.08)}
+.hs:nth-child(2) .bgimg img{transform:scale(1.08)}
+.hs:nth-child(2).on .bgimg img{transform:scale(1)}
+.trip-fear{display:block;margin-top:.25em;font:700 .85em/1.15 var(--fb);color:#ffc1a8;letter-spacing:-.02em}
+.mapscene{height:100vh;height:100svh;overflow:hidden}
+.area-detail{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .4s ease;display:block}
+.area-detail img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+.detail-view .area-detail{opacity:1}.detail-view #fx,.detail-view #pts{visibility:hidden}
+.pt.dim{opacity:.75;pointer-events:auto}.pt i::after{animation:none;inset:-6px}
+.map-overview{position:absolute;z-index:7;right:16px;top:155px;min-height:48px;padding:10px 16px;border:1px solid #fff;border-radius:999px;background:#17342c;color:#fff;font:600 16px var(--fb);cursor:pointer}
+.detail-view .pop{top:210px!important;left:16px!important;max-width:280px;animation:none}
+.detail-view .pop::after{display:none}
+.pcta,.pop.compact .pcta{min-height:48px}
+@media(min-width:900px){.area-detail img{object-fit:contain;background:#1c3029}.detail-view .pop{top:185px!important;left:32px!important}}
+@media(prefers-reduced-motion:reduce){.hs .bgimg img,.hs.on .bgimg img,.hs.wide.on .bgimg img{transform:none!important;transition:none}.area-detail{transition:none}}
 .scheme-control{margin-top:24px;min-height:48px;background:transparent;border:1px solid currentColor;color:inherit;border-radius:999px;padding:10px 18px;font:inherit;cursor:pointer}
 .steps.playing .stp:nth-child(1) .ico circle{animation:cream-drop 2.8s ease-in-out infinite}
 .steps.playing .stp:nth-child(2) .ico rect{animation:electrode-place 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
@@ -18,8 +26,7 @@
 @keyframes signal-travel{to{stroke-dashoffset:-40}}
 @media(prefers-reduced-motion:reduce){.steps.playing .ico *{animation:none!important}.scheme-control{display:none}}
 
-.area-loading{position:absolute;inset:160px 16px 380px;display:none;place-items:center;text-align:center;color:var(--soft)}.detail-pending .area-loading{display:grid}.detail-pending .layer,.detail-pending #fx,.detail-pending #pts{visibility:hidden}
-@media(min-width:900px){.area-loading{inset:155px 40px 230px 340px}}
+.area-loading{display:none}
 
 /* A readable first screen does not depend on modern viewport units. */
 .hero{height:100vh;height:100svh}html{overflow-x:hidden}

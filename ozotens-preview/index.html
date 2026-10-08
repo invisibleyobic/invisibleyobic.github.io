@@ -256,7 +256,7 @@ footer{padding:44px 20px 130px}
 .pp{font:400 15px/1.5 var(--fb);color:var(--soft);margin:8px 0}
 .stp .ico{width:140px;height:84px;margin:8px 0 6px;color:var(--ink,#0f3d2e)}.stp .ico svg{width:100%;height:100%;display:block}
 </style>
-<link rel="stylesheet" href="visuals.css?v=e52056166d0b"></head>
+<link rel="stylesheet" href="visuals.css?v=de92d5d2e87f"></head>
 <body>
 <div class="top"><a class="brand" href="#top">ОЗО<b>ТЭНС</b></a><button class="burger" id="bg" type="button" aria-label="Меню" aria-expanded="false"><span></span></button></div>
 <nav class="menu" id="mn" aria-label="Разделы"><button class="x" id="mx" type="button" aria-label="Закрыть меню">&times;</button>
@@ -281,7 +281,7 @@ footer{padding:44px 20px 130px}
     </div>
     <div class="hs" data-d="4800">
       <div class="bgimg"><img loading="lazy" width="1600" height="900" decoding="async" src="img/room.webp" alt="" style="object-position:76% 50%"></div>
-      <div class="ht"><h2 class="dela reveal">Помнишь поездки без «а вдруг прихватит»?</h2><p class="p reveal">Сначала отказываешься от пробежки, потом от поездки, потом от гостей. Боль не командует вслух, но планы тихо сокращаются.</p></div>
+      <div class="ht"><h2 class="dela reveal">Помнишь поездки без<br><em class="trip-fear">«А вдруг прихватит»?</em></h2><p class="p reveal">Сначала отказываешься от пробежки, потом от поездки, потом от гостей. Боль не командует вслух, но планы тихо сокращаются.</p></div>
     </div>
     <div class="hs" data-d="5000">
       <div class="bgimg"><img loading="lazy" width="1600" height="900" decoding="async" src="img/bench.webp" alt="" style="object-position:78% 50%"></div>
@@ -408,7 +408,7 @@ var vis={};
 if('IntersectionObserver' in window){
  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>.4)e.target.classList.add('in')})},{threshold:[.4]});
  scenes.forEach(function(s){io.observe(s)});
- var io2=new IntersectionObserver(function(en){en.forEach(function(e){vis[e.target.id]=e.isIntersecting;updateDock();if(e.target.id==='map'){camOn=e.isIntersecting;if(camOn&&typeof popShow==='function'){popKey=-1;popShow();fillThumbs();showDetail(ORDER[active])}}})},{threshold:[.25]});
+ var io2=new IntersectionObserver(function(en){en.forEach(function(e){vis[e.target.id]=e.isIntersecting;updateDock();if(e.target.id==='map'){camOn=e.isIntersecting;if(camOn&&typeof popShow==='function'){popKey=-1;if(areaChosen)popShow();fillThumbs();showDetail(ORDER[active])}}})},{threshold:[.25]});
  [$('hero'),mapEl,document.querySelector('footer')].forEach(function(s){if(s){if(!s.id)s.id='ft';io2.observe(s)}});
 }else scenes.forEach(function(s){s.classList.add('in')});
 function updateDock(){var show=!vis.hero&&!vis.map&&!vis.ft;dock.classList.toggle('on',show&&scrollY>innerHeight*.8)}
@@ -444,7 +444,7 @@ $('ovx').addEventListener('click',closeOv);ov.addEventListener('click',function(
 var layer=$('layer'),photo=$('photo'),cam=$('cam'),pts=$('pts'),fx=$('fx'),ctx=fx.getContext('2d'),car=$('car'),dots=$('dots'),rail=$('rail');
 var sw=0,sh=0,W=0,H=0,reserve=330,active=0,camOn=false,C={tx:0,ty:0,z:1},T={tx:0,ty:0,z:1},cards=[],ptEls={};
 function clampT(tx,ty,z){return[Math.min(0,Math.max(sw-W*z,tx)),Math.min(0,Math.max(sh-reserve-H*z,ty))]}
-function compute(k){
+function compute(k){if(!areaChosen){var tx=sw*.5-CX/100*W,t=clampT(tx,0,1);return{tx:t[0],ty:0,z:1}}
  var z0=ZONES[k],px=z0.x/100*W,py=z0.y/100*H,base=Math.min(sw,sh)*.24,z=Math.max(1.5,Math.min(2.3,base/(z0.r/100*W)));
  var Tx=sw>=900?sw*.66:sw*.5,Ty=sw>=900?(sh-230)*.5+30:sh*.30,t=clampT(Tx-px*z,Ty-py*z,z);return{tx:t[0],ty:t[1],z:z};
 }
@@ -479,29 +479,33 @@ function buildCar(){
   car.appendChild(b);cards.push(b);
   var d=document.createElement('i');dots.appendChild(d);
   var pt=document.createElement('button');pt.className='pt';pt.type='button';pt.setAttribute('aria-label',z.t);pt.innerHTML='<i></i>';pt.addEventListener('click',function(){goTo(i,true)});pts.appendChild(pt);ptEls[k]=pt;
-  b.addEventListener('click',function(){if(i===active)openSheet();else goTo(i,true)});
+  b.addEventListener('click',function(){if(i===active&&areaChosen)openSheet();else goTo(i,true)});
  });
 }
 function fillThumbs(){if(!camOn)return;
  var src=photo.currentSrc||photo.src,asp=(photo.naturalWidth||2688)/(photo.naturalHeight||1520);
  cards.forEach(function(c,i){
-  var z=ZONES[ORDER[i]],img=c.firstChild;if(ORDER[i]!=='foot'){img.src='detail-images/'+ORDER[i]+'.png';img.loading='lazy';img.decoding='async';img.style.cssText='width:100%;height:100%;object-fit:cover;left:0;top:0';return}var cw=c.clientWidth||164,ch=c.clientHeight||210;
+  var z=ZONES[ORDER[i]],img=c.firstChild,cw=c.clientWidth||164,ch=c.clientHeight||210;
   var w=cw*.38/(z.r/100),ih=w/asp;if(ih<ch*1.25){ih=ch*1.25;w=ih*asp}
   img.src=src;img.style.width=w+'px';img.style.height=ih+'px';
   img.style.left=(cw/2-z.x/100*w)+'px';img.style.top=(ch*.45-z.y/100*ih)+'px';
  });
 }
 var scrollTimer=null,lockUntil=0;
-var detailSerial=0;
+var detailSerial=0,areaChosen=false;
 function showDetail(k){
- var root=document.getElementById('map'),img=document.getElementById('area-photo'),serial=++detailSerial;
- root.classList.remove('detail-view');
- if(!camOn)return;
- if(k==='foot'){img.onload=null;root.classList.remove('detail-pending');return;}
- root.classList.add('detail-pending');root.querySelector('.area-loading').textContent='Загружаем крупный план...';
- function reveal(){if(serial===detailSerial){root.classList.remove('detail-pending');root.classList.add('detail-view')}}
- img.onerror=function(){if(serial===detailSerial)root.querySelector('.area-loading').textContent='Не удалось загрузить крупный план.'};
- img.onload=reveal;img.src='detail-images/'+k+'.png';img.alt='Иллюстративный крупный план: '+ZONES[k].t+'. Не схема размещения электрода.';
+ var root=$('map'),img=$('area-photo'),serial=++detailSerial;
+ root.classList.remove('detail-view','detail-pending');
+ if(!camOn||!areaChosen||k==='foot')return;
+ var started=performance.now();
+ function reveal(){
+  if(serial!==detailSerial)return;
+  if(!camOn)return;
+  if(!RM&&performance.now()-started<700){setTimeout(reveal,50);return;}
+  root.classList.add('detail-view');
+ }
+ img.onload=reveal;img.onerror=function(){root.classList.remove('detail-view')};
+ img.src='detail-images/'+k+'.png';img.alt='Иллюстративный крупный план: '+ZONES[k].t+'. Не схема размещения электрода.';
  if(img.complete&&img.naturalWidth)reveal();
 }
 function setActive(i,fromScroll){
@@ -509,15 +513,23 @@ function setActive(i,fromScroll){
  cards.forEach(function(c,j){c.classList.toggle('on',j===i);c.setAttribute('aria-selected',j===i)});
  [].forEach.call(dots.children,function(d,j){d.classList.toggle('on',j===i)});
  T=compute(ORDER[i]);showDetail(ORDER[i]);
- if(typeof popShow==='function')popShow();
+ if(areaChosen&&typeof popShow==='function')popShow();
 }
 function centerOf(i){var c=cards[i];return c.offsetLeft+c.offsetWidth/2-car.clientWidth/2}
-function goTo(i,smooth){i=Math.max(0,Math.min(ORDER.length-1,i));lockUntil=performance.now()+500;setActive(i);car.scrollTo({left:centerOf(i),behavior:smooth&&!RM?'smooth':'auto'});used()}
+function goTo(i,smooth){areaChosen=true;i=Math.max(0,Math.min(ORDER.length-1,i));lockUntil=performance.now()+500;setActive(i);car.scrollTo({left:centerOf(i),behavior:smooth&&!RM?'smooth':'auto'});used()}
 function nearest(){var mid=car.scrollLeft+car.clientWidth/2,best=0,bd=1e9;cards.forEach(function(c,j){var d=Math.abs(c.offsetLeft+c.offsetWidth/2-mid);if(d<bd){bd=d;best=j}});return best}
-car.addEventListener('scroll',function(){if(performance.now()<lockUntil)return;used();setActive(nearest(),true)},{passive:true});
+car.addEventListener('scroll',function(){if(performance.now()<lockUntil)return;used();areaChosen=true;setActive(nearest(),true)},{passive:true});
 function used(){rail.classList.add('used')}
 $('pv').addEventListener('click',function(){goTo(active-1,true)});$('nx').addEventListener('click',function(){goTo(active+1,true)});
-car.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();goTo(active+1,true)}if(e.key==='ArrowLeft'){e.preventDefault();goTo(active-1,true)}if(e.key==='Enter'){openSheet()}});
+car.addEventListener('keydown',function(e){if(['ArrowRight','ArrowLeft',' '].indexOf(e.key)!==-1)return;if(e.key==='ArrowRight'){e.preventDefault();goTo(active+1,true)}if(e.key==='ArrowLeft'){e.preventDefault();goTo(active-1,true)}if(e.key==='Enter'){openSheet()}});
+document.addEventListener('keydown',function(e){
+ var r=mapEl.getBoundingClientRect(),tag=e.target.tagName;
+ if(e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey||e.target.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(tag)||document.querySelector('.sheetwrap.on,.ov.on,.menu.on')||r.top>innerHeight*.35||r.bottom<innerHeight*.65)return;
+ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();goTo(active+(e.key==='ArrowRight'?1:-1),true)}
+ else if(e.code==='Space'&&tag!=='BUTTON'&&tag!=='A'){e.preventDefault();openSheet()}
+});
+var overview=document.createElement('button');overview.type='button';overview.className='map-overview';overview.textContent='Общий вид';mapEl.appendChild(overview);
+overview.addEventListener('click',function(){areaChosen=false;++detailSerial;mapEl.classList.remove('detail-view','detail-pending');pop.classList.remove('show');T=compute(null)});
 /* свайп по самой карте */
 var sx=null,sy=null;
 cam.addEventListener('pointerdown',function(e){sx=e.clientX;sy=e.clientY});
@@ -534,7 +546,7 @@ function popPlace(){
  pop.classList.toggle('flip',flip);pop.style.left=left+'px';pop.style.top=(flip?above:below)+'px';pop.style.setProperty('--tx',Math.max(22,Math.min(wc-22,p[0]-left))+'px');
 }
 function popShow(){
- var z=ZONES[ORDER[active]];if(popKey===active)return;popKey=active;
+ if(!areaChosen)return;var z=ZONES[ORDER[active]];if(popKey===active)return;popKey=active;
  pop.innerHTML='<span class="lb"><i></i>ОЗОТЭНС-терапия</span><p></p><button class="pcta" type="button"></button>';pop.querySelector('p').textContent=z.pop;var kk=ORDER[active];pop.querySelector('.pcta').textContent=ELECTRODE[kk]?'Набор: '+z.t.toLowerCase()+' \u2192':'Что делать дальше \u2192';
  pop.classList.remove('show','compact','mini');void pop.offsetWidth;pop.classList.add('show');
 }
