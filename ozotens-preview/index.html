@@ -256,7 +256,7 @@ footer{padding:44px 20px 130px}
 .pp{font:400 15px/1.5 var(--fb);color:var(--soft);margin:8px 0}
 .stp .ico{width:140px;height:84px;margin:8px 0 6px;color:var(--ink,#0f3d2e)}.stp .ico svg{width:100%;height:100%;display:block}
 </style>
-</head>
+<link rel="stylesheet" href="visuals.css"></head>
 <body>
 <div class="top"><a class="brand" href="#top">ОЗО<b>ТЭНС</b></a><button class="burger" id="bg" type="button" aria-label="Меню" aria-expanded="false"><span></span></button></div>
 <nav class="menu" id="mn" aria-label="Разделы"><button class="x" id="mx" type="button" aria-label="Закрыть меню">&times;</button>
@@ -268,7 +268,7 @@ footer{padding:44px 20px 130px}
   <div class="sbar" id="sbar" aria-hidden="true"></div>
   <div class="hslides" id="hs">
     <div class="hs wide" data-d="4600">
-      <div class="bgimg"><img fetchpriority="high" width="1600" height="900" decoding="async" src="img/office.webp" alt="" style="object-position:72% 50%"><video id="loop" poster="img/office.webp" muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+      <div class="bgimg"><img fetchpriority="high" width="1600" height="900" decoding="async" src="img/office.webp" srcset="hero-images/office.png 1600w, img/office.webp 800w" sizes="100vw" alt="" style="object-position:72% 50%"></div>
       <div class="ht"><p class="mono k reveal">Знакомо?</p><h2 class="reveal">У тебя были планы на день.</h2><p class="p reveal">Работа. Дорога. Встречи.</p></div>
     </div>
     <div class="hs wide" data-d="5200">
@@ -288,7 +288,7 @@ footer{padding:44px 20px 130px}
       <div class="ht"><h2 class="reveal">Надоело подстраивать жизнь под боль?</h2><p class="p reveal">Хотеть жить без оглядки на поясницу нормально. Разобраться в вариантах можно прямо сейчас, а выбирать вместе со специалистом.</p></div>
     </div>
     <div class="hs" data-d="5400">
-      <div class="bgimg"><img loading="lazy" width="1600" height="900" decoding="async" src="img/daylight.webp" alt="" style="object-position:80% 50%"></div>
+      <div class="bgimg"><img loading="lazy" width="1600" height="900" decoding="async" src="img/daylight.webp" srcset="hero-images/daylight.png 1600w, img/daylight.webp 800w" sizes="100vw" alt="" style="object-position:80% 50%"></div>
       <div class="ht"><h2 class="dela reveal">Ты не один!<br>Твои планы важны!</h2><p class="sm reveal">Образ желаемой жизни. Это не результат применения прибора.</p></div>
     </div>
   </div>
@@ -296,7 +296,7 @@ footer{padding:44px 20px 130px}
   <div class="hcta"><a class="btn" href="#map" id="tomap"><span id="tomapT">Покажи, где болит</span><svg class="dn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a><button class="watch" id="watch" type="button"><i></i>Ролик 35 с</button></div>
 </section>
 <section class="scene mapscene" id="map" data-s="7" aria-label="Выбор области">
-  <div class="cam" id="cam"><div class="layer" id="layer"><img id="photo" width="2000" height="1131" decoding="async" src="img/woman.webp" alt="Человек со спины, иллюстративный кадр"></div><canvas id="fx" aria-hidden="true"></canvas><div id="pts"></div></div>
+  <div class="cam" id="cam"><div class="layer" id="layer"><img id="photo" width="2000" height="1131" decoding="async" src="img/woman.webp" alt="Человек со спины, иллюстративный кадр"></div><div class="area-detail"><img id="area-photo" alt="Иллюстративный крупный план выбранной области. Не схема размещения электрода."></div><canvas id="fx" aria-hidden="true"></canvas><div id="pts"></div></div>
   <div class="maphead"><h2 class="dela">Покажи, где болит.</h2></div>
   <div class="pop" id="pop" role="status" aria-live="polite"></div>
   <div class="rail" id="rail">
@@ -408,7 +408,7 @@ var vis={};
 if('IntersectionObserver' in window){
  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>.4)e.target.classList.add('in')})},{threshold:[.4]});
  scenes.forEach(function(s){io.observe(s)});
- var io2=new IntersectionObserver(function(en){en.forEach(function(e){vis[e.target.id]=e.isIntersecting;updateDock();if(e.target.id==='map'){camOn=e.isIntersecting;if(camOn&&typeof popShow==='function'){popKey=-1;popShow()}}})},{threshold:[.25]});
+ var io2=new IntersectionObserver(function(en){en.forEach(function(e){vis[e.target.id]=e.isIntersecting;updateDock();if(e.target.id==='map'){camOn=e.isIntersecting;if(camOn&&typeof popShow==='function'){popKey=-1;popShow();fillThumbs();showDetail(ORDER[active])}}})},{threshold:[.25]});
  [$('hero'),mapEl,document.querySelector('footer')].forEach(function(s){if(s){if(!s.id)s.id='ft';io2.observe(s)}});
 }else scenes.forEach(function(s){s.classList.add('in')});
 function updateDock(){var show=!vis.hero&&!vis.map&&!vis.ft;dock.classList.toggle('on',show&&scrollY>innerHeight*.8)}
@@ -482,21 +482,31 @@ function buildCar(){
   b.addEventListener('click',function(){if(i===active)openSheet();else goTo(i,true)});
  });
 }
-function fillThumbs(){
+function fillThumbs(){if(!camOn)return;
  var src=photo.currentSrc||photo.src,asp=(photo.naturalWidth||2688)/(photo.naturalHeight||1520);
  cards.forEach(function(c,i){
-  var z=ZONES[ORDER[i]],img=c.firstChild,cw=c.clientWidth||164,ch=c.clientHeight||210;
+  var z=ZONES[ORDER[i]],img=c.firstChild;if(ORDER[i]!=='foot'){img.src='detail-images/'+ORDER[i]+'.png';img.loading='lazy';img.decoding='async';img.style.cssText='width:100%;height:100%;object-fit:cover;left:0;top:0';return}var cw=c.clientWidth||164,ch=c.clientHeight||210;
   var w=cw*.38/(z.r/100),ih=w/asp;if(ih<ch*1.25){ih=ch*1.25;w=ih*asp}
   img.src=src;img.style.width=w+'px';img.style.height=ih+'px';
   img.style.left=(cw/2-z.x/100*w)+'px';img.style.top=(ch*.45-z.y/100*ih)+'px';
  });
 }
 var scrollTimer=null,lockUntil=0;
+var detailSerial=0;
+function showDetail(k){
+ var root=document.getElementById('map'),img=document.getElementById('area-photo'),serial=++detailSerial;
+ root.classList.remove('detail-view');
+ if(!camOn)return;
+ if(k==='foot'){img.onload=null;return;}
+ function reveal(){if(serial===detailSerial)root.classList.add('detail-view')}
+ img.onload=reveal;img.src='detail-images/'+k+'.png';img.alt='Иллюстративный крупный план: '+ZONES[k].t+'. Не схема размещения электрода.';
+ if(img.complete&&img.naturalWidth)reveal();
+}
 function setActive(i,fromScroll){
  if(i===active&&fromScroll)return;active=i;
  cards.forEach(function(c,j){c.classList.toggle('on',j===i);c.setAttribute('aria-selected',j===i)});
  [].forEach.call(dots.children,function(d,j){d.classList.toggle('on',j===i)});
- T=compute(ORDER[i]);
+ T=compute(ORDER[i]);showDetail(ORDER[i]);
  if(typeof popShow==='function')popShow();
 }
 function centerOf(i){var c=cards[i];return c.offsetLeft+c.offsetWidth/2-car.clientWidth/2}
@@ -613,5 +623,5 @@ if(photo.complete&&photo.naturalWidth)start();else{photo.addEventListener('load'
 addEventListener('resize',function(){measure();fillThumbs();car.scrollTo({left:centerOf(active)})});
 })();
 </script>
-</body>
+<script src="visuals.js"></script></body>
 </html>
