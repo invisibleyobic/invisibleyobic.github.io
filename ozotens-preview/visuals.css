@@ -7,6 +7,7 @@
 .hs:nth-child(2).on .bgimg img{animation-name:story-out}
 @keyframes story-in{from{transform:scale(1)}to{transform:scale(1.08)}}
 @keyframes story-out{from{transform:scale(1.08)}to{transform:scale(1)}}
+.trip-memory{white-space:nowrap;font-size:clamp(18px,5.5vw,46px)}
 .trip-fear{display:block;margin-top:.25em;font:700 .85em/1.15 var(--fb);color:#ffc1a8;letter-spacing:-.02em}
 .mapscene{height:100vh;height:100svh;overflow:hidden}
 .area-detail{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .4s ease;display:block}
