@@ -17,3 +17,6 @@
 @keyframes electrode-place{0%,15%{transform:translateY(-10px);opacity:.4}55%,85%{transform:none;opacity:.85}100%{transform:translateY(-10px);opacity:.4}}
 @keyframes signal-travel{to{stroke-dashoffset:-40}}
 @media(prefers-reduced-motion:reduce){.steps.playing .ico *{animation:none!important}.scheme-control{display:none}}
+
+.area-loading{position:absolute;inset:160px 16px 380px;display:none;place-items:center;text-align:center;color:var(--soft)}.detail-pending .area-loading{display:grid}.detail-pending .layer,.detail-pending #fx,.detail-pending #pts{visibility:hidden}
+@media(min-width:900px){.area-loading{inset:155px 40px 230px 340px}}

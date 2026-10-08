@@ -268,7 +268,7 @@ footer{padding:44px 20px 130px}
   <div class="sbar" id="sbar" aria-hidden="true"></div>
   <div class="hslides" id="hs">
     <div class="hs wide" data-d="4600">
-      <div class="bgimg"><img fetchpriority="high" width="1600" height="900" decoding="async" src="img/office.webp" srcset="hero-images/office.png 1600w, img/office.webp 800w" sizes="100vw" alt="" style="object-position:72% 50%"></div>
+      <div class="bgimg"><picture><source media="(min-width:900px)" srcset="hero-images/office.png"><img fetchpriority="high" width="1600" height="900" decoding="async" src="img/office.webp" alt="" style="object-position:72% 50%"></picture></div>
       <div class="ht"><p class="mono k reveal">Знакомо?</p><h2 class="reveal">У тебя были планы на день.</h2><p class="p reveal">Работа. Дорога. Встречи.</p></div>
     </div>
     <div class="hs wide" data-d="5200">
@@ -288,7 +288,7 @@ footer{padding:44px 20px 130px}
       <div class="ht"><h2 class="reveal">Надоело подстраивать жизнь под боль?</h2><p class="p reveal">Хотеть жить без оглядки на поясницу нормально. Разобраться в вариантах можно прямо сейчас, а выбирать вместе со специалистом.</p></div>
     </div>
     <div class="hs" data-d="5400">
-      <div class="bgimg"><img loading="lazy" width="1600" height="900" decoding="async" src="img/daylight.webp" srcset="hero-images/daylight.png 1600w, img/daylight.webp 800w" sizes="100vw" alt="" style="object-position:80% 50%"></div>
+      <div class="bgimg"><picture><source media="(min-width:900px)" srcset="hero-images/daylight.png"><img loading="lazy" width="1600" height="900" decoding="async" src="img/daylight.webp" alt="" style="object-position:80% 50%"></picture></div>
       <div class="ht"><h2 class="dela reveal">Ты не один!<br>Твои планы важны!</h2><p class="sm reveal">Образ желаемой жизни. Это не результат применения прибора.</p></div>
     </div>
   </div>
@@ -296,7 +296,7 @@ footer{padding:44px 20px 130px}
   <div class="hcta"><a class="btn" href="#map" id="tomap"><span id="tomapT">Покажи, где болит</span><svg class="dn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a><button class="watch" id="watch" type="button"><i></i>Ролик 35 с</button></div>
 </section>
 <section class="scene mapscene" id="map" data-s="7" aria-label="Выбор области">
-  <div class="cam" id="cam"><div class="layer" id="layer"><img id="photo" width="2000" height="1131" decoding="async" src="img/woman.webp" alt="Человек со спины, иллюстративный кадр"></div><div class="area-detail"><img id="area-photo" alt="Иллюстративный крупный план выбранной области. Не схема размещения электрода."></div><canvas id="fx" aria-hidden="true"></canvas><div id="pts"></div></div>
+  <div class="cam" id="cam"><div class="layer" id="layer"><img id="photo" width="2000" height="1131" decoding="async" src="img/woman.webp" alt="Человек со спины, иллюстративный кадр"></div><div class="area-detail"><img id="area-photo" alt="Иллюстративный крупный план выбранной области. Не схема размещения электрода."></div><div class="area-loading" role="status">Загружаем крупный план...</div><canvas id="fx" aria-hidden="true"></canvas><div id="pts"></div></div>
   <div class="maphead"><h2 class="dela">Покажи, где болит.</h2></div>
   <div class="pop" id="pop" role="status" aria-live="polite"></div>
   <div class="rail" id="rail">
@@ -497,8 +497,10 @@ function showDetail(k){
  var root=document.getElementById('map'),img=document.getElementById('area-photo'),serial=++detailSerial;
  root.classList.remove('detail-view');
  if(!camOn)return;
- if(k==='foot'){img.onload=null;return;}
- function reveal(){if(serial===detailSerial)root.classList.add('detail-view')}
+ if(k==='foot'){img.onload=null;root.classList.remove('detail-pending');return;}
+ root.classList.add('detail-pending');root.querySelector('.area-loading').textContent='Загружаем крупный план...';
+ function reveal(){if(serial===detailSerial){root.classList.remove('detail-pending');root.classList.add('detail-view')}}
+ img.onerror=function(){if(serial===detailSerial)root.querySelector('.area-loading').textContent='Не удалось загрузить крупный план.'};
  img.onload=reveal;img.src='detail-images/'+k+'.png';img.alt='Иллюстративный крупный план: '+ZONES[k].t+'. Не схема размещения электрода.';
  if(img.complete&&img.naturalWidth)reveal();
 }
