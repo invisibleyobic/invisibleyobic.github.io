@@ -557,12 +557,14 @@ var dock=$('dock'),mapEl=$('map');
 var topEl=document.querySelector('.top');
 function onScroll(){var lt=document.getElementById('how');topEl.classList.toggle('solid',!!lt&&lt.getBoundingClientRect().top<innerHeight*.6)}
 addEventListener('scroll',onScroll,{passive:true});onScroll();
-var vis={};
+var vis={},mapFull=false,popT=0;
 if('IntersectionObserver' in window){
  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>.4)e.target.classList.add('in')})},{threshold:[.4]});
  scenes.forEach(function(s){io.observe(s)});
- var io2=new IntersectionObserver(function(en){en.forEach(function(e){vis[e.target.id]=e.isIntersecting;updateDock();if(e.target.id==='map'){camOn=e.isIntersecting;if(camOn&&typeof popShow==='function'){popKey=-1;popShow()}}})},{threshold:[.25]});
+ var io2=new IntersectionObserver(function(en){en.forEach(function(e){vis[e.target.id]=e.isIntersecting;updateDock();if(e.target.id==='map')camOn=e.isIntersecting;})},{threshold:[.25]});
  [$('hero'),mapEl,document.querySelector('footer')].forEach(function(s){if(s){if(!s.id)s.id='ft';io2.observe(s)}});
+ /* подсказка-пузырь появляется, только когда карта почти целиком на экране и пузырь уже поставлен на место (раньше мелькал в углу при прокрутке) */
+ if(mapEl)new IntersectionObserver(function(en){en.forEach(function(e){clearTimeout(popT);mapFull=false;if(e.isIntersecting&&e.intersectionRatio>=.9){popT=setTimeout(function(){mapFull=true;popKey=-1;if(typeof popShow==='function')popShow()},320)}else{popKey=-1;popWait=false;pop.classList.remove('show','compact','mini')}})},{threshold:[0,.9]}).observe(mapEl);
 }else scenes.forEach(function(s){s.classList.add('in')});
 function updateDock(){var show=!vis.hero&&!vis.map&&!vis.ft;dock.classList.toggle('on',show&&scrollY>innerHeight*.8)}
 /* ---- карусель в шапке ---- */
@@ -671,8 +673,9 @@ var sx=null,sy=null;
 cam.addEventListener('pointerdown',function(e){sx=e.clientX;sy=e.clientY});
 cam.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx,dy=e.clientY-sy;sx=null;if(Math.abs(dx)>46&&Math.abs(dx)>Math.abs(dy)*1.4)goTo(active+(dx<0?1:-1),true)});
 
-var pop=$('pop'),popKey=-1,popHold=0;
+var pop=$('pop'),popKey=-1,popHold=0,popWait=false;
 function popPlace(){
+ if(popWait){if(Math.abs(C.ty-T.ty)<3&&Math.abs(C.tx-T.tx)<3&&Math.abs(C.z-T.z)<.02){popWait=false;popDo()}else return}
  if(!pop.classList.contains('show'))return;
  var p=pscr(ORDER[active]),wc=pop.offsetWidth,hc=pop.offsetHeight,railTop=rail.offsetTop,headB=cam.parentNode.querySelector('.maphead').getBoundingClientRect().bottom-cam.parentNode.getBoundingClientRect().top;
  var left=Math.max(16,Math.min(sw-wc-16,p[0]-wc/2)),below=p[1]+46,above=p[1]-46-hc,flip;
@@ -682,9 +685,11 @@ function popPlace(){
  pop.classList.toggle('flip',flip);pop.style.left=left+'px';pop.style.top=(flip?above:below)+'px';pop.style.setProperty('--tx',Math.max(22,Math.min(wc-22,p[0]-left))+'px');
 }
 function popShow(){
+ if(!mapFull||popKey===active)return;pop.classList.remove('show','compact','mini');popWait=true}
+function popDo(){
  var z=ZONES[ORDER[active]];if(popKey===active)return;popKey=active;
  pop.innerHTML='<span class="lb"><i></i>ОЗОТЭНС-терапия</span><p></p><button class="pcta" type="button"></button>';pop.querySelector('p').textContent=z.pop;var kk=ORDER[active];pop.querySelector('.pcta').textContent=ELECTRODE[kk]?'Набор: '+z.t.toLowerCase()+' \u2192':'Что делать дальше \u2192';
- popHold=0;pop.classList.remove('show','compact','mini');void pop.offsetWidth;pop.classList.add('show');
+ popHold=0;pop.classList.remove('show','compact','mini');void pop.offsetWidth;pop.classList.add('show');popPlace();
 }
 pop.addEventListener('click',function(){openSheet()});
 /* ---- шторка ---- */
@@ -698,7 +703,7 @@ var PROD={
  cream:{t:'Крем OZOTENS 30%',s:'Электродный озонсодержащий крем',p:['Крем наносят на электрод перед сеансом. Он входит в метод ОЗОТЭНС вместе с прибором и электродом.','Состав, срок хранения и противопоказания смотрите на упаковке и в инструкции производителя.'],c:'Фото: Медозонс'},
  electrode:{t:'Фигурный электрод',s:'Форма зависит от области',p:['Электрод проводит ток от прибора к коже. У разработчика есть формы под разные области, например «СПИНА», «ПЛЕЧО», «КОЛЕНО», «СТОПА».','Это пример формы, а не личный подбор. Для шеи совет по применению не даём, пока нет ответа производителя.'],c:'Фото: Медозонс'}
 };
-var BUILD='20261010-1';
+var BUILD='20261010-2';
 (function(){var bn=document.getElementById('build');if(bn)bn.textContent='Версия сборки '+BUILD})();
 function loadOrb(cb){if(window.OzoOrb){cb();return}var inl=document.getElementById('orb-inline');if(inl){var q=document.createElement('script');q.text=inl.textContent;document.head.appendChild(q);cb();return}var s=document.createElement('script');s.src='orb.js?v='+BUILD;s.onload=cb;s.onerror=cb;document.head.appendChild(s)}
 function loadV3D(cb){if(window.Ozo3D){cb();return}var inl=document.getElementById('v3d-inline');if(inl){var q=document.createElement('script');q.text=inl.textContent;document.head.appendChild(q);cb();return}var s=document.createElement('script');s.src='view3d.js?v='+BUILD;s.onload=cb;s.onerror=function(){cb()};document.head.appendChild(s)}
