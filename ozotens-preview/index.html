@@ -368,7 +368,7 @@ footer{padding:44px 20px 130px}
 <body>
 <div class="top"><a class="brand" href="#top">ОЗО<b>ТЭНС</b></a><button class="burger" id="bg" type="button" aria-label="Меню" aria-expanded="false"><span></span></button></div>
 <nav class="menu" id="mn" aria-label="Разделы"><button class="x" id="mx" type="button" aria-label="Закрыть меню">&times;</button>
-  <a href="#top">История</a><a href="#map">Где болит</a><a href="#kit">Комплект</a><a href="#guide">Руководство</a><a href="#how">Как устроено</a><a href="#safety">Безопасность</a><a href="#docs">Документы</a><a href="#faq">Вопросы</a>
+  <a href="#top">История</a><a href="#map">Где болит</a><a href="#kit">Комплект</a><a href="#guide">Руководство</a><a href="#how">Как устроено</a><a href="#safety">Безопасность</a><a href="#docs">Документы</a><a href="#faq">Вопросы</a><a href="/ozotens-shop-preview/">Магазин и документы</a>
   <small>Имеются противопоказания. Необходимо проконсультироваться со специалистом. Результат индивидуален.</small></nav>
 
 <main id="top">
@@ -521,7 +521,7 @@ footer{padding:44px 20px 130px}
   <div class="fgrid">
     <div class="fb"><a class="brand" href="#top">ОЗО<b>ТЭНС</b></a><p>Метод для спины, шеи и суставов: прибор ТЭНС, крем OZOTENS 30% и электрод. Сайт ознакомительный, заказы не принимаются.</p></div>
     <nav aria-label="О методе"><b>О методе</b><a href="#how">Как устроено</a><a href="#kit">Комплект</a><a href="#safety">Безопасность</a><a href="#docs">Документы</a><a href="#faq">Вопросы</a></nav>
-    <nav aria-label="Сайт"><b>Сайт</b><button type="button" data-page="contacts">Контакты и продавец</button><button type="button" data-page="privacy">Политика конфиденциальности</button><button type="button" data-page="terms">Условия использования</button><button type="button" data-page="about">О проекте</button></nav>
+    <nav aria-label="Сайт"><b>Сайт</b><a href="/ozotens-shop-preview/">Магазин и документы</a><button type="button" data-page="contacts">Контакты и продавец</button><button type="button" data-page="privacy">Политика конфиденциальности</button><button type="button" data-page="terms">Условия использования</button><button type="button" data-page="about">О проекте</button></nav>
   </div>
   <div class="row"><a class="btn g" href="#top">Наверх, к истории</a><a class="btn" href="#map">Выбрать область</a></div>
   <p class="legalf"><b>Имеются противопоказания. Необходимо проконсультироваться со специалистом.</b> Материалы не заменяют консультацию врача. Результат индивидуален. Иллюстрации и кадры образные, не показывают результат применения. Фото комплекта: Медозонс. Справки по областям: NHS (Великобритания), общие материалы, не российские рекомендации.</p>
@@ -703,7 +703,7 @@ var PROD={
  cream:{t:'Крем OZOTENS 30%',s:'Электродный озонсодержащий крем',p:['Крем наносят на электрод перед сеансом. Он входит в метод ОЗОТЭНС вместе с прибором и электродом.','Состав, срок хранения и противопоказания смотрите на упаковке и в инструкции производителя.'],c:'Фото: Медозонс'},
  electrode:{t:'Фигурный электрод',s:'Форма зависит от области',p:['Электрод проводит ток от прибора к коже. У разработчика есть формы под разные области, например «СПИНА», «ПЛЕЧО», «КОЛЕНО», «СТОПА».','Это пример формы, а не личный подбор. Для шеи совет по применению не даём, пока нет ответа производителя.'],c:'Фото: Медозонс'}
 };
-var BUILD='20261010-2';
+var BUILD='20261011-1';
 (function(){var bn=document.getElementById('build');if(bn)bn.textContent='Версия сборки '+BUILD})();
 function loadOrb(cb){if(window.OzoOrb){cb();return}var inl=document.getElementById('orb-inline');if(inl){var q=document.createElement('script');q.text=inl.textContent;document.head.appendChild(q);cb();return}var s=document.createElement('script');s.src='orb.js?v='+BUILD;s.onload=cb;s.onerror=cb;document.head.appendChild(s)}
 function loadV3D(cb){if(window.Ozo3D){cb();return}var inl=document.getElementById('v3d-inline');if(inl){var q=document.createElement('script');q.text=inl.textContent;document.head.appendChild(q);cb();return}var s=document.createElement('script');s.src='view3d.js?v='+BUILD;s.onload=cb;s.onerror=function(){cb()};document.head.appendChild(s)}

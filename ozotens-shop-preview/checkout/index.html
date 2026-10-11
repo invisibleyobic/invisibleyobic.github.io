@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оформление заказа - ОЗОТЭНС</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Оформление заказа">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230a1c17'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23ff4a1c'/%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/Onest-400-cyrillic.woff2">
+<link rel="stylesheet" href="../assets/fonts/local.css">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+<header class="top"><div class="w">
+  <a class="brand" href="../">ОЗО<b>ТЭНС</b></a>
+  <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Меню">Меню</button>
+  <nav class="menu" id="menu" aria-label="Разделы"><a href="../catalog/">Каталог</a><a href="../how-to/">Как пользоваться</a><a href="../documents/">Документы</a><a href="../support/">Поддержка</a><a href="../articles/">Статьи</a><a href="../about/">О продавце</a></nav>
+  <a class="cartlink" href="../cart/">Заказ <span id="cartn" class="cartn" hidden></span></a>
+  <form class="sform" role="search" action="../search/" method="get"><label class="sr" for="q">Поиск по сайту</label><input id="q" name="q" type="search" placeholder="Поиск: документы, электрод, доставка" autocomplete="off"><button type="submit">Найти</button></form>
+</div></header>
+<div class="status" role="note"><div class="w">Черновик каркаса. Заказы не принимаются.</div></div>
+<main id="main"><div class="w">
+<nav class="crumbs" aria-label="Хлебные крошки"><a href="../">Главная</a><a href="../cart/">Мой заказ</a><span aria-current="page">Оформление</span></nav>
+<h1>Оформление заказа</h1>
+<div class="wait" data-wait><b>Макет формы</b><p>Заказы пока не принимаются. Форма ничего не отправляет и не сохраняет, пока нет продавца, оферты и политики данных (ВОПРОСЫ 1.10, 2.5).</p></div>
+<p class="warnline"><b>Имеются противопоказания. Необходимо проконсультироваться со специалистом. Результат индивидуален.</b></p>
+<h2>Состав заказа</h2><div id="osum" aria-live="polite"></div>
+<form id="order" class="order" novalidate>
+<h2>Ваши данные</h2>
+<div class="fld"><label for="f-name">Имя *</label><input id="f-name" name="name" type="text" required autocomplete="name"><small></small><span class="ferr" data-err="name" role="alert"></span></div>
+<div class="fld"><label for="f-phone">Телефон *</label><input id="f-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel"><small>По нему свяжемся для подтверждения</small><span class="ferr" data-err="phone" role="alert"></span></div>
+<div class="fld"><label for="f-email">Почта</label><input id="f-email" name="email" type="email" autocomplete="email"><small>Необязательно</small><span class="ferr" data-err="email" role="alert"></span></div>
+<div class="fld"><label for="f-city">Город</label><input id="f-city" name="city" type="text" autocomplete="address-level2"><small></small><span class="ferr" data-err="city" role="alert"></span></div>
+<div class="fld"><label for="f-delivery">Доставка</label><select id="f-delivery" name="delivery" disabled><option>Способы и сроки доставки будут уточнены</option></select><small>Службы доставки пока не выбраны (ВОПРОСЫ 1.10).</small></div>
+<div class="fld"><label for="f-comment">Комментарий</label><textarea id="f-comment" name="comment" rows="3" maxlength="1000"></textarea><small>Не пишите здесь диагнозы и другие сведения о здоровье.</small></div>
+<div class="hp" aria-hidden="true"><label>Не заполняйте это поле<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+<h2>Согласия</h2>
+<div class="fld ck"><label><input type="checkbox" name="consent_pd"> <span>Согласен на обработку персональных данных (<a href="../legal/privacy/">политика</a>) *</span></label><span class="ferr" data-err="consent_pd" role="alert"></span></div>
+<div class="fld ck"><label><input type="checkbox" name="consent_offer"> <span>Принимаю условия <a href="../legal/offer/">оферты</a> *</span></label><span class="ferr" data-err="consent_offer" role="alert"></span></div>
+<div class="fld ck"><label><input type="checkbox" name="consent_mk"> <span>Хочу получать новости и предложения (необязательно, отдельное согласие)</span></label></div>
+<button class="btn" type="submit">Отправить заказ</button>
+<p id="omsg" role="status" class="omsg"></p>
+</form>
+</div></main>
+<footer class="foot"><div class="w">
+  <div class="fgrid"><div class="fb"><a class="brand" href="../">ОЗО<b>ТЭНС</b></a><p>Метод для спины, шеи и суставов: прибор ТЭНС, крем OZOTENS 30% и электрод под область тела.</p><a class="btn ghost" href="/ozotens-preview/">История метода</a></div><nav aria-label="Покупателю"><b>Покупателю</b><a href="../catalog/">Каталог</a><a href="../cart/">Мой заказ</a><a href="../support/payment/">Оплата</a><a href="../support/delivery/">Доставка</a><a href="../support/warranty/">Гарантия</a><a href="../support/complaints/">Рекламации и возврат</a></nav><nav aria-label="О методе"><b>О методе</b><a href="/ozotens-preview/">История метода</a><a href="../how-to/">Как пользоваться</a><a href="../documents/">Документы</a><a href="../articles/">Статьи</a></nav><nav aria-label="Сайт"><b>Сайт</b><a href="../about/">О продавце</a><a href="../contacts/">Контакты</a><a href="../legal/offer/">Оферта</a><a href="../legal/privacy/">Политика данных</a><a href="../legal/consent/">Согласия</a><a href="../search/">Поиск</a></nav></div>
+  <p class="legal"><b>Имеются противопоказания. Необходимо проконсультироваться со специалистом. Результат индивидуален.</b> Материалы не заменяют консультацию врача. Иллюстрации образные.</p>
+  <p class="legal">&copy; 2026 ОЗОТЭНС. Продавец и реквизиты уточняются. Заказы и персональные данные пока не принимаются.</p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+<script src="../assets/cart.js" defer></script>
+</body>
+</html>
