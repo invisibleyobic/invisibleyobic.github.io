@@ -68,7 +68,7 @@ ul.links{list-style:none;padding:0}ul.links a{display:inline-flex;min-height:44p
 .vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}.vid video{width:100%;height:auto;border-radius:16px;background:#000}.vid figcaption{font-size:14px;color:var(--soft)}figure.vid{margin:0}
 /* заказ */
 .cartlink{color:#fff;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;gap:6px;padding:0 10px;border:1px solid rgba(255,255,255,.3);border-radius:999px;font-size:16px}
-.cartn{background:var(--coral);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font:600 13px var(--fb);padding:0 6px}
+.cartn[hidden]{display:none}.cartn{background:var(--coral);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font:600 13px var(--fb);padding:0 6px}
 .addform{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:14px 0;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:18px}
 .sizesel{display:flex;align-items:center;gap:8px;font-size:16px}.sizesel select,.fld select,.fld input[type=text],.fld input[type=tel],.fld input[type=email],.fld textarea{min-height:48px;border:1px solid #9aa7a0;border-radius:12px;padding:8px 12px;font:400 17px var(--fb);background:#fff;color:var(--text);width:100%;max-width:520px}
 .sizesel select{width:auto;min-width:120px}
