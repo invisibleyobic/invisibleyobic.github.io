@@ -21,23 +21,22 @@ fetch(base+'search-index.json').then(function(r){return r.json()}).then(function
 
 })();
 (function(){
-/* оттаивание морозной подложки под курсором или пальцем */
+/* v2: оттаивание целиком. Наведение (или касание) запускает волну таяния по всему блоку, уход - обратное замерзание.
+   Анимация по времени, а не за курсором: без отставания и без возни под текстом. */
 var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
 [].forEach.call(document.querySelectorAll('.thaw'),function(el){
- var x=.5,y=.5,tx=.5,ty=.5,r=0,tr=0,raf=0,off=0;
  var layer=el.querySelector('.frostlayer');if(!layer)return;
- function set(){var m=r<1?'none':'radial-gradient(circle '+r.toFixed(1)+'px at '+(x*100).toFixed(1)+'% '+(y*100).toFixed(1)+'%,transparent 0,transparent 38%,#000 100%)';layer.style.webkitMaskImage=m;layer.style.maskImage=m}
- function loop(){r+=(tr-r)*(RM?1:.1);x+=(tx-x)*(RM?1:.22);y+=(ty-y)*(RM?1:.22);set();raf=(Math.abs(tr-r)>.5||Math.abs(tx-x)>.002||Math.abs(ty-y)>.002)?requestAnimationFrame(loop):0}
- function go(){if(!raf)raf=requestAnimationFrame(loop)}
- function pos(e){var b=el.getBoundingClientRect();tx=(e.clientX-b.left)/b.width;ty=(e.clientY-b.top)/b.height}
- function R(){return Math.max(170,Math.min(320,el.offsetWidth*.24))}
- el.addEventListener('pointerenter',function(e){clearTimeout(off);pos(e);if(r<1){x=tx;y=ty}tr=R();go()});
- el.addEventListener('pointermove',function(e){clearTimeout(off);pos(e);tr=R();go()});
- el.addEventListener('pointerleave',function(){tr=0;go()});
- el.addEventListener('pointerdown',function(e){if(e.pointerType==='touch'){pos(e);x=tx;y=ty;tr=R();go()}});
- el.addEventListener('pointerup',function(e){if(e.pointerType==='touch'){off=setTimeout(function(){tr=0;go()},1100)}});
- el.addEventListener('pointercancel',function(){tr=0;go()});
- if(!RM&&'IntersectionObserver' in window){var seen=false;new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting&&!seen){seen=true;setTimeout(function(){tx=.32;ty=.55;tr=R()*1.15;go();setTimeout(function(){tr=0;go()},1500)},600)}})},{threshold:.6}).observe(el)}
+ var p=0,from=0,to=0,start=0,dur=1,raf=0,t=0;
+ function paint(){var e=ease(p),f=-25+e*150;
+  var m=p<=0?'none':'linear-gradient(100deg,transparent '+(f-22).toFixed(1)+'%,rgba(0,0,0,.55) '+(f-8).toFixed(1)+'%,#000 '+f.toFixed(1)+'%)';
+  layer.style.webkitMaskImage=m;layer.style.maskImage=m}
+ function frame(now){var k=Math.min(1,(now-start)/dur);p=from+(to-from)*k;paint();raf=k<1?requestAnimationFrame(frame):0}
+ function go(target,ms){if(RM){p=target;paint();return}from=p;to=target;dur=Math.max(1,ms*Math.abs(target-p));start=performance.now();if(!raf)raf=requestAnimationFrame(frame)}
+ function on(){clearTimeout(t);go(1,1400)}function off(){clearTimeout(t);go(0,2200)}
+ el.addEventListener('mouseenter',on);el.addEventListener('mouseleave',off);
+ el.addEventListener('focusin',on);el.addEventListener('focusout',function(e){if(!el.contains(e.relatedTarget))off()});
+ el.addEventListener('touchstart',function(){on();t=setTimeout(off,4500)},{passive:true});
 });
 })();
 (function(){
