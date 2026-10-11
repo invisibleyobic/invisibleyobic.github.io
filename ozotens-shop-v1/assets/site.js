@@ -21,13 +21,22 @@ fetch(base+'search-index.json').then(function(r){return r.json()}).then(function
 
 })();
 (function(){
-/* v2: оттаивание целиком - класс .thawed включает плавную CSS-анимацию (без слежения за курсором) */
+/* v2: оттаивание целиком. Наведение (или касание) запускает волну таяния по всему блоку, уход - обратное замерзание.
+   Анимация по времени, а не за курсором: без отставания и без возни под текстом. */
 var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
 [].forEach.call(document.querySelectorAll('.thaw'),function(el){
- var t=0;function on(){clearTimeout(t);el.classList.add('thawed')}function off(){clearTimeout(t);el.classList.remove('thawed')}
+ var layer=el.querySelector('.frostlayer');if(!layer)return;
+ var p=0,from=0,to=0,start=0,dur=1,raf=0,t=0;
+ function paint(){var e=ease(p),f=-25+e*150;
+  var m=p<=0?'none':'linear-gradient(100deg,transparent '+(f-22).toFixed(1)+'%,rgba(0,0,0,.55) '+(f-8).toFixed(1)+'%,#000 '+f.toFixed(1)+'%)';
+  layer.style.webkitMaskImage=m;layer.style.maskImage=m}
+ function frame(now){var k=Math.min(1,(now-start)/dur);p=from+(to-from)*k;paint();raf=k<1?requestAnimationFrame(frame):0}
+ function go(target,ms){if(RM){p=target;paint();return}from=p;to=target;dur=Math.max(1,ms*Math.abs(target-p));start=performance.now();if(!raf)raf=requestAnimationFrame(frame)}
+ function on(){clearTimeout(t);go(1,1400)}function off(){clearTimeout(t);go(0,2200)}
  el.addEventListener('mouseenter',on);el.addEventListener('mouseleave',off);
  el.addEventListener('focusin',on);el.addEventListener('focusout',function(e){if(!el.contains(e.relatedTarget))off()});
- el.addEventListener('touchstart',function(){on();t=setTimeout(off,4000)},{passive:true});
+ el.addEventListener('touchstart',function(){on();t=setTimeout(off,4500)},{passive:true});
 });
 })();
 (function(){
