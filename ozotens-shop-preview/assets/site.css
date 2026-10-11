@@ -135,3 +135,39 @@ main h2{position:relative;padding-bottom:10px}main h2::after{content:"";position
 .foot{background:linear-gradient(180deg,rgba(2,13,9,.7),rgba(2,13,9,.82)),url(frost/frost-bar.webp) center/cover,var(--ink);border-top:1px solid rgba(143,240,210,.25)}
 .foot nav a:hover{color:var(--mint)}
 @media(max-width:600px){.hero,.pagehead{border-radius:22px}}
+
+/* ===== «Оттаивание»: гладкий перламутр снизу, иней сверху; под курсором и пальцем иней тает, потом снова затягивает ===== */
+.thaw{isolation:isolate}
+.hero.thaw,.pagehead.thaw{background:radial-gradient(60% 80% at 78% 18%,rgba(120,240,205,.55),transparent 70%),linear-gradient(135deg,#0a3a2d 0,#10705a 48%,#1aa28f 100%)}
+.thaw::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(2,18,13,.6),rgba(2,18,13,.18) 62%,rgba(2,18,13,0))}
+.thaw>*:not(.frostlayer){position:relative;z-index:2}
+.frostlayer{position:absolute;inset:0;z-index:0;pointer-events:none;background:url(frost/frost-overlay.webp) center/cover no-repeat;
+}
+@media(prefers-reduced-motion:reduce){.frostlayer{opacity:.9}}
+
+/* видео-блок на главной */
+.vblock{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:28px;align-items:center;margin:36px 0 8px;padding:28px;border-radius:26px;background:#fff;border:1px solid rgba(15,106,78,.18);box-shadow:0 14px 40px rgba(15,106,78,.1)}
+.vblock h2{margin-top:6px}.vmedia video{width:100%;height:auto;border-radius:18px;background:#000;display:block}
+.vph{aspect-ratio:16/9;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:#fff;
+ background:linear-gradient(180deg,rgba(2,13,9,.35),rgba(2,13,9,.65)),url(frost/frost-dark.webp) center/cover,var(--ink)}
+.vph b{font:600 20px var(--fb)}.vph small{color:#cfe9df;font-size:15px;max-width:30em}
+.vph .play{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;margin-bottom:8px;box-shadow:0 0 0 10px rgba(79,231,184,.18)}
+.vph .play::after{content:"";border-left:20px solid #0a3a2d;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+@media(max-width:860px){.vblock{grid-template-columns:1fr;padding:20px}}
+/* 3D в карточке товара */
+.p3bar{display:flex;gap:6px;margin:0 0 10px}.p3bar button{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--emer);background:#fff;color:var(--deepg);font:600 15px var(--fb);cursor:pointer}
+.p3bar button.on{background:var(--emer);color:#fff}
+.v3d{aspect-ratio:1;border-radius:16px;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#2f6c5a 0%,#164236 48%,#08201b 100%)}
+.v3d:not([hidden])~img{display:none}
+
+/* личный кабинет (макет) */
+.acc{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:24px;align-items:start;margin-top:10px}
+.accin{background:#fff;border:1px solid rgba(15,106,78,.2);border-radius:20px;padding:20px}.accin h2{margin-top:0}
+.btn[disabled],input[disabled]{opacity:.55;cursor:not-allowed}
+@media(max-width:860px){.acc{grid-template-columns:1fr}}
+
+/* шапка на телефоне: логотип | Заказ | Меню в одну строку, кабинет внутри меню */
+.menu .mobonly{display:none}
+@media(max-width:860px){.top .cartlink{order:2;margin-left:auto;padding:0 12px}.top .acclink{margin-left:0}.burger{order:3;margin-left:0}.sform{order:4}.menu{order:5}}
+@media(max-width:600px){.top .acclink{display:none}.menu .mobonly{display:inline-flex}}
+@media(max-width:400px){.top .w{gap:10px 8px}.brand{font-size:18px}.top .cartlink{padding:0 10px;font-size:15px}.burger{padding:0 12px;font-size:15px}}
