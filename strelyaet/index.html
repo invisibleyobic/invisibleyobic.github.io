@@ -29,7 +29,7 @@ a{color:inherit}
 .scan{position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(0,0,0,.1) 0 1px,transparent 1px 3px);mix-blend-mode:multiply}
 #noise{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;opacity:.045}
 .osd{position:fixed;z-index:31;font:500 16px JBM,monospace;color:#fff;text-shadow:2px 0 0 rgba(255,0,60,.6),-2px 0 0 rgba(0,200,255,.5);pointer-events:none;letter-spacing:.06em}
-.osd.tl{left:18px;top:14px}.osd.tr{right:18px;bottom:14px}.osd.bl{left:18px;bottom:14px}
+.osd.tl{left:18px;top:14px}.osd.tr{right:18px;bottom:14px}.osd.bl{left:18px;top:40px}
 .snd{position:fixed;right:14px;top:8px;z-index:32;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid rgba(255,210,63,.5);background:rgba(18,11,7,.75);color:var(--y);font:500 16px JBM,monospace;cursor:pointer;display:none}
 .js .snd{display:inline-flex;align-items:center}
 .snd[aria-pressed="true"]{background:rgba(255,210,63,.16)}
@@ -88,6 +88,8 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
 .card img{width:100%;height:200px;object-fit:contain;background:#fff;border-radius:12px}
 .card b{font:800 19px/1.2 Unb,sans-serif}
 .card span{font-size:16px;color:#4a3a28}
+a.card{text-decoration:none;transition:transform .2s,box-shadow .2s}a.card:hover,a.card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 34px -14px var(--y)}
+.card em{font-style:normal;font-weight:700;color:#1a1006;margin-top:auto;min-height:28px}
 @media(max-width:820px){.kit{grid-template-columns:1fr}}
 .go{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 0}
 .go a{min-height:56px}
@@ -104,7 +106,7 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
 <body>
 <a class="skip" href="#choice">К выбору</a>
 
-<div class="osd tl" aria-hidden="true" id="osd">&#9654; PLAY</div><div class="osd tr" aria-hidden="true">SP <span id="tc">0:00:00</span></div><div class="osd bl" aria-hidden="true">НОЯ. 12 1995</div>
+<div class="osd tl" aria-hidden="true" id="osd">&#9654; PLAY</div><div class="osd tr" aria-hidden="true">SP <span id="tc">0:00:00</span></div><div class="osd bl" aria-hidden="true" id="date"></div>
 <button class="snd" id="snd" type="button" aria-pressed="false">Звук: выкл</button>
 <div class="flashtxt" id="flash" aria-hidden="true"></div>
 <main>
@@ -119,17 +121,16 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
     <button class="play" id="play" type="button">&#9654; Смотреть со звуком</button>
   </div>
   <div class="w"><div class="say">
-    <p class="kick">ДЕВЯНОСТЫЕ ПРОШЛИ. А У ТЕБЯ?</p>
-    <h1 id="h1">Всё ещё стреляет?</h1>
+    <p class="kick">ВОПРОС ПО ДЕЛУ</p>
+    <h1 id="h1">Всё ещё стреляет в спину, в ногу, по нерву?</h1>
     <div class="lines reveal h" id="lines">
-      <p>В поясницу стреляет. В ногу простреливает. По седалищному отдаёт.</p>
-      <p class="b">Сейчас другое время. Сейчас так дела не делают.</p>
+      <p class="b">Сейчас другое время. Сейчас так дела не делают. Сейчас проблемы решают, а не откладывают.</p>
     </div>
     <div class="choice reveal h" id="choice" role="group" aria-label="Что делаем">
       <a class="btn a" id="ba" href="#now"><canvas class="reel" width="68" height="68" aria-hidden="true"></canvas>Сложить оружие</a>
       <button class="btn b" id="bb" type="button"><canvas class="reel" width="68" height="68" aria-hidden="true"></canvas>Стрелять как раньше</button>
     </div>
-    <div class="no" id="no" role="status" aria-live="polite"><b id="nob">Э, нет, брат, так не пойдёт.</b><p id="nop">Терпеть, пока стреляет, - это из девяностых. Давай по-нормальному.</p><div class="choice"><a class="btn a" href="#now" id="ba2">Ладно, сложить оружие</a><a class="btn c" href="https://medozons.ru/map-clinics/" rel="noopener" target="_blank">Сначала к специалисту</a></div></div>
+    <div class="no" id="no" role="status" aria-live="polite"><b id="nob">Погоди, не спеши.</b><p id="nop">Терпеть, пока стреляет, - так себе план. Давай решим вопрос, а не отложим его.</p><div class="choice"><a class="btn a" href="#now" id="ba2">Ладно, сложить оружие</a><a class="btn c" href="https://medozons.ru/map-clinics/" rel="noopener" target="_blank">Сначала к специалисту</a></div></div>
   </div></div>
 </section>
 
@@ -138,14 +139,15 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
   <h2>Без стрельбы. Спокойно, дома, по инструкции.</h2>
   <p class="lead">Метод ОЗОТЭНС: карманный прибор ТЭНС, электродный крем OZOTENS 30% и электрод под нужную область - поясницу, шею, колено, плечо. Перед началом - разговор со специалистом.</p>
   <div class="kit">
-    <div class="card"><img src="img/device.webp" width="600" height="600" alt="Карманный прибор ТЭНС с проводами" loading="lazy" decoding="async"><b>Прибор</b><span>Карманный, два канала, режимы TENS, EMS и массаж.</span></div>
-    <div class="card"><img src="img/cream.webp" width="600" height="600" alt="Флакон и упаковка крема OZOTENS 30%" loading="lazy" decoding="async"><b>Крем OZOTENS 30%</b><span>Электродный крем с озонированным оливковым маслом.</span></div>
-    <div class="card"><img src="img/el.webp" width="380" height="174" alt="Фигурный электрод для поясницы" loading="lazy" decoding="async"><b>Электрод под область</b><span>Для поясницы своя форма, для шеи и колена - свои.</span></div>
+    <a class="card" href="/ozotens-shop-preview/catalog/pribor-roovjoy/"><img src="img/device.webp" width="600" height="600" alt="Карманный прибор ТЭНС с проводами" loading="lazy" decoding="async"><b>Прибор</b><span>Карманный, два канала, режимы TENS, EMS и массаж.</span><em>Подробнее &rarr;</em></a>
+    <a class="card" href="/ozotens-shop-preview/catalog/krem-ozotens-30/"><img src="img/cream.webp" width="600" height="600" alt="Флакон и упаковка крема OZOTENS 30%" loading="lazy" decoding="async"><b>Крем OZOTENS 30%</b><span>Электродный крем с озонированным оливковым маслом.</span><em>Подробнее &rarr;</em></a>
+    <a class="card" href="/ozotens-shop-preview/catalog/#electrodes"><img src="img/el.webp" width="380" height="174" alt="Фигурный электрод для поясницы" loading="lazy" decoding="async"><b>Электрод под область</b><span>Для поясницы своя форма, для шеи и колена - свои.</span><em>Подробнее &rarr;</em></a>
   </div>
   <div class="go">
-    <a class="btn a" href="/ozotens-shop-preview/catalog/">Посмотреть набор</a>
+    <a class="btn a" href="/ozotens-preview/">Узнать про метод</a>
+    <a class="btn c" href="/ozotens-shop-preview/catalog/">Посмотреть набор</a>
     <a class="btn c" href="https://medozons.ru/map-clinics/" rel="noopener" target="_blank">Сначала к специалисту</a>
-    <a class="tl" href="/ozotens-preview/">Как устроен метод &rarr;</a>
+    
   </div>
   <p class="warn">Имеются противопоказания. Необходимо проконсультироваться со специалистом.<small>Результат индивидуален. Если стреляет сильно, внезапно, с онемением или слабостью в ноге - к врачу, не откладывая.</small></p>
 </div></section>
@@ -162,6 +164,8 @@ var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 var nc=document.getElementById('noise'),nx=nc.getContext('2d'),img=nx.createImageData(320,180),last=0;
 function noise(t){if(document.hidden)return requestAnimationFrame(noise);requestAnimationFrame(noise);if(t-last<70)return;last=t;var d=img.data;for(var i=0;i<d.length;i+=4){var v=Math.random()*255|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}nx.putImageData(img,0,0)}
 if(!RM)requestAnimationFrame(noise);
+/* дата на экране кассеты - сегодняшняя, по часам устройства */
+(function(){var M=['ЯНВ','ФЕВ','МАР','АПР','МАЯ','ИЮН','ИЮЛ','АВГ','СЕН','ОКТ','НОЯ','ДЕК'],W=['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'],el=document.getElementById('date');function d(){var n=new Date();el.textContent=W[n.getDay()]+' '+n.getDate()+' '+M[n.getMonth()]+' '+n.getFullYear()}d();setInterval(d,60000)})();
 /* счётчик ленты */
 var tc=document.getElementById('tc'),t0=Date.now();
 setInterval(function(){var s=((Date.now()-t0)/1000)|0;tc.textContent='0:'+('0'+((s/60)|0)).slice(-2)+':'+('0'+s%60).slice(-2)},1000);
@@ -175,16 +179,16 @@ function win(){[392,523,659,784].forEach(function(f,i){tone(f,.16,'square',.045,
 sb.addEventListener('click',function(){on=!on;sb.setAttribute('aria-pressed',on);sb.textContent='Звук: '+(on?'вкл':'выкл');if(on){ac();AC.resume();clunk()}});
 /* сцена: оригинал со звуком идёт непрерывно; на «А чё?» картинка переключается на двоих пострадавших */
 var ov=document.getElementById('ov'),sv=document.getElementById('sv'),b1=document.getElementById('b1'),b2=document.getElementById('b2'),b3=document.getElementById('b3'),pb=document.getElementById('play'),raf=0;
-var CUT_IN=5.1,CUT_OUT=6.15,S1=2.9,S3=6.15;
+var CUT_IN=4.4,CUT_OUT=6.0,S1=1.0,S3=6.0,S4=8.4,T3A='А то, что уже не стреляют.',T3B='А то, что уже не стреляют. Сейчас по-другому делают.';
 function setB(a,b,c){b1.classList.toggle('on',a);b2.classList.toggle('on',b);b3.classList.toggle('on',c)}
 function tick(){var t=ov.currentTime,cut=t>=CUT_IN&&t<CUT_OUT;
  ov.classList.toggle('off',cut);
  if(cut&&sv.paused){try{sv.currentTime=.4}catch(e){}var q=sv.play();if(q&&q.catch)q.catch(function(){})}
- setB(t>=S1&&t<CUT_IN,cut,t>=S3);
+ setB(t>=S1&&t<CUT_IN,cut,t>=S3);var tx=t>=S4?T3B:T3A;if(b3.textContent!==tx)b3.textContent=tx;
  if(!ov.paused&&!ov.ended)raf=requestAnimationFrame(tick)}
 function run(sound){cancelAnimationFrame(raf);ov.muted=!sound;try{ov.currentTime=0}catch(e){}setB(false,false,false);ov.classList.remove('off');
  var q=ov.play();if(q&&q.catch)q.catch(function(){setB(true,false,false)});raf=requestAnimationFrame(tick)}
-ov.addEventListener('ended',function(){cancelAnimationFrame(raf);ov.classList.remove('off');setB(false,false,true)});
+ov.addEventListener('ended',function(){cancelAnimationFrame(raf);ov.classList.remove('off');b3.textContent=T3B;setB(false,false,true)});
 pb.addEventListener('click',function(){if(!on){on=true;sb.setAttribute('aria-pressed','true');sb.textContent='Звук: вкл';ac()&&AC.resume()}run(true)});
 if(RM){setB(true,false,false)}else{sv.preload='auto';setTimeout(function(){run(false)},600)}
 /* печать заголовка и появление выбора */
@@ -199,7 +203,7 @@ function reelLoop(){reels.forEach(function(r){var hot=r.btn.matches(':hover,:foc
 if(RM)reels.forEach(drawReel);else{requestAnimationFrame(reelLoop);document.addEventListener('visibilitychange',function(){if(!document.hidden)requestAnimationFrame(reelLoop)})}
 /* выбор без выбора */
 var no=document.getElementById('no'),nob=document.getElementById('nob'),nop=document.getElementById('nop'),tries=0,flash=document.getElementById('flash'),osd=document.getElementById('osd');
-var NO=[['Э, нет, брат, так не пойдёт.','Терпеть, пока стреляет, - это из девяностых. Давай по-нормальному.'],['Брат, мы же договорились.','Сейчас другое время. Сложи оружие - и разберёмся спокойно.']];
+var NO=[['Погоди, не спеши.','Терпеть, пока стреляет, - так себе план. Давай решим вопрос, а не отложим его.'],['Точно?','Спина одна. Давай её беречь: сложи оружие, разберёмся спокойно.']];
 function glitch(txt,o){if(RM)return;document.body.classList.remove('rew');void document.body.offsetWidth;document.body.classList.add('rew');flash.textContent=txt;flash.classList.remove('go');void flash.offsetWidth;flash.classList.add('go');osd.innerHTML=o;setTimeout(function(){osd.innerHTML='&#9654; PLAY'},900)}
 document.getElementById('bb').addEventListener('click',function(){var m=NO[Math.min(tries,NO.length-1)];tries++;nob.textContent=m[0];nop.textContent=m[1];no.classList.remove('show');void no.offsetWidth;no.classList.add('show');rewind();glitch('СТОП','&#9632; STOP')});
 function lay(e){e.preventDefault();var a=document.getElementById('ba');a.classList.add('on');ch.classList.add('picked');no.classList.remove('show');win();glitch('ХОРОШ','&#9193; FF');
