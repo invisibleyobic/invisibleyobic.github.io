@@ -9,6 +9,7 @@
 <meta name="theme-color" content="#121513">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23121513'/%3E%3Cpath d='M32 14C32 14 20 28 20 37a12 12 0 0 0 24 0c0-9-12-23-12-23Z' fill='%23f29a3c'/%3E%3C/svg%3E">
 <link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
+<link rel="stylesheet" href="vendor/lenis.css">
 <style>
 @font-face{font-family:Onest;font-weight:400 700;font-display:swap;src:url(fonts/Onest-400-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:Onest;font-weight:400 700;font-display:swap;src:url(fonts/Onest-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20BD,U+2190-21FF,U+2212}
@@ -84,7 +85,7 @@ h1 em{font-style:normal;color:var(--acc)}
 /* карточка товара: шторка на телефоне */
 .sheet{position:fixed;inset:0;z-index:50;pointer-events:none}
 .sheet .scrim{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity var(--t) var(--ease)}
-.sheet .pane{position:absolute;left:0;right:0;bottom:0;max-height:94vh;overflow:auto;border-radius:28px 28px 0 0;background:var(--bg2);border:1px solid var(--glassb);transform:translateY(100%);transition:transform .28s var(--ease);padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+.sheet .pane{position:absolute;left:0;right:0;bottom:0;max-height:94vh;overflow:auto;border-radius:28px 28px 0 0;background:var(--bg2);border:1px solid var(--glassb);transform:translateY(100%);transition:transform .28s var(--ease);overscroll-behavior:contain}
 .sheet.on{pointer-events:auto}.sheet.on .scrim{opacity:1}.sheet.on .pane{transform:none}
 .dhero{position:relative;height:300px;display:grid;place-items:center;background:radial-gradient(60% 60% at 50% 45%,rgba(242,154,60,.28),transparent 70%)}
 .dhero.light{background:#f1efe8;margin:12px 12px 0;border-radius:22px;height:276px}.dhero.light .dtop{top:12px;left:12px;right:12px}.dhero.light .icb{background:rgba(18,21,19,.75)}
@@ -107,8 +108,10 @@ h1 em{font-style:normal;color:var(--acc)}
 .sw[aria-checked="true"]{background:var(--acc)}.sw[aria-checked="true"]::after{transform:translateX(24px)}
 .orow .lbl{display:flex;flex-direction:column}.orow .lbl small{color:var(--soft);font-size:16px}
 .dwarn{margin-top:18px;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.05);color:var(--soft)}
-.buy{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:10px;align-items:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(25,29,26,.86);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-top:1px solid var(--glassb);transform:translateY(110%);transition:transform .28s var(--ease)}
-.sheet.on .buy{transform:none}
+.buy{position:sticky;left:0;right:0;bottom:0;z-index:60;margin-top:8px;display:flex;gap:10px;align-items:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(25,29,26,.86);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-top:1px solid var(--glassb)}
+/* GSAP ведёт шторку сам, CSS-переходы остаются запасом, если скрипт не загрузился */
+html.gs .sheet .pane,html.gs .sheet .scrim{transition:none}
+.dhero{touch-action:pan-x}.grip{position:absolute;top:8px;left:50%;width:40px;height:4px;margin-left:-20px;border-radius:2px;background:rgba(255,255,255,.28);z-index:2}
 .qty{display:flex;align-items:center;gap:6px}
 .qty button{width:44px;height:44px;border-radius:50%;border:1px solid var(--glassb);background:var(--glass);cursor:pointer;font-size:20px}
 .qty output{min-width:22px;text-align:center;font-weight:700}
@@ -128,7 +131,8 @@ h1 em{font-style:normal;color:var(--acc)}
  .sheet .scrim{display:none}
  .sheet .pane{position:static;height:100%;max-height:none;transform:none;border-radius:28px;padding-bottom:0;display:flex;flex-direction:column}
  .sheet .dbody{flex:1;overflow:auto}
- .buy{position:static;transform:none;border-radius:0 0 28px 28px;padding:14px 18px}
+ .buy{position:static;margin:0;border-radius:0 0 28px 28px;padding:14px 18px}
+ .grip{display:none}
  .dclose{display:none}
  .offer{min-height:260px}.offer h2{font-size:32px}
 }
@@ -159,7 +163,7 @@ h1 em{font-style:normal;color:var(--acc)}
 <aside class="sheet" id="sheet" aria-label="Карточка товара">
   <div class="scrim" id="scrim"></div>
   <div class="pane" role="dialog" aria-modal="true" aria-labelledby="dn">
-    <div class="dhero" id="dhero"><img id="dimg" alt="" width="600" height="600"><div class="dtop"><button class="icb press dclose" id="dclose" type="button" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><span></span></div></div>
+    <div class="dhero" id="dhero"><span class="grip" aria-hidden="true"></span><img id="dimg" alt="" width="600" height="600"><div class="dtop"><button class="icb press dclose" id="dclose" type="button" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><span></span></div></div>
     <div class="dbody">
       <span class="tag2" id="dtag"></span>
       <h2 id="dn"></h2>
@@ -179,9 +183,14 @@ h1 em{font-style:normal;color:var(--acc)}
   <a href="/ozotens-shop-preview/support/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v.5M10 9.5a2 2 0 1 1 3 1.7c-.8.5-1 1-1 1.8"/></svg>Помощь</a>
 </nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/Flip.min.js" defer></script>
+<script src="vendor/lenis.min.js" defer></script>
 <script>
 (function(){
-var D={"items": {"85/31": {"name": "Прибор RoovJoy", "sub": "мод. R-C3, 2 канала, TENS / EMS / Massage", "price": 19700, "img": "img/device.webp", "sizes": [], "cat": "dev"}, "5T15": {"name": "Крем OZOTENS 30%", "sub": "150 мл, электродный", "price": 10750, "img": "img/cream.webp", "sizes": [], "cat": "cream"}, "85/01": {"name": "Электрод «Шея»", "area": "Шея", "segs": "4 сегмента", "sub": "2 канала, шейно-воротниковая зона", "price": 26775, "img": "img/el-neck.webp", "sizes": ["M", "L"], "cat": "el"}, "85/21": {"name": "Электрод «Шея на остистые»", "area": "Шея на остистые", "segs": "6 сегментов", "sub": "2 канала, шейно-воротниковая зона", "price": 34950, "img": "img/el-neck.webp", "sizes": ["M", "L"], "cat": "el"}, "85/02": {"name": "Электрод «Плечо»", "area": "Плечо", "segs": "4 сегмента", "sub": "2 канала", "price": 36775, "img": "img/el-shoulder.webp", "sizes": [], "cat": "el"}, "85/03": {"name": "Электрод «Плечо - голень»", "area": "Плечо - голень", "segs": "2 сегмента", "sub": "1 канал, обхват до 40 см", "price": 21750, "img": "img/el-shin-arm.webp", "sizes": [], "cat": "el"}, "85/04": {"name": "Электрод «Спина»", "area": "Спина", "segs": "4 сегмента", "sub": "2 канала, эластичный пояс с манжетой", "price": 31750, "img": "img/el-back.webp", "sizes": ["M", "L", "XL"], "cat": "el"}, "85/24": {"name": "Электрод «Спина на остистые»", "area": "Спина на остистые", "segs": "6 сегментов", "sub": "2 канала, эластичный пояс с манжетой", "price": 38250, "img": "img/el-back.webp", "sizes": ["M", "L", "XL"], "cat": "el"}, "85/34": {"name": "Электрод «Спина на остистые»", "area": "Спина на остистые", "segs": "3 сегмента", "sub": "2 канала, эластичный пояс с манжетой", "price": 36100, "img": "img/el-back.webp", "sizes": ["M", "L", "XL"], "cat": "el"}, "85/05": {"name": "Электрод «Тазобедренный»", "area": "Тазобедренный", "segs": "4 сегмента", "sub": "2 канала (85/15 - 1 канал)", "price": 23450, "img": "img/el-hip.webp", "sizes": [], "cat": "el"}, "85/06": {"name": "Электрод «Кисть - стопа»", "area": "Кисть - стопа", "segs": "2 сегмента", "sub": "1 канал", "price": 18950, "img": "img/el-hand-foot.webp", "sizes": [], "cat": "el"}, "85/07": {"name": "Электрод «Колено»", "area": "Колено", "segs": "4 сегмента", "sub": "2 канала", "price": 20400, "img": "img/el-knee.webp", "sizes": [], "cat": "el"}, "85/17": {"name": "Электрод «Колено»", "area": "Колено", "segs": "4 сегмента", "sub": "1 канал", "price": 20400, "img": "img/el-knee.webp", "sizes": [], "cat": "el"}, "85/08": {"name": "Электрод «Голень - бедро»", "area": "Голень - бедро", "segs": "2 сегмента", "sub": "1 канал, размеры M, L", "price": 23125, "img": "img/el-shin-thigh.webp", "sizes": ["M", "L"], "cat": "el"}, "85/09": {"name": "Электрод «Стопа»", "area": "Стопа", "segs": "2 сегмента", "sub": "1 канал", "price": 19350, "img": "img/el-foot.webp", "sizes": ["M", "L"], "cat": "el"}}, "guide": ["85/04", "85/01", "85/02", "85/03", "85/05", "85/06", "85/07", "85/08", "85/09"], "device": "85/31", "cream": "5T15"},I=D.items,KEY='ozotens_cart_v1',MAXQ=9,DESK=matchMedia('(min-width:980px)');
+var D={"items": {"85/31": {"name": "Прибор RoovJoy", "sub": "мод. R-C3, 2 канала, TENS / EMS / Massage", "price": 19700, "img": "img/device.webp", "sizes": [], "cat": "dev"}, "5T15": {"name": "Крем OZOTENS 30%", "sub": "150 мл, электродный", "price": 10750, "img": "img/cream.webp", "sizes": [], "cat": "cream"}, "85/01": {"name": "Электрод «Шея»", "area": "Шея", "segs": "4 сегмента", "sub": "2 канала, шейно-воротниковая зона", "price": 26775, "img": "img/el-neck.webp", "sizes": ["M", "L"], "cat": "el"}, "85/21": {"name": "Электрод «Шея на остистые»", "area": "Шея на остистые", "segs": "6 сегментов", "sub": "2 канала, шейно-воротниковая зона", "price": 34950, "img": "img/el-neck.webp", "sizes": ["M", "L"], "cat": "el"}, "85/02": {"name": "Электрод «Плечо»", "area": "Плечо", "segs": "4 сегмента", "sub": "2 канала", "price": 36775, "img": "img/el-shoulder.webp", "sizes": [], "cat": "el"}, "85/03": {"name": "Электрод «Плечо - голень»", "area": "Плечо - голень", "segs": "2 сегмента", "sub": "1 канал, обхват до 40 см", "price": 21750, "img": "img/el-shin-arm.webp", "sizes": [], "cat": "el"}, "85/04": {"name": "Электрод «Спина»", "area": "Спина", "segs": "4 сегмента", "sub": "2 канала, эластичный пояс с манжетой", "price": 31750, "img": "img/el-back.webp", "sizes": ["M", "L", "XL"], "cat": "el"}, "85/24": {"name": "Электрод «Спина на остистые»", "area": "Спина на остистые", "segs": "6 сегментов", "sub": "2 канала, эластичный пояс с манжетой", "price": 38250, "img": "img/el-back.webp", "sizes": ["M", "L", "XL"], "cat": "el"}, "85/34": {"name": "Электрод «Спина на остистые»", "area": "Спина на остистые", "segs": "3 сегмента", "sub": "2 канала, эластичный пояс с манжетой", "price": 36100, "img": "img/el-back.webp", "sizes": ["M", "L", "XL"], "cat": "el"}, "85/05": {"name": "Электрод «Тазобедренный»", "area": "Тазобедренный", "segs": "4 сегмента", "sub": "2 канала (85/15 - 1 канал)", "price": 23450, "img": "img/el-hip.webp", "sizes": [], "cat": "el"}, "85/06": {"name": "Электрод «Кисть - стопа»", "area": "Кисть - стопа", "segs": "2 сегмента", "sub": "1 канал", "price": 18950, "img": "img/el-hand-foot.webp", "sizes": [], "cat": "el"}, "85/07": {"name": "Электрод «Колено»", "area": "Колено", "segs": "4 сегмента", "sub": "2 канала", "price": 20400, "img": "img/el-knee.webp", "sizes": [], "cat": "el"}, "85/17": {"name": "Электрод «Колено»", "area": "Колено", "segs": "4 сегмента", "sub": "1 канал", "price": 20400, "img": "img/el-knee.webp", "sizes": [], "cat": "el"}, "85/08": {"name": "Электрод «Голень - бедро»", "area": "Голень - бедро", "segs": "2 сегмента", "sub": "1 канал, размеры M, L", "price": 23125, "img": "img/el-shin-thigh.webp", "sizes": ["M", "L"], "cat": "el"}, "85/09": {"name": "Электрод «Стопа»", "area": "Стопа", "segs": "2 сегмента", "sub": "1 канал", "price": 19350, "img": "img/el-foot.webp", "sizes": ["M", "L"], "cat": "el"}}, "guide": ["85/04", "85/01", "85/02", "85/03", "85/05", "85/06", "85/07", "85/08", "85/09"], "device": "85/31", "cream": "5T15"},I=D.items,KEY='ozotens_cart_v1',MAXQ=9,DESK=matchMedia('(min-width:980px)'),RM=matchMedia('(prefers-reduced-motion:reduce)').matches,lenis=null;
+/* GSAP и Lenis - свои копии в vendor/, грузятся после первой отрисовки (defer); без них всё работает на CSS */
+function G(){return window.gsap&&!RM}
 function rub(n){return n.toLocaleString('ru-RU')+' ₽'}
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 function load(){try{var c=JSON.parse(localStorage.getItem(KEY));return Array.isArray(c)?c:[]}catch(e){return[]}}
@@ -195,16 +204,17 @@ var cur='all',cats=document.getElementById('cats');
 CATS.forEach(function(c){var b=el('button','cat glass press');b.type='button';b.dataset.c=c[0];b.setAttribute('aria-pressed',c[0]===cur);b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">'+c[2]+'</svg>';b.appendChild(el('span',null,c[1]));cats.appendChild(b)});
 cats.addEventListener('click',function(e){var b=e.target.closest('.cat');if(!b)return;cur=b.dataset.c;[].forEach.call(cats.children,function(x){x.setAttribute('aria-pressed',x===b)});render()});
 /* карточки */
-function card(code,inRow){var it=I[code],c=el('div','card press');c.dataset.code=code;c.tabIndex=0;c.setAttribute('role','button');c.setAttribute('aria-label',it.name+', '+rub(it.price));
+function card(code,inRow){var it=I[code],c=el('div','card press');c.dataset.code=code;c.dataset.flipId=code;c.tabIndex=0;c.setAttribute('role','button');c.setAttribute('aria-label',it.name+', '+rub(it.price));
  var im=el('div','im'+(it.cat==='el'?' light':''));var img=el('img');img.src=it.img;img.alt='';img.loading='lazy';img.decoding='async';img.width=300;img.height=300;im.appendChild(img);c.appendChild(im);
  if(it.segs)c.appendChild(el('span','sz',it.segs.replace(' сегмента','').replace(' сегментов','')+' сегм.'));
  c.appendChild(el('b',null,it.cat==='el'?it.area:it.name));
  var ft=el('div','ft');ft.appendChild(el('span','pr',rub(it.price)));var p=el('button','plus press','+');p.type='button';p.setAttribute('aria-label','Добавить в заказ: '+it.name);ft.appendChild(p);c.appendChild(ft);return c}
 var base=document.getElementById('base'),grid=document.getElementById('grid'),q=document.getElementById('q');
 [D.device,D.cream].forEach(function(c){base.appendChild(card(c,true))});
-function render(){var s=q.value.trim().toLowerCase().replace(/ё/g,'е');grid.textContent='';
+function render(){var fs=G()&&window.Flip&&grid.children.length?Flip.getState(grid.querySelectorAll('.card')):null;var s=q.value.trim().toLowerCase().replace(/ё/g,'е');grid.textContent='';
  var ord=D.guide.concat(Object.keys(I).filter(function(c){return D.guide.indexOf(c)<0}));var list=ord.filter(function(c){var it=I[c];if(cur!=='all'&&it.cat!==cur)return false;if(cur==='all'&&it.cat!=='el'&&!s)return false;return !s||(it.name+' '+(it.sub||'')).toLowerCase().replace(/ё/g,'е').indexOf(s)>-1});
  list.forEach(function(c){grid.appendChild(card(c))});if(!list.length)grid.appendChild(el('p','empty','Ничего не нашли. Попробуйте «спина» или «крем».'));
+ if(fs)Flip.from(fs,{targets:grid.querySelectorAll('.card'),duration:.3,ease:'power3.out',onEnter:function(e){return gsap.fromTo(e,{opacity:0,scale:.94},{opacity:1,scale:1,duration:.24,ease:'power3.out'})}});
  document.getElementById('gt').textContent=s?'Найдено':(cur==='all'||cur==='el'?'Электроды под область':cur==='dev'?'Прибор':'Крем')}
 q.addEventListener('input',render);document.getElementById('all').addEventListener('click',function(){cur='all';q.value='';[].forEach.call(cats.children,function(x){x.setAttribute('aria-pressed',x.dataset.c==='all')});render()});
 render();
@@ -229,8 +239,20 @@ function open(code){var it=I[code];st={code:code,size:it.sizes[0]||'',dev:false,
  opt.textContent='';if(it.sizes.length||it.cat==='el'){opt.hidden=false;opt.appendChild(el('h4',null,'Собрать набор'));
   if(it.sizes.length){var r=el('div','orow');r.appendChild(el('span',null,'Размер'));var sg=el('div','seg');it.sizes.forEach(function(s){var b=el('button',null,s);b.type='button';b.setAttribute('aria-pressed',s===st.size);b.addEventListener('click',function(){st.size=s;[].forEach.call(sg.children,function(x){x.setAttribute('aria-pressed',x===b)})});sg.appendChild(b)});r.appendChild(sg);opt.appendChild(r)}
   opt.appendChild(sw('Добавить прибор','+ '+rub(I[D.device].price),'dev'));opt.appendChild(sw('Добавить крем','+ '+rub(I[D.cream].price),'cream'))}else opt.hidden=true;
- upd();sheet.classList.add('on');if(!DESK.matches){document.body.style.overflow='hidden';setTimeout(function(){document.getElementById('dclose').focus({preventScroll:true})},60)}}
-function close(){if(DESK.matches)return;sheet.classList.remove('on');document.body.style.overflow=''}
+ upd();var pane=sheet.querySelector('.pane');pane.scrollTop=0;
+ if(DESK.matches){if(G())gsap.fromTo(['#dimg','#dtag','#dn','.dbody .meta','#dsub','#opt'],{y:10,opacity:0},{y:0,opacity:1,duration:.26,ease:'power3.out',stagger:.025,overwrite:true});sheet.classList.add('on');return}
+ var was=sheet.classList.contains('on');sheet.classList.add('on');document.body.style.overflow='hidden';if(lenis)lenis.stop();
+ if(G()&&!was){gsap.killTweensOf(pane);gsap.fromTo(pane,{yPercent:100,y:0},{yPercent:0,duration:.38,ease:'expo.out'});gsap.fromTo('#scrim',{opacity:0},{opacity:1,duration:.22});gsap.fromTo('#dimg',{scale:.86,opacity:0},{scale:1,opacity:1,duration:.4,delay:.05,ease:'expo.out'})}
+ setTimeout(function(){document.getElementById('dclose').focus({preventScroll:true})},60)}
+function shut(){sheet.classList.remove('on');document.body.style.overflow='';if(lenis)lenis.start();if(window.gsap)gsap.set(sheet.querySelector('.pane'),{clearProps:'transform'})}
+function close(){if(DESK.matches||!sheet.classList.contains('on'))return;var pane=sheet.querySelector('.pane');
+ if(G()){gsap.killTweensOf(pane);gsap.to(pane,{yPercent:100,duration:.24,ease:'power3.in',onComplete:shut});gsap.to('#scrim',{opacity:0,duration:.2,clearProps:'opacity'})}else shut()}
+/* шторку можно смахнуть вниз за картинку */
+(function(){var h=document.getElementById('dhero'),pane=sheet.querySelector('.pane'),y0=null,dy=0,t0=0;
+ h.addEventListener('pointerdown',function(e){if(DESK.matches||!G()||e.target.closest('button'))return;y0=e.clientY;dy=0;t0=Date.now();h.setPointerCapture(e.pointerId)});
+ h.addEventListener('pointermove',function(e){if(y0===null)return;dy=Math.max(0,e.clientY-y0);gsap.set(pane,{y:dy});gsap.set('#scrim',{opacity:Math.max(.2,1-dy/400)})});
+ function up(){if(y0===null)return;var v=dy/Math.max(1,Date.now()-t0);y0=null;if(dy>110||v>.6){gsap.to(pane,{y:pane.offsetHeight,duration:.22,ease:'power3.in',onComplete:function(){gsap.set(pane,{y:0});shut()}});gsap.to('#scrim',{opacity:0,duration:.2,clearProps:'opacity'})}else{gsap.to(pane,{y:0,duration:.3,ease:'expo.out'});gsap.to('#scrim',{opacity:1,duration:.2})}}
+ h.addEventListener('pointerup',up);h.addEventListener('pointercancel',up)})();
 document.getElementById('scrim').addEventListener('click',close);document.getElementById('dclose').addEventListener('click',close);
 document.getElementById('qm').addEventListener('click',function(){st.q=Math.max(1,st.q-1);upd()});document.getElementById('qp').addEventListener('click',function(){st.q=Math.min(MAXQ,st.q+1);upd()});
 document.getElementById('add').addEventListener('click',function(){var it=I[st.code];add(st.code,st.size,st.q);if(it.cat==='el'){if(st.dev)add(D.device,'',st.q);if(st.cream)add(D.cream,'',st.q)}say('Добавлено в заказ.');close()});
@@ -239,6 +261,9 @@ function kit(){open('85/04');st.dev=true;st.cream=true;[].forEach.call(opt.query
 var of=document.getElementById('offer');of.addEventListener('click',kit);of.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();kit()}});
 /* на компьютере карточка справа видна сразу */
 if(DESK.matches)kit();
+/* плавная прокрутка (Lenis) и Flip подключаются, когда скрипты догрузились */
+document.addEventListener('DOMContentLoaded',function(){if(!window.gsap)return;document.documentElement.classList.add('gs');if(window.Flip)gsap.registerPlugin(Flip);
+ if(window.Lenis&&!RM){lenis=new Lenis({autoRaf:true,lerp:.12,prevent:function(n){return n.closest&&n.closest('.pane,.cats,.row')}})}});
 })();
 </script>
 </body>
