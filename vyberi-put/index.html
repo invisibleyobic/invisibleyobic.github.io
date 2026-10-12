@@ -26,14 +26,14 @@ a{color:inherit}
 main{position:relative;z-index:2}
 .w{max-width:1120px;margin:0 auto;padding:0 20px}
 /* первый экран */
-.intro{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:64px 0 48px}
-.term{font:500 clamp(20px,3.4vw,34px)/1.45 JBM,ui-monospace,monospace;color:var(--g);min-height:7.4em;max-width:900px}
+.intro{overflow-x:clip;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:56px 0 40px}
+.term{font:500 clamp(18px,2.6vw,28px)/1.45 JBM,ui-monospace,monospace;color:var(--g);min-height:6.4em;max-width:900px}
 .term p{margin:0 0 .3em;text-shadow:0 0 18px rgba(125,255,178,.35)}
 .term .cur{display:inline-block;width:.6em;height:1.05em;background:var(--g);vertical-align:-.15em;margin-left:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .choose{margin-top:28px;opacity:1;transition:opacity .8s,transform .8s}
 .js .choose.hide{opacity:0;transform:translateY(14px);pointer-events:none}
-.choose h1{font:600 clamp(30px,5vw,54px)/1.08 Onest,sans-serif;letter-spacing:-.02em;margin:0 0 26px;color:#fff}
+.choose h1{font:600 clamp(30px,5vw,54px)/1.08 Onest,sans-serif;letter-spacing:-.02em;margin:0;color:#fff;position:relative;z-index:1}
 .pills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .pill{position:relative;display:flex;flex-direction:column;gap:6px;text-decoration:none;padding:22px 24px 22px 76px;border-radius:999px;border:1px solid color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 9%,transparent);min-height:96px;justify-content:center;transition:transform .35s,box-shadow .35s,background .35s,opacity .35s}
 .pill::before{content:"";position:absolute;left:22px;top:50%;width:38px;height:18px;margin-top:-9px;border-radius:999px;background:linear-gradient(90deg,var(--c) 50%,color-mix(in srgb,var(--c) 40%,#fff) 50%);box-shadow:0 0 18px var(--c);transform:rotate(-24deg)}
@@ -45,6 +45,7 @@ main{position:relative;z-index:2}
 .skipintro{margin-top:22px;font-size:16px;color:var(--dim)}
 .skipintro button{all:unset;cursor:pointer;text-decoration:underline;min-height:44px;display:inline-flex;align-items:center}
 .skipintro button:focus-visible{outline:3px solid var(--g);outline-offset:4px}
+@media(max-width:600px){.intro{padding-top:84px}}
 @media(max-width:860px){.pills{grid-template-columns:1fr}.pill{border-radius:32px}}
 /* пути */
 .path{padding:clamp(72px,10vw,120px) 0;border-top:1px solid rgba(125,255,178,.12)}
@@ -64,11 +65,35 @@ main{position:relative;z-index:2}
 .end .big{font:500 clamp(22px,3vw,30px)/1.35 JBM,monospace;color:var(--g)}
 .foot{font-size:16px;color:var(--dim);padding:24px 0 40px;border-top:1px solid rgba(125,255,178,.12)}
 .foot a{display:inline-flex;min-height:44px;align-items:center;margin-right:18px}
+/* 3D-таблетки как пикапы в игре: крутятся, качаются, светятся снизу */
+.pk{position:absolute;left:4px;top:50%;width:76px;height:76px;margin-top:-38px;pointer-events:none}
+.js .pill{padding-left:88px}.js .pill::before{display:none}
+/* руки из темноты */
+.stage{position:relative;width:min(1100px,150%);margin:-6px 0 6px 50%;transform:translateX(-50%);aspect-ratio:1344/452}
+#palm{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hands{display:block;width:100%;height:auto;opacity:.92;
+ -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent 100%);pointer-events:none}
+.js .choose.hide .hands{opacity:0;transform:translateY(40px);filter:brightness(0)}
+.js .hands{transition:opacity 2.4s ease,transform 2.4s ease,filter 2.4s ease}
+/* глич */
+.gl{position:relative;display:inline-block}
+.gl.on::before,.gl.on::after{content:attr(data-text);position:absolute;inset:0;pointer-events:none}
+.gl.on::before{color:#ff3b6b;transform:translate(-3px,0);clip-path:inset(12% 0 58% 0);mix-blend-mode:screen;animation:g1 .28s steps(2) infinite}
+.gl.on::after{color:#4df2ff;transform:translate(3px,0);clip-path:inset(60% 0 8% 0);mix-blend-mode:screen;animation:g2 .28s steps(2) infinite}
+@keyframes g1{0%{clip-path:inset(12% 0 58% 0);transform:translate(-4px,-1px)}50%{clip-path:inset(40% 0 30% 0);transform:translate(3px,1px)}100%{clip-path:inset(70% 0 5% 0);transform:translate(-2px,0)}}
+@keyframes g2{0%{clip-path:inset(60% 0 8% 0);transform:translate(4px,1px)}50%{clip-path:inset(5% 0 72% 0);transform:translate(-3px,0)}100%{clip-path:inset(30% 0 45% 0);transform:translate(2px,-1px)}}
+.shake main{animation:sh .32s steps(3)}
+@keyframes sh{0%{transform:translate(0);filter:none}33%{transform:translate(-6px,2px) skewX(-2deg);filter:hue-rotate(40deg) contrast(1.4)}66%{transform:translate(5px,-2px);filter:hue-rotate(-30deg)}100%{transform:none;filter:none}}
+/* звук */
+.snd{position:fixed;right:14px;top:14px;z-index:5;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(125,255,178,.45);background:rgba(3,8,6,.7);color:var(--g);font:500 16px JBM,monospace;cursor:pointer}
+.snd[aria-pressed="true"]{background:rgba(125,255,178,.14)}
+.js .snd{display:inline-flex;align-items:center}.snd{display:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#rain{display:none}}
 </style>
 </head>
 <body>
 <a class="skip" href="#paths">К выбору пути</a>
+<button class="snd" id="snd" type="button" aria-pressed="false">Звук: выкл</button>
 <canvas id="rain" aria-hidden="true"></canvas><div class="vign" aria-hidden="true"></div>
 <main>
 <section class="intro"><div class="w">
@@ -76,11 +101,12 @@ main{position:relative;z-index:2}
     <noscript><p>Проснись.</p><p>Ты снова просидел восемь часов.</p><p>Шея, поясница, плечи: тело всё помнит.</p><p>Можно и дальше не замечать. А можно выбрать.</p></noscript>
   </div>
   <div class="choose" id="paths">
-    <h1>Выбери свой путь.</h1>
+    <h1><span class="gl" id="gl" data-text="Выбери свой путь.">Выбери свой путь.</span></h1>
+    <div class="stage" id="stage"><img class="hands" src="hands.webp" width="1344" height="452" alt="Две раскрытые ладони протянуты из темноты" decoding="async"><canvas id="palm" aria-hidden="true"></canvas></div>
     <nav class="pills" id="pills" aria-label="Три пути">
-      <a class="pill p-home" href="#home"><b>Помочь себе дома</b><span>Прибор, крем и электрод под область тела</span></a>
-      <a class="pill p-doc" href="#doc"><b>Прийти к специалисту</b><span>Клиники и кабинеты озонотерапии</span></a>
-      <a class="pill p-own" href="#own"><b>Открыть свой кабинет</b><span>Для врачей и клиник: аппарат и обучение</span></a>
+      <a class="pill p-home" href="#home"><canvas class="pk" width="152" height="152" aria-hidden="true"></canvas><b>Помочь себе дома</b><span>Прибор, крем и электрод под область тела</span></a>
+      <a class="pill p-doc" href="#doc"><canvas class="pk" width="152" height="152" aria-hidden="true"></canvas><b>Прийти к специалисту</b><span>Клиники и кабинеты озонотерапии</span></a>
+      <a class="pill p-own" href="#own"><canvas class="pk" width="152" height="152" aria-hidden="true"></canvas><b>Открыть свой кабинет</b><span>Для врачей и клиник: аппарат и обучение</span></a>
     </nav>
   </div>
   <p class="skipintro" id="skipwrap" hidden><button type="button" id="skipbtn">Показать сразу</button></p>
@@ -143,17 +169,68 @@ if(RM){finish()}else{
  var li=0,ci=0,p=null,cur=document.createElement('span');cur.className='cur';
  (function type(){if(done)return;
   if(!p){p=document.createElement('p');term.appendChild(p)}
-  var s=lines[li];p.textContent=s.slice(0,++ci);p.appendChild(cur);
+  var s=lines[li];p.textContent=s.slice(0,++ci);p.appendChild(cur);if(window.__tick&&s[ci-1]!==' ')window.__tick();
   if(ci<s.length){timer=setTimeout(type,s[ci-1]==='.'||s[ci-1]===':'?240:30)}
   else{li++;ci=0;p=null;if(li<lines.length){timer=setTimeout(type,380)}else{timer=setTimeout(function(){choose.classList.remove('hide');skipw.hidden=true;done=true},300)}}})();
  document.getElementById('skipbtn').addEventListener('click',finish)}
+/* ---- звук: синтез в браузере, без файлов; включается только кнопкой ---- */
+var AC=null,master=null,drone=null,sndOn=false,sb=document.getElementById('snd');
+function ac(){if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;AC=new C();master=AC.createGain();master.gain.value=.5;master.connect(AC.destination)}return AC}
+function blip(f,d,type,vol,when){if(!sndOn||!ac())return;var t=AC.currentTime+(when||0),o=AC.createOscillator(),g=AC.createGain();o.type=type||'square';o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(vol||.05,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.02)}
+function startDrone(){if(drone||!ac())return;var g=AC.createGain(),lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=380;g.gain.value=0;g.gain.linearRampToValueAtTime(.06,AC.currentTime+2);
+ [55,55.4,82.4].forEach(function(f){var o=AC.createOscillator();o.type='sawtooth';o.frequency.value=f;o.connect(lp);o.start()});lp.connect(g);g.connect(master);drone=g}
+function stopDrone(){if(drone){drone.gain.linearRampToValueAtTime(0,AC.currentTime+.6);var d=drone;drone=null;setTimeout(function(){d.disconnect()},800)}}
+sb.addEventListener('click',function(){sndOn=!sndOn;sb.setAttribute('aria-pressed',sndOn);sb.textContent='Звук: '+(sndOn?'вкл':'выкл');
+ if(sndOn){ac();AC.resume();startDrone();blip(880,.08,'square',.04)}else stopDrone()});
+function pickup(){[523,659,784,1047].forEach(function(f,i){blip(f,.18,'square',.045,i*.07)});blip(1568,.4,'triangle',.05,.3)}
+window.__tick=function(){blip(1200+Math.random()*500,.025,'square',.018)};
+/* ---- глич заголовка: редкие короткие сбои ---- */
+var gl=document.getElementById('gl');
+function glitch(ms){if(RM)return;gl.classList.add('on');setTimeout(function(){gl.classList.remove('on')},ms||260)}
+if(!RM)(function loop(){setTimeout(function(){glitch(220+Math.random()*200);if(sndOn)blip(90,.12,'sawtooth',.05);loop()},3500+Math.random()*4000)})();
+/* ---- 3D-таблетки: капсула крутится вокруг вертикальной оси, качается, снизу ореол и луч ---- */
+var COL={'p-home':['#7dffb2','#e9fff3'],'p-doc':['#8fd0ff','#eef8ff'],'p-own':['#ffc46b','#fff5e3']};
+var pks=[].map.call(document.querySelectorAll('.pill'),function(a,i){var c=a.querySelector('.pk'),k=a.classList[1];return{a:a,c:c,x:c.getContext('2d'),col:COL[k],ph:i*2.1,speed:1,hover:0}});
+function capsule(x,th,cA,cB,cx,cy,R,L){var e=.42,ax=Math.cos(th),az=Math.sin(th),px=ax,py=az*Math.sin(e),len=Math.hypot(px,py)||1e-4,ux=px/len,uy=py/len,h=(L/2-R)*len,
+ tilt=-.42,ct=Math.cos(tilt),st=Math.sin(tilt),dx=ux*ct-uy*st,dy=ux*st+uy*ct,nx=-dy,ny=dx;
+ function stadium(){x.beginPath();x.arc(cx+dx*h,cy+dy*h,R,Math.atan2(ny,nx)+Math.PI,Math.atan2(ny,nx),false);x.arc(cx-dx*h,cy-dy*h,R,Math.atan2(ny,nx),Math.atan2(ny,nx)+Math.PI,false);x.closePath()}
+ var depth=az*Math.cos(e),split=-Math.sign(depth||1)*R*Math.abs(depth)*.9;
+ x.save();stadium();x.fillStyle=cB;x.fill();x.clip();
+ x.beginPath();var sx=cx+dx*split,sy=cy+dy*split;var Q=L*2;x.moveTo(sx+nx*Q,sy+ny*Q);x.lineTo(sx+nx*Q+dx*Q,sy+ny*Q+dy*Q);x.lineTo(sx-nx*Q+dx*Q,sy-ny*Q+dy*Q);x.lineTo(sx-nx*Q,sy-ny*Q);x.closePath();x.fillStyle=cA;x.fill();
+ var g=x.createLinearGradient(cx+nx*R,cy+ny*R,cx-nx*R,cy-ny*R);g.addColorStop(0,'rgba(0,0,0,.45)');g.addColorStop(.45,'rgba(0,0,0,0)');g.addColorStop(.7,'rgba(255,255,255,.18)');g.addColorStop(1,'rgba(0,0,0,.35)');x.fillStyle=g;x.fillRect(cx-L,cy-L,2*L,2*L);
+ x.strokeStyle='rgba(255,255,255,.75)';x.lineWidth=2.4;x.lineCap='round';x.beginPath();x.moveTo(cx+dx*h*.85-nx*R*.5,cy+dy*h*.85-ny*R*.5);x.lineTo(cx-dx*h*.4-nx*R*.5,cy-dy*h*.4-ny*R*.5);x.stroke();
+ x.restore()}
+function drawPk(p,t){var x=p.x,W=152,cx=76,bob=Math.sin(t*2.2+p.ph)*5,cy=66+bob,th=t*2.6*p.speed+p.ph;x.clearRect(0,0,W,W);
+ var g=x.createRadialGradient(cx,128,2,cx,128,46);g.addColorStop(0,p.col[0]+'99');g.addColorStop(1,p.col[0]+'00');x.fillStyle=g;x.save();x.scale(1,.32);x.beginPath();x.arc(cx,128/.32,46+Math.sin(t*3+p.ph)*4,0,7);x.fill();x.restore();
+ 
+ x.shadowColor=p.col[0];x.shadowBlur=18+p.hover*14;capsule(x,th,p.col[0],p.col[1],cx,cy,15,74);x.shadowBlur=0}
+/* таблетки над ладонями: левая - дома, между ладонями - свой кабинет, правая - к специалисту */
+var pc=document.getElementById('palm'),px=pc.getContext('2d'),SPOT={'p-home':[.355,.40],'p-own':[.52,.30],'p-doc':[.69,.40]},picked=null;
+pks.forEach(function(p){p.k=p.a.classList[1];p.sc=1;p.al=1});
+function fitPalm(){var r=Math.min(devicePixelRatio||1,2),b=pc.getBoundingClientRect();pc.width=Math.round(b.width*r);pc.height=Math.round(b.height*r);px.setTransform(r,0,0,r,0,0)}
+fitPalm();addEventListener('resize',fitPalm);
+function drawPalm(t){var W=pc.clientWidth,H=pc.clientHeight;px.clearRect(0,0,W,H);
+ pks.forEach(function(p){var hv=p.a.matches(':hover,:focus-visible'),tsc=picked?(picked===p?1.75:.7):(hv?1.25:1),tal=picked&&picked!==p?.18:1;
+  p.sc+=(tsc-p.sc)*.09;p.al+=(tal-p.al)*.09;
+  var s=SPOT[p.k],cx=s[0]*W,base=s[1]*H,bob=Math.sin(t*2.2+p.ph)*W*.006,cy=base+bob,R=W*.016*p.sc,L=W*.078*p.sc,gy=base+H*.2;
+  px.globalAlpha=p.al;
+  var g=px.createRadialGradient(cx,gy,1,cx,gy,L*.9);g.addColorStop(0,p.col[0]+'aa');g.addColorStop(1,p.col[0]+'00');px.save();px.translate(cx,gy);px.scale(1,.3);px.beginPath();px.arc(0,0,L*.9*(1+Math.sin(t*3+p.ph)*.06),0,7);px.restore();px.fillStyle=g;px.fill();
+  
+  px.shadowColor=p.col[0];px.shadowBlur=W*.02*p.sc;capsule(px,t*2.6*p.speed+p.ph,p.col[0],p.col[1],cx,cy,R,L);px.shadowBlur=0;px.globalAlpha=1})}
+var t0=performance.now();
+function pkLoop(now){var t=(now-t0)/1000;pks.forEach(function(p){p.speed+=((p.a.matches(':hover,:focus-visible')||picked===p?2.4:1)-p.speed)*.08;p.hover=p.speed>1.2?1:0;drawPk(p,t)});drawPalm(t);if(!RM&&!document.hidden)requestAnimationFrame(pkLoop)}
+if(RM){pks.forEach(function(p){drawPk(p,.6)});drawPalm(.6)}else{requestAnimationFrame(pkLoop);document.addEventListener('visibilitychange',function(){if(!document.hidden)requestAnimationFrame(pkLoop)})}
+pks.forEach(function(p){p.a.addEventListener('mouseenter',function(){blip(660,.06,'square',.03)})});
 /* выбор пути: подсветить таблетку и мягко перейти к пути */
 var pills=document.getElementById('pills');
 pills.addEventListener('click',function(e){var a=e.target.closest('.pill');if(!a)return;e.preventDefault();
  [].forEach.call(pills.children,function(x){x.classList.toggle('on',x===a)});pills.classList.add('picked');
+ picked=pks.filter(function(p){return p.a===a})[0];pickup();glitch(320);
+ if(!RM){document.body.classList.remove('shake');void document.body.offsetWidth;document.body.classList.add('shake')}else{drawPalm(.6)}
+ var stg=document.getElementById('stage').getBoundingClientRect();if(!RM&&(stg.top<0||stg.bottom>innerHeight))document.getElementById('stage').scrollIntoView({behavior:'smooth',block:'center'});
  var t=document.querySelector(a.getAttribute('href'));history.replaceState(null,'',a.getAttribute('href'));
- t.scrollIntoView({behavior:RM?'auto':'smooth'});t.classList.remove('flash');void t.offsetWidth;t.classList.add('flash');
- var h=t.querySelector('h2');h.setAttribute('tabindex','-1');h.focus({preventScroll:true})});
+ setTimeout(function(){t.scrollIntoView({behavior:RM?'auto':'smooth'});t.classList.remove('flash');void t.offsetWidth;t.classList.add('flash');
+  var h=t.querySelector('h2');h.setAttribute('tabindex','-1');h.focus({preventScroll:true})},RM?0:1300)});
 })();
 </script>
 </body>
