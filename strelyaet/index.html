@@ -41,10 +41,10 @@ a{color:inherit}
 .bub{position:absolute;z-index:4;max-width:min(420px,40%);padding:16px 20px;border-radius:22px;background:#fffdf5;color:#1a1006;font:800 clamp(17px,1.9vw,26px)/1.2 Unb,sans-serif;box-shadow:6px 6px 0 rgba(0,0,0,.35);opacity:0;transform:scale(.6) translateY(10px);transform-origin:var(--o,left bottom);transition:opacity .25s,transform .35s cubic-bezier(.2,1.6,.4,1)}
 .bub.on{opacity:1;transform:none}
 .open{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:opacity .25s,filter .25s}
-.open.off{opacity:0;filter:contrast(2) brightness(1.6);pointer-events:none}
+.open.off{opacity:0;filter:contrast(1.6) brightness(1.4);pointer-events:none}
 .bub::after{content:"";position:absolute;width:22px;height:22px;background:#fffdf5;transform:rotate(45deg)}
 .b1,.b3{right:5%;top:6%;--o:left bottom}.b1::after,.b3::after{left:28px;bottom:-9px}
-.b2{left:50%;top:13%;max-width:200px;background:#ffd23f;--o:right bottom}.b2::after{right:30px;bottom:-9px;background:#ffd23f}
+.b2{left:58%;top:8%;width:18%;max-width:none;text-align:center;background:#ffd23f;--o:center bottom}.b2::before,.b2::after{content:"";position:absolute;width:0;height:0;background:none;border-left:11px solid transparent;border-right:11px solid transparent;border-top:clamp(50px,9vw,120px) solid #ffd23f;top:calc(100% - 4px);transform-origin:50% 0}.b2::before{left:10%;transform:rotate(26deg)}.b2::after{right:6%;transform:rotate(-18deg)}
 
 .play{position:absolute;z-index:5;left:20px;bottom:44px;min-height:52px;padding:0 20px;border-radius:12px;border:2px solid var(--y);background:rgba(18,11,7,.8);color:var(--y);font:700 17px Onest,sans-serif;cursor:pointer}
 .play:hover{background:var(--y);color:#1a1006}
@@ -97,7 +97,7 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
 .warn small{display:block;margin-top:10px;font:400 16px/1.5 Onest,sans-serif;color:var(--dim)}
 .foot{padding:40px 0 56px;color:var(--dim);font-size:16px}
 .foot a{display:inline-flex;min-height:44px;align-items:center;margin-right:18px}
-@media(max-width:600px){.osd.tr,.osd.bl{display:none}.stage{aspect-ratio:4/3}.stage video{object-position:30% 50%}.stage{aspect-ratio:1/1}.bub{max-width:66%;font-size:16px;padding:10px 14px}.b1,.b3{right:4%;top:12%}.b2{left:auto;right:30%;top:38%}.play{bottom:16px;left:12px}}
+@media(max-width:600px){.osd.tr,.osd.bl{display:none}.stage{aspect-ratio:4/3}.stage video{object-position:30% 50%}.stage{aspect-ratio:4/3}.stage #sv{object-position:78% 50%}.stage #ov{object-position:35% 50%}.bub{max-width:66%;font-size:16px;padding:10px 14px}.b1,.b3{right:4%;top:12%}.b2{left:40%;top:8%;width:30%}.b2::after{right:-30%}.play{bottom:16px;left:12px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#noise{display:none}}
 </style>
 </head>
@@ -111,11 +111,12 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
 <section class="hero">
   <div class="stage" id="stage">
     <video id="sv" muted playsinline preload="none" poster="img/scene.webp" width="1280" height="732" aria-label="Мужчина в чёрном пальто разводит руками перед двумя парнями: один держится за поясницу, другой за ногу"><source src="scene.webm" type="video/webm"><source src="scene.mp4" type="video/mp4"></video>
-    <img class="open" id="open" src="img/open.webp" width="1280" height="711" alt="Кадр: мужчина в чёрном пальто удивлённо разводит руками у машины" fetchpriority="high">
+    <video class="open" id="ov" playsinline preload="metadata" poster="img/open.webp" width="1280" height="720" aria-label="Сцена: мужчина в чёрном пальто у машины спрашивает, все ли стреляют"><source src="orig.webm" type="video/webm"><source src="orig.mp4" type="video/mp4"></video>
     <div class="scan" aria-hidden="true"></div><canvas id="noise" width="320" height="180" aria-hidden="true"></canvas>
     <p class="bub b1" id="b1">А вы чё, ребята, все стреляете?</p>
     <p class="bub b2" id="b2">А чё?</p>
     <p class="bub b3" id="b3">А то, что уже не стреляют. Сейчас по-другому делают.</p>
+    <button class="play" id="play" type="button">&#9654; Смотреть со звуком</button>
   </div>
   <div class="w"><div class="say">
     <p class="kick">ДЕВЯНОСТЫЕ ПРОШЛИ. А У ТЕБЯ?</p>
@@ -172,14 +173,20 @@ function clunk(){tone(120,.12,'square',.08);tone(60,.2,'sine',.1,.02)}
 function rewind(){tone(300,.5,'sawtooth',.04,0,1800)}
 function win(){[392,523,659,784].forEach(function(f,i){tone(f,.16,'square',.045,i*.07)})}
 sb.addEventListener('click',function(){on=!on;sb.setAttribute('aria-pressed',on);sb.textContent='Звук: '+(on?'вкл':'выкл');if(on){ac();AC.resume();clunk()}});
-/* сцена: видео без звука и реплики; кнопка - заново со звуком */
-var sv=document.getElementById('sv'),bubs=['b1','b2','b3'].map(function(id){return document.getElementById(id)}),T=[400,3600,4500],tm=[];
-function scene(withSound){tm.forEach(clearTimeout);tm=[];bubs.forEach(function(b){b.classList.remove('on')});
- if(RM){document.getElementById('open').classList.add('off');bubs[1].classList.add('on');bubs[2].classList.add('on');return}
- var op=document.getElementById('open');op.classList.remove('off');
- tm.push(setTimeout(function(){op.classList.add('off');bubs[0].classList.remove('on');try{sv.currentTime=0}catch(e){}var q=sv.play();if(q&&q.catch)q.catch(function(){})},3000));
- T.forEach(function(t,k){tm.push(setTimeout(function(){bubs[k].classList.add('on');if(!withSound)tone(900+k*120,.05,'square',.03)},t))})}
-if(RM){scene(false)}else{sv.preload='auto';setTimeout(function(){scene(false)},700)}
+/* сцена: оригинал со звуком идёт непрерывно; на «А чё?» картинка переключается на двоих пострадавших */
+var ov=document.getElementById('ov'),sv=document.getElementById('sv'),b1=document.getElementById('b1'),b2=document.getElementById('b2'),b3=document.getElementById('b3'),pb=document.getElementById('play'),raf=0;
+var CUT_IN=5.1,CUT_OUT=6.15,S1=2.9,S3=6.15;
+function setB(a,b,c){b1.classList.toggle('on',a);b2.classList.toggle('on',b);b3.classList.toggle('on',c)}
+function tick(){var t=ov.currentTime,cut=t>=CUT_IN&&t<CUT_OUT;
+ ov.classList.toggle('off',cut);
+ if(cut&&sv.paused){try{sv.currentTime=.4}catch(e){}var q=sv.play();if(q&&q.catch)q.catch(function(){})}
+ setB(t>=S1&&t<CUT_IN,cut,t>=S3);
+ if(!ov.paused&&!ov.ended)raf=requestAnimationFrame(tick)}
+function run(sound){cancelAnimationFrame(raf);ov.muted=!sound;try{ov.currentTime=0}catch(e){}setB(false,false,false);ov.classList.remove('off');
+ var q=ov.play();if(q&&q.catch)q.catch(function(){setB(true,false,false)});raf=requestAnimationFrame(tick)}
+ov.addEventListener('ended',function(){cancelAnimationFrame(raf);ov.classList.remove('off');setB(false,false,true)});
+pb.addEventListener('click',function(){if(!on){on=true;sb.setAttribute('aria-pressed','true');sb.textContent='Звук: вкл';ac()&&AC.resume()}run(true)});
+if(RM){setB(true,false,false)}else{sv.preload='auto';setTimeout(function(){run(false)},600)}
 /* печать заголовка и появление выбора */
 var h1=document.getElementById('h1'),full=h1.textContent,lines=document.getElementById('lines'),ch=document.getElementById('choice');
 function show(){lines.classList.remove('h');setTimeout(function(){ch.classList.remove('h')},RM?0:700)}
