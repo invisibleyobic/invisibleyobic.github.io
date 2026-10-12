@@ -44,7 +44,7 @@ a{color:inherit}
 .open.off{opacity:0;filter:contrast(1.6) brightness(1.4);pointer-events:none}
 .bub::after{content:"";position:absolute;width:22px;height:22px;background:#fffdf5;transform:rotate(45deg)}
 .b1,.b3{right:5%;top:6%;--o:left bottom}.b1::after,.b3::after{left:28px;bottom:-9px}
-.b2{left:58%;top:8%;width:18%;max-width:none;text-align:center;background:#ffd23f;--o:center bottom}.b2::before,.b2::after{content:"";position:absolute;width:0;height:0;background:none;border-left:11px solid transparent;border-right:11px solid transparent;border-top:clamp(50px,9vw,120px) solid #ffd23f;top:calc(100% - 4px);transform-origin:50% 0}.b2::before{left:10%;transform:rotate(26deg)}.b2::after{right:6%;transform:rotate(-18deg)}
+.b2{left:40%;top:6%;width:20%;max-width:none;text-align:center;background:#ffd23f;--o:center bottom}.b2::before,.b2::after{content:"";position:absolute;width:0;height:0;background:none;border-left:11px solid transparent;border-right:11px solid transparent;border-top:clamp(50px,9vw,120px) solid #ffd23f;top:calc(100% - 4px);transform-origin:50% 0}.b2::before{left:8%;transform:rotate(38deg)}.b2::after{right:8%;transform:rotate(-34deg)}
 
 .play{position:absolute;z-index:5;left:20px;bottom:44px;min-height:52px;padding:0 20px;border-radius:12px;border:2px solid var(--y);background:rgba(18,11,7,.8);color:var(--y);font:700 17px Onest,sans-serif;cursor:pointer}
 .play:hover{background:var(--y);color:#1a1006}
@@ -97,7 +97,7 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
 .warn small{display:block;margin-top:10px;font:400 16px/1.5 Onest,sans-serif;color:var(--dim)}
 .foot{padding:40px 0 56px;color:var(--dim);font-size:16px}
 .foot a{display:inline-flex;min-height:44px;align-items:center;margin-right:18px}
-@media(max-width:600px){.osd.tr,.osd.bl{display:none}.stage{aspect-ratio:4/3}.stage video{object-position:30% 50%}.stage{aspect-ratio:4/3}.stage #sv{object-position:78% 50%}.stage #ov{object-position:35% 50%}.bub{max-width:66%;font-size:16px;padding:10px 14px}.b1,.b3{right:4%;top:12%}.b2{left:40%;top:8%;width:30%}.b2::after{right:-30%}.play{bottom:16px;left:12px}}
+@media(max-width:600px){.osd.tr,.osd.bl{display:none}.stage{aspect-ratio:4/3}.stage video{object-position:30% 50%}.stage{aspect-ratio:4/3}.stage #ov{object-position:35% 50%}.bub{max-width:66%;font-size:16px;padding:10px 14px}.b1,.b3{right:4%;top:12%}.b2{left:33%;top:6%;width:34%}.play{bottom:16px;left:12px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#noise{display:none}}
 </style>
 </head>
@@ -110,7 +110,7 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
 <main>
 <section class="hero">
   <div class="stage" id="stage">
-    <video id="sv" muted playsinline preload="none" poster="img/scene.webp" width="1280" height="732" aria-label="Мужчина в чёрном пальто разводит руками перед двумя парнями: один держится за поясницу, другой за ногу"><source src="scene.webm" type="video/webm"><source src="scene.mp4" type="video/mp4"></video>
+    <video id="sv" muted playsinline preload="none" poster="img/scene.webp" width="1280" height="720" aria-label="Мужчина в чёрном пальто разводит руками перед двумя парнями: один держится за поясницу, другой за ногу"><source src="scene.webm" type="video/webm"><source src="scene.mp4" type="video/mp4"></video>
     <video class="open" id="ov" playsinline preload="metadata" poster="img/open.webp" width="1280" height="720" aria-label="Сцена: мужчина в чёрном пальто у машины спрашивает, все ли стреляют"><source src="orig.webm" type="video/webm"><source src="orig.mp4" type="video/mp4"></video>
     <div class="scan" aria-hidden="true"></div><canvas id="noise" width="320" height="180" aria-hidden="true"></canvas>
     <p class="bub b1" id="b1">А вы чё, ребята, все стреляете?</p>
