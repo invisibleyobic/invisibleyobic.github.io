@@ -266,3 +266,12 @@ ol.lit li{margin:0 0 12px;overflow-wrap:anywhere}
  .grid.cols3 .card.text::after{content:"";grid-column:2;grid-row:1/3;width:9px;height:9px;border-right:1.8px solid #111;border-top:1.8px solid #111;transform:rotate(45deg);justify-self:center}
  .grid.cols3 .card.text:hover,.grid.cols3 .card.text:focus-visible{background:rgba(0,0,0,.03)}
 }
+/* ревью арт-директора 12.10: спокойнее на телефоне */
+@media(max-width:600px){
+ .top .brand .drop{display:none}
+ main h2{text-transform:none;letter-spacing:-.01em;font-weight:600;font-size:22px}
+ .grid.cols3 .card.text small{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+ .stories .sc{border:1px solid #e3e3e3}
+ .hero .btn{letter-spacing:.06em;border-radius:2px}
+ .warnline{border-left:0;border-radius:12px}
+}

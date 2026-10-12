@@ -363,23 +363,42 @@ footer{padding:44px 20px 130px}
 .gc{max-height:min(600px,calc(100svh - 210px));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .guide .gh{max-width:760px}.gl{display:none}
 @media(min-width:700px){.gl{display:block}}
-/* телефон: упаковка как в магазине - белая шапка с иконками, прямоугольные кнопки, списки строками */
+/* телефон: упаковка как в магазине, но в цветах лендинга (ревью арт-директора 12.10) */
 .tshop{display:none}
 @media(max-width:600px){
- .top,.top.solid{display:grid;grid-template-columns:48px 1fr 48px;align-items:center;background:#fff;color:#111;padding:calc(4px + env(safe-area-inset-top)) 8px 4px;border-bottom:1px solid #e7e7e7;pointer-events:auto;backdrop-filter:none}
+ .top,.top.solid{display:grid;grid-template-columns:48px 1fr 48px;align-items:center;background:rgba(8,14,11,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#fff;padding:calc(4px + env(safe-area-inset-top)) 8px 4px;border-bottom:1px solid rgba(255,255,255,.08);pointer-events:auto}
  .top .burger{grid-column:1;grid-row:1;border:0;background:transparent;backdrop-filter:none;width:44px;height:44px}
- .top .burger span,.top .burger span::before,.top .burger span::after{background:#111;height:1.6px;width:22px}
- .top .brand{grid-column:2;grid-row:1;justify-self:center;color:#111;text-shadow:none;font-size:20px;min-height:44px;display:inline-flex;align-items:center}
- .tshop{grid-column:3;grid-row:1;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:#111}
- .btn,.watch,.more,.pop .pcta{border-radius:0;text-transform:uppercase;letter-spacing:.1em;font-size:16px}
- .dock{left:0;right:0;bottom:0;border-radius:0;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#fff;border:0;border-top:1px solid #e7e7e7;box-shadow:none;backdrop-filter:none}
- .dock a{border-radius:0;text-transform:uppercase;letter-spacing:.1em;font-size:16px}
- .dock .a{background:#0b0f0d;color:#fff}.dock .b{background:#fff;color:#111;box-shadow:inset 0 0 0 1.5px #111}
+ .top .burger span,.top .burger span::before,.top .burger span::after{background:#fff;height:1.6px;width:22px}
+ .top .brand{grid-column:2;grid-row:1;justify-self:center;color:#fff;text-shadow:none;font-size:20px;min-height:44px;display:inline-flex;align-items:center}
+ .tshop{grid-column:3;grid-row:1;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:#fff}
+ /* один шрифт заголовков, Dela только в логотипе */
+ h2,h2.dela,.slam,.sheet h3{font-family:var(--fb);font-weight:700;letter-spacing:-.025em;line-height:1.08}
+ h2,h2.dela{font-size:32px}.slam{font-size:30px}.sheet h3{font-size:26px}
+ /* надзаголовки: один спокойный цвет, без моноширинной разрядки */
+ .mono,.light .mono,#how .mono{font:500 16px/1.4 var(--fb);letter-spacing:.01em;text-transform:none;color:rgba(255,255,255,.55)}
+ .light .mono{color:#8a7a6e}
+ /* кнопки: одна форма */
+ .btn,.watch,.more,.pop .pcta{border-radius:2px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;font-size:16px;min-height:52px}
+ .watch{border:0;background:transparent;padding-left:0}
+ .scheme-control{border:0;border-radius:0;padding:10px 0;text-decoration:underline;text-underline-offset:3px;font-size:16px}
+ /* карточки без градиентов и свечения */
+ .gc,#how .stp{background:#13221b;box-shadow:none;border:1px solid rgba(255,255,255,.08);border-radius:16px}
+ .gc::before,#how .stp::before{display:none}
+ /* нижняя панель: тёмная, одна кнопка */
+ .dock{left:0;right:0;bottom:0;border-radius:0;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:rgba(8,14,11,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:0;border-top:1px solid rgba(255,255,255,.08);box-shadow:none}
+ .dock .b{display:none}
+ .dock a{border-radius:2px;text-transform:uppercase;letter-spacing:.06em;font-size:16px}
+ .dock .a{background:#fff;color:#0b0f0d}
+ /* вопросы строками */
  details:not(.sc):not(.ref){background:transparent;border:0;border-bottom:1px solid rgba(11,16,36,.14);border-radius:0;padding:0 2px;margin-top:0}
  details:not(.sc):not(.ref):first-of-type{border-top:1px solid rgba(11,16,36,.14)}
  details:not(.sc):not(.ref) summary{font-size:17px;padding:14px 0}
- details:not(.sc):not(.ref) summary::after{content:"";width:9px;height:9px;border-right:1.8px solid #111;border-bottom:1.8px solid #111;transform:rotate(45deg);transition:transform .2s;flex:none;margin-right:4px}
+ details:not(.sc):not(.ref) summary::after{content:"";width:9px;height:9px;border-right:1.8px solid currentColor;border-bottom:1.8px solid currentColor;transform:rotate(45deg);transition:transform .2s;flex:none;margin-right:4px}
  details:not(.sc):not(.ref)[open] summary::after{content:"";transform:rotate(-135deg)}
+ /* ссылки без синего браузерного */
+ .light a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+ .doc em{background:none;padding:0;color:#b4472a}
+ .row .btn.g{display:none}
  .menu a{font-size:20px;min-height:54px}
 }
 </style>
