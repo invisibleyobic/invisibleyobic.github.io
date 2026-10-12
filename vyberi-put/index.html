@@ -106,7 +106,7 @@ main{position:relative;z-index:2}
 <main>
 <section class="intro"><div class="w">
   <div class="term" id="term" aria-live="off">
-    <noscript><p>Проснись, Нео.</p><p>Матрица - это кресло, экран и восемь часов без движения.</p><p>Шея, поясница, плечи: тело всё помнит.</p><p>Выход есть. Осталось выбрать.</p></noscript>
+    <noscript><p>Проснись, вайб-кодер.</p><p>Матрица - это кресло, экран и восемь часов без движения.</p><p>Шея, поясница, плечи: тело всё помнит.</p><p>Выход есть. Осталось выбрать.</p></noscript>
   </div>
   <div class="choose" id="paths">
     <h1><span class="gl" id="gl" data-text="Выбери свой путь.">Выбери свой путь.</span></h1>
@@ -177,7 +177,7 @@ function handsUp(){if(handsDone)return;handsDone=true;
  var pr=hv.play();if(pr&&pr.catch)pr.catch(fin);hv.onended=fin;setTimeout(fin,6000)}
 if(!RM){hv.preload='auto';try{hv.load()}catch(e){}}
 /* печать строк */
-var lines=['Проснись, Нео.','Матрица - это кресло, экран и восемь часов без движения.','Шея, поясница, плечи: тело всё помнит.','Выход есть. Осталось выбрать.'];
+var lines=['Проснись, вайб-кодер.','Матрица - это кресло, экран и восемь часов без движения.','Шея, поясница, плечи: тело всё помнит.','Выход есть. Осталось выбрать.'];
 var term=document.getElementById('term'),choose=document.getElementById('paths'),skipw=document.getElementById('skipwrap'),done=false,timer=0;
 function finish(){if(done)return;done=true;clearTimeout(timer);handsUp();term.textContent='';lines.forEach(function(l){var p=document.createElement('p');p.textContent=l;term.appendChild(p)});choose.classList.remove('hide');skipw.hidden=true}
 if(RM){finish()}else{
