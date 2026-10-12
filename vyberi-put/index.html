@@ -40,7 +40,13 @@ main{position:relative;z-index:2}
 .pill b{font-size:20px;font-weight:600;color:#fff;line-height:1.2}
 .pill span{font-size:16px;color:var(--dim);line-height:1.35}
 .pill:hover,.pill:focus-visible{transform:translateY(-4px);box-shadow:0 0 0 1px var(--c),0 14px 40px -12px var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
-.pills.picked .pill:not(.on){opacity:.35}
+.pills.picked .pill:not(.on){opacity:.6}
+.pill::after{content:"\2192";position:absolute;right:26px;top:50%;margin-top:-14px;font-size:24px;line-height:28px;color:var(--c);opacity:0;transform:translateX(-8px);transition:opacity .25s,transform .25s}
+.pill.hot::after,.pill.on::after,.pill:hover::after,.pill:focus-visible::after{opacity:1;transform:none}
+.pill.hot{box-shadow:0 0 0 1px var(--c),0 14px 40px -12px var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.stage.over{cursor:pointer}
+.tip{position:absolute;transform:translate(-50%,-100%);padding:8px 16px;border-radius:999px;background:rgba(3,8,6,.86);border:1px solid var(--c);color:#fff;font:600 16px Onest,sans-serif;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;box-shadow:0 0 24px -6px var(--c)}
+.tip.show{opacity:1}
 .p-home{--c:var(--home)}.p-doc{--c:var(--doc)}.p-own{--c:var(--own)}
 .skipintro{margin-top:22px;font-size:16px;color:var(--dim)}
 .skipintro button{all:unset;cursor:pointer;text-decoration:underline;min-height:44px;display:inline-flex;align-items:center}
@@ -67,9 +73,11 @@ main{position:relative;z-index:2}
 .foot a{display:inline-flex;min-height:44px;align-items:center;margin-right:18px}
 /* 3D-таблетки как пикапы в игре: крутятся, качаются, светятся снизу */
 .pk{position:absolute;left:4px;top:50%;width:76px;height:76px;margin-top:-38px;pointer-events:none}
-.js .pill{padding-left:88px}.js .pill::before{display:none}
+.js .pill{padding-left:88px;padding-right:56px}.js .pill::before{display:none}
 /* руки из темноты */
 .stage{position:relative;width:min(1100px,150%);margin:-6px 0 6px 50%;transform:translateX(-50%);aspect-ratio:1344/452}
+.stage video{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent 100%)}
+.stage.playing video{opacity:.92}.stage.playing .hands{opacity:0!important;transition:none}
 #palm{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hands{display:block;width:100%;height:auto;opacity:.92;
  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent 100%);pointer-events:none}
@@ -98,11 +106,11 @@ main{position:relative;z-index:2}
 <main>
 <section class="intro"><div class="w">
   <div class="term" id="term" aria-live="off">
-    <noscript><p>Проснись.</p><p>Ты снова просидел восемь часов.</p><p>Шея, поясница, плечи: тело всё помнит.</p><p>Можно и дальше не замечать. А можно выбрать.</p></noscript>
+    <noscript><p>Проснись, Нео.</p><p>Матрица - это кресло, экран и восемь часов без движения.</p><p>Шея, поясница, плечи: тело всё помнит.</p><p>Выход есть. Осталось выбрать.</p></noscript>
   </div>
   <div class="choose" id="paths">
     <h1><span class="gl" id="gl" data-text="Выбери свой путь.">Выбери свой путь.</span></h1>
-    <div class="stage" id="stage"><img class="hands" src="hands.webp" width="1344" height="452" alt="Две раскрытые ладони протянуты из темноты" decoding="async"><canvas id="palm" aria-hidden="true"></canvas></div>
+    <div class="stage" id="stage"><video id="hv" muted playsinline preload="none" width="960" height="322" aria-hidden="true" tabindex="-1"><source src="hands.webm" type="video/webm"><source src="hands.mp4" type="video/mp4"></video><img class="hands" src="hands.webp" width="1344" height="452" alt="Две раскрытые ладони протянуты из темноты" decoding="async"><canvas id="palm" aria-hidden="true"></canvas><div class="tip" id="tip" aria-hidden="true"></div></div>
     <nav class="pills" id="pills" aria-label="Три пути">
       <a class="pill p-home" href="#home"><canvas class="pk" width="152" height="152" aria-hidden="true"></canvas><b>Помочь себе дома</b><span>Прибор, крем и электрод под область тела</span></a>
       <a class="pill p-doc" href="#doc"><canvas class="pk" width="152" height="152" aria-hidden="true"></canvas><b>Прийти к специалисту</b><span>Клиники и кабинеты озонотерапии</span></a>
@@ -160,10 +168,18 @@ function tick(t){if(!run)return;requestAnimationFrame(tick);if(t-last<55)return;
   if(y>innerHeight&&Math.random()>.975)cols[i]=0;cols[i]++}}
 if(!RM){size();addEventListener('resize',size);requestAnimationFrame(tick);
  document.addEventListener('visibilitychange',function(){run=!document.hidden;if(run)requestAnimationFrame(tick)})}
+/* руки поднимаются из темноты: видео один раз, последний кадр совпадает с картинкой */
+var hv=document.getElementById('hv'),stgEl=document.getElementById('stage'),handsDone=false;
+function handsUp(){if(handsDone)return;handsDone=true;
+ function fin(){stgEl.classList.remove('playing');window.__rev&&window.__rev()}
+ if(RM||!hv.canPlayType||!(hv.canPlayType('video/webm')||hv.canPlayType('video/mp4'))){fin();return}
+ stgEl.classList.add('playing');try{hv.currentTime=0}catch(e){}
+ var pr=hv.play();if(pr&&pr.catch)pr.catch(fin);hv.onended=fin;setTimeout(fin,6000)}
+if(!RM){hv.preload='auto';try{hv.load()}catch(e){}}
 /* печать строк */
-var lines=['Проснись.','Ты снова просидел восемь часов.','Шея, поясница, плечи: тело всё помнит.','Можно и дальше не замечать. А можно выбрать.'];
+var lines=['Проснись, Нео.','Матрица - это кресло, экран и восемь часов без движения.','Шея, поясница, плечи: тело всё помнит.','Выход есть. Осталось выбрать.'];
 var term=document.getElementById('term'),choose=document.getElementById('paths'),skipw=document.getElementById('skipwrap'),done=false,timer=0;
-function finish(){if(done)return;done=true;clearTimeout(timer);term.textContent='';lines.forEach(function(l){var p=document.createElement('p');p.textContent=l;term.appendChild(p)});choose.classList.remove('hide');skipw.hidden=true}
+function finish(){if(done)return;done=true;clearTimeout(timer);handsUp();term.textContent='';lines.forEach(function(l){var p=document.createElement('p');p.textContent=l;term.appendChild(p)});choose.classList.remove('hide');skipw.hidden=true}
 if(RM){finish()}else{
  choose.classList.add('hide');skipw.hidden=false;
  var li=0,ci=0,p=null,cur=document.createElement('span');cur.className='cur';
@@ -171,7 +187,7 @@ if(RM){finish()}else{
   if(!p){p=document.createElement('p');term.appendChild(p)}
   var s=lines[li];p.textContent=s.slice(0,++ci);p.appendChild(cur);if(window.__tick&&s[ci-1]!==' ')window.__tick();
   if(ci<s.length){timer=setTimeout(type,s[ci-1]==='.'||s[ci-1]===':'?240:30)}
-  else{li++;ci=0;p=null;if(li<lines.length){timer=setTimeout(type,380)}else{timer=setTimeout(function(){choose.classList.remove('hide');skipw.hidden=true;done=true},300)}}})();
+  else{li++;ci=0;p=null;if(li<lines.length){timer=setTimeout(type,380)}else{timer=setTimeout(function(){choose.classList.remove('hide');skipw.hidden=true;done=true;handsUp()},300)}}})();
  document.getElementById('skipbtn').addEventListener('click',finish)}
 /* ---- звук: синтез в браузере, без файлов; включается только кнопкой ---- */
 var AC=null,master=null,drone=null,sndOn=false,sb=document.getElementById('snd');
@@ -206,19 +222,30 @@ function drawPk(p,t){var x=p.x,W=152,cx=76,bob=Math.sin(t*2.2+p.ph)*5,cy=66+bob,
  x.shadowColor=p.col[0];x.shadowBlur=18+p.hover*14;capsule(x,th,p.col[0],p.col[1],cx,cy,15,74);x.shadowBlur=0}
 /* таблетки над ладонями: левая - дома, между ладонями - свой кабинет, правая - к специалисту */
 var pc=document.getElementById('palm'),px=pc.getContext('2d'),SPOT={'p-home':[.355,.40],'p-own':[.52,.30],'p-doc':[.69,.40]},picked=null;
-pks.forEach(function(p){p.k=p.a.classList[1];p.sc=1;p.al=1});
+pks.forEach(function(p){p.k=p.a.classList[1];p.sc=1;p.al=1;p.label=p.a.querySelector('b').textContent});
+var palmHot=null,stg=document.getElementById('stage'),tip=document.getElementById('tip');
+function hotOf(){return palmHot||pks.filter(function(p){return p.a.matches(':hover,:focus-visible')})[0]||null}
+function spotXY(p){var W=pc.clientWidth,H=pc.clientHeight,s=SPOT[p.k];return[s[0]*W,s[1]*H,W*.078*p.sc]}
+function setPalmHot(h){if(h===palmHot)return;palmHot=h;pks.forEach(function(p){p.a.classList.toggle('hot',p===h)});stg.classList.toggle('over',!!h);
+ if(h){var xy=spotXY(h);tip.textContent=h.label;tip.style.left=xy[0]+'px';tip.style.top=(xy[1]-xy[2]*.42)+'px';tip.style.borderColor=h.col[0];tip.style.boxShadow='0 0 24px -6px '+h.col[0];tip.classList.add('show');blip(660,.06,'square',.03)}else tip.classList.remove('show')}
+stg.addEventListener('mousemove',function(e){var r=stg.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top,best=null,bd=1e9;
+ pks.forEach(function(p){var xy=spotXY(p),d=Math.hypot(mx-xy[0],my-xy[1]);if(d<Math.max(xy[2]*.85,34)&&d<bd){bd=d;best=p}});setPalmHot(best)});
+stg.addEventListener('mouseleave',function(){setPalmHot(null)});
+stg.addEventListener('click',function(e){var r=stg.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+ pks.forEach(function(p){var xy=spotXY(p);if(Math.hypot(mx-xy[0],my-xy[1])<Math.max(xy[2]*.85,34))p.a.click()})});
 function fitPalm(){var r=Math.min(devicePixelRatio||1,2),b=pc.getBoundingClientRect();pc.width=Math.round(b.width*r);pc.height=Math.round(b.height*r);px.setTransform(r,0,0,r,0,0)}
 fitPalm();addEventListener('resize',fitPalm);
-function drawPalm(t){var W=pc.clientWidth,H=pc.clientHeight;px.clearRect(0,0,W,H);
- pks.forEach(function(p){var hv=p.a.matches(':hover,:focus-visible'),tsc=picked?(picked===p?1.75:.7):(hv?1.25:1),tal=picked&&picked!==p?.18:1;
+var rev=RM?1:0,revT=RM?1:0;window.__rev=function(){revT=1};
+function drawPalm(t){var W=pc.clientWidth,H=pc.clientHeight;px.clearRect(0,0,W,H);rev+=(revT-rev)*.06;
+ var hot=hotOf();pks.forEach(function(p){var hv=hot===p,tsc=picked?(picked===p?1.75:.85):(hv?1.3:1),tal=picked?(picked===p?1:.5):(hot&&!hv?.4:1);
   p.sc+=(tsc-p.sc)*.09;p.al+=(tal-p.al)*.09;
   var s=SPOT[p.k],cx=s[0]*W,base=s[1]*H,bob=Math.sin(t*2.2+p.ph)*W*.006,cy=base+bob,R=W*.016*p.sc,L=W*.078*p.sc,gy=base+H*.2;
-  px.globalAlpha=p.al;
+  px.globalAlpha=p.al*rev;
   var g=px.createRadialGradient(cx,gy,1,cx,gy,L*.9);g.addColorStop(0,p.col[0]+'aa');g.addColorStop(1,p.col[0]+'00');px.save();px.translate(cx,gy);px.scale(1,.3);px.beginPath();px.arc(0,0,L*.9*(1+Math.sin(t*3+p.ph)*.06),0,7);px.restore();px.fillStyle=g;px.fill();
   
   px.shadowColor=p.col[0];px.shadowBlur=W*.02*p.sc;capsule(px,t*2.6*p.speed+p.ph,p.col[0],p.col[1],cx,cy,R,L);px.shadowBlur=0;px.globalAlpha=1})}
 var t0=performance.now();
-function pkLoop(now){var t=(now-t0)/1000;pks.forEach(function(p){p.speed+=((p.a.matches(':hover,:focus-visible')||picked===p?2.4:1)-p.speed)*.08;p.hover=p.speed>1.2?1:0;drawPk(p,t)});drawPalm(t);if(!RM&&!document.hidden)requestAnimationFrame(pkLoop)}
+function pkLoop(now){var t=(now-t0)/1000;pks.forEach(function(p){p.speed+=((hotOf()===p||picked===p?2.6:1)-p.speed)*.08;p.hover=p.speed>1.2?1:0;drawPk(p,t)});drawPalm(t);if(!RM&&!document.hidden)requestAnimationFrame(pkLoop)}
 if(RM){pks.forEach(function(p){drawPk(p,.6)});drawPalm(.6)}else{requestAnimationFrame(pkLoop);document.addEventListener('visibilitychange',function(){if(!document.hidden)requestAnimationFrame(pkLoop)})}
 pks.forEach(function(p){p.a.addEventListener('mouseenter',function(){blip(660,.06,'square',.03)})});
 /* выбор пути: подсветить таблетку и мягко перейти к пути */
