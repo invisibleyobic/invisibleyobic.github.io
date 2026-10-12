@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="В поясницу стреляет, в ногу простреливает? Сейчас другое время. Метод ОЗОТЭНС дома или визит к специалисту.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23120b07'/%3E%3Cpath d='M22 18l26 14-26 14z' fill='%23ffd23f'/%3E%3C/svg%3E">
-<link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
+<link rel="preload" as="image" href="img/open.webp" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/Unbounded-600-cyrillic.woff2">
 <style>
 @font-face{font-family:Onest;font-weight:400 700;font-display:swap;src:url(fonts/Onest-400-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
@@ -34,10 +34,23 @@ a{color:inherit}
 .js .snd{display:inline-flex;align-items:center}
 .snd[aria-pressed="true"]{background:rgba(255,210,63,.16)}
 /* первый экран */
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
-.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 30%;filter:saturate(.9) contrast(1.05)}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,11,7,.96) 0,rgba(18,11,7,.85) 38%,rgba(18,11,7,.15) 70%,rgba(18,11,7,.35) 100%),linear-gradient(0deg,var(--bg) 0,transparent 30%)}
-.hero .w{position:relative;z-index:2;width:100%;padding-top:80px;padding-bottom:60px}
+.hero{position:relative;overflow:hidden;padding-bottom:40px}
+.stage{position:relative;width:100%;max-height:86svh;aspect-ratio:1280/732;overflow:hidden;background:#000}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:sepia(.25) saturate(.9) contrast(1.05)}
+.stage::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(0deg,var(--bg) 0,transparent 22%);pointer-events:none}
+.bub{position:absolute;z-index:4;max-width:min(420px,40%);padding:16px 20px;border-radius:22px;background:#fffdf5;color:#1a1006;font:800 clamp(17px,1.9vw,26px)/1.2 Unb,sans-serif;box-shadow:6px 6px 0 rgba(0,0,0,.35);opacity:0;transform:scale(.6) translateY(10px);transform-origin:var(--o,left bottom);transition:opacity .25s,transform .35s cubic-bezier(.2,1.6,.4,1)}
+.bub.on{opacity:1;transform:none}
+.open{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:opacity .25s,filter .25s}
+.open.off{opacity:0;filter:contrast(2) brightness(1.6);pointer-events:none}
+.bub::after{content:"";position:absolute;width:22px;height:22px;background:#fffdf5;transform:rotate(45deg)}
+.b1,.b3{right:5%;top:6%;--o:left bottom}.b1::after,.b3::after{left:28px;bottom:-9px}
+.b2{left:50%;top:13%;max-width:200px;background:#ffd23f;--o:right bottom}.b2::after{right:30px;bottom:-9px;background:#ffd23f}
+
+.play{position:absolute;z-index:5;left:20px;bottom:44px;min-height:52px;padding:0 20px;border-radius:12px;border:2px solid var(--y);background:rgba(18,11,7,.8);color:var(--y);font:700 17px Onest,sans-serif;cursor:pointer}
+.play:hover{background:var(--y);color:#1a1006}
+
+
+.hero .w{position:relative;z-index:2;width:100%;padding-top:8px}
 .say{max-width:640px}
 .kick{font:500 16px JBM,monospace;color:var(--dim);letter-spacing:.08em;margin:0 0 16px}
 h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;color:var(--y);text-shadow:2px 0 0 rgba(194,22,74,.35),-1px 0 0 rgba(0,180,255,.2);min-height:2.1em}
@@ -84,7 +97,7 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
 .warn small{display:block;margin-top:10px;font:400 16px/1.5 Onest,sans-serif;color:var(--dim)}
 .foot{padding:40px 0 56px;color:var(--dim);font-size:16px}
 .foot a{display:inline-flex;min-height:44px;align-items:center;margin-right:18px}
-@media(max-width:600px){.osd.tr,.osd.bl{display:none}.hero .bg{object-position:78% 20%}.hero::after{background:linear-gradient(180deg,rgba(18,11,7,.05) 0,rgba(18,11,7,.25) 30%,rgba(18,11,7,.92) 52%,var(--bg) 100%)}.hero{align-items:flex-end}.hero .w{padding-top:46vh}}
+@media(max-width:600px){.osd.tr,.osd.bl{display:none}.stage{aspect-ratio:4/3}.stage video{object-position:30% 50%}.stage{aspect-ratio:1/1}.bub{max-width:66%;font-size:16px;padding:10px 14px}.b1,.b3{right:4%;top:12%}.b2{left:auto;right:30%;top:38%}.play{bottom:16px;left:12px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#noise{display:none}}
 </style>
 </head>
@@ -96,11 +109,17 @@ h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;col
 <div class="flashtxt" id="flash" aria-hidden="true"></div>
 <main>
 <section class="hero">
-  <div class="scan" aria-hidden="true"></div><canvas id="noise" width="320" height="180" aria-hidden="true"></canvas>
-  <img class="bg" src="img/hero.webp" width="1600" height="895" alt="Мужчина в малиновом пиджаке и с золотой цепью на складе поднимает ладонь: хорош" fetchpriority="high">
+  <div class="stage" id="stage">
+    <video id="sv" muted playsinline preload="none" poster="img/scene.webp" width="1280" height="732" aria-label="Мужчина в чёрном пальто разводит руками перед двумя парнями: один держится за поясницу, другой за ногу"><source src="scene.webm" type="video/webm"><source src="scene.mp4" type="video/mp4"></video>
+    <img class="open" id="open" src="img/open.webp" width="1280" height="711" alt="Кадр: мужчина в чёрном пальто удивлённо разводит руками у машины" fetchpriority="high">
+    <div class="scan" aria-hidden="true"></div><canvas id="noise" width="320" height="180" aria-hidden="true"></canvas>
+    <p class="bub b1" id="b1">А вы чё, ребята, все стреляете?</p>
+    <p class="bub b2" id="b2">А чё?</p>
+    <p class="bub b3" id="b3">А то, что уже не стреляют. Сейчас по-другому делают.</p>
+  </div>
   <div class="w"><div class="say">
-    <p class="kick">ДЕВЯНОСТЫЕ. СКЛАД. РАЗГОВОР ПО ДЕЛУ.</p>
-    <h1 id="h1">А вы что, ребята, все стреляете?</h1>
+    <p class="kick">ДЕВЯНОСТЫЕ ПРОШЛИ. А У ТЕБЯ?</p>
+    <h1 id="h1">Всё ещё стреляет?</h1>
     <div class="lines reveal h" id="lines">
       <p>В поясницу стреляет. В ногу простреливает. По седалищному отдаёт.</p>
       <p class="b">Сейчас другое время. Сейчас так дела не делают.</p>
@@ -153,6 +172,14 @@ function clunk(){tone(120,.12,'square',.08);tone(60,.2,'sine',.1,.02)}
 function rewind(){tone(300,.5,'sawtooth',.04,0,1800)}
 function win(){[392,523,659,784].forEach(function(f,i){tone(f,.16,'square',.045,i*.07)})}
 sb.addEventListener('click',function(){on=!on;sb.setAttribute('aria-pressed',on);sb.textContent='Звук: '+(on?'вкл':'выкл');if(on){ac();AC.resume();clunk()}});
+/* сцена: видео без звука и реплики; кнопка - заново со звуком */
+var sv=document.getElementById('sv'),bubs=['b1','b2','b3'].map(function(id){return document.getElementById(id)}),T=[400,3600,4500],tm=[];
+function scene(withSound){tm.forEach(clearTimeout);tm=[];bubs.forEach(function(b){b.classList.remove('on')});
+ if(RM){document.getElementById('open').classList.add('off');bubs[1].classList.add('on');bubs[2].classList.add('on');return}
+ var op=document.getElementById('open');op.classList.remove('off');
+ tm.push(setTimeout(function(){op.classList.add('off');bubs[0].classList.remove('on');try{sv.currentTime=0}catch(e){}var q=sv.play();if(q&&q.catch)q.catch(function(){})},3000));
+ T.forEach(function(t,k){tm.push(setTimeout(function(){bubs[k].classList.add('on');if(!withSound)tone(900+k*120,.05,'square',.03)},t))})}
+if(RM){scene(false)}else{sv.preload='auto';setTimeout(function(){scene(false)},700)}
 /* печать заголовка и появление выбора */
 var h1=document.getElementById('h1'),full=h1.textContent,lines=document.getElementById('lines'),ch=document.getElementById('choice');
 function show(){lines.classList.remove('h');setTimeout(function(){ch.classList.remove('h')},RM?0:700)}
