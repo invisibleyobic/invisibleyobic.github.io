@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Всё ещё стреляет? - спина, поясница, нога</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="В поясницу стреляет, в ногу простреливает? Сейчас другое время. Метод ОЗОТЭНС дома или визит к специалисту.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23120b07'/%3E%3Cpath d='M22 18l26 14-26 14z' fill='%23ffd23f'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/Unbounded-600-cyrillic.woff2">
+<style>
+@font-face{font-family:Onest;font-weight:400 700;font-display:swap;src:url(fonts/Onest-400-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Onest;font-weight:400 700;font-display:swap;src:url(fonts/Onest-400-cyrillic-ext.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+@font-face{font-family:Onest;font-weight:400 700;font-display:swap;src:url(fonts/Onest-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Unb;font-weight:600 900;font-display:swap;src:url(fonts/Unbounded-600-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Unb;font-weight:600 900;font-display:swap;src:url(fonts/Unbounded-600-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+2212}
+@font-face{font-family:JBM;font-weight:500 700;font-display:swap;src:url(fonts/JetBrainsMono-500-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:JBM;font-weight:500 700;font-display:swap;src:url(fonts/JetBrainsMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+2212,U+25A0-25FF}
+:root{--bg:#120b07;--bg2:#1c120c;--y:#ffd23f;--rasp:#c2164a;--cream:#f3e6c8;--dim:#c9b79a;--green:#7dffb2}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--cream);font:400 18px/1.6 Onest,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--y);outline-offset:4px;border-radius:10px}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;z-index:20;background:#000;padding:12px 16px}
+.w{max-width:1180px;margin:0 auto;padding:0 20px}
+/* видеокассета: строки развёртки, шум, экранные надписи */
+.scan{position:fixed;inset:0;z-index:30;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);mix-blend-mode:multiply}
+#noise{position:fixed;inset:0;width:100%;height:100%;z-index:29;pointer-events:none;opacity:.045}
+.osd{position:fixed;z-index:31;font:500 16px JBM,monospace;color:#fff;text-shadow:2px 0 0 rgba(255,0,60,.6),-2px 0 0 rgba(0,200,255,.5);pointer-events:none;letter-spacing:.06em}
+.osd.tl{left:18px;top:14px}.osd.tr{right:18px;bottom:14px}.osd.bl{left:18px;bottom:14px}
+.snd{position:fixed;right:14px;top:8px;z-index:32;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid rgba(255,210,63,.5);background:rgba(18,11,7,.75);color:var(--y);font:500 16px JBM,monospace;cursor:pointer;display:none}
+.js .snd{display:inline-flex;align-items:center}
+.snd[aria-pressed="true"]{background:rgba(255,210,63,.16)}
+/* первый экран */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 30%;filter:saturate(.9) contrast(1.05)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,11,7,.96) 0,rgba(18,11,7,.85) 38%,rgba(18,11,7,.15) 70%,rgba(18,11,7,.35) 100%),linear-gradient(0deg,var(--bg) 0,transparent 30%)}
+.hero .w{position:relative;z-index:2;width:100%;padding-top:80px;padding-bottom:60px}
+.say{max-width:640px}
+.kick{font:500 16px JBM,monospace;color:var(--dim);letter-spacing:.08em;margin:0 0 16px}
+h1{font:800 clamp(34px,5.6vw,68px)/1.04 Unb,Onest,sans-serif;margin:0 0 22px;color:var(--y);text-shadow:3px 0 0 rgba(194,22,74,.55),-2px 0 0 rgba(0,180,255,.35);min-height:2.1em}
+.lines p{margin:0 0 8px;font-size:clamp(19px,2vw,22px)}
+.lines .b{color:#fff;font-weight:600}
+.reveal{opacity:1;transform:none;transition:opacity .6s,transform .6s}
+.js .reveal.h{opacity:0;transform:translateY(12px)}
+.choice{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+.btn{position:relative;display:inline-flex;align-items:center;gap:12px;min-height:60px;padding:0 26px 0 18px;border-radius:14px;font:700 18px Onest,sans-serif;text-decoration:none;cursor:pointer;border:2px solid var(--y);transition:transform .25s,box-shadow .25s,opacity .3s,background .25s}
+.btn.a{background:var(--y);color:#1a1006}
+.btn.a:hover,.btn.a:focus-visible{transform:translateY(-3px);box-shadow:0 0 0 3px rgba(255,210,63,.25),0 16px 40px -14px var(--y)}
+.btn.b{background:transparent;color:var(--cream);border-color:rgba(243,230,200,.4)}
+.btn.b:hover,.btn.b:focus-visible{border-color:var(--rasp);color:#fff}
+.reel{width:34px;height:34px;flex:none}
+.choice.picked .btn:not(.on){opacity:.35}
+.no{margin-top:18px;max-width:560px;padding:18px 20px;border-radius:14px;background:rgba(194,22,74,.16);border:2px solid var(--rasp);display:none}
+.no.show{display:block;animation:pop .35s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{transform:scale(.9);opacity:0}100%{transform:none;opacity:1}}
+.no b{display:block;font:800 22px/1.2 Unb,sans-serif;color:#fff;margin-bottom:6px}
+.no p{margin:0 0 14px}
+.no .btn{min-height:52px;font-size:17px}
+/* перемотка и сбой кассеты */
+.rew main{animation:rw .5s steps(5)}
+@keyframes rw{0%{filter:none;transform:none}20%{filter:contrast(1.6) saturate(1.5) hue-rotate(-20deg);transform:translateX(-10px) skewX(-3deg)}40%{transform:translateY(6px)}60%{filter:contrast(1.3) brightness(1.3);transform:translateX(8px) skewX(2deg)}100%{filter:none;transform:none}}
+.flashtxt{position:fixed;inset:0;z-index:28;display:flex;align-items:center;justify-content:center;font:800 clamp(40px,9vw,120px) Unb,sans-serif;color:#fff;text-shadow:5px 0 0 var(--rasp),-5px 0 0 #00c8ff;pointer-events:none;opacity:0}
+.flashtxt.go{animation:ft .9s ease-out}
+@keyframes ft{0%{opacity:0;transform:scale(1.3)}15%{opacity:1;transform:scale(1)}70%{opacity:1}100%{opacity:0;transform:scale(.96)}}
+/* «как сейчас» */
+.now{padding:clamp(72px,10vw,120px) 0 40px;background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.now .kick{color:var(--y)}
+.now h2{font:800 clamp(30px,4.4vw,52px)/1.08 Unb,sans-serif;margin:0 0 18px;color:#fff;max-width:900px}
+.now .lead{max-width:740px;font-size:clamp(18px,1.8vw,21px);margin:0 0 30px}
+.kit{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#f3e6c8;color:#1a1006;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.card img{width:100%;height:200px;object-fit:contain;background:#fff;border-radius:12px}
+.card b{font:800 19px/1.2 Unb,sans-serif}
+.card span{font-size:16px;color:#4a3a28}
+@media(max-width:820px){.kit{grid-template-columns:1fr}}
+.go{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 0}
+.go a{min-height:56px}
+.btn.c{background:transparent;color:var(--y)}
+.warn{margin:44px 0 0;padding:28px 24px;border-radius:18px;border:3px solid var(--y);background:rgba(255,210,63,.08);font:800 clamp(22px,3vw,34px)/1.25 Unb,sans-serif;color:#fff;text-align:center}
+.warn small{display:block;margin-top:10px;font:400 16px/1.5 Onest,sans-serif;color:var(--dim)}
+.foot{padding:40px 0 56px;color:var(--dim);font-size:16px}
+.foot a{display:inline-flex;min-height:44px;align-items:center;margin-right:18px}
+@media(max-width:600px){.osd.tr,.osd.bl{display:none}.hero .bg{object-position:78% 20%}.hero::after{background:linear-gradient(180deg,rgba(18,11,7,.05) 0,rgba(18,11,7,.25) 30%,rgba(18,11,7,.92) 52%,var(--bg) 100%)}.hero{align-items:flex-end}.hero .w{padding-top:46vh}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#noise{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#choice">К выбору</a>
+<div class="scan" aria-hidden="true"></div><canvas id="noise" width="320" height="180" aria-hidden="true"></canvas>
+<div class="osd tl" aria-hidden="true" id="osd">&#9654; PLAY</div><div class="osd tr" aria-hidden="true">SP <span id="tc">0:00:00</span></div><div class="osd bl" aria-hidden="true">НОЯ. 12 1995</div>
+<button class="snd" id="snd" type="button" aria-pressed="false">Звук: выкл</button>
+<div class="flashtxt" id="flash" aria-hidden="true"></div>
+<main>
+<section class="hero">
+  <img class="bg" src="img/hero.webp" width="1600" height="895" alt="Мужчина в малиновом пиджаке и с золотой цепью на складе поднимает ладонь: хорош" fetchpriority="high">
+  <div class="w"><div class="say">
+    <p class="kick">ДЕВЯНОСТЫЕ. СКЛАД. РАЗГОВОР ПО ДЕЛУ.</p>
+    <h1 id="h1">А вы что, ребята, все стреляете?</h1>
+    <div class="lines reveal h" id="lines">
+      <p>В поясницу стреляет. В ногу простреливает. По седалищному отдаёт.</p>
+      <p class="b">Сейчас другое время. Сейчас так дела не делают.</p>
+    </div>
+    <div class="choice reveal h" id="choice" role="group" aria-label="Что делаем">
+      <a class="btn a" id="ba" href="#now"><canvas class="reel" width="68" height="68" aria-hidden="true"></canvas>Сложить оружие</a>
+      <button class="btn b" id="bb" type="button"><canvas class="reel" width="68" height="68" aria-hidden="true"></canvas>Стрелять как раньше</button>
+    </div>
+    <div class="no" id="no" role="status" aria-live="polite"><b id="nob">Э, нет, брат, так не пойдёт.</b><p id="nop">Терпеть, пока стреляет, - это из девяностых. Давай по-нормальному.</p><a class="btn a" href="#now" id="ba2">Ладно, сложить оружие</a></div>
+  </div></div>
+</section>
+
+<section class="now" id="now"><div class="w">
+  <p class="kick">КАК СЕЙЧАС ДЕЛАЮТ</p>
+  <h2>Без стрельбы. Спокойно, дома, по инструкции.</h2>
+  <p class="lead">Метод ОЗОТЭНС: карманный прибор ТЭНС, электродный крем OZOTENS 30% и электрод под нужную область - поясницу, шею, колено, плечо. Перед началом - разговор со специалистом.</p>
+  <div class="kit">
+    <div class="card"><img src="img/device.webp" width="600" height="600" alt="Карманный прибор ТЭНС с проводами" loading="lazy" decoding="async"><b>Прибор</b><span>Карманный, два канала, режимы TENS, EMS и массаж.</span></div>
+    <div class="card"><img src="img/cream.webp" width="600" height="600" alt="Флакон и упаковка крема OZOTENS 30%" loading="lazy" decoding="async"><b>Крем OZOTENS 30%</b><span>Электродный крем с озонированным оливковым маслом.</span></div>
+    <div class="card"><img src="img/el.webp" width="380" height="174" alt="Фигурный электрод для поясницы" loading="lazy" decoding="async"><b>Электрод под область</b><span>Для поясницы своя форма, для шеи и колена - свои.</span></div>
+  </div>
+  <div class="go">
+    <a class="btn a" href="/ozotens-shop-preview/catalog/">Посмотреть набор</a>
+    <a class="btn c" href="https://medozons.ru/map-clinics/" rel="noopener" target="_blank">Сначала к специалисту</a>
+    <a class="btn c" href="/ozotens-preview/">Как устроен метод</a>
+  </div>
+  <p class="warn">Имеются противопоказания. Необходимо проконсультироваться со специалистом.<small>Результат индивидуален. Если стреляет сильно, внезапно, с онемением или слабостью в ноге - к врачу, не откладывая.</small></p>
+</div></section>
+</main>
+<footer class="foot"><div class="w">
+  <a href="/ozotens-preview/">ОЗОТЭНС</a><a href="/ozotens-shop-preview/">Магазин</a><a href="/vyberi-put/">Выбери путь</a>
+  <p>Демо-страница. Персонаж вымышленный. Не медицинская рекомендация.</p>
+</div></footer>
+<script>
+(function(){
+document.documentElement.classList.add('js');
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* шум кассеты: маленький холст, растянутый на экран */
+var nc=document.getElementById('noise'),nx=nc.getContext('2d'),img=nx.createImageData(320,180),last=0;
+function noise(t){if(document.hidden)return requestAnimationFrame(noise);requestAnimationFrame(noise);if(t-last<70)return;last=t;var d=img.data;for(var i=0;i<d.length;i+=4){var v=Math.random()*255|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}nx.putImageData(img,0,0)}
+if(!RM)requestAnimationFrame(noise);
+/* счётчик ленты */
+var tc=document.getElementById('tc'),t0=Date.now();
+setInterval(function(){var s=((Date.now()-t0)/1000)|0;tc.textContent='0:'+('0'+((s/60)|0)).slice(-2)+':'+('0'+s%60).slice(-2)},1000);
+/* звук: синтез, только по кнопке */
+var AC=null,on=false,sb=document.getElementById('snd');
+function ac(){if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(C)AC=new C()}return AC}
+function tone(f,d,type,vol,when,f2){if(!on||!ac())return;var t=AC.currentTime+(when||0),o=AC.createOscillator(),g=AC.createGain();o.type=type||'square';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(vol||.05,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.02)}
+function clunk(){tone(120,.12,'square',.08);tone(60,.2,'sine',.1,.02)}
+function rewind(){tone(300,.5,'sawtooth',.04,0,1800)}
+function win(){[392,523,659,784].forEach(function(f,i){tone(f,.16,'square',.045,i*.07)})}
+sb.addEventListener('click',function(){on=!on;sb.setAttribute('aria-pressed',on);sb.textContent='Звук: '+(on?'вкл':'выкл');if(on){ac();AC.resume();clunk()}});
+/* печать заголовка и появление выбора */
+var h1=document.getElementById('h1'),full=h1.textContent,lines=document.getElementById('lines'),ch=document.getElementById('choice');
+function show(){lines.classList.remove('h');setTimeout(function(){ch.classList.remove('h')},RM?0:700)}
+if(RM){show()}else{h1.textContent='';var i=0;(function ty(){h1.textContent=full.slice(0,++i);if(i<full.length){if(full[i-1]!==' ')tone(1400,.02,'square',.015);setTimeout(ty,full[i-1]===','?220:45)}else setTimeout(show,400)})()}
+/* катушки кассеты на кнопках: крутятся, быстрее при наведении */
+var reels=[].map.call(document.querySelectorAll('.reel'),function(c){return{c:c,x:c.getContext('2d'),a:0,sp:1,btn:c.parentNode}});
+function drawReel(r){var x=r.x;x.clearRect(0,0,68,68);x.save();x.translate(34,34);x.rotate(r.a);var col=r.btn.classList.contains('a')?'#1a1006':'#f3e6c8';
+ x.strokeStyle=col;x.fillStyle=col;x.lineWidth=3;x.beginPath();x.arc(0,0,27,0,7);x.stroke();x.lineWidth=4;x.beginPath();x.arc(0,0,13,0,7);x.stroke();for(var k=0;k<6;k++){x.rotate(Math.PI/3);x.fillRect(-2,-13,4,6)}x.globalAlpha=.35;x.beginPath();x.arc(0,0,21,0,7);x.lineWidth=7;x.stroke();x.globalAlpha=1;x.restore()}
+function reelLoop(){reels.forEach(function(r){var hot=r.btn.matches(':hover,:focus-visible')||r.btn.classList.contains('on');r.sp+=((hot?6:1)-r.sp)*.1;r.a+=.03*r.sp;drawReel(r)});if(!RM&&!document.hidden)requestAnimationFrame(reelLoop)}
+if(RM)reels.forEach(drawReel);else{requestAnimationFrame(reelLoop);document.addEventListener('visibilitychange',function(){if(!document.hidden)requestAnimationFrame(reelLoop)})}
+/* выбор без выбора */
+var no=document.getElementById('no'),nob=document.getElementById('nob'),nop=document.getElementById('nop'),tries=0,flash=document.getElementById('flash'),osd=document.getElementById('osd');
+var NO=[['Э, нет, брат, так не пойдёт.','Терпеть, пока стреляет, - это из девяностых. Давай по-нормальному.'],['Брат, мы же договорились.','Сейчас другое время. Сложи оружие - и разберёмся спокойно.'],['Не, ну ты упёртый.','Ладно, кнопка тут, но ты и сам всё понял.']];
+function glitch(txt,o){if(RM)return;document.body.classList.remove('rew');void document.body.offsetWidth;document.body.classList.add('rew');flash.textContent=txt;flash.classList.remove('go');void flash.offsetWidth;flash.classList.add('go');osd.innerHTML=o;setTimeout(function(){osd.innerHTML='&#9654; PLAY'},900)}
+document.getElementById('bb').addEventListener('click',function(){var m=NO[Math.min(tries,NO.length-1)];tries++;nob.textContent=m[0];nop.textContent=m[1];no.classList.remove('show');void no.offsetWidth;no.classList.add('show');rewind();glitch('СТОП','&#9632; STOP')});
+function lay(e){e.preventDefault();var a=document.getElementById('ba');a.classList.add('on');ch.classList.add('picked');no.classList.remove('show');win();glitch('ХОРОШ','&#9193; FF');
+ var t=document.getElementById('now');history.replaceState(null,'','#now');setTimeout(function(){t.scrollIntoView({behavior:RM?'auto':'smooth'});var h=t.querySelector('h2');h.setAttribute('tabindex','-1');h.focus({preventScroll:true})},RM?0:900)}
+document.getElementById('ba').addEventListener('click',lay);document.getElementById('ba2').addEventListener('click',lay);
+})();
+</script>
+</body>
+</html>
