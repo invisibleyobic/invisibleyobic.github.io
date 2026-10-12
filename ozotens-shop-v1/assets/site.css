@@ -220,3 +220,38 @@ ol.lit li{margin:0 0 12px;overflow-wrap:anywhere}
 .tl-legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:16px;color:var(--soft);margin:16px 0 0}
 .tl-legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:3px solid #7fb895;background:#fff}
 .tl-legend .tl-dev::before{border-color:var(--sky)}.tl-legend .tl-ozt::before{border-color:var(--coral);background:var(--coral)}
+/* шапка с иконками (на компьютере - подписи, на телефоне - как у больших магазинов) */
+.top svg{display:block}.isearch,.icosp{display:none}
+.burger svg,.cartlink svg{display:none}
+.top .brand{order:1}.top .menu{order:2}.top .acclink{order:3}.top .cartmain{order:4}.top .sform{order:5}
+.cartlink svg{width:22px;height:22px}
+/* сторис: быстрый выбор кружками */
+.stories{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:18px 2px 6px;margin:0 -2px;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.stories a{flex:none;width:92px;text-align:center;text-decoration:none;color:var(--text);scroll-snap-align:start;font-size:16px;line-height:1.25}
+.stories .sc{display:block;width:84px;height:84px;margin:0 auto 8px;border-radius:50%;border:2px solid var(--ink);padding:3px;background:#fff;transition:transform .2s}
+.stories img{width:100%;height:100%;border-radius:50%;object-fit:contain;background:#fff}
+.stories a:hover .sc,.stories a:focus-visible .sc{transform:scale(1.05)}
+@media(max-width:600px){
+ .top,.top.top{background:#fff;color:#111;border-bottom:1px solid #e7e7e7}
+ .top .w{display:grid;grid-template-columns:44px 44px 1fr 44px 44px;align-items:center;gap:0 4px;padding-block:6px}
+ .burger{order:0;grid-column:1;display:inline-flex;justify-content:center;border:0;padding:0;min-width:44px;color:#111}
+ .burger svg,.cartlink svg{display:block}.top .lbl{display:none}
+ .isearch{display:inline-flex;grid-column:2;align-items:center;justify-content:center;min-height:44px;min-width:44px;color:#111}
+ .top .brand{grid-column:3;justify-self:center;color:#111;font-size:20px}.top .brand .dline{stroke:#111}
+ .top .acclink,.icosp{display:inline-flex;grid-column:4;justify-content:center;border:0;padding:0;min-width:44px;color:#111}
+ .top .cartmain{grid-column:5;justify-content:center;border:0;padding:0;min-width:44px;color:#111;position:relative}
+ .top .cartmain .cartn{position:absolute;top:2px;right:0}
+ .top .sform{display:none}
+ .top .menu{grid-column:1/-1;background:#fff;margin-top:4px}.top .menu a{color:#111}
+ .status{text-align:center;background:#fff;color:#111;border-bottom:1px solid #eee}
+ .status .w{padding-block:8px}.status .st-k{display:block;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:#7a7a7a}.status .st-v{display:block;font-weight:600}
+ .hero,.hero.thaw{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);border-radius:0;margin-top:0;padding:28px 20px 24px}
+ .hero .btn{border-radius:0;text-transform:uppercase;letter-spacing:.12em;font-size:16px;background:#0b0f0d;color:#fff;border-color:#0b0f0d;min-height:56px;padding:0 22px}
+ .hero .btn::after{content:"\2192";margin-left:16px;font-size:20px}
+ .hero .btn.ghost{background:transparent;color:#fff;border-color:#fff}
+ .hero .btn:hover{background:#222}
+}
+@media(max-width:600px){main .w>.hero:first-child{margin-top:-28px}}
+.stories a{width:108px}
+@media(max-width:600px){.burger,.isearch,.top .brand,.top .acclink,.icosp,.top .cartmain{grid-row:1}.top .menu{grid-row:2}}
