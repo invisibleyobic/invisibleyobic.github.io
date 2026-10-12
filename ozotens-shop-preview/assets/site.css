@@ -255,3 +255,14 @@ ol.lit li{margin:0 0 12px;overflow-wrap:anywhere}
 @media(max-width:600px){main .w>.hero:first-child{margin-top:-28px}}
 .stories a{width:108px}
 @media(max-width:600px){.burger,.isearch,.top .brand,.top .acclink,.icosp,.top .cartmain{grid-row:1}.top .menu{grid-row:2}}
+/* телефон: разделы - минималистичный список вместо крупных карточек */
+@media(max-width:600px){
+ main h2{font-size:20px;letter-spacing:.06em;text-transform:uppercase;margin:32px 0 6px;padding-bottom:0}
+ main h2::after{display:none}
+ .grid.cols3{display:block;margin:0;border-top:1px solid #e3e3e3}
+ .grid.cols3 .card.text{display:grid;grid-template-columns:1fr 20px;grid-template-rows:auto auto;column-gap:12px;align-items:center;padding:14px 2px;border:0;border-bottom:1px solid #e3e3e3;border-radius:0;background:transparent;box-shadow:none;transform:none}
+ .grid.cols3 .card.text b{grid-column:1;font-size:17px;font-weight:600;line-height:1.3}
+ .grid.cols3 .card.text small{grid-column:1;font-size:16px;line-height:1.35;color:#7a7f7c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:2px 0 0}
+ .grid.cols3 .card.text::after{content:"";grid-column:2;grid-row:1/3;width:9px;height:9px;border-right:1.8px solid #111;border-top:1.8px solid #111;transform:rotate(45deg);justify-self:center}
+ .grid.cols3 .card.text:hover,.grid.cols3 .card.text:focus-visible{background:rgba(0,0,0,.03)}
+}
