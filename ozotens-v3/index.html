@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ОЗОТЭНС - спокойно, дома</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Карманный прибор ТЭНС, крем OZOTENS 30% и электрод под нужную область. Спина, шея, суставы.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23a9b2a6'/%3E%3Cpath d='M32 14C32 14 20 28 20 37a12 12 0 0 0 24 0c0-9-12-23-12-23Z' fill='none' stroke='%231d221f' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/Cormorant-500-cyr.woff2">
+<link rel="preload" as="image" href="img/hero-d.webp" media="(min-width:821px)" fetchpriority="high">
+<link rel="preload" as="image" href="img/hero-m.webp" media="(max-width:820px)" fetchpriority="high">
+<style>
+@font-face{font-family:Serif;font-style:normal;font-weight:500;font-display:swap;src:url(fonts/Cormorant-500-cyr.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Serif;font-style:normal;font-weight:500;font-display:swap;src:url(fonts/Cormorant-500-lat.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:Serif;font-style:italic;font-weight:500;font-display:swap;src:url(fonts/Cormorant-500i-cyr.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Serif;font-style:italic;font-weight:500;font-display:swap;src:url(fonts/Cormorant-500i-lat.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:Onest;font-weight:400 700;font-display:swap;src:url(fonts/Onest-400-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Onest;font-weight:400 700;font-display:swap;src:url(fonts/Onest-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF}
+:root{--sage:#a9b2a6;--sage2:#9aa498;--paper:#f3f2ee;--ink:#1d221f;--soft:#4c544e;--glass:rgba(255,255,255,.22);--glassb:rgba(255,255,255,.42);--warm:#f2b766}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;color:var(--ink);font:400 17px/1.6 Onest,system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:var(--paper)}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:12px}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;z-index:99;background:#fff;padding:10px 14px}
+.serif{font-family:Serif,Georgia,serif;font-weight:500;letter-spacing:-.01em}
+.serif i,.serif em{font-style:italic}
+.glass{background:var(--glass);border:1px solid var(--glassb);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2)}
+.pill{display:inline-flex;align-items:center;gap:14px;min-height:56px;padding:0 24px 0 8px;border-radius:14px;text-decoration:none;font-weight:600;font-size:16px;letter-spacing:.02em;color:var(--ink);background:#fbfaf6;box-shadow:0 10px 30px -12px rgba(29,34,31,.35);transition:transform .25s,box-shadow .25s}
+.pill .ic{width:42px;height:42px;border-radius:10px;background:var(--ink);color:#fff;display:grid;place-items:center}
+.pill:hover{transform:translateY(-2px);box-shadow:0 16px 36px -14px rgba(29,34,31,.45)}
+.ghost{display:inline-flex;align-items:center;min-height:56px;padding:0 6px;font-weight:600;text-decoration:none;border-bottom:1px solid currentColor;border-radius:0}
+/* ===== шапка ===== */
+.nav{position:absolute;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:28px clamp(24px,5vw,72px)}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;letter-spacing:.2em;font-size:16px;min-height:44px}
+.logo svg{width:22px;height:28px}
+.links{display:flex;gap:6px;align-items:center;font-size:16px}
+.links a{text-decoration:none;padding:10px 12px;min-height:44px;display:inline-flex;align-items:center;opacity:.8}
+.links a:hover{opacity:1}
+.links span{width:3px;height:3px;border-radius:50%;background:currentColor;opacity:.5}
+.navr{display:flex;gap:6px}
+.icb{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;text-decoration:none;color:inherit;background:transparent;border:0;cursor:pointer}
+.icb svg{width:22px;height:22px}
+/* ===== первый экран (компьютер) ===== */
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:var(--sage)}
+.hero picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hin{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px clamp(24px,5vw,72px) 210px}
+.kick{display:inline-flex;align-items:center;gap:10px;font-size:16px;color:var(--soft);margin:0 0 22px}
+.kick i{width:28px;height:1px;background:currentColor}
+h1{font-size:clamp(56px,6.4vw,104px);line-height:.98;margin:0 0 26px;max-width:11ch}
+.hlead{max-width:440px;color:var(--soft);margin:0 0 34px;font-size:17px}
+.hcta{display:flex;flex-wrap:wrap;gap:22px;align-items:center}
+.steps{position:absolute;z-index:3;left:clamp(24px,5vw,72px);bottom:48px;display:grid;grid-template-columns:repeat(4,150px);gap:14px}
+.step{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--ink)}
+.step .glass{height:96px;border-radius:16px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;transition:background .25s}
+.step:hover .glass{background:rgba(255,255,255,.36)}
+.step svg{width:22px;height:22px}
+.step b{font-weight:500;font-size:16px}
+.step small{display:flex;align-items:center;gap:10px;font-size:16px;color:var(--soft)}.step small::before{content:"";width:22px;height:1px;background:currentColor}
+/* ===== заявление (как Hotle) ===== */
+.state{padding:clamp(90px,12vw,170px) clamp(24px,5vw,72px) clamp(60px,8vw,120px);display:grid;grid-template-columns:1fr minmax(0,180px);gap:40px}
+.state h2{font-size:clamp(44px,5.4vw,84px);line-height:1.02;margin:0;max-width:16ch}
+.state aside{font-size:16px;color:var(--soft);padding-top:14px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:0 clamp(24px,5vw,72px);border-top:1px solid rgba(29,34,31,.14);border-bottom:1px solid rgba(29,34,31,.14)}
+.fact{padding:36px 0 34px;padding-right:24px}
+.fact+.fact{border-left:1px solid rgba(29,34,31,.14);padding-left:32px}
+.fact b{display:block;font-family:Serif,Georgia,serif;font-weight:500;font-size:clamp(52px,5vw,76px);line-height:1}
+.fact span{display:block;margin-top:10px;color:var(--soft);font-size:16px;max-width:260px}
+/* ===== области (стеклянные карточки на фото) ===== */
+.areas{position:relative;margin:clamp(90px,10vw,150px) clamp(16px,3vw,40px) 0;border-radius:32px;overflow:hidden;background:var(--sage2);padding:clamp(56px,7vw,96px) clamp(20px,4vw,56px)}
+.areas::before{content:"";position:absolute;inset:0;background:radial-gradient(40% 50% at 80% 20%,rgba(242,183,102,.35),transparent 70%),radial-gradient(50% 60% at 10% 90%,rgba(255,255,255,.35),transparent 70%)}
+.areas h2{position:relative;font-size:clamp(40px,4.4vw,64px);line-height:1.02;margin:0 0 10px}
+.areas p.l{position:relative;max-width:520px;color:var(--soft);margin:0 0 40px}
+.track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.ac{border-radius:24px;padding:18px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:14px;min-height:340px;transition:transform .3s}
+.ac:hover{transform:translateY(-4px)}
+.ac .im{flex:1;border-radius:16px;background:rgba(255,255,255,.75);display:grid;place-items:center;padding:16px}
+.ac .im img{max-height:150px;width:auto;mix-blend-mode:multiply}
+.ac b{font-family:Serif,Georgia,serif;font-weight:500;font-size:30px;line-height:1}
+.ac span{font-size:16px;color:var(--soft)}
+.ac .go{display:flex;justify-content:space-between;align-items:center}
+.ac .go i{width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-style:normal}
+/* ===== финал ===== */
+.end{padding:clamp(90px,10vw,150px) clamp(24px,5vw,72px) 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end}
+.end h2{font-size:clamp(44px,5vw,76px);line-height:1;margin:0}
+.end p{color:var(--soft);margin:0 0 22px}
+.warn{margin:40px clamp(24px,5vw,72px) 0;padding:26px 28px;border-radius:20px;background:#e9e8e1;font-size:clamp(18px,1.7vw,22px);font-weight:500;line-height:1.4}
+.warn small{display:block;margin-top:8px;font-size:16px;font-weight:400;color:var(--soft)}
+footer{padding:44px clamp(24px,5vw,72px) 60px;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:16px;color:var(--soft)}
+footer a{min-height:44px;display:inline-flex;align-items:center;text-decoration:none}
+footer p{flex-basis:100%;margin:10px 0 0}
+.dock{display:none}.mlead{display:none}
+/* ===== телефон: своя раскладка ===== */
+@media(max-width:820px){
+ body{font-size:16px}
+ .nav{position:fixed;top:calc(10px + env(safe-area-inset-top));left:12px;right:12px;padding:6px 6px 6px 16px;border-radius:18px;background:rgba(243,242,238,.55);border:1px solid rgba(255,255,255,.6);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+ .links,.navr .hide-m{display:none}
+ .hero{min-height:auto;background:var(--paper)}
+ .hero picture{position:absolute;left:0;right:0;top:0;height:100svh}
+ .hero picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 70%}
+ .hin{justify-content:flex-start;padding:104px 20px 0;min-height:100svh}
+ h1{font-size:clamp(46px,13vw,64px);max-width:none;margin-bottom:18px}
+ .hin .hlead,.hin .hcta{display:none}
+ .mlead{display:block!important;padding:28px 20px 0;color:var(--soft);font-size:16px;margin:0}
+ .steps{position:relative;left:auto;bottom:auto;grid-template-columns:1fr 1fr;gap:10px;padding:24px 20px 0}
+ .steps .glass{background:#e8e7e0;border-color:#dedcd3;backdrop-filter:none;-webkit-backdrop-filter:none}
+ .step .glass{height:auto;min-height:84px}
+ .step small{display:none}
+ .state{grid-template-columns:1fr;padding:80px 20px 36px;gap:18px}
+ .state h2{font-size:42px}
+ .state aside{padding:0}
+ .facts{grid-template-columns:1fr;margin:0 20px}
+ .fact,.fact+.fact{border-left:0;padding:24px 0;border-top:1px solid rgba(29,34,31,.14)}
+ .fact:first-child{border-top:0}
+ .areas{margin:80px 0 0;border-radius:28px 28px 0 0;padding:48px 0 40px}
+ .areas h2,.areas p.l{padding:0 20px}
+ .areas h2{font-size:40px}
+ .track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:0 20px 8px;scrollbar-width:none}
+ .track::-webkit-scrollbar{display:none}
+ .ac{flex:0 0 78%;scroll-snap-align:center;min-height:320px}
+ .end{grid-template-columns:1fr;padding:80px 20px 24px}
+ .end h2{font-size:42px}
+ .warn{margin:28px 20px 0}
+ footer{padding:32px 20px 130px}
+ .dock{display:flex;position:fixed;z-index:30;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));gap:8px;padding:8px;border-radius:20px;background:rgba(243,242,238,.6);border:1px solid rgba(255,255,255,.6);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 10px 30px -12px rgba(29,34,31,.3)}
+ .dock a{flex:1;min-height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-weight:600;font-size:16px}
+ .dock .a{background:var(--ink);color:#fff}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+<header class="nav">
+  <a class="logo" href="#top" aria-label="ОЗОТЭНС, наверх"><svg viewBox="0 0 24 32" aria-hidden="true"><path d="M12 1.5C12 1.5 2.5 13 2.5 19.5a9.5 9.5 0 0 0 19 0C21.5 13 12 1.5 12 1.5Z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>ОЗОТЭНС</a>
+  <nav class="links" aria-label="Разделы"><a href="#how">Как устроено</a><span></span><a href="#areas">Области</a><span></span><a href="/ozotens-shop-preview/documents/">Документы</a><span></span><a href="/ozotens-shop-preview/support/">Поддержка</a></nav>
+  <div class="navr">
+    <a class="icb hide-m" href="/ozotens-shop-preview/search/" aria-label="Поиск"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></a>
+    <a class="icb" href="/ozotens-shop-preview/cart/" aria-label="Мой заказ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></a>
+    <a class="icb" href="/ozotens-shop-preview/" aria-label="Магазин"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></a>
+  </div>
+</header>
+<main id="main">
+<section class="hero" id="top">
+  <picture>
+    <source media="(max-width:820px)" srcset="img/hero-m.webp" width="1152" height="2048">
+    <img src="img/hero-d.webp" width="2048" height="1152" alt="Карманный прибор ТЭНС и крем OZOTENS 30% на каменном постаменте в тёплом свете" fetchpriority="high">
+  </picture>
+  <div class="hin">
+    <p class="kick"><i></i>Метод ОЗОТЭНС</p>
+    <h1 class="serif">Спина, шея, суставы. <i>Спокойно, дома.</i></h1>
+    <p class="hlead">Карманный прибор ТЭНС, крем OZOTENS 30% и электрод под нужную область. По инструкции и после разговора со специалистом.</p>
+    <div class="hcta">
+      <a class="pill" href="/ozotens-shop-preview/catalog/"><span class="ic" aria-hidden="true">&rarr;</span>Подобрать набор</a>
+      <a class="ghost" href="/ozotens-preview/">Как устроен метод</a>
+    </div>
+  </div>
+  <p class="mlead">Карманный прибор ТЭНС, крем OZOTENS 30% и электрод под нужную область. По инструкции и после разговора со специалистом.</p>
+  <nav class="steps" id="how" aria-label="Четыре шага">
+    <a class="step" href="/ozotens-preview/#map"><span class="glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="6" r="3"/><path d="M12 9v12M7 13h10"/></svg><b>Область</b></span><small>01</small></a>
+    <a class="step" href="/ozotens-shop-preview/catalog/#electrodes"><span class="glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M9 6v12M15 6v12"/></svg><b>Электрод</b></span><small>02</small></a>
+    <a class="step" href="/ozotens-shop-preview/catalog/krem-ozotens-30/"><span class="glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="7" y="7" width="10" height="14" rx="2"/><path d="M9 7V4h6v3"/></svg><b>Крем</b></span><small>03</small></a>
+    <a class="step" href="/ozotens-shop-preview/how-to/"><span class="glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M10 8h4M10 12h4"/></svg><b>Процедура</b></span><small>04</small></a>
+  </nav>
+</section>
+
+<section class="state">
+  <h2 class="serif">Простой метод для тех, кто <i>сидит, водит</i> и <i>работает</i> без перерыва.</h2>
+  <aside>Без записи и без дороги. Решение о применении - вместе со специалистом.</aside>
+</section>
+<div class="facts">
+  <div class="fact"><b>1994</b><span>первый аппарат озонотерапии у производителя</span></div>
+  <div class="fact"><b>2020</b><span>опубликован патент РФ на метод</span></div>
+  <div class="fact"><b>9</b><span>форм электродов под разные области тела</span></div>
+</div>
+
+<section class="areas" id="areas">
+  <h2 class="serif">Где <i>болит?</i></h2>
+  <p class="l">Один прибор подходит ко всем электродам. Форму выбирают под область тела.</p>
+  <div class="track">
+    <a class="ac glass" href="/ozotens-shop-preview/catalog/elektrod-85-01/"><span class="im"><img src="img/el-back.webp" width="380" height="174" alt="Электрод для спины" loading="lazy" decoding="async"></span><span class="go"><span><b>Спина</b><br><span>поясница и грудной отдел</span></span><i aria-hidden="true">&rarr;</i></span></a>
+    <a class="ac glass" href="/ozotens-shop-preview/catalog/elektrod-85-02/"><span class="im"><img src="img/el-neck.webp" width="370" height="329" alt="Электрод для шеи" loading="lazy" decoding="async"></span><span class="go"><span><b>Шея</b><br><span>только после врача</span></span><i aria-hidden="true">&rarr;</i></span></a>
+    <a class="ac glass" href="/ozotens-shop-preview/catalog/elektrod-85-07/"><span class="im"><img src="img/el-knee.webp" width="322" height="233" alt="Электрод для колена" loading="lazy" decoding="async"></span><span class="go"><span><b>Колено</b><br><span>коленный сустав</span></span><i aria-hidden="true">&rarr;</i></span></a>
+    <a class="ac glass" href="/ozotens-shop-preview/catalog/elektrod-85-03/"><span class="im"><img src="img/el-shoulder.webp" width="386" height="258" alt="Электрод для плеча" loading="lazy" decoding="async"></span><span class="go"><span><b>Плечо</b><br><span>плечевой сустав</span></span><i aria-hidden="true">&rarr;</i></span></a>
+  </div>
+</section>
+
+<section class="end">
+  <h2 class="serif">Начните <i>с разговора</i> со специалистом.</h2>
+  <div><p>Потом - набор под вашу область и инструкция. Всё остальное на сайте: документы, гарантия, поддержка.</p>
+  <a class="pill" href="/ozotens-shop-preview/catalog/"><span class="ic" aria-hidden="true">&rarr;</span>Открыть каталог</a></div>
+</section>
+<p class="warn">Имеются противопоказания. Необходимо проконсультироваться со специалистом.<small>Результат индивидуален. Материалы не заменяют консультацию врача.</small></p>
+</main>
+<footer>
+  <a href="/ozotens-preview/">История метода</a><a href="/ozotens-shop-preview/">Магазин</a><a href="/ozotens-shop-preview/documents/">Документы</a><a href="/ozotens-shop-preview/contacts/">Контакты</a>
+  <p>Демо нового стиля. Заказы не принимаются.</p>
+</footer>
+<nav class="dock" aria-label="Быстрые действия"><a class="b" href="#areas">Где болит?</a><a class="a" href="/ozotens-shop-preview/catalog/">Каталог &rarr;</a></nav>
+</body>
+</html>
