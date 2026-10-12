@@ -112,8 +112,8 @@ a.card{text-decoration:none;transition:transform .2s,box-shadow .2s}a.card:hover
 <main>
 <section class="hero">
   <div class="stage" id="stage">
-    <video id="sv" muted playsinline preload="none" poster="img/scene.webp" width="1280" height="720" aria-label="Мужчина в чёрном пальто разводит руками перед двумя парнями: один держится за поясницу, другой за ногу"><source src="scene.webm" type="video/webm"><source src="scene.mp4" type="video/mp4"></video>
-    <video class="open" id="ov" playsinline preload="metadata" poster="img/open.webp" width="1280" height="720" aria-label="Сцена: мужчина в чёрном пальто у машины спрашивает, все ли стреляют"><source src="orig.webm" type="video/webm"><source src="orig.mp4" type="video/mp4"></video>
+    <video id="sv" muted playsinline preload="auto" poster="img/scene.webp" width="1280" height="720" aria-label="Двое парней: один держится за поясницу, другой за ногу"><source src="scene.webm" type="video/webm"><source src="scene.mp4" type="video/mp4"></video>
+    <video class="open" id="ov" muted autoplay playsinline preload="auto" poster="img/open.webp" width="1280" height="720" aria-label="Сцена: мужчина в чёрном пальто у машины спрашивает, все ли стреляют"><source src="orig.webm" type="video/webm"><source src="orig.mp4" type="video/mp4"></video>
     <div class="scan" aria-hidden="true"></div><canvas id="noise" width="320" height="180" aria-hidden="true"></canvas>
     <p class="bub b1" id="b1">А вы чё, ребята, все стреляете?</p>
     <p class="bub b2" id="b2">А чё?</p>
@@ -190,7 +190,9 @@ function run(sound){cancelAnimationFrame(raf);ov.muted=!sound;try{ov.currentTime
  var q=ov.play();if(q&&q.catch)q.catch(function(){setB(true,false,false)});raf=requestAnimationFrame(tick)}
 ov.addEventListener('ended',function(){cancelAnimationFrame(raf);ov.classList.remove('off');b3.textContent=T3B;setB(false,false,true)});
 pb.addEventListener('click',function(){if(!on){on=true;sb.setAttribute('aria-pressed','true');sb.textContent='Звук: вкл';ac()&&AC.resume()}run(true)});
-if(RM){setB(true,false,false)}else{sv.preload='auto';setTimeout(function(){run(false)},600)}
+if(RM){ov.pause();setB(true,false,false)}else{run(false);
+ var kick=function(){if(ov.paused&&!ov.ended)run(false);['touchstart','scroll','click'].forEach(function(e){removeEventListener(e,kick)})};
+ ['touchstart','scroll','click'].forEach(function(e){addEventListener(e,kick,{passive:true,once:true})})}
 /* печать заголовка и появление выбора */
 var h1=document.getElementById('h1'),full=h1.textContent,lines=document.getElementById('lines'),ch=document.getElementById('choice');
 function show(){lines.classList.remove('h');setTimeout(function(){ch.classList.remove('h')},RM?0:700)}
