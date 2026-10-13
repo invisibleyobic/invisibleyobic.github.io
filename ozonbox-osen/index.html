@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex,nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>OZONEBOX - осенняя коробка</title>
+<meta name="description" content="Черновик концепции: осенняя коробка OZONEBOX с четырьмя средствами на озонированном масле." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="assets/img/hero.webp" />
+<style>
+  /* Макет-концепция, не код продукта. Цвета - токены здесь; в продукт переедут в app/globals.css. */
+  @property --rev { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+
+  :root, .sw-root {
+    --sw-bg: #0a0c09;
+    --sw-ink: #f3ece0;
+    --sw-ink-soft: #b3a792;
+    --sw-accent: #c9a55b;
+    --sw-font-display: "Cormorant Garamond", Georgia, serif;
+    --sw-font-body: "Manrope", system-ui, sans-serif;
+
+    --gold: #c9a55b;
+    --gold-soft: rgba(201,165,91,.28);
+    --ozone: #3c6df0;
+    --ink: #f3ece0;
+    --ink-soft: #b3a792;
+    --ink-mute: #7d7361;
+    --plate: rgba(12,14,10,.58);
+    --ease: cubic-bezier(.16,1,.3,1);
+  }
+  html, body { background: var(--sw-bg); color: var(--ink); }
+  body { font-family: var(--sw-font-body); -webkit-font-smoothing: antialiased; }
+
+  /* Текст с лёгким градиентом: белый в центре, темнее к краям */
+  .grad-text {
+    background: radial-gradient(120% 140% at 50% 45%, #fffaf0 0%, #efe4cf 38%, #a8977a 78%, #5d5140 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* ---------- шапка ---------- */
+  .hdr { position: fixed; inset: 0 0 auto 0; z-index: 70; display: flex; align-items: center; justify-content: space-between;
+    padding: clamp(14px,2.2vw,26px) clamp(16px,4.5vw,64px); pointer-events: none; }
+  .hdr > * { pointer-events: auto; }
+  .logo img { height: clamp(18px, 1.7vw, 24px); display: block; }
+  .nav { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 34px); }
+  .nav a:not(.btn) { position: relative; color: var(--ink-soft); text-decoration: none; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; overflow: hidden; display: inline-block; height: 1.4em; line-height: 1.4em; }
+  /* ховер: слово уезжает вверх, снизу приезжает золотая копия */
+  .nav a span { display: block; transition: transform .45s var(--ease); }
+  .nav a span::after { content: attr(data-t); display: block; color: var(--gold); }
+  .nav a:hover span, .nav a:focus-visible span { transform: translateY(-100%); }
+  .btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 22px;
+    border-radius: 999px; border: 1px solid var(--gold); color: #14110b; background: var(--gold); font: 600 13px/1 var(--sw-font-body);
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+  .btn::before { content: ""; position: absolute; inset: 0; transform: translateX(-120%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); transition: transform .8s var(--ease); }
+  .btn:hover::before { transform: translateX(120%) skewX(-20deg); }
+  .btn:hover { box-shadow: 0 10px 40px rgba(201,165,91,.35); }
+  .btn .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ozone); box-shadow: 0 0 0 3px rgba(60,109,240,.25); }
+  .btn--ghost { background: transparent; color: var(--ink); border-color: var(--gold-soft); }
+  .btn--ghost:hover { border-color: var(--gold); }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  /* ---------- первый экран ---------- */
+  .hero { position: fixed; inset: 0; z-index: 30; overflow: hidden; background: var(--sw-bg); will-change: opacity; }
+  /* Артборд 16:9, накрывает экран так же, как движок (cover, центр 50% / 42%) - поэтому слои совпадают пиксель в пиксель */
+  .board { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -42%);
+    width: max(100vw, 177.78vh); height: max(56.25vw, 100vh); }
+  .board img, .layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .board img { object-fit: cover; user-select: none; -webkit-user-drag: none; }
+
+  .word { position: absolute; left: 0; right: 0; top: 7%; text-align: center; margin: 0;
+    font: 300 clamp(96px, 21vw, 420px)/0.8 var(--sw-font-display); letter-spacing: .06em; text-transform: uppercase;
+    transition: opacity .8s var(--ease), letter-spacing 1.2s var(--ease); pointer-events: none; }
+
+  .l-empty { opacity: 0;
+    -webkit-mask-image: radial-gradient(ellipse var(--rev) calc(var(--rev) * 1.1) at 58% 50%, #000 62%, transparent 100%);
+            mask-image: radial-gradient(ellipse var(--rev) calc(var(--rev) * 1.1) at 58% 50%, #000 62%, transparent 100%);
+    transition: --rev 1s var(--ease), opacity .3s; }
+  .bottle { opacity: 0; transform: translateY(2.2%); transition: opacity .7s var(--ease), transform .9s var(--ease); }
+  .bottle .glint { position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255,240,210,.55) 50%, transparent 60%);
+    background-size: 250% 100%; background-position: 120% 0; mix-blend-mode: soft-light; }
+  .b1 { clip-path: inset(34% 53.4% 42.6% 37.6%); } .b2 { clip-path: inset(24.5% 46.6% 41.6% 45.7%); }
+  .b3 { clip-path: inset(25% 40.8% 38.8% 51.6%); } .b4 { clip-path: inset(27% 33.2% 37.6% 59.1%); }
+  .l-box { transition: opacity .6s var(--ease), transform .9s var(--ease); transform-origin: 58% 60%; }
+
+  .hero.is-open .l-empty { opacity: 1; --rev: 44%; }
+  .hero.is-open .l-box { opacity: 0; transform: scale(1.015) translateY(-.6%); }
+  .hero.is-open .word { opacity: .5; letter-spacing: .1em; }
+  .hero.is-open .bottle { opacity: 1; transform: none; }
+  .hero.is-open .bottle .glint { transition: background-position 1.4s var(--ease); background-position: -20% 0; }
+  .hero.is-open .b1, .hero.is-open .b1 .glint { transition-delay: .35s; }
+  .hero.is-open .b2, .hero.is-open .b2 .glint { transition-delay: .5s; }
+  .hero.is-open .b3, .hero.is-open .b3 .glint { transition-delay: .65s; }
+  .hero.is-open .b4, .hero.is-open .b4 .glint { transition-delay: .8s; }
+
+  /* подписи над флаконами */
+  .tag { position: absolute; transform: translate(-50%, -100%); padding: 6px 12px; border-radius: 999px; white-space: nowrap;
+    font: 500 11px/1 var(--sw-font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
+    background: rgba(10,12,9,.62); border: 1px solid var(--gold-soft); backdrop-filter: blur(6px);
+    opacity: 0; translate: 0 8px; transition: opacity .5s var(--ease), translate .6s var(--ease); pointer-events: none; }
+  .hero.is-open .tag { opacity: 1; translate: 0 0; }
+  .t1 { left: 42%; top: 32.5%; } .t2 { left: 49.3%; top: 23%; } .t3 { left: 55%; top: 23.5%; } .t4 { left: 62.8%; top: 25.5%; }
+  .hero.is-open .t1 { transition-delay: .6s; } .hero.is-open .t2 { transition-delay: .75s; }
+  .hero.is-open .t3 { transition-delay: .9s; } .hero.is-open .t4 { transition-delay: 1.05s; }
+
+  .hotspot { position: absolute; left: 32%; top: 16%; width: 46%; height: 62%; cursor: pointer; border-radius: 30px; background: transparent; border: 0; }
+  .cue { position: absolute; left: 24%; top: 56%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px;
+    font: 500 11px/1 var(--sw-font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); transition: opacity .4s; pointer-events: none; }
+  .cue i { width: 26px; height: 1px; background: var(--gold); }
+  .hero.is-open .cue { opacity: 0; }
+
+  /* виньетка: края в глубокую тень, как на рефе */
+  .vignette { position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(120% 90% at 55% 45%, transparent 45%, rgba(5,6,4,.55) 80%, rgba(5,6,4,.85) 100%); }
+
+  /* нижний левый блок - расположение как на основном рефе */
+  .lede { position: absolute; left: clamp(16px,4.5vw,64px); bottom: clamp(28px,6vh,72px); width: min(560px, 44vw); z-index: 3; }
+  .lede h1 { margin: 0 0 16px; font: 300 clamp(34px, 3.6vw, 60px)/1 var(--sw-font-display); letter-spacing: .04em; text-transform: uppercase; }
+  .lede p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink-soft); max-width: 46ch; }
+
+  /* плашки */
+  .plates { position: absolute; right: clamp(16px,4.5vw,64px); bottom: clamp(28px,6vh,72px); display: flex; gap: 14px; z-index: 3; }
+  .plate { --mx: 50%; --my: 50%; position: relative; width: clamp(150px, 12.5vw, 200px); padding: 58px 16px 16px; border-radius: 18px;
+    background: radial-gradient(160px circle at var(--mx) var(--my), rgba(201,165,91,.16), transparent 70%), var(--plate);
+    border: 1px solid rgba(201,165,91,.18); backdrop-filter: blur(10px) saturate(1.1); -webkit-backdrop-filter: blur(10px);
+    transition: transform .5s var(--ease), border-color .4s; transform-style: preserve-3d; }
+  .plate:hover { border-color: rgba(201,165,91,.55); transform: translateY(-6px); }
+  .plate img { position: absolute; width: 86px; height: 86px; object-fit: contain; top: -34px; left: 10px;
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,.55)); transition: transform .6s var(--ease); }
+  .plate:hover img { transform: translateY(-6px) rotate(-8deg) scale(1.08); }
+  .plate svg { position: absolute; top: 14px; right: 14px; width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.3; opacity: .8; }
+  .plate b { display: block; font: 400 20px/1.05 var(--sw-font-display); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); margin-bottom: 8px; }
+  .plate span { display: block; font-size: 13px; line-height: 1.45; color: var(--ink-soft); }
+
+  /* ---------- секции движка ---------- */
+  .sw-copylayer::before { display: none; }
+  .sw-copy:first-child { display: none; }
+  /* затемнение под текстом, а не на пол-экрана: флакон остаётся в свету */
+  .sw-copy::before { content: ""; position: absolute; inset: -30% -35%; z-index: -1;
+    background: radial-gradient(closest-side, rgba(8,9,7,.82), rgba(8,9,7,.5) 55%, transparent); }
+  /* флаконы на станциях 1-3 стоят левее центра - текст справа */
+  .sw-copy:nth-child(2), .sw-copy:nth-child(3), .sw-copy:nth-child(4) { left: auto; right: clamp(56px, 7vw, 120px); }
+  .sw-copy__num { font: 500 12px/1 var(--sw-font-body); letter-spacing: .2em; color: var(--gold); }
+  .sw-copy__eyebrow { font: 500 12px/1 var(--sw-font-body); letter-spacing: .22em; color: var(--ink-soft); }
+  .sw-copy__title { font: 300 clamp(44px, 5.4vw, 88px)/.95 var(--sw-font-display); letter-spacing: .03em; text-transform: uppercase; text-shadow: none;
+    background: radial-gradient(120% 160% at 30% 40%, #fffaf0 0%, #efe4cf 40%, #a8977a 85%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sw-copy__body { color: var(--ink-soft); font-size: 17px; text-shadow: none; }
+  .sw-copy__tags li { color: var(--ink); background: rgba(10,12,9,.5); border-color: var(--gold-soft); font-weight: 500; letter-spacing: .06em; transition: border-color .3s, color .3s; }
+  .sw-copy__tags li:hover { border-color: var(--gold); color: var(--gold); }
+  .sw-btn--primary { background: var(--gold); color: #14110b; } .sw-btn--ghost { color: var(--ink); border-color: var(--gold-soft); }
+  .sw-hint { display: none; }
+  .sw-route__label { background: rgba(10,12,9,.7); color: var(--ink); }
+  .sw-route__dot.is-active:not(:hover) .sw-route__label { opacity: 0; }
+  .sw-scrollbar { z-index: 80; }
+
+  @media (max-width: 860px) {
+    .nav a:not(.btn) { display: none; }
+    .btn { padding: 0 16px; font-size: 11px; }
+    .word { top: 12%; font-size: 30vw; }
+    .lede { width: auto; right: 16px; bottom: calc(150px + env(safe-area-inset-bottom)); }
+    .lede h1 { font-size: 34px; }
+    .lede p { font-size: 15px; }
+    .plates { left: 16px; right: 16px; bottom: calc(20px + env(safe-area-inset-bottom)); gap: 8px; }
+    .plate { flex: 1; width: auto; padding: 40px 10px 10px; }
+    .plate img { width: 56px; height: 56px; top: -24px; left: 6px; }
+    .plate b { font-size: 15px; } .plate span { display: none; }
+    .cue { top: 76%; }
+    .sw-copylayer::before { display: block; background: linear-gradient(0deg, rgba(10,12,9,.95) 10%, rgba(10,12,9,.6) 50%, transparent 100%); }
+    .sw-copy::before { display: none; }
+    .sw-copy:nth-child(2), .sw-copy:nth-child(3), .sw-copy:nth-child(4) { left: clamp(18px,5vw,64px); right: clamp(18px,5vw,64px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <header class="hdr">
+    <a class="logo" href="#top" aria-label="OZONEBOX"><img src="assets/img/logo.webp" alt="OZONEBOX" /></a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#" data-go="1"><span data-t="Набор">Набор</span></a>
+      <a href="#" data-go="5"><span data-t="Коробка">Коробка</span></a>
+      <a class="btn" href="#" data-go="5"><i class="dot"></i>Собрать коробку</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top" aria-label="Осенняя коробка OZONEBOX">
+    <div class="board">
+      <img class="l-bg" src="assets/img/hero.webp" alt="Чёрная коробка OZONEBOX с золотой лентой на осеннем мху" />
+      <h2 class="word grad-text" aria-hidden="true">Осень</h2>
+      <img class="l-empty" src="assets/img/hero-empty.webp" alt="" />
+      <div class="layer bottle b1"><img src="assets/img/hero-open.webp" alt="" /><i class="glint"></i></div>
+      <div class="layer bottle b2"><img src="assets/img/hero-open.webp" alt="" /><i class="glint"></i></div>
+      <div class="layer bottle b3"><img src="assets/img/hero-open.webp" alt="" /><i class="glint"></i></div>
+      <div class="layer bottle b4"><img src="assets/img/hero-open.webp" alt="" /><i class="glint"></i></div>
+      <img class="l-box" src="assets/img/box-cut.webp" alt="" />
+      <span class="tag t1">Масло «ОТРИ 6000»</span>
+      <span class="tag t2">Крем для ног</span>
+      <span class="tag t3">Шампунь</span>
+      <span class="tag t4">Эмульсия для лица</span>
+      <button class="hotspot" type="button" aria-label="Открыть коробку" aria-pressed="false"></button>
+      <div class="cue"><i></i>Наведите на коробку<i></i></div>
+    </div>
+    <div class="vignette"></div>
+
+    <div class="lede">
+      <h1 class="grad-text">/ Осенняя коробка</h1>
+      <p>Осенью кожу сушат ветер и батареи. Мы сложили в чёрную коробку четыре средства на озонированном масле: для лица, волос, ног и одно масло на всё.</p>
+    </div>
+
+    <div class="plates">
+      <article class="plate">
+        <img src="assets/img/plate-leaf.webp" alt="" />
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l8-8"/></svg>
+        <b>Состав</b><span>Без гормонов, антибиотиков, парабенов и силиконов</span>
+      </article>
+      <article class="plate">
+        <img src="assets/img/plate-drop.webp" alt="" />
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 01-12 0c0-3.5 3-7 6-11z"/></svg>
+        <b>Четыре</b><span>Лицо, волосы, ноги и масло на всё</span>
+      </article>
+      <article class="plate">
+        <img src="assets/img/plate-bow.webp" alt="" />
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M3 9h18M12 9v11M12 9c-2-4-6-4-6-1.5S10 9 12 9zM12 9c2-4 6-4 6-1.5S14 9 12 9z"/></svg>
+        <b>Подарок</b><span>Лента уже завязана, дарить можно сразу</span>
+      </article>
+    </div>
+  </section>
+
+  <div id="world"></div>
+
+  <script src="scrub-engine.js"></script>
+  <script>
+    mountScrollWorld(document.getElementById('world'), {
+      nav: false,
+      atmosphere: false,
+      hint: 'Листайте',
+      crossfade: 0.35,
+      diveScroll: 1.3,
+      sections: [
+        { id: 'box', label: 'Коробка', still: 'assets/img/hero.webp', scroll: 1.8,
+          frames: { base: 'assets/seq/leg0/', count: 97, ext: '.webp', pad: 3 } },
+        { id: 'otri', label: 'Масло', still: 'assets/img/p1.webp',
+          eyebrow: 'Масло', title: 'ОТРИ 6000',
+          body: 'Косметическое озонированное оливковое масло. Банка с ребристой крышкой, открывается одной рукой.',
+          tags: ['Оливковое масло', 'Озониды'] },
+        { id: 'feet', label: 'Ноги', still: 'assets/img/p2.webp',
+          eyebrow: 'Ноги', title: 'Крем 12,5%',
+          body: 'Крем для ног Ozodermis с озонидами. 12,5% - самая высокая концентрация в наборе. Под шерстяные носки.',
+          tags: ['12,5%', 'Помпа'] },
+        { id: 'hair', label: 'Волосы', still: 'assets/img/p3.webp',
+          eyebrow: 'Волосы', title: 'Шампунь 2%',
+          body: 'Шампунь Ozodermis с озонидами. Для кожи головы, которой осенью достаётся от шапки и сухого воздуха.',
+          tags: ['2%', 'Флип-крышка'] },
+        { id: 'face', label: 'Лицо', still: 'assets/img/p4.webp',
+          eyebrow: 'Лицо', title: 'Ozone Cream',
+          body: 'Озоновая эмульсия для лица, 90 мл. Помпа спрятана под колпачком, в сумке ничего не выдавится.',
+          tags: ['90 мл', 'Помпа'] },
+        { id: 'finale', label: 'Вся коробка', still: 'assets/img/hero-open.webp', scroll: 1.4,
+          eyebrow: 'Осенняя коробка', title: 'Все четыре',
+          body: 'Эмульсия, масло, шампунь и крем для ног в одной чёрной коробке с лентой.',
+          cta: { primary: { label: 'Собрать коробку', href: '#' }, secondary: { label: 'Что внутри', href: '#top' } } },
+      ],
+      connectors: [],
+    });
+
+    // ---------- первый экран: раскрытие и уход при прокрутке ----------
+    (function () {
+      const hero = document.querySelector('.hero');
+      const hot = hero.querySelector('.hotspot');
+      const canHover = matchMedia('(hover: hover)').matches;
+      const setOpen = (v) => { hero.classList.toggle('is-open', v); hot.setAttribute('aria-pressed', String(v)); };
+      if (canHover) {
+        hot.addEventListener('mouseenter', () => setOpen(true));
+        hero.querySelector('.board').addEventListener('mouseleave', () => setOpen(false));
+        hot.addEventListener('mouseleave', (e) => { if (!e.relatedTarget || !e.relatedTarget.closest('.hotspot')) setOpen(false); });
+      }
+      hot.addEventListener('click', () => setOpen(!hero.classList.contains('is-open')));
+      hot.addEventListener('focus', () => setOpen(true));
+      hot.addEventListener('blur', () => setOpen(false));
+
+      // Уходит, как только начинается прокрутка: под ним тот же кадр - первый кадр видео L0
+      // берём сглаженный скролл движка (window.__swY), чтобы первый экран уходил так же мягко
+      let lastP = -1;
+      const tick = () => {
+        const y = window.__swY != null ? window.__swY : window.scrollY;
+        const p = Math.min(1, y / (window.innerHeight * 0.35));
+        if (p !== lastP) {
+          lastP = p;
+          hero.style.opacity = String(1 - p);
+          hero.style.visibility = p >= 1 ? 'hidden' : 'visible';
+          hero.style.pointerEvents = p > 0.3 ? 'none' : '';
+          if (p > 0.05) setOpen(false);
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+
+      // плашки: свет идёт за курсором
+      hero.querySelectorAll('.plate').forEach((pl) => pl.addEventListener('pointermove', (e) => {
+        const r = pl.getBoundingClientRect();
+        pl.style.setProperty('--mx', (e.clientX - r.left) + 'px'); pl.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      }));
+
+      // навигация шапки -> к секции
+      document.querySelectorAll('[data-go]').forEach((a) => a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const i = +a.dataset.go; const dots = document.querySelectorAll('.sw-route__dot');
+        if (dots[i]) dots[i].click();
+      }));
+    })();
+  </script>
+</body>
+</html>
