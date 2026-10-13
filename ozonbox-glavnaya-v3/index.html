@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OzoneBox - главная v3</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Главная OzoneBox, версия 3: белое, чёрное и один зелёный акцент, плитки разделов, каталог с фильтром.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="vendor/lenis.css">
+<!--
+  Макет-имитация главной OzoneBox v3 (13.10.2026). Не код сайта.
+  Направление владельца: как старое «Золотое яблоко» - белое и чёрное, всё главное зелёным;
+  плитки разделов как в рефе PHLOX, крупная типографика как в рефе Sage.
+  Зелёный (--green) временный: ждём точный цвет от владельца.
+  Цены и названия - из каталога (Tilda, 09.2026). Описаний с медицинскими обещаниями нет.
+-->
+<style>
+:root {
+  --white: #ffffff;
+  --paper: #f4f5f2;
+  --mist: #e9ece6;
+  --ink: #111412;
+  --soft: #5d645f;
+  --mute: #8e958f;
+  --line: rgba(17, 20, 18, .1);
+  --green: #13a538;
+  --green-deep: #0c8a2c;
+  --green-pale: #e3f4e7;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --r: 28px;
+  --font: "Manrope", -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--white); }
+body { margin: 0; background: var(--white); color: var(--ink); font: 400 16px/1.5 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 10px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+.wrap { max-width: 1320px; margin: 0 auto; padding-inline: 20px; }
+
+/* ---------- Кнопки ---------- */
+.btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 100px; border: 0; cursor: pointer; font-weight: 700; font-size: 15px; white-space: nowrap; transition: background-color .3s var(--ease), transform .3s var(--ease), color .3s var(--ease); }
+.btn--green { background: var(--green); color: #fff; }
+.btn--green:hover { background: var(--green-deep); }
+.btn--ink { background: var(--ink); color: #fff; }
+.btn--ink:hover { background: var(--green); }
+.btn--white { background: #fff; color: var(--ink); }
+.btn--white:hover { background: var(--green); color: #fff; }
+.btn--sm { min-height: 44px; padding: 0 16px; font-size: 14px; }
+.btn i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.22); font-style: normal; transition: transform .4s var(--ease); }
+.btn:hover i { transform: translateX(3px) rotate(-45deg); }
+
+/* ---------- Бегущая строка и шапка ---------- */
+.ticker { background: var(--ink); color: #fff; overflow: hidden; font-size: 13px; font-weight: 600; letter-spacing: .04em; }
+.ticker__row { display: flex; gap: 48px; width: max-content; padding: 9px 0; animation: tick 38s linear infinite; }
+.ticker__row span::before { content: "●"; color: var(--green); margin-right: 12px; font-size: 9px; vertical-align: 2px; }
+@keyframes tick { to { transform: translateX(-50%); } }
+
+.hdr { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; background: rgba(255,255,255,.9); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.hdr .wrap { height: 68px; display: flex; align-items: center; gap: 28px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.03em; }
+.logo svg { width: 26px; height: 27px; }
+.logo b { color: var(--green); }
+.nav { display: flex; gap: 4px; margin-right: auto; }
+.nav a { padding: 10px 12px; border-radius: 100px; font-weight: 600; font-size: 15px; color: var(--soft); transition: color .25s, background-color .25s; }
+.nav a:hover { color: var(--ink); background: var(--paper); }
+.icons { display: flex; gap: 6px; align-items: center; }
+.ic { position: relative; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 0; background: transparent; cursor: pointer; transition: background-color .25s; }
+.ic:hover { background: var(--paper); }
+.ic svg { width: 22px; height: 22px; }
+.cnt { position: absolute; top: 3px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--green); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.cnt.bump { animation: bump .5s var(--ease); }
+@keyframes bump { 40% { transform: scale(1.4); } }
+
+/* ---------- Плитки первого экрана ---------- */
+.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 250px; gap: 16px; padding-block: 18px 28px; }
+.tile { position: relative; overflow: hidden; border-radius: var(--r); padding: 26px; display: flex; flex-direction: column; justify-content: space-between; isolation: isolate; transition: transform .5s var(--ease); }
+.tile:hover { transform: translateY(-4px); }
+.tile .ghost { position: absolute; z-index: -1; left: 18px; bottom: 6px; font-weight: 800; letter-spacing: -.05em; line-height: .8; font-size: clamp(56px, 7vw, 110px); white-space: nowrap; pointer-events: none; }
+.tile .kick { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+.tile h3 { font-size: 26px; font-weight: 800; letter-spacing: -.03em; line-height: 1.05; margin-top: 4px; }
+.tile .pic { position: absolute; z-index: -1; right: -10px; bottom: -14px; width: 62%; transition: transform .7s var(--ease); }
+.tile:hover .pic { transform: scale(1.06) rotate(-2deg); }
+.tile--light { background: var(--paper); }
+.tile--light .pic img, .tile--pale .pic img, .tile--hero .pic img { -webkit-mask: radial-gradient(closest-side, #000 62%, transparent 100%); mask: radial-gradient(closest-side, #000 62%, transparent 100%); }
+.tile--light .pic img { mix-blend-mode: multiply; }
+.tile--light .ghost { color: #fff; }
+.tile--ink { background: var(--ink); color: #fff; }
+.tile--ink .ghost { color: rgba(255,255,255,.07); }
+.tile--green { background: var(--green); color: #fff; }
+.tile--green .ghost { color: rgba(255,255,255,.14); }
+.tile--pale { background: var(--green-pale); }
+.tile--pale .ghost { color: rgba(19,165,56,.12); }
+.tile--pale .pic img { mix-blend-mode: multiply; }
+.disc { border-radius: 50%; background: #fff; overflow: hidden; aspect-ratio: 1; box-shadow: 0 30px 60px -20px rgba(0,0,0,.45); }
+.disc img { padding: 8%; }
+
+.tile--hero { grid-column: span 2; grid-row: span 2; padding: 40px; background: linear-gradient(140deg, #fbfcfa 0%, var(--mist) 100%); }
+.tile--hero .ghost { font-size: clamp(90px, 13vw, 210px); color: #fff; left: 26px; bottom: 30%; text-shadow: 0 1px 0 rgba(17,20,18,.04); }
+.tile--hero .pic { width: 70%; right: -4%; bottom: 2%; }
+.tile--hero .pic img { mix-blend-mode: multiply; filter: drop-shadow(0 40px 30px rgba(17,20,18,.18)); }
+.tile--hero h1 { font-size: clamp(38px, 4.6vw, 66px); line-height: .98; letter-spacing: -.045em; font-weight: 800; max-width: 9ch; margin: 10px 0 0; }
+.tile--hero h1 em { font-style: normal; color: var(--green); }
+.hero-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.hero-price { font-weight: 800; font-size: 30px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.hero-price small { display: block; font-size: 13px; font-weight: 600; color: var(--soft); letter-spacing: 0; }
+.tile--wide { grid-column: span 2; }
+
+/* ---------- Полоса выгод ---------- */
+.perks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-block: 8px 56px; }
+.perk { display: flex; gap: 14px; align-items: center; }
+.perk svg { flex: none; width: 44px; height: 44px; padding: 10px; border-radius: 14px; background: var(--green-pale); color: var(--green-deep); }
+.perk b { display: block; font-size: 15px; }
+.perk span { font-size: 13px; color: var(--soft); }
+
+/* ---------- Баннер осенней коробки ---------- */
+.promo { position: relative; overflow: hidden; border-radius: 36px; background: var(--ink); color: #fff; display: grid; grid-template-columns: 1.1fr 1fr; min-height: 460px; isolation: isolate; }
+.promo__img { position: relative; overflow: hidden; }
+.promo__img img { position: absolute; inset: 0; width: 100%; height: 115%; object-fit: cover; }
+.promo__img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 55%, var(--ink)); }
+.promo__txt { padding: 56px 48px; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+.promo .kick { color: var(--green); font-weight: 700; letter-spacing: .1em; font-size: 13px; text-transform: uppercase; }
+.promo h2 { font-size: clamp(40px, 5vw, 76px); font-weight: 800; letter-spacing: -.05em; line-height: .92; }
+.promo h2 em { font-style: normal; color: var(--green); }
+.promo p { color: #c9cfca; max-width: 36ch; margin: 0 0 8px; }
+
+/* ---------- Редакционный блок ---------- */
+.edit { padding-block: 96px 40px; position: relative; }
+.edit__word { font-weight: 800; letter-spacing: -.07em; line-height: .78; font-size: clamp(110px, 22vw, 340px); color: var(--paper); white-space: nowrap; user-select: none; }
+.edit__row { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: end; margin-top: -0.35em; position: relative; }
+.edit h2 { font-size: clamp(30px, 3.6vw, 52px); font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.edit h2 em { font-style: normal; color: var(--green); }
+.edit p { color: var(--soft); max-width: 46ch; font-size: 17px; }
+.edit__nums { display: flex; gap: 40px; margin-top: 24px; }
+.edit__nums b { display: block; font-size: 44px; font-weight: 800; letter-spacing: -.04em; color: var(--green); font-variant-numeric: tabular-nums; }
+.edit__nums span { font-size: 14px; color: var(--soft); }
+
+/* ---------- Каталог ---------- */
+.cat { padding-block: 40px 96px; }
+.cat__head { display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; }
+.cat h2 { font-size: clamp(34px, 4vw, 56px); font-weight: 800; letter-spacing: -.045em; line-height: 1; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { min-height: 44px; padding: 0 18px; border-radius: 100px; border: 1px solid var(--line); background: #fff; font-weight: 600; font-size: 14px; cursor: pointer; transition: background-color .25s, color .25s, border-color .25s; }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.chip span { color: var(--green); margin-left: 4px; }
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.card { min-width: 0; border-radius: 24px; background: var(--paper); padding: 14px; display: flex; flex-direction: column; transition: background-color .35s var(--ease); }
+.card:hover { background: var(--green-pale); }
+.card__img { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; }
+.card__img img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; transition: transform .6s var(--ease); }
+.card:hover .card__img img { transform: scale(1.06); }
+.badge { position: absolute; top: 10px; left: 10px; background: var(--green); color: #fff; font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 100px; }
+.card__name { font-weight: 700; font-size: 16px; line-height: 1.3; margin: 12px 4px 0; flex: 1; }
+.card__foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 14px 4px 2px; }
+.card__price { font-weight: 800; font-size: 20px; font-variant-numeric: tabular-nums; }
+.add { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); color: #fff; display: grid; place-items: center; cursor: pointer; transition: background-color .25s, transform .3s var(--ease); }
+.add:hover { background: var(--green); transform: rotate(90deg); }
+.add.done { background: var(--green); }
+.add svg { width: 18px; height: 18px; }
+
+footer { background: var(--ink); color: #aab1ab; padding-block: 48px; font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+footer .logo { color: #fff; }
+
+/* нижняя панель на телефоне */
+.dock { display: none; }
+
+/* ---------- Телефон: своя раскладка, как приложение ---------- */
+@media (max-width: 860px) {
+  .nav { display: none; }
+  .hdr .wrap { height: 58px; justify-content: space-between; }
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 190px; gap: 10px; }
+  .tile { padding: 18px; border-radius: 22px; }
+  .tile h3 { font-size: 20px; }
+  .tile--hero { grid-column: span 2; grid-row: span 2; padding: 24px; }
+  .tile--hero .pic { width: 78%; right: -10%; }
+  .tile--wide { grid-column: span 2; }
+  .perks { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: 36px; }
+  .promo { grid-template-columns: 1fr; border-radius: 26px; }
+  .promo__img { min-height: 260px; }
+  .promo__img::after { background: linear-gradient(180deg, transparent 50%, var(--ink)); }
+  .promo__txt { padding: 8px 24px 32px; }
+  .edit { padding-top: 64px; }
+  .edit__row { grid-template-columns: 1fr; gap: 16px; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -20px; padding-inline: 20px; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .card { padding: 10px; border-radius: 20px; }
+  .card__name { font-size: 14px; }
+  .card__price { font-size: 17px; }
+  .dock { display: flex; position: fixed; z-index: 50; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: #fff; border-radius: 22px; padding: 8px 8px 8px 18px; align-items: center; justify-content: space-between; box-shadow: 0 20px 40px -12px rgba(0,0,0,.5); transform: translateY(150%); transition: transform .5s var(--ease); }
+  .dock.on { transform: none; }
+  .dock b { font-variant-numeric: tabular-nums; }
+  footer { padding-bottom: 110px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .ticker__row { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true"><div class="ticker__row" id="ticker"></div></div>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="OzoneBox">
+      <svg viewBox="0 0 31 32" aria-hidden="true"><path fill="#13a538" d="M24.37 17.65c3.57.31 6.32 3.42 6.32 7.16V32h-6.9c-3.58 0-6.57-2.87-6.87-6.59-.35-4.43 3.2-8.13 7.45-7.76Z"/><path fill="currentColor" d="M4.81 16c0-2.86 0-4.71.12-6.12.1-1.35.28-1.85.4-2.1a4.8 4.8 0 0 1 2.14-2.23c.23-.12.71-.3 2-.42 1.36-.11 3.13-.11 5.88-.11s4.52 0 5.87.11c1.3.12 1.78.3 2.01.42a4.8 4.8 0 0 1 2.14 2.23c.12.25.3.75.4 2.1.08 1.06.1 2.38.11 4.19a10.6 10.6 0 0 1 4.82 2.47V16c0-5.56 0-8.35-1.03-10.47A10.1 10.1 0 0 0 25.4 1.07C23.35 0 20.68 0 15.35 0S7.34 0 5.3 1.07a10.1 10.1 0 0 0-4.27 4.46C0 7.65 0 10.44 0 16s0 8.35 1.03 10.47a10.1 10.1 0 0 0 4.27 4.46C7.34 32 10.01 32 15.35 32h.52a11.5 11.5 0 0 1-2.37-5.02c-1.74 0-3-.03-4.02-.12-1.3-.11-1.78-.29-2.01-.42a4.8 4.8 0 0 1-2.14-2.22c-.12-.25-.3-.75-.4-2.1C4.82 20.7 4.81 18.86 4.81 16Z"/></svg>
+      <span>Ozone<b>Box</b></span>
+    </a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#catalog">Каталог</a>
+      <a href="#catalog" data-go="sets">Наборы</a>
+      <a href="/ozonbox-osen/">Осенняя коробка</a>
+      <a href="#about">О бренде</a>
+    </nav>
+    <div class="icons">
+      <button class="ic" type="button" aria-label="Поиск"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button>
+      <button class="ic" type="button" aria-label="Корзина, товаров: 0" id="cartBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9L5 8Z M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><span class="cnt" id="cnt">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="wrap bento" aria-label="Разделы магазина">
+    <article class="tile tile--hero" data-tilt>
+      <span class="ghost" data-ghost>OZONE</span>
+      <div>
+        <span class="kick">Хит осени · набор</span>
+        <h1>Супер <em>трио</em> для лица</h1>
+      </div>
+      <div class="pic" data-float><img src="img/super-trio.webp" alt="Набор «Супер трио»: три средства и коробка" width="900" height="900"></div>
+      <div class="hero-foot">
+        <div class="hero-price">2 893 ₽<small>три средства в одной коробке</small></div>
+        <button class="btn btn--green" type="button" data-add>В корзину <i aria-hidden="true">→</i></button>
+      </div>
+    </article>
+
+    <a class="tile tile--ink" href="#catalog" data-go="face">
+      <span class="ghost">ЛИЦО</span>
+      <div><span class="kick">Раздел</span><h3>Лицо</h3></div>
+      <div class="pic" style="width:48%;right:14px;bottom:16px"><div class="disc"><img src="img/ozodermik-3.webp" alt="" width="900" height="900" loading="lazy"></div></div>
+      <span class="btn btn--white btn--sm" style="align-self:flex-start">Смотреть</span>
+    </a>
+
+    <a class="tile tile--green" href="#catalog" data-go="hair">
+      <span class="ghost">ВОЛОСЫ</span>
+      <div><span class="kick">Раздел</span><h3>Волосы</h3></div>
+      <div class="pic" style="width:48%;right:14px;bottom:16px"><div class="disc"><img src="img/shampun.webp" alt="" width="900" height="900" loading="lazy"></div></div>
+      <span class="btn btn--white btn--sm" style="align-self:flex-start">Смотреть</span>
+    </a>
+
+    <a class="tile tile--pale" href="#catalog" data-go="body">
+      <span class="ghost">ТЕЛО</span>
+      <div><span class="kick">Раздел</span><h3>Тело</h3></div>
+      <div class="pic"><img src="img/idealnoe-telo.webp" alt="" width="900" height="900" loading="lazy"></div>
+    </a>
+
+    <a class="tile tile--light" href="#catalog" data-go="oils">
+      <span class="ghost">МАСЛО</span>
+      <div><span class="kick">Раздел</span><h3>Масло<br>«Отри 6000»</h3></div>
+      <div class="pic"><img src="img/otri-6000.webp" alt="" width="900" height="900" loading="lazy"></div>
+    </a>
+  </section>
+
+  <section class="wrap perks" aria-label="Почему здесь">
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3 7h11v9H3z M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><div><b>7 вариантов доставки</b><span>выбор при оформлении</span></div></div>
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 9.5V5h4.5L20 16.5 16.5 20 4 9.5Z"/><circle cx="8" cy="8" r="1"/></svg><div><b>−10% по коду из ролика</b><span>вводится в корзине</span></div></div>
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M4 13h16 M12 9v11 M12 9c-2-4-6-4-6-1.5S9 9 12 9Zm0 0c2-4 6-4 6-1.5S15 9 12 9Z"/></svg><div><b>Наборы под задачу</b><span>собраны из средств линейки</span></div></div>
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18 M7 15h4"/></svg><div><b>Оплата картой на сайте</b><span>данные карты не проходят через нас</span></div></div>
+  </section>
+
+  <section class="wrap" aria-labelledby="promoTitle">
+    <a class="promo" href="/ozonbox-osen/">
+      <div class="promo__img"><img src="img/osen-hero.webp" alt="Чёрная коробка OZONEBOX с золотой лентой на мху" data-par></div>
+      <div class="promo__txt">
+        <span class="kick">Новая страница · сезон</span>
+        <h2 id="promoTitle">Осенняя<br><em>коробка</em></h2>
+        <p>Четыре средства в чёрной коробке с лентой. Откройте страницу и прокрутите: камера подойдёт к каждому флакону.</p>
+        <span class="btn btn--green" style="align-self:flex-start">Открыть коробку <i aria-hidden="true">→</i></span>
+      </div>
+    </a>
+  </section>
+
+  <section class="wrap edit" id="about" aria-labelledby="editTitle">
+    <div class="edit__word" aria-hidden="true" data-word>озон</div>
+    <div class="edit__row">
+      <h2 id="editTitle">Уход, который<br>собирают <em>под задачу</em></h2>
+      <div>
+        <p>Девятнадцать средств для лица, волос и тела. Можно взять одно, а можно готовый набор: в нём уже подобраны средства, которые работают вместе.</p>
+        <div class="edit__nums">
+          <div><b data-count="19">19</b><span>средств в каталоге</span></div>
+          <div><b data-count="10">10</b><span>готовых наборов</span></div>
+          <div><b data-count="5">5</b><span>разделов</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap cat" id="catalog" aria-labelledby="catTitle">
+    <div class="cat__head">
+      <h2 id="catTitle">Каталог</h2>
+      <div class="chips" id="chips" role="group" aria-label="Раздел каталога"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo">Ozone<b style="color:#13a538">Box</b></span>
+    <span>Макет главной v3, 13.10.2026 · цены из каталога Tilda, сентябрь 2026</span>
+    <a href="/ozonbox/">Все версии OzoneBox →</a>
+  </div>
+</footer>
+
+<div class="dock" id="dock" role="status"><span>В корзине <b id="dockN">0</b></span><button class="btn btn--green btn--sm" type="button">Оформить</button></div>
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="vendor/Flip.min.js" defer></script>
+<script src="vendor/lenis.min.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Каталог - копия данных Tilda (prototypes/2026-09-09-katalog). Описаний здесь нет:
+  // в них медицинские формулировки, они ждут сверки (katalog/README.md).
+  const P = [
+    ["stop-akne","Бокс «Стоп акне»",1990,["face","sets"],"Хит"],["krem-pryschi","Крем точечного действия",967,["face"],"Хит"],
+    ["super-kombo","Набор «Супер комбо»",4999,["face","sets"],"Хит"],["chistaya-kozha","Безупречно чистая кожа",2800,["face","sets"],""],
+    ["super-trio","Набор «Супер трио»",2893,["face","sets"],""],["super-duet","Подарочный набор «Супер дуэт»",1976,["sets"],""],
+    ["ochischenie","Озоновое очищение",1257,["face"],""],["set-lico","Сет для лица",4479,["face","sets"],""],
+    ["otri-6000","Озонированное масло «Отри 6000»",899,["face","oils"],""],["shampun","Шампунь «Озодермис»",1205,["hair"],""],
+    ["maska-shampun","Набор маска и шампунь",2352,["hair","sets"],""],["vosstanovlenie-volos","Полное восстановление волос",2490,["hair","sets"],""],
+    ["maska-volosy","Озодермик, маска для волос",1306,["hair"],""],["idealnoe-telo","Идеальное тело",3500,["body","sets"],""],
+    ["anticellulit","Массажный крем для тела",1633,["body"],""],["sos-boks","Набор «СОС бокс»",1900,["sets","hair"],""],
+    ["ozodermik-3","Озодермик 3%",1195,["face"],""],["ozodermik-5","Озодермик 5%",1303,["face"],""],["dnevnoy-krem","Дневной крем",1419,["face"],""],
+  ];
+  const CATS = [["all","Все"],["face","Лицо"],["hair","Волосы"],["body","Тело"],["oils","Масло"],["sets","Наборы"]];
+  const rub = (n) => n.toLocaleString("ru-RU") + " ₽";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.getElementById("ticker").innerHTML = Array(2).fill(
+    ["Выгода 10% по коду из ролика", "Осенняя подборка для лица и волос", "Наборы - готовый подарок", "19 средств в каталоге", "7 вариантов доставки"]
+      .map((t) => `<span>${t}</span>`).join("")).join("");
+
+  const grid = document.getElementById("grid");
+  grid.innerHTML = P.map(([id, name, price, cats, badge]) => `
+    <article class="card" data-cats="${cats.join(" ")}">
+      <div class="card__img"><img src="img/${id}.webp" alt="${name}" width="900" height="900" loading="lazy">${badge ? `<span class="badge">${badge}</span>` : ""}</div>
+      <p class="card__name">${name}</p>
+      <div class="card__foot"><span class="card__price">${rub(price)}</span>
+        <button class="add" type="button" data-add aria-label="В корзину: ${name}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>
+    </article>`).join("");
+
+  const chips = document.getElementById("chips");
+  chips.innerHTML = CATS.map(([k, l]) => {
+    const n = k === "all" ? P.length : P.filter((p) => p[3].includes(k)).length;
+    return `<button class="chip" type="button" data-cat="${k}" aria-pressed="${k === "all"}">${l}<span>${n}</span></button>`;
+  }).join("");
+
+  // фильтр с перестроением карточек (GSAP Flip)
+  const setCat = (k) => {
+    const cards = [...grid.children];
+    const state = window.Flip && !reduce ? Flip.getState(cards) : null;
+    cards.forEach((c) => (c.hidden = k !== "all" && !c.dataset.cats.split(" ").includes(k)));
+    chips.querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.cat === k)));
+    if (state) Flip.from(state, { duration: .6, ease: "power3.inOut", scale: true, absolute: true,
+      onEnter: (el) => gsap.fromTo(el, { opacity: 0, scale: .85 }, { opacity: 1, scale: 1, duration: .5 }),
+      onLeave: (el) => gsap.to(el, { opacity: 0, scale: .85, duration: .35 }) });
+  };
+  chips.addEventListener("click", (e) => { const b = e.target.closest(".chip"); if (b) setCat(b.dataset.cat); });
+  document.querySelectorAll("[data-go]").forEach((a) => a.addEventListener("click", () => setCat(a.dataset.go)));
+
+  // корзина: только счётчик
+  let n = 0;
+  const cnt = document.getElementById("cnt"), dock = document.getElementById("dock"), dockN = document.getElementById("dockN");
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-add]"); if (!b) return;
+    n++; cnt.textContent = dockN.textContent = n;
+    document.getElementById("cartBtn").setAttribute("aria-label", `Корзина, товаров: ${n}`);
+    cnt.classList.remove("bump"); void cnt.offsetWidth; cnt.classList.add("bump");
+    dock.classList.add("on"); b.classList.add("done");
+    setTimeout(() => b.classList.remove("done"), 900);
+  });
+
+  if (reduce || !window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger, Flip);
+
+  // плавная прокрутка
+  if (window.Lenis) {
+    const lenis = new Lenis({ lerp: .1 });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((t) => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+  }
+
+  // появление плиток первого экрана
+  gsap.from(".bento .tile", { y: 40, opacity: 0, duration: 1, ease: "expo.out", stagger: .08 });
+  gsap.from(".tile--hero h1, .tile--hero .kick, .hero-foot", { y: 24, opacity: 0, duration: 1, ease: "expo.out", stagger: .1, delay: .25 });
+  gsap.from("[data-ghost]", { xPercent: -8, opacity: 0, duration: 1.6, ease: "expo.out", delay: .2 });
+
+  // товар парит за курсором
+  const hero = document.querySelector(".tile--hero"), fl = hero.querySelector("[data-float]");
+  if (matchMedia("(pointer: fine)").matches) {
+    const qx = gsap.quickTo(fl, "x", { duration: .8, ease: "power3" }), qy = gsap.quickTo(fl, "y", { duration: .8, ease: "power3" });
+    const qr = gsap.quickTo(fl, "rotation", { duration: .8, ease: "power3" });
+    hero.addEventListener("pointermove", (e) => { const r = hero.getBoundingClientRect(); const dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5; qx(dx * 40); qy(dy * 30); qr(dx * 6); });
+    hero.addEventListener("pointerleave", () => { qx(0); qy(0); qr(0); });
+  }
+  gsap.to(fl, { y: "-=14", duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: -1 });
+
+  // параллакс и крупные слова при прокрутке
+  gsap.to("[data-ghost]", { xPercent: -14, ease: "none", scrollTrigger: { trigger: ".bento", start: "top top", end: "bottom top", scrub: true } });
+  gsap.fromTo("[data-par]", { yPercent: -8 }, { yPercent: 4, ease: "none", scrollTrigger: { trigger: ".promo", scrub: true } });
+  gsap.from(".promo__txt > *", { y: 30, opacity: 0, stagger: .08, duration: .9, ease: "expo.out", scrollTrigger: { trigger: ".promo", start: "top 75%" } });
+  gsap.fromTo("[data-word]", { xPercent: 12 }, { xPercent: -10, ease: "none", scrollTrigger: { trigger: ".edit", scrub: true } });
+  gsap.from(".edit__row > *", { y: 40, opacity: 0, stagger: .12, duration: 1, ease: "expo.out", scrollTrigger: { trigger: ".edit__row", start: "top 80%" } });
+  document.querySelectorAll("[data-count]").forEach((el) => {
+    const o = { v: 0 };
+    gsap.to(o, { v: +el.dataset.count, duration: 1.4, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 85%" }, onUpdate: () => (el.textContent = Math.round(o.v)) });
+  });
+  ScrollTrigger.batch(".card", { start: "top 92%", onEnter: (b) => gsap.from(b, { y: 36, opacity: 0, stagger: .06, duration: .8, ease: "expo.out" }) });
+});
+</script>
+</body>
+</html>
