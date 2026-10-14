@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ОЗОТЭНС - лаборатория движения</title>
+<link rel="stylesheet" href="vendor/lenis.css">
+<style>
+@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500-cyr.woff2) format("woff2"); font-weight: 500; unicode-range: U+0400-04FF; font-display: swap; }
+@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500-lat.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500i-cyr.woff2) format("woff2"); font-weight: 500; font-style: italic; unicode-range: U+0400-04FF; font-display: swap; }
+@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500i-lat.woff2) format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Onest"; src: url(fonts/Onest-400-cyrillic.woff2) format("woff2"); font-weight: 400; unicode-range: U+0400-04FF; font-display: swap; }
+@font-face { font-family: "Onest"; src: url(fonts/Onest-400-latin.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+
+/* Лаборатория: каждая секция - одна библиотека на материале ОЗОТЭНС. Бумага, шалфей, тёплый акцент. */
+:root {
+  --paper: #f3f2ee;
+  --card: #fbfaf7;
+  --ink: #1d221f;
+  --soft: #4c544e;
+  --sage: #a9b2a6;
+  --sage-deep: #6f7d6c;
+  --warm: #e8a24a;
+  --line: rgba(29,34,31,.12);
+  --serif: "Serif", Georgia, serif;
+  --sans: "Onest", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); }
+h1, h2 { font-family: var(--serif); font-weight: 500; letter-spacing: -.01em; margin: 0; line-height: 1; }
+h2 { font-size: clamp(38px, 5.6vw, 72px); }
+h2 em, h1 em { font-style: italic; color: var(--sage-deep); }
+.kicker { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--sage-deep); display: flex; gap: 10px; align-items: center; }
+.kicker b { font-weight: 400; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; }
+.lead { color: var(--soft); max-width: 56ch; margin: 14px 0 0; }
+.btn { font: 15px/1 var(--sans); border: 1px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; padding: 12px 18px; cursor: pointer; transition: background .25s, color .25s; }
+.btn:hover, .btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.btn:focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; }
+section { padding-block: clamp(72px, 11vw, 140px); border-top: 1px solid var(--line); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* шапка */
+header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--paper) 86%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; justify-content: space-between; align-items: center; min-height: 62px; gap: 16px; }
+.logo { font: 500 22px/1 var(--serif); letter-spacing: .18em; cursor: default; min-width: 9ch; }
+.toc { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--soft); }
+.toc a { text-decoration: none; }
+.toc a:hover { color: var(--ink); }
+
+/* 0 вступление */
+.intro { padding-block: clamp(80px, 12vw, 160px) clamp(56px, 8vw, 96px); border-top: 0; }
+.intro h1 { font-size: clamp(64px, 12vw, 176px); line-height: .9; }
+.intro .lead { font-size: 19px; }
+.legend { margin-top: 34px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.legend div { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; font-size: 14px; color: var(--soft); }
+.legend b { display: block; color: var(--ink); font-weight: 400; font-size: 15px; }
+
+/* 1 SplitText */
+.split h2 { font-size: clamp(64px, 11vw, 160px); }
+.split .line { overflow: hidden; }
+
+/* 2 ScrollTrigger */
+.pin { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
+.steps { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 10px; }
+.steps li { padding: 16px 18px; border-radius: 16px; border: 1px solid var(--line); color: var(--soft); transition: background .3s, color .3s, border-color .3s; }
+.steps li.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.steps b { font: 500 26px/1 var(--serif); display: block; margin-bottom: 4px; }
+.bar { height: 3px; background: var(--line); border-radius: 3px; margin-top: 22px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 100%; background: var(--warm); transform-origin: left; transform: scaleX(0); }
+.stage { aspect-ratio: 4 / 5; border-radius: 28px; background: radial-gradient(80% 70% at 50% 40%, #fff, #e6e5df); overflow: hidden; display: grid; place-items: center; position: relative; }
+.stage img { width: 78%; mix-blend-mode: multiply; }
+.stage .tag { position: absolute; left: 18px; bottom: 16px; font-size: 13px; color: var(--soft); }
+
+/* 3 DrawSVG + MotionPath */
+.svgbox { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
+.body svg { width: 100%; max-height: 640px; }
+.body .outline { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+.body .spine { fill: none; stroke: var(--sage-deep); stroke-width: 2; stroke-dasharray: 2 7; stroke-linecap: round; }
+.body .nerve { fill: none; stroke: var(--warm); stroke-width: 2.4; stroke-linecap: round; }
+.body .pulse { fill: var(--warm); }
+.body .spot { fill: var(--warm); opacity: .25; }
+
+/* 4 MorphSVG */
+.morph { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
+.morph svg { width: min(100%, 420px); justify-self: center; }
+#shape { fill: var(--ink); }
+
+/* 5 Flip */
+.grid { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; cursor: pointer; text-align: left; padding: 0; font: inherit; color: inherit; }
+.card .ph { aspect-ratio: 1; background: #fff; display: grid; place-items: center; }
+.card img { width: 86%; height: 86%; object-fit: contain; mix-blend-mode: multiply; }
+.card .t { padding: 14px 16px; display: flex; justify-content: space-between; gap: 10px; font-size: 15px; }
+.card .t span { color: var(--soft); font-size: 13px; }
+.card[hidden] { display: none !important; }
+.overlay { position: fixed; inset: 0; z-index: 50; background: rgba(29,34,31,.45); backdrop-filter: blur(6px); display: none; place-items: center; padding: 20px; }
+.overlay.open { display: grid; }
+.sheet { background: var(--card); border-radius: 28px; width: min(760px, 100%); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+.sheet .ph { aspect-ratio: 1; background: #fff; display: grid; place-items: center; }
+.sheet .ph img { width: 86%; height: 86%; object-fit: contain; mix-blend-mode: multiply; }
+.sheet .tx { padding: 28px; display: grid; align-content: space-between; gap: 18px; }
+.sheet h3 { font: 500 40px/1 var(--serif); margin: 0; }
+
+/* 6 Draggable */
+.viewport { margin-top: 28px; overflow: hidden; cursor: grab; touch-action: pan-y; }
+.viewport:active { cursor: grabbing; }
+.track { display: flex; gap: 14px; width: max-content; padding-bottom: 6px; }
+.zone { width: 260px; height: 320px; border-radius: 24px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; background: var(--card); border: 1px solid var(--line); user-select: none; }
+.zone:nth-child(2n) { background: #e7ebe4; }
+.zone b { font: 500 44px/1 var(--serif); }
+.zone p { margin: 0; color: var(--soft); font-size: 14px; }
+.zone .n { font-size: 12px; letter-spacing: .14em; color: var(--sage-deep); }
+
+/* 7 three.js */
+.three { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
+#gl { width: 100%; aspect-ratio: 1; border-radius: 28px; background: radial-gradient(80% 70% at 50% 35%, #fff, #e3e3dc); cursor: grab; touch-action: none; display: block; }
+
+/* 8 Rive */
+.rive { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
+#rv { width: 100%; aspect-ratio: 16 / 9; border-radius: 28px; display: block; }
+
+/* 9 редакторы */
+.eds { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.ed { border-radius: 24px; padding: 24px; border: 1px dashed var(--sage-deep); display: grid; gap: 10px; align-content: start; }
+.ed h3 { font: 500 34px/1 var(--serif); margin: 0; }
+.ed p { margin: 0; color: var(--soft); font-size: 15px; }
+.ed .need { font-size: 13px; color: var(--ink); background: var(--card); border-radius: 12px; padding: 10px 12px; }
+
+footer { padding-block: 40px 60px; border-top: 1px solid var(--line); color: var(--soft); font-size: 13px; }
+
+@media (max-width: 820px) {
+  .pin, .svgbox, .morph, .three, .rive { grid-template-columns: 1fr; }
+  .pin { min-height: auto; }
+  .sheet { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="logo" id="logo" title="Наведи - ScrambleText">ОЗОТЭНС</span>
+    <nav class="toc">
+      <a href="#s1">Буквы</a><a href="#s2">Прокрутка</a><a href="#s3">Линии</a><a href="#s4">Форма</a><a href="#s5">Карточки</a><a href="#s6">Свайп</a><a href="#s7">3D</a><a href="#s8">Rive</a><a href="#s9">Редакторы</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <div class="wrap">
+      <p class="kicker">Лаборатория движения · черновик для выбора</p>
+      <h1>Что умеют <em>наши</em> библиотеки</h1>
+      <p class="lead">Каждый блок ниже - одна возможность на материале ОЗОТЭНС. Пролистай, понажимай, потаскай. Отметь, что зацепило: из этого соберём новый сайт. Вся страница прокручивается плавно - это Lenis.</p>
+      <div class="legend">
+        <div><b>GSAP</b>движение: буквы, прокрутка, линии, формы, карточки, свайп</div>
+        <div><b>Lenis</b>плавная прокрутка всей страницы</div>
+        <div><b>three.js</b>настоящее 3D в браузере</div>
+        <div><b>Rive · Unicorn · Spline</b>анимации из визуальных редакторов</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s1" class="split">
+    <div class="wrap">
+      <p class="kicker"><b>GSAP · SplitText</b> заголовок собирается по буквам</p>
+      <h2 id="splitTitle">Где <em>болит?</em></h2>
+      <p class="lead">Буквы выезжают по одной со своей кривой скорости (CustomEase). Так можно открывать любой экран: заголовок «живой», а не просто появился.</p>
+      <div class="row"><button class="btn" id="splitAgain" type="button">Ещё раз</button><button class="btn" id="splitWords" type="button">По словам</button><button class="btn" id="splitLines" type="button">Сломать и собрать</button></div>
+    </div>
+  </section>
+
+  <section id="s2">
+    <div class="wrap pin" id="pinWrap">
+      <div>
+        <p class="kicker"><b>GSAP · ScrollTrigger</b> блок замирает, пока листаешь</p>
+        <h2>Как это <em>работает</em></h2>
+        <p class="lead">Экран «прилипает», а шаги меняются от прокрутки. Прибор справа поворачивается вместе с ней. Полоса снизу - сколько осталось.</p>
+        <ol class="steps" id="steps">
+          <li class="on"><b>01 · Крем</b>Тонкий слой OZOTENS 30% на электрод.</li>
+          <li><b>02 · Электрод</b>Форма под зону: спина, шея, колено.</li>
+          <li><b>03 · Прибор</b>Сила от 0 до 40 - та, что комфортна.</li>
+        </ol>
+        <div class="bar"><i id="bar"></i></div>
+      </div>
+      <div class="stage"><img id="pinImg" src="img/device.jpg" alt="Прибор ОЗОТЭНС"><span class="tag" id="pinTag">Прибор</span></div>
+    </div>
+  </section>
+
+  <section id="s3">
+    <div class="wrap svgbox">
+      <div>
+        <p class="kicker"><b>GSAP · DrawSVG + MotionPath</b> линии рисуются, точка бежит</p>
+        <h2>Стреляет <em>в ногу</em></h2>
+        <p class="lead">Силуэт прорисовывается при прокрутке, от поясницы по ноге бежит импульс. Так можно объяснять «где болит» без единой фотографии.</p>
+      </div>
+      <div class="body">
+        <svg viewBox="0 0 300 620" aria-hidden="true">
+          <circle class="outline draw" cx="150" cy="58" r="32"/>
+          <path class="outline draw" d="M118 100 Q150 92 182 100 Q230 108 238 140 L250 262 Q252 282 240 284 L228 172 L222 292 Q228 330 216 362 L206 566 Q202 586 184 582 L170 384 L150 344 L130 384 L116 582 Q98 586 94 566 L84 362 Q72 330 78 292 L72 172 L60 284 Q48 282 50 262 L62 140 Q70 108 118 100 Z"/>
+          <path class="spine draw" d="M150 100 L150 330"/>
+          <circle class="spot" cx="150" cy="300" r="26"/>
+          <path class="nerve draw" id="nerveL" d="M146 300 Q132 330 128 380 Q124 470 116 572"/>
+          <path class="nerve draw" id="nerveR" d="M154 300 Q168 330 172 380 Q176 470 184 572"/>
+          <circle class="pulse" id="dotL" r="6" cx="146" cy="300"/>
+          <circle class="pulse" id="dotR" r="6" cx="154" cy="300"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="s4">
+    <div class="wrap morph">
+      <div>
+        <p class="kicker"><b>GSAP · MorphSVG</b> одна фигура перетекает в другую</p>
+        <h2>Крем, <em>импульс,</em> электрод</h2>
+        <p class="lead">Капля крема плавно превращается в волну импульса, потом в электрод. Метод в трёх формах, без слов. Годится для логотипа, загрузки, переходов.</p>
+        <div class="row" id="morphBtns">
+          <button class="btn" type="button" data-s="drop" aria-pressed="true">Капля</button>
+          <button class="btn" type="button" data-s="wave">Импульс</button>
+          <button class="btn" type="button" data-s="pad">Электрод</button>
+        </div>
+      </div>
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <path id="shape" d="M100 20 C100 20 40 92 40 132 A60 60 0 0 0 160 132 C160 92 100 20 100 20 Z"/>
+        <path id="sDrop" d="M100 20 C100 20 40 92 40 132 A60 60 0 0 0 160 132 C160 92 100 20 100 20 Z" fill="none"/>
+        <path id="sWave" d="M14 104 L58 104 L58 52 L92 52 L92 148 L124 148 L124 104 L186 104 L186 118 L110 118 L110 162 L78 162 L78 66 L72 66 L72 118 L14 118 Z" fill="none"/>
+        <path id="sPad" d="M52 40 H148 A22 22 0 0 1 170 62 V138 A22 22 0 0 1 148 160 H52 A22 22 0 0 1 30 138 V62 A22 22 0 0 1 52 40 Z" fill="none"/>
+      </svg>
+    </div>
+  </section>
+
+  <section id="s5">
+    <div class="wrap">
+      <p class="kicker"><b>GSAP · Flip</b> карточки перестраиваются и раскрываются</p>
+      <h2>Собери <em>свой</em> набор</h2>
+      <p class="lead">Нажми фильтр - карточки плавно переезжают. Нажми карточку - фото вылетает из неё в большое окно и возвращается обратно.</p>
+      <div class="row" id="filters">
+        <button class="btn" type="button" data-f="all" aria-pressed="true">Всё</button>
+        <button class="btn" type="button" data-f="base">Основа</button>
+        <button class="btn" type="button" data-f="zone">Под зону</button>
+      </div>
+      <div class="grid" id="grid">
+        <button class="card" type="button" data-c="base" data-t="Прибор" data-d="Два канала, 22 программы, сила 0-40."><div class="ph"><img src="img/device.jpg" alt="Прибор"></div><div class="t">Прибор<span>основа</span></div></button>
+        <button class="card" type="button" data-c="base" data-t="Крем OZOTENS 30%" data-d="Наносится на электрод, он же проводит ток."><div class="ph"><img src="img/cream.jpg" alt="Крем"></div><div class="t">Крем<span>основа</span></div></button>
+        <button class="card" type="button" data-c="zone" data-t="Электрод" data-d="Форма под зону: спина, шея, колено, плечо, стопа."><div class="ph"><img src="img/electrode.jpg" alt="Электрод"></div><div class="t">Электрод<span>под зону</span></div></button>
+        <button class="card" type="button" data-c="base zone" data-t="Комплект" data-d="Прибор, крем и электрод вместе."><div class="ph"><img src="img/kit.jpg" alt="Комплект"></div><div class="t">Комплект<span>всё сразу</span></div></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="s6">
+    <div class="wrap">
+      <p class="kicker"><b>GSAP · Draggable + Inertia</b> лента тянется и скользит</p>
+      <h2>Тяни <em>мышкой</em> или пальцем</h2>
+      <p class="lead">Отпусти с разгона - лента доедет сама и мягко остановится у края. Так делают карусели в приложениях.</p>
+    </div>
+    <div class="wrap"><div class="viewport" id="vp"><div class="track" id="track">
+      <div class="zone"><span class="n">01</span><b>Поясница</b><p>Прострел при наклоне, ноет после сидения.</p></div>
+      <div class="zone"><span class="n">02</span><b>Шея</b><p>Зажим после ноутбука, не повернуть голову.</p></div>
+      <div class="zone"><span class="n">03</span><b>Плечо</b><p>Больно поднять руку, ноет ночью.</p></div>
+      <div class="zone"><span class="n">04</span><b>Колено</b><p>Хрустит на лестнице, тяжело встать.</p></div>
+      <div class="zone"><span class="n">05</span><b>Стопа</b><p>Пятка по утрам, жжёт свод.</p></div>
+      <div class="zone"><span class="n">06</span><b>Кисть</b><p>Мышь, телефон, руль.</p></div>
+    </div></div></div>
+  </section>
+
+  <section id="s7">
+    <div class="wrap three">
+      <div>
+        <p class="kicker"><b>three.js</b> настоящее 3D прямо в браузере</p>
+        <h2>Покрути <em>прибор</em></h2>
+        <p class="lead">Это не видео и не картинка: модель собрана кодом и освещена. Тяни, чтобы повернуть. Из настоящих фото можно сделать точную модель, как в версии v11.</p>
+      </div>
+      <canvas id="gl" aria-label="3D-модель прибора"></canvas>
+    </div>
+  </section>
+
+  <section id="s8">
+    <div class="wrap rive">
+      <div>
+        <p class="kicker"><b>Rive</b> живая иллюстрация из редактора</p>
+        <h2>Анимация, <em>нарисованная</em> руками</h2>
+        <p class="lead">Это официальный пример Rive, не наш. Художник рисует сцену в редакторе rive.app, а сайт управляет ею: кнопки ниже переключают её состояния. Для нас так можно сделать спину, которая распрямляется, или прибор, который «включается».</p>
+        <div class="row" id="riveBtns"></div>
+      </div>
+      <canvas id="rv" width="1280" height="720" aria-label="Пример Rive"></canvas>
+    </div>
+  </section>
+
+  <section id="s9">
+    <div class="wrap">
+      <p class="kicker"><b>Unicorn Studio · Spline</b> ждут сцену из редактора</p>
+      <h2>Ещё два <em>редактора</em></h2>
+      <p class="lead">Библиотеки подключены, но показывать им пока нечего: сцену рисуют в их редакторе (бесплатный тариф), а сайт её проигрывает.</p>
+      <div class="eds">
+        <div class="ed"><h3>Unicorn Studio</h3><p>Живые фоны на WebGL: туман, свечение, волны, зерно, реакция на курсор. Сейчас очень популярен у дизайнеров для первых экранов.</p><p class="need">Чтобы появилось здесь: зарегистрироваться на unicorn.studio, собрать фон (или взять шаблон), прислать мне ID проекта.</p></div>
+        <div class="ed"><h3>Spline</h3><p>3D-сцены мышкой, без кода: прибор на подставке, парящие баночки, свет. Можно вращать, наводить, кликать.</p><p class="need">Чтобы появилось здесь: собрать сцену на spline.design, нажать «Export · Code», прислать мне ссылку на сцену.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Черновик для выбора анимаций, не сайт. Имеются противопоказания. Необходимо проконсультироваться со специалистом.</div></footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/Flip.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/DrawSVGPlugin.min.js"></script>
+<script src="vendor/MorphSVGPlugin.min.js"></script>
+<script src="vendor/MotionPathPlugin.min.js"></script>
+<script src="vendor/CustomEase.min.js"></script>
+<script src="vendor/Draggable.min.js"></script>
+<script src="vendor/InertiaPlugin.min.js"></script>
+<script src="vendor/ScrambleTextPlugin.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="vendor/rive/rive.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger, Flip, SplitText, DrawSVGPlugin, MorphSVGPlugin, MotionPathPlugin, CustomEase, Draggable, InertiaPlugin, ScrambleTextPlugin);
+  CustomEase.create('soft', 'M0,0 C0.16,1 0.3,1 1,1');
+
+  // Lenis: плавная прокрутка, синхронно со ScrollTrigger
+  if (!reduce) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('.toc a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); lenis.scrollTo(a.getAttribute('href'), { offset: -62 }); }));
+  }
+
+  // ScrambleText: логотип перебирает буквы при наведении
+  const logo = document.getElementById('logo');
+  logo.addEventListener('mouseenter', () => gsap.to(logo, { duration: 0.9, scrambleText: { text: 'ОЗОТЭНС', chars: 'ОЗТЭНС0123456789', speed: 0.6 } }));
+
+  if (reduce) return;
+
+  // 1. SplitText
+  const title = document.getElementById('splitTitle');
+  let split = SplitText.create(title, { type: 'chars,words', mask: 'chars' });
+  const playChars = () => gsap.fromTo(split.chars, { yPercent: 110, rotate: 8 }, { yPercent: 0, rotate: 0, duration: 1, ease: 'soft', stagger: 0.05 });
+  ScrollTrigger.create({ trigger: title, start: 'top 80%', once: true, onEnter: playChars });
+  document.getElementById('splitAgain').onclick = playChars;
+  document.getElementById('splitWords').onclick = () => gsap.fromTo(split.words, { y: 60, opacity: 0, filter: 'blur(8px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.9, ease: 'soft', stagger: 0.15 });
+  document.getElementById('splitLines').onclick = () => {
+    const tl = gsap.timeline();
+    tl.to(split.chars, { x: () => gsap.utils.random(-160, 160), y: () => gsap.utils.random(-120, 120), rotate: () => gsap.utils.random(-90, 90), opacity: 0.2, duration: 0.6, ease: 'power2.out', stagger: 0.01 })
+      .to(split.chars, { x: 0, y: 0, rotate: 0, opacity: 1, duration: 1.1, ease: 'elastic.out(1,0.6)', stagger: 0.02 });
+  };
+
+  // 2. ScrollTrigger: закрепление и шаги
+  const steps = [...document.querySelectorAll('#steps li')];
+  const imgs = [['img/cream.jpg', 'Крем OZOTENS 30%'], ['img/electrode.jpg', 'Электрод'], ['img/device.jpg', 'Прибор']];
+  const pinImg = document.getElementById('pinImg'), pinTag = document.getElementById('pinTag');
+  let cur = -1;
+  const setStep = i => { if (i === cur) return; cur = i; steps.forEach((s, k) => s.classList.toggle('on', k === i)); gsap.fromTo(pinImg, { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'soft', onStart: () => { pinImg.src = imgs[i][0]; pinTag.textContent = imgs[i][1]; } }); };
+  if (innerWidth > 820) {
+    gsap.timeline({ scrollTrigger: { trigger: '#pinWrap', start: 'top top', end: '+=180%', pin: true, scrub: 0.6, onUpdate: s => setStep(Math.min(2, Math.floor(s.progress * 3))) } })
+      .to('#bar', { scaleX: 1, ease: 'none' }, 0)
+      .fromTo('.stage', { rotate: -3 }, { rotate: 3, ease: 'none' }, 0);
+  } else { setStep(0); steps.forEach((s, k) => s.addEventListener('click', () => setStep(k))); }
+
+  // 3. DrawSVG + MotionPath
+  gsap.from('#s3 .draw', { drawSVG: 0, duration: 1, stagger: 0.15, ease: 'none', scrollTrigger: { trigger: '#s3 .body', start: 'top 75%', end: 'bottom 60%', scrub: 0.8 } });
+  const run = (dot, path, delay) => gsap.to(dot, { motionPath: { path, align: path, alignOrigin: [0.5, 0.5] }, duration: 1.6, ease: 'power1.in', repeat: -1, repeatDelay: 0.9, delay });
+  run('#dotL', '#nerveL', 0); run('#dotR', '#nerveR', 0.35);
+  gsap.to('#s3 .spot', { attr: { r: 40 }, opacity: 0.08, duration: 1.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+
+  // 4. MorphSVG
+  const shapes = { drop: '#sDrop', wave: '#sWave', pad: '#sPad' };
+  const morphBtns = [...document.querySelectorAll('#morphBtns .btn')];
+  const morphTo = k => { morphBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.s === k)); gsap.to('#shape', { morphSVG: shapes[k], duration: 0.9, ease: 'power3.inOut' }); };
+  morphBtns.forEach(b => b.addEventListener('click', () => { auto.kill(); morphTo(b.dataset.s); }));
+  const order = ['wave', 'pad', 'drop']; let oi = 0;
+  const auto = gsap.delayedCall(2.4, function next() { morphTo(order[oi++ % 3]); auto.restart(true); });
+
+  // 5. Flip: фильтр и раскрытие
+  const grid = document.getElementById('grid'), cards = [...grid.children];
+  const filterBtns = [...document.querySelectorAll('#filters .btn')];
+  filterBtns.forEach(b => b.addEventListener('click', () => {
+    filterBtns.forEach(x => x.setAttribute('aria-pressed', x === b));
+    const state = Flip.getState(cards);
+    cards.forEach(c => c.hidden = !(b.dataset.f === 'all' || c.dataset.c.includes(b.dataset.f)));
+    Flip.from(state, { duration: 0.6, ease: 'power3.inOut', scale: true, absolute: true,
+      onEnter: el => gsap.fromTo(el, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5 }),
+      onLeave: el => gsap.to(el, { opacity: 0, scale: 0.8, duration: 0.4 }) });
+  }));
+  const ov = document.createElement('div'); ov.className = 'overlay';
+  ov.innerHTML = '<div class="sheet"><div class="ph" id="ovPh"></div><div class="tx"><div><p class="kicker">Карточка товара</p><h3 id="ovT"></h3><p class="lead" id="ovD"></p></div><button class="btn" type="button" id="ovX">Закрыть</button></div></div>';
+  document.body.appendChild(ov);
+  let open = null;
+  const closeOv = () => { if (!open) return; const img = document.querySelector('#ovPh img'); const st = Flip.getState(img); open.querySelector('.ph').appendChild(img); Flip.from(st, { duration: 0.6, ease: 'power3.inOut', onComplete: () => ov.classList.remove('open') }); gsap.to('.sheet', { opacity: 0, duration: 0.3 }); open = null; };
+  cards.forEach(c => c.addEventListener('click', () => {
+    open = c; const img = c.querySelector('img'); const st = Flip.getState(img);
+    document.getElementById('ovT').textContent = c.dataset.t; document.getElementById('ovD').textContent = c.dataset.d;
+    ov.classList.add('open'); gsap.fromTo('.sheet', { opacity: 0 }, { opacity: 1, duration: 0.3 });
+    document.getElementById('ovPh').appendChild(img); Flip.from(st, { duration: 0.7, ease: 'power3.inOut' });
+  }));
+  ov.addEventListener('click', e => { if (e.target === ov || e.target.id === 'ovX') closeOv(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeOv(); });
+
+  // 6. Draggable + Inertia
+  Draggable.create('#track', { type: 'x', inertia: true, bounds: '#vp', edgeResistance: 0.85, dragClickables: true });
+})();
+</script>
+
+<script type="module">
+// 7. three.js: прибор собран кодом
+import * as THREE from './vendor/three.module.min.js';
+const cv = document.getElementById('gl');
+const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(32, 1, 0.1, 50); cam.position.set(0, 0.3, 7);
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb9c0b5, 1.4));
+const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(3, 4, 5); scene.add(key);
+const rim = new THREE.DirectionalLight(0xe8a24a, 1.2); rim.position.set(-4, -1, -3); scene.add(rim);
+
+const shape = new THREE.Shape(); const w = 1.25, h = 2.6, r = 0.32;
+shape.moveTo(-w / 2 + r, -h / 2); shape.lineTo(w / 2 - r, -h / 2); shape.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r);
+shape.lineTo(w / 2, h / 2 - r); shape.quadraticCurveTo(w / 2, h / 2, w / 2 - r, h / 2); shape.lineTo(-w / 2 + r, h / 2);
+shape.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - r); shape.lineTo(-w / 2, -h / 2 + r); shape.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + r, -h / 2);
+const body = new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: 0.32, bevelEnabled: true, bevelSize: 0.06, bevelThickness: 0.06, bevelSegments: 6, curveSegments: 24 }),
+  new THREE.MeshStandardMaterial({ color: 0xf4f3ef, roughness: 0.35, metalness: 0.05 }));
+body.geometry.center();
+const dev = new THREE.Group(); dev.add(body);
+
+const sc = document.createElement('canvas'); sc.width = 512; sc.height = 360; const g = sc.getContext('2d');
+g.fillStyle = '#c9d2c3'; g.fillRect(0, 0, 512, 360); g.fillStyle = '#1d221f';
+g.font = '600 150px monospace'; g.textAlign = 'center'; g.fillText('12', 256, 210);
+g.font = '600 40px monospace'; g.fillText('TENS · CH1', 256, 300);
+const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.95, 0.67), new THREE.MeshStandardMaterial({ map: new THREE.CanvasTexture(sc), roughness: 0.2 }));
+screen.position.set(0, 0.62, 0.23); dev.add(screen);
+const btnMat = new THREE.MeshStandardMaterial({ color: 0xd8dad4, roughness: 0.5 });
+[[-0.3, -0.25], [0.3, -0.25], [-0.3, -0.75], [0.3, -0.75]].forEach(([x, y], i) => {
+  const b = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.08, 32), i < 2 ? new THREE.MeshStandardMaterial({ color: 0xe8a24a, roughness: 0.4 }) : btnMat);
+  b.rotation.x = Math.PI / 2; b.position.set(x, y, 0.23); dev.add(b);
+});
+scene.add(dev);
+const floor = new THREE.Mesh(new THREE.CircleGeometry(1.6, 48), new THREE.MeshBasicMaterial({ color: 0x1d221f, transparent: true, opacity: 0.08 }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = -1.75; scene.add(floor);
+
+let rx = 0.1, ry = -0.5, vx = 0, vy = 0.004, drag = false, px = 0, py = 0;
+cv.addEventListener('pointerdown', e => { drag = true; px = e.clientX; py = e.clientY; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', e => { if (!drag) return; vy = (e.clientX - px) * 0.0009; vx = (e.clientY - py) * 0.0009; ry += vy * 6; rx += vx * 6; px = e.clientX; py = e.clientY; });
+cv.addEventListener('pointerup', () => drag = false);
+let visible = false; new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(cv);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function frame() {
+  const s = cv.clientWidth; if (cv.width !== Math.round(s * renderer.getPixelRatio())) { renderer.setSize(s, s, false); cam.aspect = 1; cam.updateProjectionMatrix(); }
+  if (!drag) { vy += (0.004 - vy) * 0.02; vx *= 0.94; ry += reduce ? 0 : vy; rx += vx; rx += (0.1 - rx) * 0.02; }
+  dev.rotation.set(rx, ry, 0); dev.position.y = reduce ? 0 : Math.sin(performance.now() / 900) * 0.05;
+  renderer.render(scene, cam);
+}
+renderer.setAnimationLoop(() => { if (visible) frame(); });
+frame();
+</script>
+
+<script>
+// 8. Rive: официальный пример vehicles.riv
+(() => {
+  const cv = document.getElementById('rv'); const box = document.getElementById('riveBtns');
+  rive.RuntimeLoader.setWasmUrl('vendor/rive/rive.wasm');
+  const r = new rive.Rive({ src: 'assets/vehicles.riv', canvas: cv, autoplay: true,
+    onLoad: () => {
+      r.resizeDrawingSurfaceToCanvas();
+      const names = { idle: 'Покой', curves: 'Повороты', bounce: 'Прыжки' };
+      r.animationNames.forEach((n, i) => {
+        const b = document.createElement('button'); b.className = 'btn'; b.type = 'button'; b.textContent = names[n] || n; b.setAttribute('aria-pressed', i === 0);
+        b.onclick = () => { r.stop(); r.play(n); box.querySelectorAll('.btn').forEach(x => x.setAttribute('aria-pressed', x === b)); };
+        box.appendChild(b);
+      });
+    } });
+})();
+</script>
+</body>
+</html>
