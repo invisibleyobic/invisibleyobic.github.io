@@ -42,8 +42,8 @@ em{font-style:italic;color:var(--gold2)}
 .top{position:fixed;z-index:40;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:calc(10px + env(safe-area-inset-top)) 18px 10px;pointer-events:none}
 .top>*{pointer-events:auto}
 .brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px 0 8px;border-radius:999px;text-decoration:none;background:rgba(11,20,16,.5);border:1px solid var(--line);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
-.brand i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--gold);font-style:normal}
-.brand i svg{width:14px;height:14px}
+.brand i{width:30px;height:30px;display:grid;place-items:center;font-style:normal}
+.brand i svg{width:26px;height:26px;filter:drop-shadow(0 0 6px rgba(232,184,90,.55))}
 .prog{width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
 .prog svg{width:44px;height:44px;transform:rotate(-90deg)}
 .prog circle{fill:none;stroke-width:2}
@@ -52,20 +52,59 @@ em{font-style:italic;color:var(--gold2)}
 /* 1. вступление: ущелье, золотые линии, строки в стекле */
 .intro{position:relative;height:100svh;min-height:600px;overflow:hidden}
 .intro .bg{position:absolute;inset:-6% 0;will-change:transform}
+.intro .bgi,.intro .bgi picture{position:absolute;inset:0}
 .intro .bg img{width:100%;height:100%;object-fit:cover}
+#falls{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
 .intro::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,20,16,.55),rgba(11,20,16,.05) 30%,rgba(11,20,16,.2) 60%,var(--bg) 98%);pointer-events:none}
 .lines{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 .lines path{fill:none;stroke:var(--gold);stroke-width:1.2;opacity:.75;vector-effect:non-scaling-stroke}
 .tw{position:absolute;inset:0;z-index:2;pointer-events:none}
 .tw .term{pointer-events:auto}
-.term{position:absolute;z-index:2;left:16px;right:16px;bottom:calc(24px + env(safe-area-inset-bottom));padding:22px 20px 20px;border-radius:26px}
-.term .mono{color:var(--sage);display:flex;justify-content:space-between;margin-bottom:12px}
-.term .mono b{color:var(--gold2);font-weight:500}
-.term p{margin:0 0 6px;font-size:20px;line-height:1.35}
-.term p:first-of-type{font-family:Serif,Georgia,serif;font-size:38px;line-height:1.05;margin-bottom:12px}
-.term .act{display:flex;align-items:center;gap:14px;margin-top:16px}
-.hint{display:inline-flex;align-items:center;gap:10px;color:var(--soft);font-size:16px}
-.hint span{width:1px;height:28px;background:linear-gradient(var(--gold),transparent);animation:drip 1.8s var(--ease) infinite}
+.term{position:absolute;z-index:2;left:12px;right:12px;bottom:calc(20px + env(safe-area-inset-bottom));border-radius:14px;overflow:hidden;background:rgba(6,12,9,.82);border:1px solid rgba(232,184,90,.35);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.4);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);font-family:JBM,ui-monospace,monospace}
+.tbar{display:flex;align-items:center;justify-content:space-between;gap:10px;height:40px;padding:0 4px 0 14px;background:rgba(232,184,90,.1);border-bottom:1px solid rgba(232,184,90,.22)}
+.tbar .tt{font-size:16px;color:var(--gold2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em;text-transform:none}
+.tbar .wb{display:flex;flex:none}
+.tbar .wb i{width:36px;height:32px;display:grid;place-items:center;font-style:normal;color:var(--soft);font-size:16px}
+.tbody{padding:16px 16px 18px}
+.term p{margin:0 0 8px;font-size:16px;line-height:1.45;color:#d9e6da}
+.term .pr{color:var(--gold)}
+.term .l0{font-size:24px;line-height:1.15;font-weight:700;color:var(--gold2);margin-bottom:12px}
+.cur{display:inline-block;width:.6em;height:1.1em;margin-left:4px;vertical-align:-.15em;background:var(--gold2);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.term .act{display:flex;align-items:center;gap:14px;margin-top:16px;font-family:Onest,system-ui,sans-serif}
+/* глич: короткие сбои заголовка */
+.gl{position:relative;display:inline}
+.gl.on::before,.gl.on::after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;overflow:hidden}
+.gl.on::before{color:#7dffcf;transform:translate(-2px,0);clip-path:inset(10% 0 55% 0);animation:g1 .28s steps(2) both}
+.gl.on::after{color:#ff7a5c;transform:translate(2px,0);clip-path:inset(60% 0 8% 0);animation:g2 .28s steps(2) both}
+@keyframes g1{0%{clip-path:inset(10% 0 55% 0);transform:translate(-3px,1px)}50%{clip-path:inset(40% 0 30% 0);transform:translate(3px,-1px)}100%{clip-path:inset(75% 0 5% 0);transform:translate(-1px,0)}}
+@keyframes g2{0%{clip-path:inset(60% 0 8% 0);transform:translate(3px,0)}50%{clip-path:inset(5% 0 70% 0);transform:translate(-3px,1px)}100%{clip-path:inset(30% 0 45% 0);transform:translate(1px,0)}}
+/* уведомление «пора размяться», как на часах */
+.watch{position:absolute;z-index:3;left:12px;right:12px;top:calc(70px + env(safe-area-inset-top));display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;padding:12px 12px 12px 14px;border-radius:24px;background:rgba(18,22,20,.86);border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 50px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.watch .wic{width:48px;height:48px}
+.watch .wic svg{width:48px;height:48px}
+.watch b{display:block;font-size:17px;line-height:1.2}
+.watch span{color:var(--soft);font-size:16px;line-height:1.35}
+.watch button{min-height:44px;padding:0 16px;border-radius:999px;border:0;background:#c6f36b;color:#10140c;font-weight:700;cursor:pointer}
+.watch[hidden]{display:none}
+/* «Тело всё помнит!» */
+.slam{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;padding:60px 20px;overflow:hidden;background:radial-gradient(50% 40% at 50% 50%,rgba(232,184,90,.16),transparent 70%),var(--bg)}
+.slam .in{position:relative;z-index:1}
+.slam .mono{color:var(--sage);margin-bottom:14px;display:block}
+.slam h2{font-size:64px;line-height:.95;margin:0}
+.slam h2 .ch{display:inline-block}
+.slam h2 .wd{display:inline-block;white-space:nowrap}
+.slam .flash{position:absolute;inset:0;background:radial-gradient(40% 30% at 50% 50%,rgba(246,216,146,.5),transparent 70%);opacity:0;pointer-events:none}
+/* руки с капсулами */
+.hands{position:relative;max-width:900px;margin:0 auto 18px;aspect-ratio:1200/404}
+.hands img{width:100%;height:100%;object-fit:cover;mix-blend-mode:lighten;-webkit-mask-image:radial-gradient(60% 75% at 50% 62%,#000 50%,transparent 100%);mask-image:radial-gradient(60% 75% at 50% 62%,#000 50%,transparent 100%)}
+.cap{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;border:0;background:none;cursor:pointer;display:grid;place-items:center;border-radius:50%}
+.cap i{display:block;width:34px;height:15px;border-radius:999px;transform:rotate(-28deg);box-shadow:0 0 18px var(--c),0 0 4px var(--c);background:linear-gradient(90deg,var(--c) 50%,#fff8e6 50%);animation:bob 3.2s ease-in-out infinite}
+.cap:nth-of-type(2) i{animation-delay:-1s}.cap:nth-of-type(3) i{animation-delay:-2s}
+@keyframes bob{50%{transform:rotate(-28deg) translateY(-5px)}}
+.cap span{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:16px;color:var(--soft);opacity:0;transition:opacity .2s}
+@media(hover:hover){.cap:hover span{opacity:1}}
+.spec{display:inline-block;padding:2px 0;color:inherit;text-decoration:underline;text-decoration-color:rgba(246,216,146,.5);text-underline-offset:6px;text-decoration-thickness:2px}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* 2. пути */
@@ -121,15 +160,18 @@ em{font-style:italic;color:var(--gold2)}
 .js .pnl .x{display:grid;position:fixed;z-index:3;top:calc(12px + env(safe-area-inset-top));right:14px;width:48px;height:48px;border-radius:50%;place-items:center;cursor:pointer}
 .x svg{width:20px;height:20px}
 
-/* без JS и при reduced-motion строки видны сразу */
-.js .term p,.js .term .act{opacity:0}
-.static .term p,.static .term .act{opacity:1!important}
+/* без JS и при reduced-motion всё видно сразу */
+.js .term p,.js .term .act,.js .watch{opacity:0}
+.static .term p,.static .term .act,.static .watch{opacity:1!important}
 
 @media(min-width:980px){
  .top{padding:22px 36px}
- .term{left:6vw;right:auto;top:0;bottom:0;margin:auto 0;height:max-content;width:min(520px,40vw);padding:30px 30px 26px}
- .term p:first-of-type{font-size:54px}
- .term p{font-size:22px}
+ .term{left:6vw;right:auto;top:0;bottom:0;margin:auto 0;height:max-content;width:min(560px,42vw)}
+ .tbody{padding:24px 26px 26px}
+ .term .l0{font-size:40px}
+ .term p{font-size:18px}
+ .watch{left:auto;right:36px;top:90px;width:380px}
+ .slam h2{font-size:150px}
  .intro::after{background:linear-gradient(90deg,rgba(11,20,16,.6),rgba(11,20,16,0) 50%),linear-gradient(180deg,rgba(11,20,16,.4),transparent 25%,transparent 75%,var(--bg))}
  .paths{padding:120px 36px 60px}
  .paths .hd{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:40px}
@@ -149,39 +191,59 @@ em{font-style:italic;color:var(--gold2)}
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="#intro" id="brand"><i><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" aria-hidden="true"><path d="M12 2v20M5 8h14M8 16h8"/></svg></i><span class="mono">Выбери путь</span></a>
+  <a class="brand" href="#intro" id="brand"><i><svg viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-35 16 16)"><rect x="4" y="11" width="24" height="10" rx="5" fill="#fff4dc"/><path d="M9 11h7v10H9a5 5 0 0 1 0-10z" fill="var(--gold)"/></g></svg></i><span class="mono">Выбери путь</span></a>
   <span class="prog glass" aria-hidden="true"><svg viewBox="0 0 44 44"><circle class="bgc" cx="22" cy="22" r="18"/><circle class="fg" id="pfg" cx="22" cy="22" r="18"/></svg></span>
 </header>
 
 <main>
 <section class="intro" id="intro" aria-label="Вступление">
-  <picture class="bg" id="bg">
-    <source media="(min-width:980px)" srcset="img/hero-d.webp" width="1920" height="1074">
-    <img src="img/hero-m.webp" width="900" height="1609" alt="Туманное зелёное ущелье, в середину падает золотой луч света" fetchpriority="high">
-  </picture>
+  <div class="bg" id="bg"><div class="bgi" id="bgi">
+    <picture>
+      <source media="(min-width:980px)" srcset="img/hero-d.webp" width="1920" height="1074">
+      <img src="img/hero-m.webp" width="900" height="1609" alt="Туманное зелёное ущелье, золотой луч света и водопад" fetchpriority="high" id="bgimg">
+    </picture>
+    <canvas id="falls" aria-hidden="true"></canvas>
+  </div></div>
   <svg class="lines" id="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
     <path d="M38 4V30H62V12H80"/><path d="M30 18H50V46H44"/><path d="M58 30V62H70V44"/><path d="M42 52H56V78H48V92"/><path d="M64 70H86V96"/><path d="M20 60H34V84"/>
   </svg>
-  <div class="tw" id="tw"><div class="term glass" id="term">
-    <div class="mono"><span>Сигнал</span><b id="clk">08:00 в кресле</b></div>
-    <p>Проснись, вайб-кодер.</p>
-    <p>Матрица - это кресло, экран и восемь часов без движения.</p>
-    <p>Шея, поясница, плечи: тело всё помнит.</p>
-    <p>Выход есть. Осталось выбрать.</p>
-    <div class="act"><a class="btn press" href="#paths" id="gopaths">Выбрать путь<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a><span class="hint"><span></span>или листай</span></div>
+  <div class="watch" id="watch" role="status">
+    <div class="wic" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="none" stroke="rgba(198,243,107,.22)" stroke-width="5"/><circle id="ring" cx="24" cy="24" r="20" fill="none" stroke="#c6f36b" stroke-width="5" stroke-linecap="round" stroke-dasharray="125.7" stroke-dashoffset="100" transform="rotate(-90 24 24)"/><path d="M24 14.5a2 2 0 1 1 0 .1M24 19v9M24 28l-3.5 6M24 28l3.5 6M19 22.5l5-1.5 5 1.5" fill="none" stroke="#c6f36b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div><b>Время размяться</b><span>Сидишь уже <span id="sat">2 ч 47 мин</span>. Пройдись хотя бы минуту.</span></div>
+    <button type="button" id="wok">Встаю</button>
+  </div>
+  <div class="tw" id="tw"><div class="term" id="term" role="dialog" aria-label="Сообщение">
+    <div class="tbar"><span class="tt">C:\Users\vibecoder&gt; wake.exe</span><span class="wb" aria-hidden="true"><i>&minus;</i><i>&#9633;</i><i>&times;</i></span></div>
+    <div class="tbody">
+      <p class="l0"><span class="pr">&gt;</span> <span class="gl" id="wake" data-t="Проснись, вайб-кодер!">Проснись, вайб-кодер!</span></p>
+      <p><span class="pr">&gt;</span> Матрица - это кресло, экран и восемь часов без движения.</p>
+      <p><span class="pr">&gt;</span> Выход есть. Осталось выбрать!<span class="cur" aria-hidden="true"></span></p>
+      <div class="act"><a class="btn press" href="#paths" id="gopaths">Выбрать путь<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a><span class="hint"><span></span>или листай</span></div>
+    </div>
   </div></div>
+</section>
+
+<section class="slam" id="slam" aria-label="Тело всё помнит">
+  <div class="flash" id="flash"></div>
+  <div class="in"><span class="mono">Шея. Поясница. Плечи.</span><h2 class="serif gl" id="slamh" data-t="Тело всё помнит!">Тело всё <em>помнит!</em></h2></div>
 </section>
 
 <section class="paths" id="paths" aria-labelledby="ph">
   <div class="hd">
-    <div><span class="mono" style="color:var(--sage)">Три выхода</span><h2 class="serif" id="ph">Выбери свой <em>путь</em></h2></div>
+    <div><span class="mono" style="color:var(--sage)">Три выхода</span><h2 class="serif" id="ph">Выбери свой <em>путь</em>:</h2></div>
     <p>Все три начинаются одинаково: с разговора со специалистом. Дальше - как удобнее тебе.</p>
+  </div>
+  <div class="hands" id="hands">
+    <img src="img/hands.webp" width="1200" height="404" alt="Раскрытые ладони в тёплом свете" loading="lazy" decoding="async">
+    <button class="cap" type="button" data-open="home" style="left:34%;top:26%;--c:#f2c46a" aria-label="Путь 1: помочь себе где угодно"><i></i><span>Сам</span></button>
+    <button class="cap" type="button" data-open="doc" style="left:50%;top:14%;--c:#a9d8b8" aria-label="Путь 2: к специалисту"><i></i><span>К врачу</span></button>
+    <button class="cap" type="button" data-open="own" style="left:66%;top:26%;--c:#8fd3d0" aria-label="Путь 3: своё дело"><i></i><span>Своё дело</span></button>
   </div>
   <div class="deck" id="deck">
     <a class="card press" href="#home" data-open="home">
-      <div class="im"><img src="img/p-home.webp" width="800" height="1000" alt="" loading="lazy" decoding="async"><span class="chip glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>Прибор, крем, электрод</span></div>
-      <span class="no mono glass">01 / Дома</span>
-      <div class="bd"><h3 class="serif">Помочь себе <em>дома</em></h3><p>Прибор, крем и электрод под область тела</p><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
+      <div class="im"><img src="img/p-home.webp" width="800" height="1000" alt="" loading="lazy" decoding="async"><span class="chip glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>Карманный прибор</span></div>
+      <span class="no mono glass">01 / Сам</span>
+      <div class="bd"><h3 class="serif">Помочь себе <em>где угодно</em></h3><p>Дома, в дороге, на работе: прибор, крем и электрод под область тела</p><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
     </a>
     <a class="card press" href="#doc" data-open="doc">
       <div class="im"><img src="img/p-doc.webp" width="800" height="1000" alt="" loading="lazy" decoding="async"><span class="chip glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="10" r="3"/><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/></svg>Клиники по городам</span></div>
@@ -190,15 +252,15 @@ em{font-style:italic;color:var(--gold2)}
     </a>
     <a class="card press" href="#own" data-open="own">
       <div class="im"><img src="img/p-own.webp" width="800" height="1000" alt="" loading="lazy" decoding="async"><span class="chip glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M9 8V5h6v3"/></svg>Аппарат и обучение</span></div>
-      <span class="no mono glass">03 / Свой кабинет</span>
-      <div class="bd"><h3 class="serif">Открыть свой <em>кабинет</em></h3><p>Для врачей и клиник: аппарат и обучение</p><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
+      <span class="no mono glass">03 / Своё дело</span>
+      <div class="bd"><h3 class="serif">Помог себе - <em>помоги другим</em></h3><p>Свой кабинет озонотерапии: аппарат, обучение и запуск по шагам</p><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
     </a>
   </div>
   <p class="warnbar glass"><b>Имеются противопоказания. Необходимо проконсультироваться со специалистом.</b> Результат индивидуален.</p>
 </section>
 
 <section class="end" id="end" aria-label="Итог">
-  <h2 class="serif" id="endh">Какой бы путь ты ни выбрал - начни с разговора со <em>специалистом</em>.</h2>
+  <h2 class="serif" id="endh">Какой бы путь ты ни выбрал - начни с разговора со <a class="spec" href="https://medozons.ru/map-clinics/" target="_blank" rel="noopener"><em>специалистом</em></a>.</h2>
   <p class="sub">Тело одно, и оно долго терпело.</p>
   <nav aria-label="Дальше"><a class="btn press" href="/ozotens-preview/">ОЗОТЭНС</a><a class="btn ghost press" href="/ozotens-shop-preview/">Магазин</a><a class="btn ghost press" href="/medozons-v2/">Медозонс</a></nav>
 </section>
@@ -211,9 +273,9 @@ em{font-style:italic;color:var(--gold2)}
   <button class="x glass press" type="button" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   <div class="ph"><img src="img/p-home.webp" width="800" height="1000" alt="" loading="lazy" decoding="async"></div>
   <div class="pb">
-    <span class="mono">Путь 1 / Дома</span>
-    <h2 class="serif" id="h-home">Помочь себе дома, <em>в своём ритме.</em></h2>
-    <p>Метод ОЗОТЭНС: карманный прибор ТЭНС, электродный крем OZOTENS 30% и фигурный электрод под нужную область - спину, шею, колено, плечо. Процедуру делают дома, по инструкции.</p>
+    <span class="mono">Путь 1 / Сам</span>
+    <h2 class="serif" id="h-home">Помочь себе где угодно, <em>в своём ритме.</em></h2>
+    <p>Метод ОЗОТЭНС: карманный прибор ТЭНС, электродный крем OZOTENS 30% и фигурный электрод под нужную область - спину, шею, колено, плечо. Прибор карманный, поэтому процедуру можно сделать там, где удобно: дома, в поездке, на работе. Всё - по инструкции.</p>
     <ul><li class="glass">Один прибор подходит ко всем электродам.</li><li class="glass">Электрод выбирают под область тела.</li><li class="glass">Перед началом - разговор со специалистом: у метода есть противопоказания.</li></ul>
     <div class="row"><a class="btn press" href="/ozotens-preview/">Узнать про метод</a><a class="btn ghost press" href="/ozotens-shop-preview/catalog/">Посмотреть набор</a></div>
     <p class="pwarn">Имеются противопоказания. Необходимо проконсультироваться со специалистом. Результат индивидуален.</p>
@@ -237,16 +299,18 @@ em{font-style:italic;color:var(--gold2)}
   <button class="x glass press" type="button" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   <div class="ph"><img src="img/p-own.webp" width="800" height="1000" alt="" loading="lazy" decoding="async"></div>
   <div class="pb">
-    <span class="mono">Путь 3 / Свой кабинет</span>
-    <h2 class="serif" id="h-own">Стать тем, к кому <em>приходят.</em></h2>
+    <span class="mono">Путь 3 / Своё дело</span>
+    <h2 class="serif" id="h-own">Помог себе - <em>помоги другим.</em></h2>
+    <p>Когда сам почувствовал, что телу можно помочь, хочется делиться этим дальше. Этот путь для тех, кто готов сделать из заботы о людях своё дело: свой кабинет, к которому приходят.</p>
     <p>Для врачей и клиник, которые хотят добавить озонотерапию. Медозонс производит аппараты в Нижнем Новгороде с 1990-х, комплектует оснащением и учит: курс «Основы озонотерапии» проводит Ассоциация российских озонотерапевтов.</p>
     <ul><li class="glass">Аппарат: МЕДОЗОНС ПРО-01 или БЬЮТИ.</li><li class="glass">Оснащение наборами, одноразовое и многоразовое.</li><li class="glass">Путь с нуля разобран по шагам: помещение, озонатор, экономика.</li></ul>
-    <div class="row"><a class="btn press" href="/medozons-v2/#cabinet">Как открыть кабинет</a><a class="btn ghost press" href="/medozons-v2/#models">Аппараты</a></div>
+    <div class="row"><a class="btn press" href="/medozons-v2/#cabinet">Как запустить своё дело</a><a class="btn ghost press" href="/medozons-v2/#models">Аппараты</a></div>
   </div>
 </section>
 
 <script src="vendor/gsap.min.js" defer></script>
 <script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="vendor/ScrambleTextPlugin.min.js" defer></script>
 <script src="vendor/lenis.min.js" defer></script>
 <script>
 (function(){
@@ -284,27 +348,77 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')close();
   if(dy>120||v>.7){cur=null;gsap.to(p,{y:innerHeight,duration:.26,ease:'power2.in',onComplete:function(){p.classList.remove('on');gsap.set(p,{clearProps:'transform,clipPath,opacity'});document.documentElement.style.overflow='';if(lenis)lenis.start()}});gsap.to(veil,{autoAlpha:0,duration:.24})}
   else gsap.to(cur,{y:0,duration:.3,ease:'expo.out'})})})();
 
-function toPaths(e){if(e)e.preventDefault();var t=$('#paths');if(lenis)lenis.scrollTo(t,{duration:1.4});else t.scrollIntoView({behavior:RM?'auto':'smooth'})}
+function toPaths(e){if(e)e.preventDefault();var t=$('#paths');if(lenis)lenis.scrollTo(t,{duration:.9});else t.scrollIntoView({behavior:RM?'auto':'smooth'})}
 $('#gopaths').addEventListener('click',toPaths);
-$('#brand').addEventListener('click',function(e){e.preventDefault();if(lenis)lenis.scrollTo(0,{duration:1.2});else scrollTo({top:0,behavior:RM?'auto':'smooth'})});
+$('#brand').addEventListener('click',function(e){e.preventDefault();if(lenis)lenis.scrollTo(0,{duration:.9});else scrollTo({top:0,behavior:RM?'auto':'smooth'})});
+
+/* «Время размяться»: сколько уже сидишь - растёт, пока открыта страница */
+var sat0=150+Math.floor(Math.random()*35),t0=Date.now();
+function satUpd(){var m=sat0+Math.floor((Date.now()-t0)/60000);$('#sat').textContent=Math.floor(m/60)+' ч '+(m%60)+' мин'}
+satUpd();setInterval(satUpd,20000);
+$('#wok').addEventListener('click',function(){var w=$('#watch');if(G()){gsap.to('#ring',{strokeDashoffset:0,duration:.5,ease:'power2.out'});gsap.to(w,{y:-20,opacity:0,duration:.35,delay:.45,ease:'power2.in',onComplete:function(){w.hidden=true}})}else w.hidden=true});
+
+/* глич заголовка: редкие короткие сбои */
+function glitch(el){if(RM||!el)return;el.classList.add('on');setTimeout(function(){el.classList.remove('on')},300)}
+if(!RM)(function loop(){setTimeout(function(){var w=$('#wake');if(w&&w.getBoundingClientRect().bottom>0)glitch(w);loop()},4500+Math.random()*4000)})();
+
+/* водопад: вода и брызги рисуются поверх картинки, только пока первый экран виден */
+(function(){var cv=$('#falls'),img=$('#bgimg');if(!cv||RM)return;var cx=cv.getContext('2d'),W=0,H=0,box=null,drops=[],mist=[],vis=true,last=0;
+ /* где водопад на картинке (доли ширины и высоты) */
+ var ZD={x0:.744,x1:.770,y0:.352,y1:.738,mx0:.70,mx1:.82,my0:.70,my1:.80},ZM={x0:.489,x1:.526,y0:.465,y1:.586,mx0:.44,mx1:.58,my0:.575,my1:.66};
+ function size(){var r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,1.5);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+  var iw=DESK.matches?1920:900,ih=DESK.matches?1074:1609,sc=Math.max(W/iw,H/ih),ox=(W-iw*sc)/2,oy=(H-ih*sc)/2,z=DESK.matches?ZD:ZM;
+  function X(v){return ox+v*iw*sc}function Y(v){return oy+v*ih*sc}
+  box={x0:X(z.x0),x1:X(z.x1),y0:Y(z.y0),y1:Y(z.y1),mx0:X(z.mx0),mx1:X(z.mx1),my0:Y(z.my0),my1:Y(z.my1)};
+  var n=DESK.matches?90:50;drops=[];for(var i=0;i<n;i++)drops.push(nd(true));mist=[];for(i=0;i<(DESK.matches?26:16);i++)mist.push(nm(true))}
+ function nd(any){var h=box.y1-box.y0;return{x:box.x0+Math.random()*(box.x1-box.x0),y:box.y0+(any?Math.random()*h:-Math.random()*30),l:8+Math.random()*26,v:1.6+Math.random()*2.4,a:.12+Math.random()*.3}}
+ function nm(any){return{x:box.mx0+Math.random()*(box.mx1-box.mx0),y:box.my0+Math.random()*(box.my1-box.my0),r:14+Math.random()*(DESK.matches?60:34),vx:(Math.random()-.5)*.25,vy:-.08-Math.random()*.2,a:any?Math.random()*.10:0,t:Math.random()*6}}
+ function frame(t){if(!vis||document.hidden)return;requestAnimationFrame(frame);if(t-last<33)return;var k=Math.min(3,(t-last)/16.7);last=t;cx.clearRect(0,0,W,H);
+  cx.lineCap='round';for(var i=0;i<drops.length;i++){var d=drops[i];d.y+=d.v*k*(1+(d.y-box.y0)/(box.y1-box.y0));if(d.y>box.y1){drops[i]=nd(false);continue}
+   var g=cx.createLinearGradient(0,d.y-d.l,0,d.y);g.addColorStop(0,'rgba(255,250,230,0)');g.addColorStop(1,'rgba(255,250,230,'+d.a+')');cx.strokeStyle=g;cx.lineWidth=1.2+Math.random()*.6;cx.beginPath();cx.moveTo(d.x,d.y-d.l);cx.lineTo(d.x+(Math.random()-.5),d.y);cx.stroke()}
+  for(i=0;i<mist.length;i++){var m=mist[i];m.t+=.016*k;m.x+=m.vx*k;m.y+=m.vy*k;m.a=Math.min(.12,m.a+.002*k);if(m.y<box.my0-40||m.t>8){mist[i]=nm(false);continue}
+   var rg=cx.createRadialGradient(m.x,m.y,0,m.x,m.y,m.r);rg.addColorStop(0,'rgba(255,244,214,'+m.a*(1-m.t/8)+')');rg.addColorStop(1,'rgba(255,244,214,0)');cx.fillStyle=rg;cx.beginPath();cx.arc(m.x,m.y,m.r,0,6.283);cx.fill()}}
+ function start(){if(!vis)return;last=performance.now();requestAnimationFrame(frame)}
+ size();addEventListener('resize',function(){size()});
+ if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)start()}).observe($('#intro'));
+ document.addEventListener('visibilitychange',function(){if(!document.hidden)start()});start()})();
 
 function boot(){
  if(!G()||!window.ScrollTrigger){document.documentElement.classList.add('static');return}
- gsap.registerPlugin(ScrollTrigger);
- if(window.Lenis){lenis=new Lenis({lerp:.09,prevent:function(n){return n.closest&&n.closest('.pnl')}});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){lenis.raf(t*1000)});gsap.ticker.lagSmoothing(0)}
+ gsap.registerPlugin(ScrollTrigger);if(window.ScrambleTextPlugin)gsap.registerPlugin(ScrambleTextPlugin);
+ if(window.Lenis){lenis=new Lenis({lerp:.16,wheelMultiplier:1.15,touchMultiplier:1.3,prevent:function(n){return n.closest&&n.closest('.pnl')}});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){lenis.raf(t*1000)});gsap.ticker.lagSmoothing(0)}
  /* прогресс прокрутки в кружке сверху */
  gsap.to('#pfg',{strokeDashoffset:0,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.3}});
- /* вступление: строки появляются сразу одна за другой, линии прорисовываются */
- var ps=$$('#term p'),tl=gsap.timeline({delay:.15});
- tl.fromTo('#bg img',{scale:1.12},{scale:1,duration:2.2,ease:'expo.out'},0)
-   .fromTo('#term',{y:30,opacity:0},{y:0,opacity:1,duration:.6,ease:'expo.out'},.1);
- ps.forEach(function(p,i){tl.fromTo(p,{opacity:0,y:12,filter:'blur(6px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.6,ease:'power3.out'},.35+i*.55)});
- tl.fromTo('#term .act',{opacity:0,y:10},{opacity:1,y:0,duration:.5,ease:'power3.out'},.35+ps.length*.55);
- $$('#lines path').forEach(function(p,i){var L=p.getTotalLength();gsap.set(p,{strokeDasharray:L,strokeDashoffset:L});tl.to(p,{strokeDashoffset:0,duration:1.6,ease:'power2.inOut'},.2+i*.18)});
+ /* вступление: окно командной строки выскакивает, строки печатаются, потом уведомление «пора размяться» */
+ var ps=$$('#term p'),tl=gsap.timeline();
+ tl.fromTo('#bgi',{scale:1.1},{scale:1,duration:2,ease:'expo.out'},0)
+   .fromTo('#term',{y:24,scale:.94,opacity:0},{y:0,scale:1,opacity:1,duration:.3,ease:'back.out(1.6)'},.05);
+ tl.fromTo(ps[0],{opacity:0},{opacity:1,duration:.01},.2);
+ if(window.ScrambleTextPlugin)tl.to('#wake',{duration:.7,scrambleText:{text:'Проснись, вайб-кодер!',chars:'01ОЗТЭНС#%&@',speed:.7,revealDelay:.1}},.2);
+ tl.add(function(){glitch($('#wake'))},.95);
+ ps.slice(1).forEach(function(p,i){tl.fromTo(p,{opacity:0,x:-8},{opacity:1,x:0,duration:.25,ease:'power3.out'},.3+i*.25)});
+ tl.fromTo('#term .act',{opacity:0,y:8},{opacity:1,y:0,duration:.3,ease:'power3.out'},.8);
+ tl.fromTo('#watch',{y:-40,opacity:0,scale:.96},{y:0,opacity:1,scale:1,duration:.5,ease:'back.out(1.4)'},2.2);
+ tl.fromTo('#ring',{strokeDashoffset:125.7},{strokeDashoffset:100,duration:.8,ease:'power2.out'},2.3);
+ $$('#lines path').forEach(function(p,i){var L=p.getTotalLength();gsap.set(p,{strokeDasharray:L,strokeDashoffset:L});tl.to(p,{strokeDashoffset:0,duration:1.4,ease:'power2.inOut'},.2+i*.15)});
  /* при прокрутке ущелье уходит глубже, панель уплывает, линии гаснут */
  gsap.fromTo('#bg',{yPercent:0,scale:1},{yPercent:12,scale:1.08,ease:'none',immediateRender:false,scrollTrigger:{trigger:'#intro',start:'top top',end:'bottom top',scrub:true}});
  gsap.fromTo('#tw',{yPercent:0,opacity:1},{yPercent:-12,opacity:0,ease:'none',immediateRender:false,scrollTrigger:{trigger:'#intro',start:'40% top',end:'bottom top',scrub:true}});
+ gsap.fromTo('#watch',{yPercent:0},{yPercent:-60,ease:'none',immediateRender:false,scrollTrigger:{trigger:'#intro',start:'top top',end:'60% top',scrub:true}});
  gsap.fromTo('#lines',{opacity:1,yPercent:0},{opacity:0,yPercent:-8,ease:'none',immediateRender:false,scrollTrigger:{trigger:'#intro',start:'20% top',end:'90% top',scrub:true}});
+ /* «Тело всё помнит!»: блок замирает, буквы влетают крупно, вспышка и сбой */
+ (function(){var h=$('#slamh'),txt=['Тело',' ','всё',' '],em=h.querySelector('em'),emt=em.textContent;h.textContent='';
+  function chars(str,parent){if(str===' '){parent.appendChild(document.createTextNode(' '));return}var wd=document.createElement('span');wd.className='wd';str.split('').forEach(function(c){var sp=document.createElement('span');sp.className='ch';sp.textContent=c;wd.appendChild(sp)});parent.appendChild(wd)}
+  txt.forEach(function(t){chars(t,h)});var e2=document.createElement('em');chars(emt,e2);h.appendChild(e2);
+  var st=gsap.timeline({scrollTrigger:{trigger:'#slam',start:'top top',end:'+=90%',pin:true,scrub:.4,onLeave:function(){glitch(h)}}});
+  st.fromTo('#slamh .ch',{opacity:0,scale:2.2,y:-30,filter:'blur(12px)'},{opacity:1,scale:1,y:0,filter:'blur(0px)',stagger:.04,ease:'power4.out',duration:.5})
+    .fromTo('#slam .mono',{opacity:0,y:12},{opacity:1,y:0,duration:.3},'<.2')
+    .to('#flash',{opacity:1,duration:.12},'>-.05').to('#flash',{opacity:0,duration:.4})
+    .add(function(){glitch(h)},'<')
+    .to('#slam .in',{scale:1.04,duration:.4,ease:'none'})})();
+ /* руки с капсулами: ладони поднимаются из темноты, капсулы появляются по очереди */
+ gsap.from('#hands img',{y:50,opacity:0,duration:.9,ease:'expo.out',scrollTrigger:{trigger:'#hands',start:'top 85%'}});
+ gsap.from('#hands .cap',{scale:0,opacity:0,duration:.5,ease:'back.out(2)',stagger:.12,delay:.4,scrollTrigger:{trigger:'#hands',start:'top 85%'}});
  /* заголовок путей и карточки */
  gsap.from('#paths .hd>*',{y:30,opacity:0,duration:.8,ease:'expo.out',stagger:.08,scrollTrigger:{trigger:'#paths',start:'top 75%'}});
  var cards=$$('.card');
@@ -320,11 +434,10 @@ function boot(){
    cards.forEach(function(c){gsap.from(c,{y:60,opacity:0,duration:.8,ease:'expo.out',scrollTrigger:{trigger:c,start:'top 88%'}});
     gsap.fromTo($('.im img',c),{yPercent:-6,scale:1.12},{yPercent:6,scale:1.12,ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'bottom top',scrub:true}})})}});
  gsap.from('.warnbar',{y:20,opacity:0,duration:.6,ease:'power3.out',scrollTrigger:{trigger:'.warnbar',start:'top 92%'}});
- /* финал: слова проявляются по мере прокрутки */
- var h=$('#endh'),em=h.querySelector('em'),emt=em.textContent;h.textContent='';
- var words='Какой бы путь ты ни выбрал - начни с разговора со'.split(' ');
- words.forEach(function(w){var s=document.createElement('span');s.className='w';s.textContent=w;h.appendChild(s);h.appendChild(document.createTextNode(' '))});
- var e2=document.createElement('em');e2.className='w';e2.textContent=emt;h.appendChild(e2);
+ /* финал: слова проявляются по мере прокрутки, «специалистом» - ссылка на клиники */
+ var h=$('#endh'),lk=h.querySelector('a.spec');h.textContent='';
+ 'Какой бы путь ты ни выбрал - начни с разговора со'.split(' ').forEach(function(w){var sp=document.createElement('span');sp.className='w';sp.textContent=w;h.appendChild(sp);h.appendChild(document.createTextNode(' '))});
+ lk.classList.add('w');h.appendChild(lk);h.appendChild(document.createTextNode('.'));
  gsap.fromTo('#endh .w',{opacity:.14},{opacity:1,stagger:.08,ease:'none',scrollTrigger:{trigger:'#end',start:'top 80%',end:'top 30%',scrub:true}});
  gsap.from('#end .sub,#end nav',{y:20,opacity:0,duration:.6,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#end nav',start:'top 95%'}});
 }
