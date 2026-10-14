@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ОЗОТЭНС - версия v12 «Движение»</title>
+<link rel="stylesheet" href="vendor/lenis.css">
+<style>
+@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500-cyr.woff2) format("woff2"); font-weight: 500; unicode-range: U+0400-04FF; font-display: swap; }
+@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500-lat.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500i-cyr.woff2) format("woff2"); font-weight: 500; font-style: italic; unicode-range: U+0400-04FF; font-display: swap; }
+@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500i-lat.woff2) format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Onest"; src: url(fonts/Onest-400-cyrillic.woff2) format("woff2"); font-weight: 400; unicode-range: U+0400-04FF; font-display: swap; }
+@font-face { font-family: "Onest"; src: url(fonts/Onest-400-latin.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+
+/* v12 «Движение»: собрана из анимаций, одобренных в лаборатории 14.10. Тёмная тёплая ночь вместо белой бумаги.
+   Облик временный - заменится после рефов владельца с Pinterest, механики остаются. */
+:root {
+  --bg: #111513;
+  --bg2: #171c19;
+  --panel: #1e2420;
+  --ink: #f1efe8;
+  --soft: #a9b0a8;
+  --sage: #8d9c89;
+  --warm: #f0a54a;
+  --warm2: #ffcf8a;
+  --cream: #f6f1e6;
+  --line: rgba(241,239,232,.12);
+  --serif: "Serif", Georgia, serif;
+  --sans: "Onest", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+body { overflow-x: clip; }
+a { color: inherit; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.01em; margin: 0; line-height: .98; }
+h2 { font-size: clamp(42px, 6vw, 84px); }
+h1 em, h2 em { font-style: italic; color: var(--warm2); }
+.kicker { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--sage); margin: 0 0 18px; }
+.lead { color: var(--soft); max-width: 54ch; margin: 18px 0 0; }
+.btn { font: 15px/1 var(--sans); border: 1px solid var(--line); background: rgba(241,239,232,.04); color: var(--ink); border-radius: 999px; padding: 13px 20px; cursor: pointer; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; transition: background .25s, color .25s, border-color .25s; }
+.btn:hover, .btn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn.hot { background: var(--warm); color: #1b1408; border-color: var(--warm); }
+.btn.hot:hover { background: var(--warm2); border-color: var(--warm2); }
+.btn:focus-visible, button:focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; }
+section { padding-block: clamp(80px, 11vw, 150px); position: relative; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+
+/* шапка */
+header.top { position: fixed; inset: 0 0 auto; z-index: 30; background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; justify-content: space-between; align-items: center; min-height: 64px; gap: 16px; }
+.logo { font: 500 22px/1 var(--serif); letter-spacing: .2em; min-width: 9ch; text-decoration: none; }
+.nav { display: flex; gap: 22px; font-size: 14px; color: var(--soft); }
+.nav a { text-decoration: none; }
+.nav a:hover { color: var(--ink); }
+header .btn { padding: 10px 16px; font-size: 14px; }
+
+/* 1 первый экран: «Где болит?» + лента зон */
+.hero { min-height: 100svh; padding-block: 120px 56px; display: flex; flex-direction: column; justify-content: center; overflow: clip; }
+.glow { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.glow i { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; }
+.glow i:nth-child(1) { width: 46vmax; height: 46vmax; left: -12vmax; top: -10vmax; background: radial-gradient(circle, #f0a54a 0%, transparent 65%); opacity: .32; }
+.glow i:nth-child(2) { width: 40vmax; height: 40vmax; right: -14vmax; top: 10vh; background: radial-gradient(circle, #5f7a64 0%, transparent 65%); }
+.glow i:nth-child(3) { width: 30vmax; height: 30vmax; left: 30vw; bottom: -14vmax; background: radial-gradient(circle, #c9805a 0%, transparent 65%); opacity: .25; }
+.hero .wrap { position: relative; z-index: 1; width: 100%; }
+.hero h1 { font-size: clamp(76px, 15vw, 230px); line-height: .86; }
+.hero .lead { font-size: clamp(17px, 1.6vw, 20px); }
+.hero .lead b { color: var(--ink); font-weight: 400; }
+
+.zones-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-top: clamp(36px, 6vw, 64px); flex-wrap: wrap; }
+.hint { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink); background: rgba(240,165,74,.14); border: 1px solid rgba(240,165,74,.4); border-radius: 999px; padding: 8px 14px 8px 10px; }
+.hint svg { width: 26px; height: 26px; }
+.hint .hand { transform-origin: 50% 80%; }
+.arrows { display: flex; gap: 8px; }
+.arrows button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font-size: 18px; }
+.arrows button:hover { background: var(--ink); color: var(--bg); }
+.viewport { margin-top: 18px; overflow: hidden; cursor: grab; touch-action: pan-y; position: relative; z-index: 1; }
+.viewport:active { cursor: grabbing; }
+.track { display: flex; gap: 14px; width: max-content; padding: 4px clamp(16px, 4vw, 48px) 8px; }
+@media (min-width: 1296px) { .track { padding-inline: calc((100vw - 1200px) / 2 + 48px); } }
+.zone { width: clamp(220px, 24vw, 270px); height: clamp(260px, 28vw, 320px); border-radius: 26px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; background: var(--panel); border: 1px solid var(--line); user-select: none; text-align: left; font: inherit; color: inherit; cursor: inherit; position: relative; overflow: hidden; transition: border-color .3s; }
+.zone::after { content: ""; position: absolute; inset: auto -30% -60% -30%; height: 90%; background: radial-gradient(closest-side, rgba(240,165,74,.35), transparent); opacity: 0; transition: opacity .4s; }
+.zone:hover::after, .zone.on::after { opacity: 1; }
+.zone.on { border-color: var(--warm); }
+.zone b { font: 500 46px/1 var(--serif); position: relative; z-index: 1; }
+.zone p { margin: 0; color: var(--soft); font-size: 14px; position: relative; z-index: 1; }
+.zone .n { font-size: 12px; letter-spacing: .16em; color: var(--sage); position: relative; z-index: 1; display: flex; justify-content: space-between; }
+.zone .n span { color: var(--warm2); opacity: 0; transition: opacity .3s; }
+.zone.on .n span { opacity: 1; }
+.picked { margin-top: 18px; color: var(--soft); font-size: 15px; min-height: 1.5em; }
+.picked b { color: var(--warm2); font-weight: 400; }
+
+/* 2 обычный день */
+.day { background: var(--bg2); }
+.times { margin-top: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.times div { border-top: 1px solid var(--line); padding-top: 16px; }
+.times b { font: 500 44px/1 var(--serif); color: var(--warm2); display: block; margin-bottom: 10px; }
+.times p { margin: 0; color: var(--soft); }
+
+/* 3 метод: закрепление + капля ОЗОТЭНС */
+.how h2 { font-size: clamp(40px, 4.6vw, 66px); }
+.how { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 6vw, 88px); align-items: center; min-height: 100vh; padding-top: 64px; }
+.steps { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 10px; }
+.steps li { padding: 18px 20px; border-radius: 18px; border: 1px solid var(--line); color: var(--soft); cursor: pointer; transition: background .35s, color .35s, border-color .35s; }
+.steps li.on { background: var(--cream); color: #2a2a24; border-color: var(--cream); }
+.steps b { font: 500 28px/1 var(--serif); display: block; margin-bottom: 6px; color: var(--ink); transition: color .35s; }
+.steps li.on b { color: #15140f; }
+.bar { height: 3px; background: var(--line); border-radius: 3px; margin-top: 24px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 100%; background: var(--warm); transform-origin: left; transform: scaleX(0); }
+.dropbox { position: relative; aspect-ratio: 1; display: grid; place-items: center; }
+.dropbox svg { width: min(100%, 520px); overflow: visible; }
+.dropbox .ring { fill: none; stroke: var(--warm); stroke-width: 1.2; opacity: 0; }
+.dropbox .label { position: absolute; left: 50%; bottom: 4%; translate: -50% 0; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--sage); white-space: nowrap; }
+
+/* 4 прибор-игра */
+.play { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 6vw, 88px); align-items: center; }
+.glbox { position: relative; }
+#gl { width: 100%; aspect-ratio: 1; border-radius: 32px; background: radial-gradient(70% 60% at 50% 40%, #2a322c, #121614 75%); cursor: grab; touch-action: none; display: block; border: 1px solid var(--line); }
+#gl.over { cursor: pointer; }
+.gltip { position: absolute; left: 18px; top: 18px; font-size: 13px; background: rgba(17,21,19,.7); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; color: var(--ink); pointer-events: none; }
+.meter { margin-top: 28px; }
+.meter .lv { display: flex; align-items: baseline; gap: 12px; }
+.meter .lv b { font: 500 96px/1 var(--serif); color: var(--warm2); min-width: 2ch; }
+.meter .lv span { color: var(--soft); }
+.meter .scale { height: 8px; border-radius: 8px; background: var(--line); overflow: hidden; margin-top: 12px; }
+.meter .scale i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #8d9c89, var(--warm), var(--warm2)); border-radius: 8px; }
+.meter .note { color: var(--soft); font-size: 14px; margin-top: 12px; min-height: 1.5em; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 28px; }
+.facts div { border: 1px solid var(--line); border-radius: 18px; padding: 14px; font-size: 13px; color: var(--soft); }
+.facts b { display: block; font: 500 34px/1 var(--serif); color: var(--ink); margin-bottom: 4px; }
+
+/* 5 набор: Flip */
+.grid { margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.card { display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; cursor: pointer; text-align: left; padding: 0; font: inherit; color: inherit; }
+.card .ph { flex: none; aspect-ratio: 1; background: var(--cream); display: grid; place-items: center; }
+.card img { width: 86%; height: 86%; object-fit: contain; mix-blend-mode: multiply; }
+.card .t { margin-top: auto; padding: 15px 18px; display: flex; justify-content: space-between; gap: 10px; font-size: 15px; }
+.card .t span:last-child { color: var(--soft); font-size: 13px; }
+.card[hidden] { display: none !important; }
+.overlay { position: fixed; inset: 0; z-index: 50; background: rgba(8,10,9,.6); backdrop-filter: blur(8px); display: none; place-items: center; padding: 20px; }
+.overlay.open { display: grid; }
+.sheet { background: var(--panel); border: 1px solid var(--line); border-radius: 30px; width: min(780px, 100%); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+.sheet .ph { aspect-ratio: 1; background: var(--cream); display: grid; place-items: center; }
+.sheet .ph img { width: 86%; height: 86%; object-fit: contain; mix-blend-mode: multiply; }
+.sheet .tx { padding: 30px; display: grid; align-content: space-between; gap: 18px; }
+.sheet h3 { font-size: 42px; }
+.mykit { margin-top: 26px; border: 1px dashed rgba(240,165,74,.5); border-radius: 20px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.mykit p { margin: 0; }
+.mykit small { display: block; color: var(--soft); font-size: 13px; margin-top: 4px; }
+
+/* 6 место под Rive */
+.rive { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 6vw, 88px); align-items: center; }
+.rvbox { position: relative; border-radius: 32px; overflow: hidden; border: 1px dashed rgba(240,165,74,.45); background: #0d100e; }
+#rv { width: 100%; aspect-ratio: 16 / 9; display: block; }
+.rvbox .stub { position: absolute; left: 14px; top: 14px; font-size: 12px; background: rgba(13,16,14,.8); border-radius: 999px; padding: 6px 11px; color: var(--warm2); }
+
+/* 7 документы и противопоказания */
+.docs { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 34px; }
+.docs div { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 22px; }
+.docs code { font: 500 30px/1 var(--serif); color: var(--warm2); display: block; margin-bottom: 10px; }
+.docs p { margin: 0; color: var(--soft); font-size: 15px; }
+.contra { margin-top: 70px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 40px; }
+.contra ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; color: var(--soft); }
+.contra li { border-bottom: 1px solid var(--line); padding: 8px 0; }
+
+.final { text-align: center; }
+.final h2 { font-size: clamp(48px, 8vw, 120px); max-width: 14ch; margin-inline: auto; }
+footer { padding-block: 40px 60px; border-top: 1px solid var(--line); color: var(--soft); font-size: 13px; }
+footer .wrap { display: grid; gap: 6px; }
+
+@media (max-width: 860px) {
+  .nav { display: none; }
+  .how, .play, .rive, .contra { grid-template-columns: 1fr; }
+  .how { min-height: auto; }
+  .dropbox { position: sticky; top: 64px; z-index: 2; width: auto; aspect-ratio: auto; height: 210px; margin: 0 -16px; padding: 10px 0 26px; order: -1; background: linear-gradient(var(--bg) 85%, transparent); }
+  .dropbox svg { width: auto; height: 170px; }
+  .dropbox .label { bottom: 6px; }
+  .steps li { scroll-margin-top: 290px; }
+  .times { grid-template-columns: 1fr 1fr; }
+  .sheet { grid-template-columns: 1fr; }
+  .contra ul { grid-template-columns: 1fr; }
+  .facts b { font-size: 28px; }
+  .meter .lv b { font-size: 72px; }
+}
+@media (max-width: 480px) { .arrows { display: none; } header .btn { display: none; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" id="logo" href="#top">ОЗОТЭНС</a>
+    <nav class="nav"><a href="#how">Как работает</a><a href="#play">Прибор</a><a href="#kit">Набор</a><a href="#docs">Документы</a></nav>
+    <a class="btn hot" href="#kit">Подобрать комплект</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- 1. SplitText «Где болит?» + Draggable-лента зон с подсказкой -->
+  <section class="hero">
+    <div class="glow" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <p class="kicker">Поясница · шея · суставы</p>
+      <h1 id="title">Где <em>болит?</em></h1>
+      <p class="lead">Встал - тянет. Посидел - зажало. <b>Выбери зону ниже</b> - покажем, какой электрод под неё и как проходит сеанс.</p>
+      <div class="zones-head">
+        <span class="hint" id="hint">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><g class="hand" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V7.5a2 2 0 0 1 4 0V15"/><path d="M16 14.5v-2a2 2 0 0 1 4 0V16"/><path d="M20 15.5a2 2 0 0 1 4 0v4.5a8 8 0 0 1-8 8h-1a7 7 0 0 1-5.6-2.8L6 20.5a2 2 0 0 1 3.2-2.4L12 21"/></g></svg>
+          Тяни ленту влево-вправо или жми на зону
+        </span>
+        <div class="arrows"><button type="button" id="prev" aria-label="Назад">←</button><button type="button" id="next" aria-label="Вперёд">→</button></div>
+      </div>
+    </div>
+    <div class="viewport" id="vp"><div class="track" id="track">
+      <button class="zone" type="button" data-z="Поясница" data-e="Спина"><span class="n">01<span>выбрано</span></span><b>Поясница</b><p>Прострел при наклоне, ноет после сидения.</p></button>
+      <button class="zone" type="button" data-z="Шея" data-e="Шея"><span class="n">02<span>выбрано</span></span><b>Шея</b><p>Зажим после ноутбука, не повернуть голову.</p></button>
+      <button class="zone" type="button" data-z="Плечо" data-e="Плечо"><span class="n">03<span>выбрано</span></span><b>Плечо</b><p>Больно поднять руку, ноет ночью.</p></button>
+      <button class="zone" type="button" data-z="Колено" data-e="Колено"><span class="n">04<span>выбрано</span></span><b>Колено</b><p>Хрустит на лестнице, тяжело встать.</p></button>
+      <button class="zone" type="button" data-z="Стопа" data-e="Стопа"><span class="n">05<span>выбрано</span></span><b>Стопа</b><p>Пятка по утрам, жжёт свод.</p></button>
+    </div></div>
+    <div class="wrap"><p class="picked" id="picked" aria-live="polite"></p></div>
+  </section>
+
+  <!-- 2. Обычный день: слова проявляются (SplitText) -->
+  <section class="day">
+    <div class="wrap">
+      <p class="kicker">Обычный день</p>
+      <h2 class="words">Больная спина забирает не спину. <em>Она забирает день</em></h2>
+      <div class="times">
+        <div><b>07:00</b><p>Сползаю с кровати боком, как учили.</p></div>
+        <div><b>13:00</b><p>Третий час за ноутом. Поясница горит.</p></div>
+        <div><b>19:00</b><p>Сын просит поиграть. Говорю: потом.</p></div>
+        <div><b>23:00</b><p>Ищу позу, в которой не ноет. Не нахожу.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ScrollTrigger pin (единственный на странице) + MorphSVG: капля ОЗОТЭНС -->
+  <section id="how">
+    <div class="wrap how" id="howWrap">
+      <div>
+        <p class="kicker">Метод</p>
+        <h2 class="words">Импульс и озоновый крем <em>работают вместе</em></h2>
+        <p class="lead">Слабые электрические импульсы (ТЭНС) и озонсодержащий крем OZOTENS 30% - за один сеанс, в том месте, где беспокоит.</p>
+        <ol class="steps" id="steps">
+          <li class="on"><b>01 · Крем на электрод</b>Тонкий слой OZOTENS 30% - он же проводит ток.</li>
+          <li><b>02 · Импульс</b>Включаете прибор, сила от 0 до 40 - та, что комфортна.</li>
+          <li><b>03 · Электрод на зону</b>Форма под зону: спина, шея, колено, плечо, стопа.</li>
+        </ol>
+        <div class="bar"><i id="bar"></i></div>
+      </div>
+      <div class="dropbox" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <defs>
+            <radialGradient id="gCream" cx="38%" cy="34%" r="75%"><stop offset="0" stop-color="#fffaf0"/><stop offset=".55" stop-color="#f3e6cc"/><stop offset="1" stop-color="#d9b98a"/></radialGradient>
+            <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter>
+          </defs>
+          <circle class="ring" cx="100" cy="112" r="70"/><circle class="ring" cx="100" cy="112" r="70"/><circle class="ring" cx="100" cy="112" r="70"/>
+          <ellipse cx="100" cy="186" rx="52" ry="6" fill="#000" opacity=".35" filter="url(#soft)"/>
+          <path id="shape" fill="url(#gCream)" d="M100 20 C100 20 40 92 40 132 A60 60 0 0 0 160 132 C160 92 100 20 100 20 Z"/>
+          <path id="shine" d="M70 112 C70 98 78 84 86 74" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+          <text id="dropTxt" x="100" y="146" text-anchor="middle" font-family="Onest, sans-serif" font-size="10" letter-spacing="2" fill="#6b5634">OZOTENS 30%</text>
+          <path id="sDrop" d="M100 20 C100 20 40 92 40 132 A60 60 0 0 0 160 132 C160 92 100 20 100 20 Z" fill="none"/>
+          <path id="sWave" d="M14 104 L58 104 L58 52 L92 52 L92 148 L124 148 L124 104 L186 104 L186 118 L110 118 L110 162 L78 162 L78 66 L72 66 L72 118 L14 118 Z" fill="none"/>
+          <path id="sPad" d="M52 40 H148 A22 22 0 0 1 170 62 V138 A22 22 0 0 1 148 160 H52 A22 22 0 0 1 30 138 V62 A22 22 0 0 1 52 40 Z" fill="none"/>
+        </svg>
+        <span class="label" id="dropLabel">Капля крема</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. three.js: прибор как игра -->
+  <section id="play" class="day">
+    <div class="wrap play">
+      <div class="glbox">
+        <canvas id="gl" aria-label="3D-прибор: нажимайте кнопки на корпусе"></canvas>
+        <span class="gltip" id="gltip">Жми оранжевые кнопки на корпусе · тяни, чтобы повернуть</span>
+      </div>
+      <div>
+        <p class="kicker">Прибор в руке</p>
+        <h2 class="words">Попробуй <em>сам</em></h2>
+        <p class="lead">Оранжевые кнопки - сила импульса, серые - канал и программа. Можно и кнопками ниже.</p>
+        <div class="meter">
+          <div class="lv"><b id="lv">0</b><span id="lvTxt">из 40 · выключен</span></div>
+          <div class="scale"><i id="scale"></i></div>
+          <p class="note" id="note">Начните с малого и прибавляйте, пока ощущение комфортное.</p>
+        </div>
+        <div class="row">
+          <button class="btn" type="button" data-k="minus">− Слабее</button>
+          <button class="btn hot" type="button" data-k="plus">+ Сильнее</button>
+          <button class="btn" type="button" data-k="ch">Канал</button>
+          <button class="btn" type="button" data-k="prog">Программа</button>
+        </div>
+        <div class="facts">
+          <div><b>85 г</b>легче смартфона</div>
+          <div><b>2</b>канала, две зоны сразу</div>
+          <div><b>22</b>программы: TENS, EMS, массаж</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Flip: собери свой набор -->
+  <section id="kit">
+    <div class="wrap">
+      <p class="kicker">Набор</p>
+      <h2 class="words">Собери <em>свой</em> набор</h2>
+      <p class="lead">Фильтр перестраивает карточки, нажатие раскрывает товар.</p>
+      <div class="row" id="filters">
+        <button class="btn" type="button" data-f="all" aria-pressed="true">Всё</button>
+        <button class="btn" type="button" data-f="base">Основа</button>
+        <button class="btn" type="button" data-f="zone">Под зону</button>
+      </div>
+      <div class="grid" id="grid">
+        <button class="card" type="button" data-c="base" data-t="Прибор" data-d="Два канала, 22 программы, сила 0-40. 85 грамм, аккумулятор, зарядка от USB."><div class="ph"><img src="img/device.jpg" alt="Прибор"></div><div class="t">Прибор<span>основа</span></div></button>
+        <button class="card" type="button" data-c="base" data-t="Крем OZOTENS 30%" data-d="Наносится тонким слоем на электрод, он же проводит ток."><div class="ph"><img src="img/cream.jpg" alt="Крем"></div><div class="t">Крем<span>основа</span></div></button>
+        <button class="card" type="button" data-c="zone" data-t="Электрод" data-d="Форма под зону: спина, шея, колено, плечо, стопа." id="cardPad"><div class="ph"><img src="img/electrode.jpg" alt="Электрод"></div><div class="t"><span class="nm">Электрод</span><span>под зону</span></div></button>
+        <button class="card" type="button" data-c="base zone" data-t="Комплект" data-d="Прибор, крем и электрод вместе."><div class="ph"><img src="img/kit.jpg" alt="Комплект"></div><div class="t">Комплект<span>всё сразу</span></div></button>
+      </div>
+      <div class="mykit">
+        <p>Ваш комплект: <b id="kitTxt">прибор + крем OZOTENS 30% + электрод под зону</b><small>Перед покупкой обсудите метод со своим врачом - особенно если есть грыжа или протрузия.</small></p>
+        <a class="btn hot" href="#top" id="kitBtn">Выбрать зону</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Rive: место под нашу сцену -->
+  <section class="day">
+    <div class="wrap rive">
+      <div>
+        <p class="kicker">Живая иллюстрация · Rive</p>
+        <h2 class="words">Здесь спина <em>распрямится</em></h2>
+        <p class="lead">Место под нашу Rive-сцену: человек сидит согнувшись, электрод ложится на поясницу, прибор «включается» - и он выпрямляется. Сцена реагирует на курсор и на прокрутку.</p>
+        <p class="lead">Сейчас в рамке пример-заглушка из библиотеки Rive, не наш рисунок.</p>
+      </div>
+      <div class="rvbox"><canvas id="rv" width="1280" height="720" aria-label="Пример Rive, заглушка"></canvas><span class="stub">заглушка · ждёт нашу сцену</span></div>
+    </div>
+  </section>
+
+  <!-- 7. Документы + противопоказания -->
+  <section id="docs">
+    <div class="wrap">
+      <p class="kicker">Документы</p>
+      <h2 class="words">На чём держится <em>метод</em></h2>
+      <div class="docs">
+        <div><code>RU 2714457</code><p>Патент РФ на метод ОЗОТЭНС-терапии</p></div>
+        <div><code>ПИМУ</code><p>Разработан в Ассоциации российских озонотерапевтов, исследован в Приволжском исследовательском медицинском университете</p></div>
+        <div><code>2020</code><p>Учебное пособие для врачей «ОЗОТЭНС-терапия дорсалгий и артралгий» и 5 научных статей</p></div>
+        <div><code>ЕАЭС</code><p>Декларации соответствия на прибор и крем</p></div>
+      </div>
+      <div class="contra">
+        <div><p class="kicker">Честно и сразу</p><h3 style="font-size:44px">Кому метод не подходит</h3></div>
+        <ul>
+          <li>Кардиостимулятор</li><li>Высокое давление</li><li>Беременность</li><li>Онкология, новообразования</li>
+          <li>Кровотечения и болезни крови</li><li>Температура выше 38 °C, острые гнойные воспаления</li>
+          <li>Острые внутрисуставные травмы</li><li>Раны и кожные заболевания в зоне воздействия</li><li>Непереносимость импульсного тока</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="final day">
+    <div class="wrap">
+      <h2 class="words">Спина не должна решать, <em>как ты живёшь</em></h2>
+      <div class="row" style="justify-content:center"><a class="btn hot" href="#top">Подобрать под мою боль</a></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <span>Имеются противопоказания. Необходимо проконсультироваться со специалистом.</span>
+  <span>Не пользуйтесь прибором за рулём. Черновик для сравнения версий: тексты требуют проверки юристом и производителем.</span>
+</div></footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/Flip.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/MorphSVGPlugin.min.js"></script>
+<script src="vendor/CustomEase.min.js"></script>
+<script src="vendor/Draggable.min.js"></script>
+<script src="vendor/InertiaPlugin.min.js"></script>
+<script src="vendor/ScrambleTextPlugin.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="vendor/rive/rive.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger, Flip, SplitText, MorphSVGPlugin, CustomEase, Draggable, InertiaPlugin, ScrambleTextPlugin);
+  CustomEase.create('soft', 'M0,0 C0.16,1 0.3,1 1,1');
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+  // Lenis + якоря
+  let lenis = null;
+  if (!reduce) {
+    lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+  const go = h => lenis ? lenis.scrollTo(h, { offset: -64 }) : document.querySelector(h).scrollIntoView();
+  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); go(a.getAttribute('href')); }));
+
+  const logo = $('#logo');
+  logo.addEventListener('mouseenter', () => gsap.to(logo, { duration: 0.9, scrambleText: { text: 'ОЗОТЭНС', chars: 'ОЗТЭНС0123456789', speed: 0.6 } }));
+
+  // Выбор зоны: подсветка, текст, электрод в наборе
+  const zones = $$('.zone');
+  const pick = z => {
+    zones.forEach(x => x.classList.toggle('on', x === z));
+    $('#picked').innerHTML = `${z.dataset.z}: электрод <b>«${z.dataset.e}»</b> + крем OZOTENS 30% + прибор. <a href="#kit" class="tokit">Смотреть набор →</a>`;
+    $('#picked .tokit').addEventListener('click', e => { e.preventDefault(); go('#kit'); });
+    $('#kitTxt').textContent = `прибор + крем OZOTENS 30% + электрод «${z.dataset.e}»`;
+    $('#cardPad').dataset.t = `Электрод «${z.dataset.e}»`;
+    $('#cardPad .nm').textContent = `Электрод «${z.dataset.e}»`;
+    $('#kitBtn').textContent = 'Сменить зону';
+  };
+
+  // Draggable-лента + стрелки
+  const track = $('#track'), vp = $('#vp');
+  const drag = Draggable.create(track, { type: 'x', inertia: true, bounds: vp, edgeResistance: 0.85, dragClickables: true, minimumMovement: 6,
+    onClick: e => { const z = e.target.closest('.zone'); if (z) pick(z); },
+    onDragStart: () => gsap.to('#hint', { opacity: 0.45, duration: 0.4 }) })[0];
+  const step = dir => {
+    const w = zones[0].offsetWidth + 14;
+    const min = Math.min(0, vp.clientWidth - track.scrollWidth);
+    const x = gsap.utils.clamp(min, 0, gsap.getProperty(track, 'x') - dir * w);
+    gsap.to(track, { x, duration: 0.6, ease: 'power3.out', onUpdate: () => drag.update() });
+  };
+  $('#prev').onclick = () => step(-1); $('#next').onclick = () => step(1);
+  zones.forEach(z => z.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(z); } }));
+
+  if (reduce) return;
+
+  // Живая подложка первого экрана
+  $$('.glow i').forEach((b, i) => gsap.to(b, { x: () => gsap.utils.random(-120, 120), y: () => gsap.utils.random(-80, 80), scale: () => gsap.utils.random(0.85, 1.2), duration: 7 + i * 2, ease: 'sine.inOut', repeat: -1, yoyo: true, repeatRefresh: true }));
+  addEventListener('pointermove', e => gsap.to('.glow', { x: (e.clientX / innerWidth - 0.5) * 40, y: (e.clientY / innerHeight - 0.5) * 30, duration: 1.2, ease: 'power2.out' }));
+
+  // 1. «Где болит?» по буквам, потом лента въезжает и показывает, что её можно тянуть
+  const split = SplitText.create('#title', { type: 'chars', mask: 'chars' });
+  const tl = gsap.timeline({ delay: 0.2 });
+  tl.from(split.chars, { yPercent: 115, rotate: 8, duration: 1.1, ease: 'soft', stagger: 0.06 })
+    .from('.hero .kicker, .hero .lead', { y: 20, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.1 }, '-=0.7')
+    .from('.zones-head', { y: 20, opacity: 0, duration: 0.6, ease: 'soft' }, '-=0.4')
+    .from(zones, { x: 160, opacity: 0, duration: 0.9, ease: 'soft', stagger: 0.07 }, '-=0.4')
+    .to(track, { x: -120, duration: 0.7, ease: 'power2.inOut', onUpdate: () => drag.update() })
+    .to(track, { x: 0, duration: 0.9, ease: 'elastic.out(1,0.6)', onUpdate: () => drag.update() });
+  gsap.to('#hint .hand', { x: 5, rotate: 8, duration: 0.6, ease: 'sine.inOut', repeat: -1, yoyo: true });
+
+  // Заголовки секций проявляются по словам
+  $$('h2.words').forEach(h => {
+    const s = SplitText.create(h, { type: 'words', mask: 'words' });
+    gsap.from(s.words, { yPercent: 100, opacity: 0, duration: 0.9, ease: 'soft', stagger: 0.06, scrollTrigger: { trigger: h, start: 'top 85%', once: true } });
+  });
+  gsap.from('.times div', { y: 30, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.12, scrollTrigger: { trigger: '.times', start: 'top 85%', once: true } });
+  gsap.from('.docs div', { y: 30, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.08, scrollTrigger: { trigger: '.docs', start: 'top 85%', once: true } });
+
+  // 3. Метод: капля ОЗОТЭНС -> импульс -> электрод. Закрепление только тут и только на ПК.
+  const shapes = ['#sDrop', '#sWave', '#sPad'];
+  const labels = ['Капля крема', 'Импульс', 'Электрод на зону'];
+  const steps = $$('#steps li');
+  const rings = $$('.dropbox .ring');
+  const ringTl = gsap.timeline({ repeat: -1, paused: true });
+  rings.forEach((r, i) => ringTl.fromTo(r, { attr: { r: 50 }, opacity: 0.8 }, { attr: { r: 100 }, opacity: 0, duration: 1.6, ease: 'power1.out' }, i * 0.5));
+  let cur = 0;
+  const setStep = i => {
+    if (i === cur) return; cur = i;
+    steps.forEach((s, k) => s.classList.toggle('on', k === i));
+    gsap.to('#shape', { morphSVG: shapes[i], duration: 0.9, ease: 'power3.inOut' });
+    gsap.to('#shine, #dropTxt', { opacity: i === 0 ? 1 : 0, duration: 0.3 });
+    gsap.fromTo('#dropLabel', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, onStart: () => $('#dropLabel').textContent = labels[i] });
+    i === 1 ? ringTl.play() : ringTl.pause(0);
+  };
+  // капля «дышит», пока на шаге 1
+  gsap.to('#shape', { scaleY: 1.03, scaleX: 0.98, transformOrigin: '50% 100%', duration: 1.4, ease: 'sine.inOut', repeat: -1, yoyo: true });
+  steps.forEach((s, k) => s.addEventListener('click', () => setStep(k)));
+  ScrollTrigger.matchMedia({
+    '(min-width: 861px)': () => {
+      gsap.timeline({ scrollTrigger: { trigger: '#howWrap', start: 'top top', end: '+=200%', pin: true, scrub: 0.6, onUpdate: s => setStep(Math.min(2, Math.floor(s.progress * 2.999))) } })
+        .to('#bar', { scaleX: 1, ease: 'none' }, 0);
+    },
+    '(max-width: 860px)': () => {
+      steps.forEach((s, k) => ScrollTrigger.create({ trigger: s, start: 'top 65%', end: 'bottom 65%', onToggle: st => st.isActive && setStep(k) }));
+    }
+  });
+
+  // 5. Flip: фильтр и раскрытие
+  const grid = $('#grid'), cards = [...grid.children];
+  const filterBtns = $$('#filters .btn');
+  filterBtns.forEach(b => b.addEventListener('click', () => {
+    filterBtns.forEach(x => x.setAttribute('aria-pressed', x === b));
+    const state = Flip.getState(cards);
+    cards.forEach(c => c.hidden = !(b.dataset.f === 'all' || c.dataset.c.includes(b.dataset.f)));
+    Flip.from(state, { duration: 0.6, ease: 'power3.inOut', scale: true, absolute: true,
+      onEnter: el => gsap.fromTo(el, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5 }),
+      onLeave: el => gsap.to(el, { opacity: 0, scale: 0.8, duration: 0.4 }) });
+  }));
+  const ov = document.createElement('div'); ov.className = 'overlay';
+  ov.innerHTML = '<div class="sheet"><div class="ph" id="ovPh"></div><div class="tx"><div><p class="kicker">В наборе</p><h3 id="ovT"></h3><p class="lead" id="ovD"></p></div><button class="btn" type="button" id="ovX">Закрыть</button></div></div>';
+  document.body.appendChild(ov);
+  let open = null;
+  const closeOv = () => { if (!open) return; const img = $('#ovPh img'); const st = Flip.getState(img); open.querySelector('.ph').appendChild(img); Flip.from(st, { duration: 0.6, ease: 'power3.inOut', onComplete: () => ov.classList.remove('open') }); gsap.to('.sheet', { opacity: 0, duration: 0.3 }); open = null; lenis && lenis.start(); };
+  cards.forEach(c => c.addEventListener('click', () => {
+    open = c; const img = c.querySelector('img'); const st = Flip.getState(img);
+    $('#ovT').textContent = c.dataset.t; $('#ovD').textContent = c.dataset.d;
+    ov.classList.add('open'); gsap.fromTo('.sheet', { opacity: 0 }, { opacity: 1, duration: 0.3 });
+    $('#ovPh').appendChild(img); Flip.from(st, { duration: 0.7, ease: 'power3.inOut' });
+    lenis && lenis.stop();
+  }));
+  ov.addEventListener('click', e => { if (e.target === ov || e.target.id === 'ovX') closeOv(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeOv(); });
+})();
+</script>
+
+<script type="module">
+// 4. three.js: прибор как игра. Кнопки на корпусе нажимаются, экран и импульсы отвечают.
+import * as THREE from './vendor/three.module.min.js';
+const cv = document.getElementById('gl');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 50); cam.position.set(0, 0.2, 7.4);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x2a3a30, 1.1));
+const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(3, 4, 5); scene.add(key);
+const rim = new THREE.DirectionalLight(0xf0a54a, 1.8); rim.position.set(-4, 1, -3); scene.add(rim);
+const glowLight = new THREE.PointLight(0xf0a54a, 0, 6); glowLight.position.set(0, 0.6, 1.2); scene.add(glowLight);
+
+// корпус
+const shape = new THREE.Shape(); const w = 1.25, h = 2.6, r = 0.32;
+shape.moveTo(-w / 2 + r, -h / 2); shape.lineTo(w / 2 - r, -h / 2); shape.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r);
+shape.lineTo(w / 2, h / 2 - r); shape.quadraticCurveTo(w / 2, h / 2, w / 2 - r, h / 2); shape.lineTo(-w / 2 + r, h / 2);
+shape.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - r); shape.lineTo(-w / 2, -h / 2 + r); shape.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + r, -h / 2);
+const body = new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: 0.32, bevelEnabled: true, bevelSize: 0.06, bevelThickness: 0.06, bevelSegments: 6, curveSegments: 24 }),
+  new THREE.MeshStandardMaterial({ color: 0xf4f3ef, roughness: 0.32, metalness: 0.05 }));
+body.geometry.center();
+const dev = new THREE.Group(); dev.add(body);
+
+// экран
+const sc = document.createElement('canvas'); sc.width = 512; sc.height = 360; const g = sc.getContext('2d');
+const tex = new THREE.CanvasTexture(sc); tex.colorSpace = THREE.SRGBColorSpace;
+const screenMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.2, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.15 });
+const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.95, 0.67), screenMat);
+screen.position.set(0, 0.62, 0.23); dev.add(screen);
+
+// кнопки с подписями на торце
+const cap = txt => { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, 128, 128); x.fillStyle = '#1d221f'; x.font = '600 56px system-ui, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(txt, 64, 68); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.center.set(0.5, 0.5); t.rotation = Math.PI / 2; return t; };
+const btns = [];
+[['minus', '−', -0.3, -0.25, 0xf0a54a], ['plus', '+', 0.3, -0.25, 0xf0a54a], ['ch', 'CH', -0.3, -0.75, 0xd8dad4], ['prog', 'P', 0.3, -0.75, 0xd8dad4]].forEach(([k, label, x, y, col]) => {
+  const side = new THREE.MeshStandardMaterial({ color: col, roughness: 0.4 });
+  const top = new THREE.MeshStandardMaterial({ color: col, roughness: 0.4, map: cap(label) });
+  const b = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.08, 40), [side, top, side]);
+  b.rotation.x = Math.PI / 2; b.position.set(x, y, 0.23); b.userData = { k, z: 0.23 };
+  dev.add(b); btns.push(b);
+});
+
+// провод и электрод сзади-сбоку
+const wire = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, 1.32, 0), new THREE.Vector3(0.2, 1.8, -0.2), new THREE.Vector3(1.3, 1.6, -0.6), new THREE.Vector3(1.7, 0.6, -0.8)]), 40, 0.025, 8), new THREE.MeshStandardMaterial({ color: 0x2b302c, roughness: 0.6 }));
+dev.add(wire);
+const pad = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.62, 0.05, 1, 1, 1), new THREE.MeshStandardMaterial({ color: 0x3a4a3e, roughness: 0.7 }));
+pad.position.set(1.75, 0.35, -0.85); pad.rotation.set(0, -0.5, 0.15); dev.add(pad);
+scene.add(dev);
+
+// кольца импульса вокруг электрода
+const rings = [0, 1, 2].map(() => { const m = new THREE.Mesh(new THREE.RingGeometry(0.42, 0.45, 64), new THREE.MeshBasicMaterial({ color: 0xf0a54a, transparent: true, opacity: 0, side: THREE.DoubleSide })); m.position.copy(pad.position); m.rotation.copy(pad.rotation); dev.add(m); return m; });
+const floor = new THREE.Mesh(new THREE.CircleGeometry(1.7, 48), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.3 }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = -1.8; scene.add(floor);
+
+// состояние прибора: сила 0-40, 2 канала, 22 программы
+const st = { lv: 0, ch: 1, p: 1 };
+const lvEl = document.getElementById('lv'), lvTxt = document.getElementById('lvTxt'), scaleEl = document.getElementById('scale'), note = document.getElementById('note');
+function drawScreen() {
+  const on = st.lv > 0;
+  g.fillStyle = on ? '#d6e7c9' : '#9aa597'; g.fillRect(0, 0, 512, 360); g.fillStyle = '#1d221f'; g.textAlign = 'center';
+  g.font = '600 150px monospace'; g.fillText(String(st.lv).padStart(2, '0'), 256, 200);
+  g.font = '600 38px monospace'; g.fillText(`CH${st.ch} · P${String(st.p).padStart(2, '0')}`, 256, 290);
+  if (on) { g.fillRect(40, 320, 432 * st.lv / 40, 14); }
+  tex.needsUpdate = true;
+  screenMat.emissiveIntensity = on ? 0.45 : 0.1;
+  glowLight.intensity = on ? 0.4 + st.lv / 20 : 0;
+  lvEl.textContent = st.lv; lvTxt.textContent = on ? `из 40 · канал ${st.ch} · программа ${st.p}` : 'из 40 · выключен';
+  scaleEl.style.width = (st.lv / 40 * 100) + '%';
+  note.textContent = !on ? 'Начните с малого и прибавляйте, пока ощущение комфортное.' : st.lv < 15 ? 'Лёгкое покалывание - так и начинают.' : st.lv < 30 ? 'Выбирайте ту силу, что комфортна, не больше.' : 'Если неприятно - убавьте. Комфорт важнее цифры.';
+}
+drawScreen();
+
+let shake = 0;
+function press(k) {
+  if (k === 'plus') st.lv = Math.min(40, st.lv + 2);
+  if (k === 'minus') st.lv = Math.max(0, st.lv - 2);
+  if (k === 'ch') st.ch = st.ch === 1 ? 2 : 1;
+  if (k === 'prog') st.p = st.p % 22 + 1;
+  const b = btns.find(x => x.userData.k === k);
+  if (b) { b.position.z = b.userData.z - 0.04; b.userData.t = performance.now(); }
+  shake = 0.03; navigator.vibrate && navigator.vibrate(12);
+  drawScreen();
+  document.getElementById('gltip').style.opacity = 0;
+}
+document.querySelectorAll('[data-k]').forEach(el => el.addEventListener('click', () => press(el.dataset.k)));
+
+// мышь: вращение или нажатие кнопки
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
+const hit = e => { const rc = cv.getBoundingClientRect(); ptr.set((e.clientX - rc.left) / rc.width * 2 - 1, -(e.clientY - rc.top) / rc.height * 2 + 1); ray.setFromCamera(ptr, cam); return ray.intersectObjects(btns)[0]; };
+let rx = 0.08, ry = -0.45, vx = 0, vy = 0.003, drag = false, moved = 0, px = 0, py = 0;
+cv.addEventListener('pointerdown', e => { drag = true; moved = 0; px = e.clientX; py = e.clientY; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', e => {
+  if (!drag) { cv.classList.toggle('over', !!hit(e)); return; }
+  const dx = e.clientX - px, dy = e.clientY - py; moved += Math.abs(dx) + Math.abs(dy);
+  vy = dx * 0.0009; vx = dy * 0.0009; ry += vy * 6; rx += vx * 6; px = e.clientX; py = e.clientY;
+});
+cv.addEventListener('pointerup', e => { drag = false; if (moved < 6) { const h = hit(e); if (h) press(h.object.userData.k); } });
+
+let visible = false; new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(cv);
+const t0 = performance.now();
+function frame() {
+  const now = performance.now(), t = (now - t0) / 1000;
+  const s = cv.clientWidth; if (cv.width !== Math.round(s * renderer.getPixelRatio())) { renderer.setSize(s, s, false); cam.aspect = 1; cam.updateProjectionMatrix(); }
+  if (!drag) { vy += (0.003 - vy) * 0.02; vx *= 0.94; ry += reduce ? 0 : vy; rx += vx; rx += (0.08 - rx) * 0.02; ry = ((ry + Math.PI) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2) - Math.PI; }
+  // возврат кнопок
+  btns.forEach(b => { if (b.userData.t) { const k = Math.min(1, (now - b.userData.t) / 160); b.position.z = b.userData.z - 0.04 * (1 - k); } });
+  // импульс: кольца и дрожь электрода, частота от силы
+  const on = st.lv > 0, speed = 0.6 + st.lv / 25;
+  rings.forEach((m, i) => { const ph = ((t * speed + i / 3) % 1); m.scale.setScalar(1 + ph * 1.6); m.material.opacity = on && !reduce ? (1 - ph) * (0.25 + st.lv / 60) : 0; });
+  pad.material.emissive = pad.material.emissive || new THREE.Color(); pad.material.emissive.setHex(0xf0a54a); pad.material.emissiveIntensity = on ? (0.1 + 0.25 * (0.5 + 0.5 * Math.sin(t * speed * 6.28))) * st.lv / 40 : 0;
+  shake *= 0.85;
+  dev.rotation.set(rx + (Math.random() - 0.5) * shake, ry + (Math.random() - 0.5) * shake, 0);
+  dev.position.y = reduce ? 0 : Math.sin(now / 900) * 0.05;
+  renderer.render(scene, cam);
+}
+renderer.setAnimationLoop(() => { if (visible) frame(); });
+frame();
+</script>
+
+<script>
+// 6. Rive: заглушка - официальный пример vehicles.riv, пока нет нашей сцены
+(() => {
+  const cv = document.getElementById('rv');
+  rive.RuntimeLoader.setWasmUrl('vendor/rive/rive.wasm');
+  const r = new rive.Rive({ src: 'assets/vehicles.riv', canvas: cv, autoplay: true, animations: 'curves', onLoad: () => r.resizeDrawingSurfaceToCanvas() });
+})();
+</script>
+</body>
+</html>
