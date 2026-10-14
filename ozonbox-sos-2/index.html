@@ -230,8 +230,8 @@ footer a{color:var(--paper);font-weight:700}
 <div class="ticker" aria-hidden="true"><div class="ticker__in" id="ticker"></div></div>
 <header>
   <div class="wrap bar">
-    <a class="logo" href="/ozonbox-glavnaya-9/" aria-label="OzoneBox, на главную"><svg viewBox="0 0 31 32" aria-hidden="true"><path fill="#46e62e" d="M24.37 17.65c3.57.31 6.32 3.42 6.32 7.16V32h-6.9c-3.58 0-6.57-2.87-6.87-6.59-.35-4.43 3.2-8.13 7.45-7.76Z"/><path fill="currentColor" d="M4.81 16c0-2.86 0-4.71.12-6.12.1-1.35.28-1.85.4-2.1a4.8 4.8 0 0 1 2.14-2.23c.23-.12.71-.3 2-.42 1.36-.11 3.13-.11 5.88-.11s4.52 0 5.87.11c1.3.12 1.78.3 2.01.42a4.8 4.8 0 0 1 2.14 2.23c.12.25.3.75.4 2.1.08 1.06.1 2.38.11 4.19a10.6 10.6 0 0 1 4.82 2.47V16c0-5.56 0-8.35-1.03-10.47A10.1 10.1 0 0 0 25.4 1.07C23.35 0 20.68 0 15.35 0S7.34 0 5.3 1.07a10.1 10.1 0 0 0-4.27 4.46C0 7.65 0 10.44 0 16s0 8.35 1.03 10.47a10.1 10.1 0 0 0 4.27 4.46C7.34 32 10.01 32 15.35 32h.52a11.5 11.5 0 0 1-2.37-5.02c-1.74 0-3-.03-4.02-.12-1.3-.11-1.78-.29-2.01-.42a4.8 4.8 0 0 1-2.14-2.22c-.12-.25-.3-.75-.4-2.1C4.82 20.7 4.81 18.86 4.81 16Z"/></svg><span>Ozone<b>Box</b></span></a>
-    <nav class="nav" aria-label="Разделы"><a href="/ozonbox-glavnaya-9/#catalog">Каталог</a><a href="#inside">Что внутри</a><a href="#who">Кому</a></nav>
+    <a class="logo" href="/ozonbox-glavnaya-10/" aria-label="OzoneBox, на главную"><svg viewBox="0 0 31 32" aria-hidden="true"><path fill="#46e62e" d="M24.37 17.65c3.57.31 6.32 3.42 6.32 7.16V32h-6.9c-3.58 0-6.57-2.87-6.87-6.59-.35-4.43 3.2-8.13 7.45-7.76Z"/><path fill="currentColor" d="M4.81 16c0-2.86 0-4.71.12-6.12.1-1.35.28-1.85.4-2.1a4.8 4.8 0 0 1 2.14-2.23c.23-.12.71-.3 2-.42 1.36-.11 3.13-.11 5.88-.11s4.52 0 5.87.11c1.3.12 1.78.3 2.01.42a4.8 4.8 0 0 1 2.14 2.23c.12.25.3.75.4 2.1.08 1.06.1 2.38.11 4.19a10.6 10.6 0 0 1 4.82 2.47V16c0-5.56 0-8.35-1.03-10.47A10.1 10.1 0 0 0 25.4 1.07C23.35 0 20.68 0 15.35 0S7.34 0 5.3 1.07a10.1 10.1 0 0 0-4.27 4.46C0 7.65 0 10.44 0 16s0 8.35 1.03 10.47a10.1 10.1 0 0 0 4.27 4.46C7.34 32 10.01 32 15.35 32h.52a11.5 11.5 0 0 1-2.37-5.02c-1.74 0-3-.03-4.02-.12-1.3-.11-1.78-.29-2.01-.42a4.8 4.8 0 0 1-2.14-2.22c-.12-.25-.3-.75-.4-2.1C4.82 20.7 4.81 18.86 4.81 16Z"/></svg><span>Ozone<b>Box</b></span></a>
+    <nav class="nav" aria-label="Разделы"><a href="/ozonbox-glavnaya-10/#catalog">Каталог</a><a href="#inside">Что внутри</a><a href="#who">Кому</a></nav>
     <div class="icons"><button class="cart press" type="button" id="cartBtn" data-cart aria-label="Корзина, товаров: 0"><span>Корзина</span><span class="cnt" id="cnt">0</span></button></div>
   </div>
 </header>
@@ -267,7 +267,7 @@ footer a{color:var(--paper);font-weight:700}
     </div>
   </section>
 </main>
-<footer><div class="wrap"><span>Макет страницы набора, 14.10.2026 · цены из каталога Tilda, сентябрь 2026</span><a href="/ozonbox-glavnaya-9/">← На главную</a></div></footer>
+<footer><div class="wrap"><span>Макет страницы набора, 14.10.2026 · цены из каталога Tilda, сентябрь 2026</span><a href="/ozonbox-glavnaya-10/">← На главную</a></div></footer>
 <script src="shop.js?v=9"></script>
 <script>
 (() => {
@@ -295,6 +295,14 @@ footer a{color:var(--paper);font-weight:700}
   let tkRz; addEventListener("resize", () => { clearTimeout(tkRz); tkRz = setTimeout(runTicker, 200); });
   const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }));
   document.querySelectorAll(".rv").forEach((el) => io.observe(el));
+})();
+</script>
+<script>
+// «На главную» ведёт на ту версию главной, с которой пришли, а не на одну заданную
+(() => {
+  let n;
+  try { n = (document.referrer.match(/\/ozonbox-glavnaya-(\d+)\//) || [])[1] || sessionStorage.getItem("ozb_from"); if (n) sessionStorage.setItem("ozb_from", n); } catch (e) {}
+  if (n) document.querySelectorAll('a[href^="/ozonbox-glavnaya-10/"]').forEach((a) => (a.href = a.getAttribute("href").replace("glavnaya-10", "glavnaya-" + n)));
 })();
 </script>
 </body>
