@@ -57,6 +57,8 @@
   // состояние корзины - в браузере, общее для главной и лендингов
   let st = { items: {}, promo: null, dl: "pvz" };
   try { st = Object.assign(st, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
+  // в корзине - только товары из каталога и целые количества: мусор из старых версий не ломает счётчик
+  st.items = Object.fromEntries(Object.entries(st.items || {}).filter(([id, n]) => byId[id] && Number.isInteger(n) && n > 0));
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
   const count = () => Object.values(st.items).reduce((a, b) => a + b, 0);
   const subtotal = () => Object.entries(st.items).reduce((a, [id, q]) => a + byId[id][2] * q, 0);
@@ -107,7 +109,7 @@
       { duration: 650, easing: "cubic-bezier(.5,0,.3,1)" }).onfinish = () => { f.remove(); done(); };
   };
   const add = (id, q = 1, fromImg) => fly(fromImg, () => { st.items[id] = (st.items[id] || 0) + q; save(); sync(); say("В корзине: " + byId[id][1]); });
-  const setQ = (id, q) => { if (q <= 0) delete st.items[id]; else st.items[id] = q; save(); sync(); };
+  const setQ = (id, q) => { if (!byId[id] || !Number.isFinite(q)) return; if (q <= 0) delete st.items[id]; else st.items[id] = q; save(); sync(); };
 
   // карточка товара
   const related = (id) => {
@@ -319,7 +321,7 @@
   const CLOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>`;
   sr.innerHTML = `<div class="sr__bar">${LENS}<input id="ozbQ" type="search" placeholder="Что ищем?" autocomplete="off" enterkeyhint="search" aria-label="Что ищем?"><button class="sr__x press" type="button" data-sr-close aria-label="Закрыть">${X}</button></div><div class="sr__body" id="ozbSrBody"></div>`;
   const q = $("#ozbQ"), body = $("#ozbSrBody");
-  const chips = (arr, ico) => `<div class="sr__chips">${arr.map((t) => `<button class="sr__chip press" type="button" data-q="${esc(t)}">${ico || ""}${esc(t)}</button>`).join("")}</div>`;
+  const chips = (arr, ico) => `<div class="sr__chips">${arr.map((t) => `<button class="sr__chip press" type="button" data-sq="${esc(t)}">${ico || ""}${esc(t)}</button>`).join("")}</div>`;
   const renderSr = () => {
     const v = q.value.trim();
     if (!v) {
@@ -339,7 +341,7 @@
     const t = e.target.closest("[aria-label='Поиск'],[data-search]");
     if (t && !sr.contains(t)) { e.preventDefault(); openSearch(); return; }
     if (!sr.contains(e.target)) return;
-    const c = e.target.closest("[data-q]"); if (c) { q.value = c.dataset.q; renderSr(); q.focus({ preventScroll: true }); return; }
+    const c = e.target.closest("[data-sq]"); if (c) { q.value = c.dataset.sq; renderSr(); q.focus({ preventScroll: true }); return; }
     const o = e.target.closest("[data-sr-open]"); if (o) { remember(q.value); open(o.dataset.srOpen); return; }
     if (e.target.closest("[data-sr-clear]")) { hist = []; try { localStorage.removeItem(HKEY); } catch (er) {} renderSr(); return; }
     if (e.target.closest("[data-sr-close]")) hide();
