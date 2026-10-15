@@ -40,6 +40,9 @@
   // мягкие подсказки без цифр: состав совпадает не до миллилитра
   const SOFT = { "ochischenie": "super-duet", "ozodermik-3": "stop-akne", "otri-6000": "stop-akne", "dnevnoy-krem": "chistaya-kozha", "anticellulit": "idealnoe-telo" };
   const CODES = { "OSEN-R1": { pct: 10 }, "OSEN-OLD": { expired: true } };
+  // личный код из окна «Стойте!»: STAY12- и 4 знака, у каждого посетителя свой (размер скидки ждёт решения владельца)
+  const EXIT_PCT = 12;
+  const codeOf = (v) => CODES[v] || (/^STAY12-[A-Z0-9]{4}$/.test(v || "") ? { pct: EXIT_PCT } : undefined);
   const MP = { ozon: "https://www.ozon.ru/seller/ip-salmanov-rafael-hazranovich/", wb: "https://www.wildberries.ru/brands/ozonebox" };
 
   const byId = Object.fromEntries(P.map((p) => [p[0], p]));
@@ -58,13 +61,15 @@
   const count = () => Object.values(st.items).reduce((a, b) => a + b, 0);
   const subtotal = () => Object.entries(st.items).reduce((a, [id, q]) => a + byId[id][2] * q, 0);
   // скидка по коду - вниз до целого рубля, как в lib/orders/money.ts
-  const discount = () => (st.promo && CODES[st.promo]?.pct ? Math.floor(subtotal() * CODES[st.promo].pct / 100) : 0);
+  const discount = () => (st.promo && codeOf(st.promo)?.pct ? Math.floor(subtotal() * codeOf(st.promo).pct / 100) : 0);
 
   // каркас: подложка, карточка, корзина, окно скидки, тост
   document.body.insertAdjacentHTML("beforeend", `
     <div class="ov" id="ozbOv"></div>
     <section class="pd" id="ozbPd" role="dialog" aria-modal="true" aria-label="Карточка товара"></section>
     <aside class="cd" id="ozbCd" role="dialog" aria-modal="true" aria-label="Корзина"></aside>
+    <section class="sr" id="ozbSr" role="dialog" aria-modal="true" aria-label="Поиск"></section>
+    <section class="ex" id="ozbEx" role="dialog" aria-modal="true" aria-label="Скидка перед уходом"></section>
     <section class="pm" id="ozbPm" role="dialog" aria-modal="true" aria-label="Скидка по коду"></section>
     <div class="toast" id="ozbToast" role="status"><i></i><span></span></div>`);
   const ov = $("#ozbOv"), pd = $("#ozbPd"), cd = $("#ozbCd"), pm = $("#ozbPm"), toast = $("#ozbToast");
@@ -191,7 +196,7 @@
     cd.innerHTML = head("<em>Ваша</em> корзина") + `<div class="cd__body">
       ${ids.map((id) => `<div class="ci"><img src="${img(id)}" alt=""><div><p>${esc(byId[id][1])}</p><small>${rub(byId[id][2])}</small></div><div class="qty"><button type="button" data-q="${id}" data-d="-1" aria-label="Меньше">−</button><b>${st.items[id]}</b><button type="button" data-q="${id}" data-d="1" aria-label="Больше">+</button></div></div>`).join("")}
       ${upsell()}
-      <div><div class="code"><input id="ozbCode" placeholder="Код из ролика" value="${st.promo || ""}" aria-label="Код из ролика"><button class="btn btn--ink btn--sm press" type="button" data-code>Применить</button></div><p class="code__msg ${st.promo ? "ok" : ""}" id="ozbMsg">${st.promo ? "Код применён: −" + CODES[st.promo].pct + "%" : ""}</p></div>
+      <div><div class="code"><input id="ozbCode" placeholder="Код из ролика" value="${st.promo || ""}" aria-label="Код из ролика"><button class="btn btn--ink btn--sm press" type="button" data-code>Применить</button></div><p class="code__msg ${st.promo ? "ok" : ""}" id="ozbMsg">${st.promo ? "Код применён: −" + codeOf(st.promo).pct + "%" : ""}</p></div>
     </div>` + sumBlock(`<button class="btn btn--acid press" type="button" data-step="contacts">Оформить ${ARR}</button>`);
   };
   // детали выбранной доставки
@@ -268,7 +273,7 @@
     if (d.reveal !== undefined) { $("#ozbPmCode").classList.add("on"); return; }
     if (d.apply) { st.promo = d.apply; save(); hide(); say("Код " + d.apply + " применится в корзине"); return; }
     if (d.code !== undefined) {
-      const v = $("#ozbCode").value.trim().toUpperCase(), c = CODES[v], msg = $("#ozbMsg");
+      const v = $("#ozbCode").value.trim().toUpperCase(), c = codeOf(v), msg = $("#ozbMsg");
       if (!v) { st.promo = null; save(); renderCart(); return; }
       if (!c) { msg.className = "code__msg bad"; msg.textContent = "Такого кода нет. Проверьте написание"; return; }
       if (c.expired) { msg.className = "code__msg bad"; msg.textContent = "Срок действия этого кода закончился"; return; }
@@ -288,7 +293,120 @@
     }
   });
 
+  // поиск: строка сверху, подсказки «Часто ищут», своя история (в браузере), результаты по мере ввода
+  const sr = $("#ozbSr"), HKEY = "ozb_search_hist_v1";
+  const CAT = { face: "лицо кожа", hair: "волосы кожа головы", body: "тело", oils: "масло", sets: "набор наборы подарок" };
+  const EXTRA = { "stop-akne": "акне прыщи", "krem-pryschi": "акне прыщи точечно", "super-duet": "подарок упаковка", "sos-boks": "sos сос срочно" };
+  const POP = ["Лицо", "Крем", "Волосы", "Тело", "Масло", "Наборы", "Акне", "Подарок"];
+  const hay = Object.fromEntries(P.map(([id, name, , cats]) => {
+    const inf = INFO[id] || {};
+    return [id, [name, inf.kind, (inf.inside || []).join(" "), cats.map((c) => CAT[c]).join(" "), EXTRA[id] || ""].join(" ").toLowerCase().replace(/ё/g, "е")];
+  }));
+  // грубое русское окончание: «кремы» найдёт «крем», «лицо» - «лица»
+  const stem = (w) => w.length > 4 ? w.slice(0, Math.max(4, w.length - 2)) : w.length > 3 ? w.slice(0, 3) : w;
+  const STOP = new Set(["для", "и", "с", "со", "на", "от", "в", "во", "по", "к"]);
+  const find = (q) => {
+    const ws = q.toLowerCase().replace(/ё/g, "е").split(/[^a-zа-я0-9%]+/).filter((w) => w && !STOP.has(w)).map(stem);
+    if (!ws.length) return [];
+    // сначала товары, у которых слово в названии или виде товара, потом наборы, где оно в составе
+    const inName = (p) => ws.every((w) => (p[1] + " " + (INFO[p[0]]?.kind || "")).toLowerCase().replace(/ё/g, "е").includes(w)) ? 0 : 1;
+    return P.filter(([id]) => ws.every((w) => hay[id].includes(w))).sort((a, b) => inName(a) - inName(b));
+  };
+  let hist = [];
+  try { hist = JSON.parse(localStorage.getItem(HKEY) || "[]"); } catch (e) {}
+  const remember = (q) => { q = q.trim(); if (q.length < 2) return; hist = [q, ...hist.filter((h) => h.toLowerCase() !== q.toLowerCase())].slice(0, 6); try { localStorage.setItem(HKEY, JSON.stringify(hist)); } catch (e) {} };
+  const LENS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>`;
+  const CLOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>`;
+  sr.innerHTML = `<div class="sr__bar">${LENS}<input id="ozbQ" type="search" placeholder="Что ищем?" autocomplete="off" enterkeyhint="search" aria-label="Что ищем?"><button class="sr__x press" type="button" data-sr-close aria-label="Закрыть">${X}</button></div><div class="sr__body" id="ozbSrBody"></div>`;
+  const q = $("#ozbQ"), body = $("#ozbSrBody");
+  const chips = (arr, ico) => `<div class="sr__chips">${arr.map((t) => `<button class="sr__chip press" type="button" data-q="${esc(t)}">${ico || ""}${esc(t)}</button>`).join("")}</div>`;
+  const renderSr = () => {
+    const v = q.value.trim();
+    if (!v) {
+      body.innerHTML = (hist.length ? `<div class="sr__h"><h3>Вы искали</h3><button type="button" data-sr-clear>Очистить</button></div>${chips(hist, CLOCK)}` : "")
+        + `<div class="sr__h"><h3>Часто ищут</h3></div>${chips(POP)}`;
+      return;
+    }
+    const r = find(v);
+    body.innerHTML = r.length
+      ? `<div class="sr__h"><h3>Нашли: ${r.length}</h3></div><ul class="sr__list">${r.map(([id, name, price]) => `<li><button class="sr__it press" type="button" data-sr-open="${id}"><img src="${img(id)}" alt="" width="56" height="56" loading="lazy"><span>${esc(name)}<small>${esc(INFO[id]?.kind || "")}</small></span><b>${rub(price)}</b></button></li>`).join("")}</ul>`
+      : `<div class="sr__none"><p>По запросу «${esc(v)}» ничего не нашли</p><span>Попробуйте одно слово: лицо, волосы, тело, масло</span></div>${chips(POP)}`;
+  };
+  const openSearch = () => { q.value = ""; renderSr(); show(sr); setTimeout(() => q.focus({ preventScroll: true }), 80); };
+  q.addEventListener("input", renderSr);
+  q.addEventListener("keydown", (e) => { if (e.key === "Enter") { remember(q.value); const r = find(q.value); if (r.length === 1) open(r[0][0]); else q.blur(); } });
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest("[aria-label='Поиск'],[data-search]");
+    if (t && !sr.contains(t)) { e.preventDefault(); openSearch(); return; }
+    if (!sr.contains(e.target)) return;
+    const c = e.target.closest("[data-q]"); if (c) { q.value = c.dataset.q; renderSr(); q.focus({ preventScroll: true }); return; }
+    const o = e.target.closest("[data-sr-open]"); if (o) { remember(q.value); open(o.dataset.srOpen); return; }
+    if (e.target.closest("[data-sr-clear]")) { hist = []; try { localStorage.removeItem(HKEY); } catch (er) {} renderSr(); return; }
+    if (e.target.closest("[data-sr-close]")) hide();
+  });
+
+  // окно «Стойте!»: когда посетитель собирается уйти. Компьютер - мышь уходит к вкладкам и крестику;
+  // телефон - резкий рывок вверх после того, как пролистал хотя бы полтора экрана. Один раз за визит,
+  // не раньше 12 секунд и первого действия, не поверх других окон и не тем, у кого код уже применён.
+  const ex = $("#ozbEx"), EKEY = "ozb_exit_v1";
+  let exCode = "";
+  try { exCode = localStorage.getItem("ozb_exit_code") || ""; } catch (e) {}
+  if (!exCode) { const A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; exCode = "STAY12-" + Array.from({ length: 4 }, () => A[Math.floor(Math.random() * A.length)]).join(""); try { localStorage.setItem("ozb_exit_code", exCode); } catch (e) {} }
+  const RINGS = `<svg class="ex__rings" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="34"/><circle cx="100" cy="100" r="58"/><circle cx="100" cy="100" r="82"/><circle cx="148" cy="52" r="9"/><circle cx="46" cy="150" r="6"/><circle cx="160" cy="138" r="4"/></svg>`;
+  const openExit = () => {
+    try { sessionStorage.setItem(EKEY, "1"); } catch (e) {}
+    ex.innerHTML = `<button class="pd__x press" type="button" data-close aria-label="Закрыть">${X}</button>
+      <div class="ex__txt">
+        <p class="ex__kick">Уже уходите?</p>
+        <h2>Стойте!<br>Для вас есть <mark>скидка</mark></h2>
+        <p class="ex__sub">Личный код на весь заказ. Переверните карточку - покажем размер.</p>
+        <button class="ex__no press" type="button" data-close data-ex-no>Нет, спасибо</button>
+      </div>
+      <div class="ex__card" id="ozbExCard">
+        <div class="ex__face ex__front">${RINGS}<span class="ex__lbl">Ваша скидка</span><b class="ex__q">?</b><button class="btn btn--ink press" type="button" data-ex-flip>Узнать скидку ${ARR}</button></div>
+        <div class="ex__face ex__back" inert aria-hidden="true"><span class="ex__lbl">Ваша скидка</span><b class="ex__pct">−${EXIT_PCT}%</b><span class="ex__on">на весь заказ</span>
+          <div class="ex__code"><b>${exCode}</b><button class="press" type="button" data-ex-copy aria-label="Скопировать код"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></div>
+          <button class="btn btn--acid press" type="button" data-apply="${exCode}">Применить в корзине ${ARR}</button></div>
+      </div>
+      <p class="note ex__note">Скидка на весь заказ, с другими кодами не суммируется. Макет: код работает в демо-корзине этого сайта, полные условия акции опубликуем на сайте.</p>`;
+    show(ex);
+  };
+  const burst = (host) => {
+    if (reduce) return;
+    for (let i = 0; i < 14; i++) {
+      const b = document.createElement("span"); b.className = "ex__bub"; const z = 10 + Math.random() * 22; b.style.width = b.style.height = z + "px"; host.appendChild(b);
+      const a = Math.random() * Math.PI * 2, r = 120 + Math.random() * 120;
+      b.animate([{ transform: "translate(-50%,-50%) scale(.2)", opacity: 0 }, { opacity: 1, offset: .25 }, { transform: `translate(calc(-50% + ${Math.cos(a) * r}px), calc(-50% + ${Math.sin(a) * r}px)) scale(1)`, opacity: 0 }],
+        { duration: 900 + Math.random() * 500, easing: "cubic-bezier(.2,.7,.3,1)", fill: "both" }).onfinish = () => b.remove();
+    }
+  };
+  let armed = false, acted = false;
+  const t0 = Date.now();
+  // «Нет, спасибо» - не показываем неделю; код применён - не показываем вовсе
+  const ready = () => armed && acted && !openEl && !st.promo && Date.now() - t0 > 12000 && (() => { try { return !sessionStorage.getItem(EKEY) && Date.now() - (+localStorage.getItem("ozb_exit_no") || 0) > 7 * 864e5; } catch (e) { return false; } })();
+  setTimeout(() => (armed = true), 12000);
+  ["scroll", "click", "keydown", "touchstart"].forEach((ev) => addEventListener(ev, () => (acted = true), { once: true, passive: true }));
+  // компьютер: мышь ушла за верхний край и не вернулась за 400 мс (потянулся к вкладкам и передумал - не считаем)
+  let exT;
+  document.addEventListener("mouseout", (e) => { if (!e.relatedTarget && e.clientY < 12 && ready()) { clearTimeout(exT); exT = setTimeout(() => ready() && openExit(), 400); } });
+  document.addEventListener("mouseover", () => clearTimeout(exT));
+  // телефон: один быстрый рывок вверх длиной больше экрана, который довёл до самого верха
+  let ly = scrollY, lt = 0, runY = scrollY, runT = performance.now();
+  addEventListener("scroll", () => {
+    const y = scrollY, t = performance.now();
+    if (y >= ly) { runY = y; runT = t; }
+    else if (t - lt > 250) { runY = ly; runT = t - 16; } // пауза - новый рывок
+    else if (matchMedia("(pointer: coarse)").matches && y < innerHeight * .5 && runY - y > innerHeight * 1.2 && (runY - y) / Math.max(1, t - runT) > 1.5 && ready()) openExit();
+    ly = y; lt = t;
+  }, { passive: true });
+  ex.addEventListener("click", (e) => {
+    if (e.target.closest("[data-ex-no]")) { try { localStorage.setItem("ozb_exit_no", Date.now()); } catch (er) {} }
+    if (e.target.closest("[data-ex-flip]")) { const cdx = $("#ozbExCard"), bk = cdx.querySelector(".ex__back"), fr = cdx.querySelector(".ex__front"); bk.inert = false; bk.removeAttribute("aria-hidden"); fr.inert = true; fr.setAttribute("aria-hidden", "true"); cdx.classList.add("on"); burst($("#ozbExCard")); setTimeout(() => ex.querySelector("[data-apply]")?.focus({ preventScroll: true }), 500); }
+    if (e.target.closest("[data-ex-copy]")) { navigator.clipboard?.writeText(exCode).then(() => say("Код " + exCode + " скопирован"), () => say("Код: " + exCode)); }
+  });
+
   sync();
   if (location.hash.startsWith("#p=")) setTimeout(() => open(location.hash.slice(3)), 300);
-  window.OZB = { P, INFO, byId, rub, open, add, openCart, openPromo };
+  if (location.search.includes("exit")) setTimeout(openExit, 400);
+  window.OZB = { P, INFO, byId, rub, open, add, openCart, openPromo, openSearch, openExit };
 })();
