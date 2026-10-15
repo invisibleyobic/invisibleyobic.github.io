@@ -73,7 +73,7 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .blobs i:nth-child(2) { width: 26vmax; height: 26vmax; left: -8vmax; top: 18vh; background: #eef2ff; opacity: .9; }
 .blobs i:nth-child(3) { width: 22vmax; height: 22vmax; right: 18vw; top: 30vh; background: #dde5f7; opacity: .35; }
 .hero .wrap { position: relative; z-index: 1; }
-.hero h1 { font-size: clamp(64px, 10.5vw, 150px); letter-spacing: -.055em; line-height: .86; }
+.hero h1 { font-size: clamp(64px, 10.5vw, 150px); letter-spacing: -.045em; line-height: 1; padding-bottom: .04em; }
 .hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 32px; align-items: center; }
 .hero-kit { border-radius: 32px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px -36px rgba(20,40,90,.35); }
 .hero-kit img { width: 100%; aspect-ratio: 1; object-fit: cover; }
@@ -117,6 +117,15 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .hc .art { aspect-ratio: 4 / 3; border-radius: 20px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
 .hc .art svg { width: 62%; height: 80%; overflow: visible; }
 .hc .art img { width: 82%; height: 76%; object-fit: contain; }
+.cream-art { position: relative; }
+.cream-art .tube { position: absolute; left: 4%; top: 6%; width: 52% !important; height: 88% !important; }
+.cream-art .ontopad { position: absolute; right: 4%; bottom: 6%; width: 46%; height: auto; }
+.mon { position: relative; background: #07120d !important; border-color: #07120d !important; }
+.mon canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mon span { position: absolute; bottom: 10px; font: 600 11px/1 ui-monospace, monospace; color: #6ff5a9; letter-spacing: .04em; opacity: .85; }
+.mon .mon-l { left: 12px; } .mon .mon-r { right: 12px; }
+.belt-art { position: relative; }
+.belt-art i { position: absolute; left: 50%; top: 50%; width: 30%; aspect-ratio: 1; margin: -15% 0 0 -15%; border: 2px solid var(--warm); border-radius: 50%; opacity: 0; pointer-events: none; }
 .hc .n { font-size: 14px; color: var(--soft); margin: 0 0 6px; }
 .hc h3 { font-size: 26px; letter-spacing: -.025em; }
 .hc p { margin: 8px 0 0; color: var(--soft); }
@@ -126,7 +135,7 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .stage { position: relative; border-radius: 36px; background: radial-gradient(80% 70% at 50% 35%, #ffffff, #e7e8e6); aspect-ratio: 4 / 5; overflow: hidden; }
 .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .stage .fallback { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; mix-blend-mode: multiply; }
-.stage .tip { position: absolute; left: 16px; top: 16px; background: rgba(255,255,255,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 14px; pointer-events: none; }
+.stage .tip { position: absolute; left: 16px; bottom: 16px; background: rgba(255,255,255,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 14px; pointer-events: none; }
 .read { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
 .read div { background: var(--card); border-radius: 22px; padding: 16px 18px; }
 .read span { color: var(--soft); font-size: 14px; display: block; }
@@ -152,6 +161,25 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .prize b { display: block; font-size: 26px; letter-spacing: -.02em; color: var(--warm); }
 .prize code { font: 600 16px var(--f); background: rgba(255,255,255,.12); padding: 3px 8px; border-radius: 8px; }
 .game .note { color: #8d918e; font-size: 13px; margin-top: 14px; }
+
+/* 5б. наборы */
+.bgrid { margin-top: 30px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.bc { background: var(--card); border-radius: var(--r); padding: 22px; display: flex; flex-direction: column; gap: 12px; position: relative; border: 1px solid var(--line); }
+.bc.hit { border: 2px solid var(--warm); }
+.bc .bdg { align-self: flex-start; font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: var(--warm-bg); color: var(--warm-d); }
+.bc h3 { font-size: 28px; }
+.bc .tg { color: var(--soft); font-size: 15px; margin: 0; min-height: 3em; }
+.bc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 15px; }
+.bc li { display: flex; justify-content: space-between; gap: 8px; align-items: center; border-top: 1px solid var(--line); padding-top: 8px; }
+.bc select { font: inherit; font-size: 14px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); padding: 0 8px; max-width: 100%; width: 100%; }
+.bc .pick { display: grid; gap: 6px; width: 100%; }
+.bc .pr { margin-top: auto; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.bc .pr b { font-size: 28px; letter-spacing: -.02em; }
+.bc .pr s { color: var(--soft); }
+.bc .sv { color: var(--warm-d); font-weight: 650; font-size: 15px; }
+.small-note { color: var(--soft); font-size: 13px; margin-top: 14px; }
+@media (max-width: 1100px) { .bgrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) { .bgrid { grid-template-columns: 1fr; } }
 
 /* 6. каталог */
 .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 30px; }
@@ -221,6 +249,13 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .form { margin-top: 18px; display: grid; gap: 10px; }
 .form input { height: 52px; border-radius: 14px; border: 1px solid var(--line); padding: 0 14px; font: inherit; }
 .empty { text-align: center; color: var(--soft); padding: 40px 10px; }
+@media (max-width: 420px) {
+  .cl li { grid-template-columns: 52px 1fr !important; position: relative; padding-right: 44px; }
+  .cl img { width: 52px; height: 52px; }
+  .cl .qty { grid-column: 2; }
+  .cl .del { position: absolute; right: 2px; top: 2px; }
+  .pv .ph { aspect-ratio: 16 / 10; }
+}
 @media (max-width: 760px) {
   .sheet { top: auto; left: 0; width: 100%; max-height: 92svh; border-radius: 26px 26px 0 0; transform: translateY(105%); }
   .sheet.open { transform: none; }
@@ -268,7 +303,6 @@ footer .wrap { display: grid; gap: 6px; }
   .item { padding: 8px; border-radius: 22px; }
   .item .nm { font-size: 14px; }
   .item .ds { font-size: 12px; }
-  .item .add { width: 40px; height: 40px; }
   .day .box { grid-template-columns: 96px 1fr; gap: 16px; align-items: start; padding: 22px 18px; }
   .clock { position: sticky; top: 84px; }
   .clock svg { width: 96px; }
@@ -276,6 +310,10 @@ footer .wrap { display: grid; gap: 6px; }
   .entries li { grid-template-columns: 1fr; gap: 2px; font-size: 17px; }
   .day h2 { font-size: 30px; }
   .hero-grid { grid-template-columns: 1fr; }
+  .hero-kit { display: none; }
+  .hero { padding-top: 28px; }
+  .hero .lead { font-size: 16px; margin-top: 14px !important; }
+  .hint { font-size: 14px; }
   .arrows { display: none; }
   .hc { flex-direction: column; align-items: stretch; }
   .hc .art { width: 100%; aspect-ratio: 16 / 9; }
@@ -291,7 +329,7 @@ footer .wrap { display: grid; gap: 6px; }
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#top"><svg viewBox="0 0 16 20" aria-hidden="true"><path d="M8 0C8 0 0 9 0 13.5a8 8 0 0 0 16 0C16 9 8 0 8 0Z"/></svg>ОЗОТЭНС</a>
-    <nav class="nav"><a href="#how">Как работает</a><a href="#device">Прибор</a><a href="#wheel">Колесо скидок</a><a href="#shop">Каталог</a><a href="#docs">Документы</a></nav>
+    <nav class="nav"><a href="#how">Как работает</a><a href="#device">Прибор</a><a href="#wheel">Колесо скидок</a><a href="#bundles">Наборы</a><a href="#shop">Каталог</a><a href="#docs">Документы</a></nav>
     <button class="cartbtn" type="button" id="cartBtn" aria-label="Корзина"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.4 11.2a2 2 0 0 1-2 1.8H7.4a2 2 0 0 1-2-1.8L4 8Z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg><span>Корзина</span><b id="cartN"></b></button>
   </div>
 </header>
@@ -305,7 +343,7 @@ footer .wrap { display: grid; gap: 6px; }
       <div class="hero-grid">
         <div>
           <h1 id="title">Где <em>болит?</em></h1>
-          <p class="lead" style="margin-top:22px">Прибор ТЭНС, озоновый крем OZOTENS 30% и электрод по форме больного места. Выберите зону - покажем нужный электрод и цену.</p>
+          <p class="lead" style="margin-top:22px">Прибор ТЭНС, озонсодержащий крем OZOTENS 30% и электрод по форме больного места. Выберите зону - покажем нужный электрод и цену.</p>
         </div>
         <div class="hero-kit"><img src="img/kit-set.jpg" alt="Комплект: прибор RoovJoy, крем OZOTENS 30% и электроды"></div>
       </div>
@@ -354,23 +392,22 @@ footer .wrap { display: grid; gap: 6px; }
       <p class="lead">Слабые электрические импульсы (ТЭНС) и озонсодержащий крем OZOTENS 30% за один сеанс, в том месте, где беспокоит.</p>
       <div class="how-grid">
         <div class="hc">
-          <div class="art"><svg viewBox="0 0 200 200" aria-hidden="true">
-            <defs><radialGradient id="gDrop" cx="38%" cy="34%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#eef2fb"/><stop offset="1" stop-color="#c3d0ec"/></radialGradient></defs>
-            <path id="drop" fill="url(#gDrop)" d="M100 16 C100 16 38 92 38 134 A62 62 0 0 0 162 134 C162 92 100 16 100 16 Z"/>
-            <path d="M70 116 C70 100 78 86 86 76" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-            <text x="100" y="150" text-anchor="middle" font-family="Onest, sans-serif" font-weight="700" font-size="13" fill="#3c4a6b">OZOTENS 30%</text>
-          </svg></div>
-          <div><p class="n">01</p><h3>Крем на электрод</h3><p>Тонкий слой OZOTENS 30%. Он же проводит ток.</p></div>
+          <div class="art cream-art" aria-hidden="true">
+            <img class="tube" src="img/cream.webp" alt="">
+            <svg viewBox="0 0 120 120" class="ontopad">
+              <rect x="20" y="78" width="80" height="30" rx="9" fill="#e8eaee" stroke="#cfd3da"/>
+              <ellipse id="layer" cx="60" cy="88" rx="0" ry="0" fill="#ffffff" stroke="#dfe5f1"/>
+              <path id="dollop" d="M60 8 C60 8 46 26 46 36 A14 14 0 0 0 74 36 C74 26 60 8 60 8 Z" fill="#ffffff" stroke="#d6dcea"/>
+            </svg>
+          </div>
+          <div><p class="n">01</p><h3>Крем на электрод</h3><p>Тонкий слой OZOTENS 30% на сегменты электрода. Крем же проводит ток.</p></div>
         </div>
         <div class="hc">
-          <div class="art"><svg viewBox="0 0 200 200" aria-hidden="true">
-            <path id="wave" fill="#2f66f5" d="M100 16 C100 16 38 92 38 134 A62 62 0 0 0 162 134 C162 92 100 16 100 16 Z"/>
-            <path id="sWave" fill="none" d="M14 104 Z"/>
-          </svg></div>
-          <div><p class="n">02</p><h3>Импульс</h3><p>Прибор даёт слабые импульсы. Силу от 0 до 40 выбираете сами, по ощущениям.</p></div>
+          <div class="art mon"><canvas id="ecg" aria-label="Монитор: бифазный прямоугольный импульс"></canvas><span class="mon-l" style="top:10px;bottom:auto">TENS · бифазный</span><span class="mon-r" id="ecgHz">2-100 Гц · 100-300 мкс</span></div>
+          <div><p class="n">02</p><h3>Импульс</h3><p>Прибор даёт слабые бифазные импульсы. Силу от 0 до 40 выбираете сами, по ощущениям.</p></div>
         </div>
         <div class="hc">
-          <div class="art"><img src="img/el-back.webp" alt="Электрод «Спина»: эластичный пояс с четырьмя сегментами"></div>
+          <div class="art belt-art"><img id="beltImg" src="img/el-back.webp" alt="Электрод «Спина»: эластичный пояс с манжетой и 4 сегментами"><i class="pr1"></i><i class="pr2"></i><i class="pr3"></i></div>
           <div><p class="n">03</p><h3>Пояс на больное место</h3><p>Электрод - это пояс или накладка по форме зоны. Для поясницы - эластичный пояс с манжетой и 4 сегментами.</p></div>
         </div>
       </div>
@@ -427,6 +464,17 @@ footer .wrap { display: grid; gap: 6px; }
           <button class="spin" type="button" id="spinBtn">Крутить</button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 5б. Наборы: дешевле, чем по отдельности (предложение экономиста, утверждает продавец) -->
+  <section id="bundles">
+    <div class="wrap">
+      <p class="kick">Наборы</p>
+      <h2 class="words">Вместе - <em>дешевле</em></h2>
+      <p class="lead">Чем больше вещей в наборе, тем больше скидка: 2 позиции −3%, 3 позиции −5%, 4 позиции −7%. Скидка набора суммируется с призом колеса, но всего не больше 12%.</p>
+      <div class="bgrid" id="bgrid"></div>
+      <p class="small-note">Предложение: размеры скидок и наборы утверждает продавец.</p>
     </div>
   </section>
 
@@ -508,12 +556,6 @@ footer .wrap { display: grid; gap: 6px; }
 <script src="vendor/InertiaPlugin.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script>
-// волна импульса для морфа: плавный бифазный, считается один раз
-(() => { const f = x => -62 * Math.exp(-(((x - 80) / 13) ** 2)) + 62 * Math.exp(-(((x - 122) / 13) ** 2));
-  const N = 120, pts = [], pt = (x, s) => { const d = (f(x + 0.01) - f(x - 0.01)) / 0.02, n = Math.hypot(1, d); return [x + s * 9 * (-d / n), 104 + f(x) + s * 9 / n]; };
-  for (let i = 0; i <= N; i++) pts.push(pt(14 + i * 172 / N, -1)); for (let i = N; i >= 0; i--) pts.push(pt(14 + i * 172 / N, 1));
-  document.getElementById('sWave').setAttribute('d', 'M' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L') + ' Z'); })();
-
 // ===== данные: розничные цены из каталога ОТРИ (как в каталоге v2) =====
 const I = {
   '85/31': { name: 'Прибор RoovJoy R-C3', sub: '2 канала, TENS / EMS / массаж, 22 программы', price: 19700, img: 'img/device.webp', cat: 'dev' },
@@ -530,6 +572,15 @@ const I = {
 };
 const ZONES = ['85/04', '85/01', '85/02', '85/07', '85/05', '85/09', '85/06', '85/08', '85/03'];
 const DEV = '85/31', CREAM = '5T15';
+// наборы: предложение экономиста, утверждает продавец
+const BUNDLES = [
+  { id: 'start', title: 'Старт', badge: 'Хит', tagline: 'Всё для первого сеанса: прибор, крем и электрод под вашу зону', items: [{ code: '85/31' }, { code: '5T15' }, { pick: '85/04' }], pct: 5 },
+  { id: 'two', title: 'Две зоны', badge: 'Выгоднее всего', tagline: 'Два канала прибора - две зоны за один сеанс, например спина и шея', items: [{ code: '85/31' }, { code: '5T15' }, { pick: '85/04' }, { pick: '85/01' }], pct: 7 },
+  { id: 'add', title: 'Ещё одна зона', badge: 'Если прибор уже есть', tagline: 'Электрод под новую зону и крем к нему', items: [{ code: '5T15' }, { pick: '85/01' }], pct: 3 },
+  { id: 'cream', title: 'Запас крема', badge: 'Запас', tagline: 'Крем нужен на каждый сеанс - сразу три тюбика', items: [{ code: '5T15', q: 3 }], pct: 5 },
+];
+const MAX_DISC = 12;
+const floor10 = n => Math.floor(n / 10) * 10;
 // призы колеса: пример, условия утверждает продавец
 const PRIZES = [
   { t: '−3%', d: 3, w: 30 }, { t: '−5%', d: 5, w: 22 }, { t: '0₽', t2: 'доставка', name: 'Доставка 0 ₽', ship: true, w: 12 }, { t: '−7%', d: 7, w: 10 },
@@ -560,6 +611,8 @@ let lenis = null;
 let cart = store.get('ozo_cart_v12', []);      // [{code, size, q}]
 let bonus = store.get('ozo_wheel_v12', null);   // приз колеса
 const saveCart = () => { store.set('ozo_cart_v12', cart); const n = cart.reduce((a, c) => a + c.q, 0); $('#cartN').textContent = n || ''; };
+const lineFull = c => c.b ? c.full : I[c.code].price;
+const linePrice = c => c.b ? c.price : I[c.code].price;
 const addToCart = (code, size, q = 1) => {
   const f = cart.find(c => c.code === code && c.size === size);
   f ? f.q = Math.min(9, f.q + q) : cart.push({ code, size: size || null, q });
@@ -577,6 +630,7 @@ const openSheet = (title, body, foot, keep) => {
   $('#shTitle').textContent = title; $('#shBody').innerHTML = ''; $('#shFoot').innerHTML = '';
   $('#shBody').append(body); if (foot) { $('#shFoot').append(foot); $('#shFoot').hidden = false; } else $('#shFoot').hidden = true;
   $('#shBody').scrollTop = keep ? sy : 0;
+  $('#toast').classList.remove('on');
   sheet.classList.add('open'); ov.classList.add('open'); document.body.classList.add('lock'); lenis && lenis.stop();
   document.querySelector('main').inert = true; document.querySelector('header.top').inert = true;
   if (!keep) setTimeout(() => $('#shX').focus({ preventScroll: true }), 60);
@@ -594,7 +648,7 @@ const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) 
 
 function openProduct(code) {
   const it = I[code]; const st = { size: it.sizes ? it.sizes[0] : null, dev: false, cream: false, q: 1 };
-  const inCart = c => cart.some(x => x.code === c);
+  const inCart = c => cart.some(x => x.code === c || (x.b && x.items.some(y => y.code === c)));
   const b = h('div', 'pv');
   b.innerHTML = `<div class="ph"><img src="${it.img}" alt="${it.name}"></div><h3>${it.name}</h3><p class="sub">${[it.segs, it.sub].filter(Boolean).join(' · ')}</p><p class="pr">${rub(it.price)}</p>`;
   if (it.cat === 'el') b.append(h('p', 'howto', 'Как надеть: нанесите тонкий слой крема OZOTENS 30% на сегменты, наденьте электрод на зону и подключите к прибору.'));
@@ -621,14 +675,16 @@ function openCart(keep) {
   const b = h('div');
   if (!cart.length) { b.append(h('p', 'empty', 'Корзина пока пустая. Выберите зону в начале страницы.')); openSheet('Корзина', b, null, keep); return; }
   const ul = h('ul', 'cl');
-  cart.forEach((c, i) => { const it = I[c.code]; const li = h('li', '', `<img src="${it.img}" alt=""><div class="t">${it.name}${c.size ? ` <small>размер ${c.size}</small>` : ''}<small>${rub(it.price)}</small></div>`);
+  cart.forEach((c, i) => { const it = c.b ? { name: 'Набор «' + c.title + '»', img: 'img/kit-set.jpg' } : I[c.code];
+    const li = h('li', '', c.b ? `<img src="${it.img}" alt=""><div class="t">${it.name}<small>${c.items.map(x => I[x.code].name.replace('Электрод ', '') + (x.size ? ' ' + x.size : '') + (x.q > 1 ? ' ×' + x.q : '')).join(' + ')}</small><small><s>${rub(c.full)}</s> ${rub(c.price)}</small></div>` : `<img src="${it.img}" alt=""><div class="t">${it.name}${c.size ? ` <small>размер ${c.size}</small>` : ''}<small>${rub(it.price)}</small></div>`);
     const q = h('div', 'qty', `<button type="button" aria-label="Меньше">−</button><span>${c.q}</span><button type="button" aria-label="Больше">+</button>`);
     const [m, p] = q.querySelectorAll('button'); m.onclick = () => { c.q--; if (c.q <= 0) cart.splice(i, 1); saveCart(); haptic(8); openCart(true); }; p.onclick = () => { c.q = Math.min(9, c.q + 1); saveCart(); haptic(8); openCart(true); };
     const del = h('button', 'del', '×'); del.type = 'button'; del.setAttribute('aria-label', 'Удалить: ' + it.name); del.onclick = () => { cart.splice(i, 1); saveCart(); haptic(10); openCart(true); };
     li.append(q, del); ul.append(li); });
   b.append(ul);
-  const sub = cart.reduce((a, c) => a + I[c.code].price * c.q, 0); const disc = bonus && bonus.d ? Math.round(sub * bonus.d / 100) : 0;
-  b.append(h('div', 'sum', `<div><span>Товары</span><span class="price">${rub(sub)}</span></div>${bonus && bonus.d ? `<div><span>Приз колеса: ${bonus.t}</span><span class="price">−${rub(disc)}</span></div>` : ''}<div><span>Доставка</span><span>${bonus && bonus.ship ? '0 ₽ (приз колеса)' : 'рассчитаем при подтверждении'}</span></div><div class="tot"><span>Итого</span><span class="price">${rub(sub - disc)}</span></div>`));
+  const full = cart.reduce((a, c) => a + lineFull(c) * c.q, 0), sub = cart.reduce((a, c) => a + linePrice(c) * c.q, 0), bsave = full - sub;
+  let disc = bonus && bonus.d ? Math.round(sub * bonus.d / 100) : 0; const capped = bsave + disc > full * MAX_DISC / 100; if (capped) disc = Math.max(0, Math.floor(full * MAX_DISC / 100) - bsave);
+  b.append(h('div', 'sum', `<div><span>Товары</span><span class="price">${rub(full)}</span></div>${bsave ? `<div><span>Скидка наборов</span><span class="price">−${rub(bsave)}</span></div>` : ''}${bonus && bonus.d ? `<div><span>Приз колеса: ${bonus.t}${capped ? ' (до потолка 12%)' : ''}</span><span class="price">−${rub(disc)}</span></div>` : ''}<div><span>Доставка</span><span>${bonus && bonus.ship ? '0 ₽ (приз колеса)' : 'при звонке'}</span></div><div class="tot"><span>Итого</span><span class="price">${rub(sub - disc)}</span></div>`));
   const form = h('form', 'form', '<label class="sr" for="fN">Имя</label><input id="fN" name="n" placeholder="Имя" autocomplete="name" required><label class="sr" for="fP">Телефон</label><input id="fP" name="p" placeholder="+7 900 000-00-00" type="tel" inputmode="tel" autocomplete="tel" required minlength="10">');
   form.onsubmit = e => { e.preventDefault(); closeSheet(); toast('Черновик: заявка пока не отправляется'); };
   b.append(form); b.append(h('div', 'warn', 'Имеются противопоказания. Необходимо проконсультироваться со специалистом.'));
@@ -646,6 +702,29 @@ ZONES.forEach(code => { const it = I[code]; const z = h('button', 'zone');
   z.innerHTML = `<div class="ph"><img src="${it.img}" alt="" draggable="false"></div><div class="nm">${it.zone}</div><div class="el">${it.name} · ${it.segs}</div><div class="ft"><span class="price">${rub(it.price)}</span><span class="go">Смотреть</span></div>`;
   z.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProduct(code); } });
   track.append(z); });
+
+// ===== наборы =====
+const ELS = Object.keys(I).filter(k => I[k].cat === 'el');
+BUNDLES.forEach(bd => {
+  const c = h('article', 'bc' + (bd.id === 'start' ? ' hit' : '')); const st = bd.items.map(x => ({ code: x.code || x.pick, q: x.q || 1, pick: !!x.pick, size: null }));
+  c.innerHTML = `<span class="bdg">${bd.badge}</span><h3>${bd.title}</h3><p class="tg">${bd.tagline}</p>`;
+  const ul = h('ul'); c.append(ul);
+  const pr = h('div', 'pr'); const go = h('button', 'btn dark', 'Набор в корзину'); go.type = 'button';
+  const upd = () => { const full = st.reduce((a, x) => a + I[x.code].price * x.q, 0), price = floor10(full * (1 - bd.pct / 100));
+    pr.innerHTML = `<b class="price">${rub(price)}</b><s class="price">${rub(full)}</s><span class="sv">Выгода ${rub(full - price)} · −${bd.pct}%</span>`; return { full, price }; };
+  st.forEach(x => { const li = h('li');
+    if (!x.pick) { li.innerHTML = `<span>${I[x.code].name}${x.q > 1 ? ' × ' + x.q : ''}</span><span class="price">${rub(I[x.code].price * x.q)}</span>`; }
+    else { const box = h('div', 'pick'); const sel = h('select'); sel.setAttribute('aria-label', 'Электрод для набора «' + bd.title + '»');
+      ELS.forEach(k => { const o = h('option', '', `${I[k].name.replace('Электрод ', '')} · ${rub(I[k].price)}`); o.value = k; o.selected = k === x.code; sel.append(o); });
+      const ss = h('select'); ss.setAttribute('aria-label', 'Размер');
+      const setSizes = () => { x.size = I[x.code].sizes ? I[x.code].sizes[0] : null; ss.innerHTML = (I[x.code].sizes || []).map(z => `<option>${z}</option>`).join(''); ss.hidden = !I[x.code].sizes; };
+      sel.onchange = () => { x.code = sel.value; setSizes(); haptic(8); upd(); }; ss.onchange = () => { x.size = ss.value; };
+      setSizes(); box.append(sel, ss); li.append(box); }
+    ul.append(li); });
+  go.onclick = () => { const { full, price } = upd(); cart.push({ b: bd.id, title: bd.title, items: st.map(x => ({ code: x.code, size: x.size, q: x.q })), full, price, q: 1 }); saveCart(); haptic(15);
+    gsap.fromTo('#cartBtn', { scale: 1 }, { scale: 1.18, duration: 0.15, yoyo: true, repeat: 1 }); toast('Набор «' + bd.title + '» в корзине'); };
+  c.append(pr, go); upd(); $('#bgrid').append(c);
+});
 
 // ===== каталог =====
 const grid = $('#grid');
@@ -668,7 +747,7 @@ $('#ticks').innerHTML = Array.from({ length: 12 }, (_, k) => `<line x1="100" y1=
   g.innerHTML = `<circle r="198" fill="#fff"/><circle r="194" fill="#2a2e2c"/>`;
   PRIZES.forEach((p, i) => { const a0 = (i / n) * Math.PI * 2 - Math.PI / 2 - Math.PI / n, a1 = a0 + Math.PI * 2 / n;
     const path = document.createElementNS(NS, 'path'); path.setAttribute('d', `M0 0 L${R * Math.cos(a0)} ${R * Math.sin(a0)} A${R} ${R} 0 0 1 ${R * Math.cos(a1)} ${R * Math.sin(a1)} Z`); path.setAttribute('fill', fills[i]); g.append(path);
-    const am = (a0 + a1) / 2, deg = am * 180 / Math.PI, flip = Math.cos(am) < -0.01, tx = document.createElementNS(NS, 'text'); tx.setAttribute('transform', `rotate(${deg}) translate(122 0)${flip ? ' rotate(180)' : ''}`); tx.setAttribute('text-anchor', 'middle'); tx.setAttribute('dominant-baseline', 'middle');
+    const am = (a0 + a1) / 2, deg = am * 180 / Math.PI, flip = Math.cos(am) < -0.01, tx = document.createElementNS(NS, 'text'); tx.setAttribute('transform', `rotate(${deg}) translate(112 0)`); tx.setAttribute('text-anchor', 'middle'); tx.setAttribute('dominant-baseline', 'middle');
     tx.setAttribute('fill', fills[i] === '#ffffff' ? '#111312' : fills[i] === '#2f66f5' ? '#ffffff' : '#ffffff'); tx.setAttribute('font-family', 'Onest, sans-serif'); tx.setAttribute('font-weight', '800'); tx.setAttribute('font-size', 34); tx.textContent = p.t; g.append(tx);
     if (p.t2) { tx.setAttribute('y', -9); const t2 = tx.cloneNode(); t2.setAttribute('y', 18); t2.setAttribute('font-size', 15); t2.setAttribute('font-weight', 600); t2.textContent = p.t2; g.append(t2); }
     const win = document.createElementNS(NS, 'path'); win.setAttribute('d', path.getAttribute('d')); win.setAttribute('fill', '#fff'); win.setAttribute('opacity', 0); win.setAttribute('class', 'win'); win.dataset.i = i; g.append(win); });
@@ -696,7 +775,8 @@ $('#prev').onclick = () => stepRibbon(-1); $('#next').onclick = () => stepRibbon
   const show = p => { $('#prize').innerHTML = `<b>${p.ship ? 'Доставка 0 ₽' : p.t + ' на заказ'}</b>Код <code>OZO${p.ship ? 'SHIP' : p.d}</code> уже в корзине. Попытка использована.<div class="row" style="margin-top:14px"><button class="btn hot" type="button" id="toCart">Перейти в корзину</button></div>`; $('#toCart').onclick = () => openCart(); };
   const confetti = () => { if (reduce) return; const box = $('#confetti'); const cols = ['#2f66f5', '#ffffff', '#cfdcff', '#3a6ff0']; for (let i = 0; i < 40; i++) { const c = document.createElement('i'); c.style.background = cols[i % 4]; box.append(c); gsap.fromTo(c, { x: 0, y: 0, rotation: 0, opacity: 1 }, { x: gsap.utils.random(-260, 260), y: gsap.utils.random(-260, 200), rotation: gsap.utils.random(-540, 540), opacity: 0, duration: gsap.utils.random(1, 1.8), ease: 'power2.out', onComplete: () => c.remove() }); } };
   if (bonus) { show(bonus); btn.disabled = true; btn.textContent = bonus.t; }
-  const tickCheck = () => { const r = gsap.getProperty(g, 'rotation'); const k = Math.floor((r + seg / 2) / seg); if (k !== lastTick) { lastTick = k; haptic(6); gsap.fromTo('.wheel .ptr', { rotation: -14 }, { rotation: 0, duration: 0.25, ease: 'power2.out' }); } };
+  let lastBuzz = 0;
+  const tickCheck = () => { const r = gsap.getProperty(g, 'rotation'); const k = Math.floor((r + seg / 2) / seg); if (k !== lastTick) { lastTick = k; const now = performance.now(); if (now - lastBuzz > 120) { lastBuzz = now; haptic(6); } gsap.fromTo('.wheel .ptr', { rotation: -14 }, { rotation: 0, duration: 0.25, ease: 'power2.out' }); } };
   const spin = (power = 1) => {
     if (spinning || bonus) { if (bonus) toast('Попытка уже использована'); return; }
     spinning = true; btn.disabled = true; haptic(20);
@@ -728,14 +808,14 @@ $$('#filters button').forEach(b => b.addEventListener('click', () => {
     onLeave: el => gsap.to(el, { opacity: 0, scale: 0.85, duration: 0.3 }) });
 }));
 
-if (reduce) { $$('.entries li').forEach(l => l.classList.add('on')); gsap.set('#wave', { morphSVG: '#sWave' }); }
+if (reduce) { $$('.entries li').forEach(l => l.classList.add('on')); gsap.set('#layer', { attr: { rx: 30, ry: 6 } }); }
 else {
   // живая подложка
   $$('.blobs i').forEach((b, i) => gsap.to(b, { x: () => gsap.utils.random(-90, 90), y: () => gsap.utils.random(-60, 60), scale: () => gsap.utils.random(0.85, 1.15), duration: 7 + i * 2, ease: 'sine.inOut', repeat: -1, yoyo: true, repeatRefresh: true }));
   // «Где болит?» по буквам, лента въезжает и покачивается - видно, что тянется
-  const split = SplitText.create('#title', { type: 'chars', mask: 'chars' });
+  const split = SplitText.create('#title', { type: 'lines,chars', mask: 'lines' });
   gsap.timeline({ delay: 0.15 })
-    .from(split.chars, { yPercent: 110, duration: 1, ease: 'soft', stagger: 0.05 })
+    .from(split.chars, { yPercent: 110, duration: 1, ease: 'soft', stagger: 0.05, onComplete: () => split.revert() })
     .from('.hero .kick, .hero .lead, .hero-sub', { y: 16, opacity: 0, duration: 0.7, ease: 'soft', stagger: 0.08 }, '-=0.7')
     .from('.zone', { x: 140, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.06 }, '-=0.5')
     .from('.hero-kit', { y: 30, opacity: 0, duration: 0.9, ease: 'soft' }, 0.4);
@@ -752,12 +832,41 @@ else {
   gsap.set('#hh', { rotation: 210, svgOrigin: '100 100' });
   // карточки метода
   gsap.from('.hc', { y: 40, opacity: 0, duration: 0.9, ease: 'soft', stagger: 0.12, scrollTrigger: { trigger: '.how-grid', start: 'top 85%', once: true } });
-  gsap.to('#drop', { scaleY: 1.04, scaleX: 0.97, transformOrigin: '50% 100%', duration: 1.4, ease: 'sine.inOut', repeat: -1, yoyo: true });
+  gsap.timeline({ repeat: -1, repeatDelay: 0.6 })
+    .fromTo('#dollop', { y: -10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 })
+    .to('#dollop', { y: 52, duration: 0.55, ease: 'power2.in' })
+    .to('#dollop', { scaleY: 0.4, scaleX: 1.5, transformOrigin: '50% 100%', opacity: 0, duration: 0.18 })
+    .fromTo('#layer', { attr: { rx: 4, ry: 2 } }, { attr: { rx: 30, ry: 6 }, duration: 0.6, ease: 'power2.out' }, '-=0.1')
+    .to('#layer', { attr: { rx: 0, ry: 0 }, duration: 0.4, delay: 1.1 })
+    .set('#dollop', { scaleX: 1, scaleY: 1 });
+  const bt = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
+  ['.pr1', '.pr2', '.pr3'].forEach((c, i) => bt.fromTo('.belt-art ' + c, { scale: 0.4, opacity: 0.9 }, { scale: 3, opacity: 0, duration: 1.4, ease: 'power1.out' }, i * 0.35));
+  bt.fromTo('#beltImg', { scaleX: 1 }, { scaleX: 0.96, duration: 0.25, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 0);
   // капля перетекает в импульс (MorphSVG), потом импульс «бьётся»
-  ScrollTrigger.create({ trigger: '.how-grid', start: 'top 70%', once: true, onEnter: () => gsap.timeline({ delay: 0.5 }).to('#wave', { morphSVG: '#sWave', duration: 1.1, ease: 'power3.inOut' }).to('#wave', { scaleY: 1.12, transformOrigin: '50% 52%', duration: 0.35, ease: 'power2.out', yoyo: true, repeat: -1, repeatDelay: 0.5 }) });
+  gsap.from('.bc', { y: 30, opacity: 0, duration: 0.7, ease: 'soft', stagger: 0.08, scrollTrigger: { trigger: '#bgrid', start: 'top 85%', once: true } });
   gsap.from('.item', { y: 30, opacity: 0, duration: 0.7, ease: 'soft', stagger: 0.04, scrollTrigger: { trigger: '#grid', start: 'top 85%', once: true } });
 }
 addEventListener('load', () => ScrollTrigger.refresh());
+
+// ===== монитор: бифазный прямоугольный импульс, развёртка как на больничном мониторе =====
+(() => { const cv = $('#ecg'); if (!cv) return; const g = cv.getContext('2d'); let W = 0, H = 0, x = 0, vis = false, t = 0, last = 0, prevY = null;
+  const dpr = Math.min(2, devicePixelRatio || 1);
+  const size = () => { W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0); g.fillStyle = '#07120d'; g.fillRect(0, 0, W, H); grid(); x = 0; prevY = null; };
+  const grid = () => { g.strokeStyle = 'rgba(111,245,169,.08)'; g.lineWidth = 1; for (let i = 0; i < W; i += 16) { g.beginPath(); g.moveTo(i + .5, 0); g.lineTo(i + .5, H); g.stroke(); } for (let j = 0; j < H; j += 16) { g.beginPath(); g.moveTo(0, j + .5); g.lineTo(W, j + .5); g.stroke(); } };
+  // период меняется плавно: показываем, что частота настраивается
+  const sig = tt => { const per = 0.55 + 0.35 * Math.sin(tt * 0.25), ph = (tt % per) / per, w = 0.07; return ph < w ? 1 : ph < 2 * w ? -1 : 0; };
+  const draw = now => { if (!vis) { last = now; return requestAnimationFrame(draw); } const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
+    const speed = W / 2.4, steps = Math.max(1, Math.round(speed * dt));
+    for (let k = 0; k < steps; k++) { t += 1 / speed; x += 1; if (x > W) { x = 0; prevY = null; }
+      g.fillStyle = '#07120d'; g.fillRect(x + 1, 0, 14, H); for (let j = 0; j < H; j += 16) { g.fillStyle = 'rgba(111,245,169,.08)'; g.fillRect(x + 1, j, 14, 1); }
+      if (x % 16 < 14 && (x + 15) % 16 === 0) {}
+      const y = H * 0.5 - sig(t) * H * 0.28;
+      g.strokeStyle = '#6ff5a9'; g.lineWidth = 2; g.shadowColor = '#6ff5a9'; g.shadowBlur = 8; g.beginPath(); g.moveTo(x - 1, prevY ?? y); g.lineTo(x, y); g.stroke(); g.shadowBlur = 0; prevY = y; }
+    requestAnimationFrame(draw); };
+  new ResizeObserver(size).observe(cv); new IntersectionObserver(e => vis = e[0].isIntersecting).observe(cv);
+  if (reduce) { size(); for (let i = 0; i < W; i++) { const y = H * 0.5 - sig(i / (W / 2.4)) * H * 0.28; g.fillStyle = '#6ff5a9'; g.fillRect(i, y, 1.5, 1.5); } return; }
+  requestAnimationFrame(draw);
+})();
 </script>
 
 <script type="module">
@@ -768,10 +877,12 @@ try {
   const dev = mountDevice(rd('dev3d'), { haptic: () => window.ozoHaptic && window.ozoHaptic(12), onChange: st => {
     rd('rCh1').textContent = st.on ? st.ch1 : 0; rd('rCh2').textContent = st.on ? st.ch2 : 0;
     rd('rMode').textContent = st.on ? st.mode : 'выкл'; rd('rProg').textContent = st.on ? String(st.prog).padStart(2, '0') : '-';
-    rd('devTip').textContent = st.on ? (st.ch1 + st.ch2 ? 'Импульс идёт · комфорт важнее цифры' : 'Прибавьте CH1 +') : 'Нажмите кнопку питания на приборе';
+    rd('devTip').textContent = st.on ? (st.ch1 + st.ch2 ? 'Импульс идёт · смена программы (P) сбрасывает силу' : 'Жмите + на CH1 или CH2') : 'Нажмите кнопку питания';
   } });
   rd('devFallback').hidden = true;
-  document.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => dev.press(b.dataset.k)));
+  // включаем сам, когда прибор впервые показался на экране - чтобы «+» сразу работал
+  new IntersectionObserver((en, ob) => { if (en[0].isIntersecting) { ob.disconnect(); if (!dev.state.on) dev.press('power'); } }, { threshold: 0.5 }).observe(rd('dev3d'));
+  document.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.k; if (!dev.state.on && k !== 'power') { dev.press('power'); setTimeout(() => dev.press(k), 750); } else dev.press(k); }));
 } catch (e) { console.warn('3D не загрузился', e); rd('dev3d').hidden = true; rd('devPad').hidden = true; rd('devTip').hidden = true; document.querySelector('.read').hidden = true; }
 </script>
 </body>
