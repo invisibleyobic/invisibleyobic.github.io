@@ -4,496 +4,458 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>ОЗОТЭНС - версия v12 «Движение»</title>
+<title>ОЗОТЭНС - версия v12</title>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="vendor/lenis.css">
 <style>
-@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500-cyr.woff2) format("woff2"); font-weight: 500; unicode-range: U+0400-04FF; font-display: swap; }
-@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500-lat.woff2) format("woff2"); font-weight: 500; font-display: swap; }
-@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500i-cyr.woff2) format("woff2"); font-weight: 500; font-style: italic; unicode-range: U+0400-04FF; font-display: swap; }
-@font-face { font-family: "Serif"; src: url(fonts/Cormorant-500i-lat.woff2) format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
-@font-face { font-family: "Onest"; src: url(fonts/Onest-400-cyrillic.woff2) format("woff2"); font-weight: 400; unicode-range: U+0400-04FF; font-display: swap; }
-@font-face { font-family: "Onest"; src: url(fonts/Onest-400-latin.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Onest"; src: url(fonts/Onest-var-cyr.woff2) format("woff2"); font-weight: 400 800; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; font-display: swap; }
+@font-face { font-family: "Onest"; src: url(fonts/Onest-var-lat.woff2) format("woff2"); font-weight: 400 800; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+20BD, U+2122, U+2191, U+2193, U+2212, U+2215; font-display: swap; }
 
-/* v12 «Движение»: собрана из анимаций, одобренных в лаборатории 14.10. Тёмная тёплая ночь вместо белой бумаги.
-   Облик временный - заменится после рефов владельца с Pinterest, механики остаются. */
+/* v12: светлая, как «Медозонс-v2» (понравился владельцу), товары и цены из каталога v2 (каталог ОТРИ, 08.10). */
 :root {
-  --bg: #111513;
-  --bg2: #171c19;
-  --panel: #1e2420;
-  --ink: #f1efe8;
-  --soft: #a9b0a8;
-  --sage: #8d9c89;
-  --warm: #f0a54a;
-  --warm2: #ffcf8a;
-  --cream: #f6f1e6;
-  --line: rgba(241,239,232,.12);
-  --serif: "Serif", Georgia, serif;
-  --sans: "Onest", system-ui, sans-serif;
+  --bg: #f2f2f0;
+  --card: #ffffff;
+  --soft-bg: #e9eaea;
+  --ink: #111312;
+  --soft: #5f6461;
+  --line: rgba(17,19,18,.1);
+  --warm: #f39a2b;
+  --warm-d: #c86f08;
+  --warm-bg: #fff1e0;
+  --r: 28px;
+  --f: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.5 var(--f); -webkit-font-smoothing: antialiased; }
 body { overflow-x: clip; }
+body.lock { overflow: hidden; }
 a { color: inherit; }
-.wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); }
-h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.01em; margin: 0; line-height: .98; }
-h2 { font-size: clamp(42px, 6vw, 84px); }
-h1 em, h2 em { font-style: italic; color: var(--warm2); }
-.kicker { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--sage); margin: 0 0 18px; }
-.lead { color: var(--soft); max-width: 54ch; margin: 18px 0 0; }
-.btn { font: 15px/1 var(--sans); border: 1px solid var(--line); background: rgba(241,239,232,.04); color: var(--ink); border-radius: 999px; padding: 13px 20px; cursor: pointer; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; transition: background .25s, color .25s, border-color .25s; }
-.btn:hover, .btn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.btn.hot { background: var(--warm); color: #1b1408; border-color: var(--warm); }
-.btn.hot:hover { background: var(--warm2); border-color: var(--warm2); }
-.btn:focus-visible, button:focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; }
-section { padding-block: clamp(80px, 11vw, 150px); position: relative; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); }
+h1, h2, h3 { margin: 0; font-weight: 750; letter-spacing: -.035em; line-height: .98; }
+h2 { font-size: clamp(38px, 5.4vw, 76px); }
+h2 em, h1 em { font-style: normal; color: var(--warm); }
+.kick { font-size: 15px; color: var(--soft); margin: 0 0 16px; }
+.lead { color: var(--soft); font-size: clamp(17px, 1.5vw, 20px); max-width: 52ch; margin: 18px 0 0; }
+section { padding-block: clamp(72px, 10vw, 130px); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-weight: 550; font-size: 16px; cursor: pointer; text-decoration: none; transition: transform .15s, background .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
+.btn:active { transform: scale(.97); }
+.btn.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn.hot { background: var(--warm); color: #1d1206; border-color: var(--warm); }
+.btn.hot:hover { background: #f7a945; }
+.btn:focus-visible, button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
 .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.price { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 /* шапка */
-header.top { position: fixed; inset: 0 0 auto; z-index: 30; background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-header.top .wrap { display: flex; justify-content: space-between; align-items: center; min-height: 64px; gap: 16px; }
-.logo { font: 500 22px/1 var(--serif); letter-spacing: .2em; min-width: 9ch; text-decoration: none; }
-.nav { display: flex; gap: 22px; font-size: 14px; color: var(--soft); }
-.nav a { text-decoration: none; }
+header.top { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
+.logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 750; letter-spacing: .16em; text-decoration: none; font-size: 17px; }
+.logo svg { width: 16px; height: 20px; }
+.logo path { fill: var(--warm); transition: fill .3s; }
+.logo:hover path { fill: #3a6ff0; }
+.nav { display: flex; gap: 26px; font-size: 15px; }
+.nav a { text-decoration: none; color: var(--soft); }
 .nav a:hover { color: var(--ink); }
-header .btn { padding: 10px 16px; font-size: 14px; }
+.cartbtn { position: relative; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); cursor: pointer; display: grid; place-items: center; }
+.cartbtn svg { width: 20px; height: 20px; }
+.cartbtn b { position: absolute; top: -4px; right: -4px; min-width: 22px; height: 22px; border-radius: 11px; background: var(--warm); font-size: 12px; display: grid; place-items: center; padding: 0 5px; }
+.cartbtn b:empty { display: none; }
 
-/* 1 первый экран: «Где болит?» + лента зон */
-.hero { min-height: 100svh; padding-block: 120px 56px; display: flex; flex-direction: column; justify-content: center; overflow: clip; }
-.glow { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.glow i { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; }
-.glow i:nth-child(1) { width: 46vmax; height: 46vmax; left: -12vmax; top: -10vmax; background: radial-gradient(circle, #f0a54a 0%, transparent 65%); opacity: .32; }
-.glow i:nth-child(2) { width: 40vmax; height: 40vmax; right: -14vmax; top: 10vh; background: radial-gradient(circle, #5f7a64 0%, transparent 65%); }
-.glow i:nth-child(3) { width: 30vmax; height: 30vmax; left: 30vw; bottom: -14vmax; background: radial-gradient(circle, #c9805a 0%, transparent 65%); opacity: .25; }
-.hero .wrap { position: relative; z-index: 1; width: 100%; }
-.hero h1 { font-size: clamp(76px, 15vw, 230px); line-height: .86; }
-.hero .lead { font-size: clamp(17px, 1.6vw, 20px); }
-.hero .lead b { color: var(--ink); font-weight: 400; }
-
-.zones-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-top: clamp(36px, 6vw, 64px); flex-wrap: wrap; }
-.hint { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink); background: rgba(240,165,74,.14); border: 1px solid rgba(240,165,74,.4); border-radius: 999px; padding: 8px 14px 8px 10px; }
-.hint svg { width: 26px; height: 26px; }
-.hint .hand { transform-origin: 50% 80%; }
+/* 1. первый экран */
+.hero { position: relative; padding-block: clamp(40px, 7vw, 90px) 40px; overflow: clip; }
+.blobs { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.blobs i { position: absolute; border-radius: 50%; filter: blur(60px); }
+.blobs i:nth-child(1) { width: 38vmax; height: 38vmax; right: -8vmax; top: -12vmax; background: #ffd29b; opacity: .6; }
+.blobs i:nth-child(2) { width: 26vmax; height: 26vmax; left: -8vmax; top: 18vh; background: #ffe9cf; opacity: .9; }
+.blobs i:nth-child(3) { width: 22vmax; height: 22vmax; right: 18vw; top: 30vh; background: #f6c9a5; opacity: .35; }
+.hero .wrap { position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(68px, 13vw, 196px); letter-spacing: -.055em; line-height: .86; }
+.hero-sub { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-top: 26px; }
+.hero-sub .lead { margin: 0; }
+.hint { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; border-radius: 999px; padding: 10px 18px 10px 12px; font-size: 15px; }
+.hint svg { width: 24px; height: 24px; }
+.ribbon { position: relative; z-index: 1; margin-top: 30px; overflow: hidden; cursor: grab; touch-action: pan-y; }
+.ribbon:active { cursor: grabbing; }
+.track { display: flex; gap: 14px; width: max-content; padding: 6px clamp(16px, 4vw, 48px) 10px; }
+@media (min-width: 1336px) { .track { padding-inline: calc((100vw - 1240px) / 2 + 48px); } }
+.zone { width: clamp(236px, 22vw, 280px); background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; text-align: left; cursor: inherit; user-select: none; display: flex; flex-direction: column; gap: 10px; transition: border-color .25s, box-shadow .25s; }
+.zone:hover { border-color: rgba(243,154,43,.6); box-shadow: 0 14px 30px -18px rgba(217,127,18,.6); }
+.zone .ph { aspect-ratio: 4 / 3; border-radius: 18px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
+.zone .ph img { width: 86%; height: 80%; object-fit: contain; pointer-events: none; }
+.zone .nm { font-weight: 700; font-size: 22px; letter-spacing: -.02em; padding: 0 6px; }
+.zone .el { color: var(--soft); font-size: 14px; padding: 0 6px; }
+.zone .ft { display: flex; justify-content: space-between; align-items: center; padding: 2px 6px 4px; }
+.zone .go { font-size: 14px; font-weight: 600; background: var(--warm-bg); color: var(--warm-d); border-radius: 999px; padding: 7px 12px; }
 .arrows { display: flex; gap: 8px; }
-.arrows button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font-size: 18px; }
-.arrows button:hover { background: var(--ink); color: var(--bg); }
-.viewport { margin-top: 18px; overflow: hidden; cursor: grab; touch-action: pan-y; position: relative; z-index: 1; }
-.viewport:active { cursor: grabbing; }
-.track { display: flex; gap: 14px; width: max-content; padding: 4px clamp(16px, 4vw, 48px) 8px; }
-@media (min-width: 1296px) { .track { padding-inline: calc((100vw - 1200px) / 2 + 48px); } }
-.zone { width: clamp(220px, 24vw, 270px); height: clamp(260px, 28vw, 320px); border-radius: 26px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; background: var(--panel); border: 1px solid var(--line); user-select: none; text-align: left; font: inherit; color: inherit; cursor: inherit; position: relative; overflow: hidden; transition: border-color .3s; }
-.zone::after { content: ""; position: absolute; inset: auto -30% -60% -30%; height: 90%; background: radial-gradient(closest-side, rgba(240,165,74,.35), transparent); opacity: 0; transition: opacity .4s; }
-.zone:hover::after, .zone.on::after { opacity: 1; }
-.zone.on { border-color: var(--warm); }
-.zone b { font: 500 46px/1 var(--serif); position: relative; z-index: 1; }
-.zone p { margin: 0; color: var(--soft); font-size: 14px; position: relative; z-index: 1; }
-.zone .n { font-size: 12px; letter-spacing: .16em; color: var(--sage); position: relative; z-index: 1; display: flex; justify-content: space-between; }
-.zone .n span { color: var(--warm2); opacity: 0; transition: opacity .3s; }
-.zone.on .n span { opacity: 1; }
-.picked { margin-top: 18px; color: var(--soft); font-size: 15px; min-height: 1.5em; }
-.picked b { color: var(--warm2); font-weight: 400; }
+.arrows button { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); cursor: pointer; font-size: 18px; }
 
-/* 2 обычный день */
-.day { background: var(--bg2); }
-.times { margin-top: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.times div { border-top: 1px solid var(--line); padding-top: 16px; }
-.times b { font: 500 44px/1 var(--serif); color: var(--warm2); display: block; margin-bottom: 10px; }
-.times p { margin: 0; color: var(--soft); }
+/* 2. обычный день */
+.day .box { background: var(--card); border-radius: 36px; padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+.clock { display: grid; justify-items: center; gap: 14px; }
+.clock svg { width: min(300px, 70vw); }
+.clock .face { fill: var(--bg); }
+.clock .ticks line { stroke: #b9bcb9; stroke-width: 3; stroke-linecap: round; }
+.clock .hh { stroke: var(--ink); stroke-width: 7; stroke-linecap: round; }
+.clock .mm { stroke: var(--warm); stroke-width: 4; stroke-linecap: round; }
+.clock .pin { fill: var(--warm); }
+.clock b { font-size: 46px; font-weight: 750; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.entries { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 4px; }
+.entries li { display: grid; grid-template-columns: 76px 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); opacity: .3; transition: opacity .4s; font-size: clamp(18px, 1.7vw, 22px); font-weight: 500; }
+.entries li.on { opacity: 1; }
+.entries li b { color: var(--warm-d); font-variant-numeric: tabular-nums; }
 
-/* 3 метод: закрепление + капля ОЗОТЭНС */
-.how h2 { font-size: clamp(40px, 4.6vw, 66px); }
-.how { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 6vw, 88px); align-items: center; min-height: 100vh; padding-top: 64px; }
-.steps { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 10px; }
-.steps li { padding: 18px 20px; border-radius: 18px; border: 1px solid var(--line); color: var(--soft); cursor: pointer; transition: background .35s, color .35s, border-color .35s; }
-.steps li.on { background: var(--cream); color: #2a2a24; border-color: var(--cream); }
-.steps b { font: 500 28px/1 var(--serif); display: block; margin-bottom: 6px; color: var(--ink); transition: color .35s; }
-.steps li.on b { color: #15140f; }
-.bar { height: 3px; background: var(--line); border-radius: 3px; margin-top: 24px; overflow: hidden; }
-.bar i { display: block; height: 100%; width: 100%; background: var(--warm); transform-origin: left; transform: scaleX(0); }
-.dropbox { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.dropbox svg { width: min(100%, 520px); overflow: visible; }
-.dropbox .ring { fill: none; stroke: var(--warm); stroke-width: 1.2; opacity: 0; }
-.dropbox .label { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--sage); white-space: nowrap; }
+/* 3. как работает */
+.how-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.hc { background: var(--card); border-radius: var(--r); padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.hc .art { aspect-ratio: 4 / 3; border-radius: 20px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
+.hc .art svg { width: 62%; height: 80%; overflow: visible; }
+.hc .art img { width: 82%; height: 76%; object-fit: contain; }
+.hc .n { font-size: 14px; color: var(--soft); margin: 0 0 6px; }
+.hc h3 { font-size: 26px; letter-spacing: -.025em; }
+.hc p { margin: 8px 0 0; color: var(--soft); }
 
-/* 4 прибор-игра */
-.play { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 6vw, 88px); align-items: center; }
-.glbox { position: relative; }
-#gl { width: 100%; aspect-ratio: 1; border-radius: 32px; background: radial-gradient(70% 60% at 50% 40%, #2a322c, #121614 75%); cursor: grab; touch-action: none; display: block; border: 1px solid var(--line); }
-#gl.over { cursor: pointer; }
-.gltip { position: absolute; left: 18px; top: 18px; font-size: 13px; background: rgba(17,21,19,.7); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; color: var(--ink); pointer-events: none; }
-.meter { margin-top: 28px; }
-.meter .lv { display: flex; align-items: baseline; gap: 12px; }
-.meter .lv b { font: 500 96px/1 var(--serif); color: var(--warm2); min-width: 2ch; }
-.meter .lv span { color: var(--soft); }
-.meter .scale { height: 8px; border-radius: 8px; background: var(--line); overflow: hidden; margin-top: 12px; }
-.meter .scale i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #8d9c89, var(--warm), var(--warm2)); border-radius: 8px; }
-.meter .note { color: var(--soft); font-size: 14px; margin-top: 12px; min-height: 1.5em; }
-.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 28px; }
-.facts div { border: 1px solid var(--line); border-radius: 18px; padding: 14px; font-size: 13px; color: var(--soft); }
-.facts b { display: block; font: 500 34px/1 var(--serif); color: var(--ink); margin-bottom: 4px; }
+/* 4. прибор */
+.dev { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+.stage { position: relative; border-radius: 36px; background: radial-gradient(80% 70% at 50% 35%, #ffffff, #e7e8e6); aspect-ratio: 4 / 5; overflow: hidden; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage .fallback { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; mix-blend-mode: multiply; }
+.stage .tip { position: absolute; left: 16px; top: 16px; background: rgba(255,255,255,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 14px; pointer-events: none; }
+.read { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
+.read div { background: var(--card); border-radius: 22px; padding: 16px 18px; }
+.read span { color: var(--soft); font-size: 14px; display: block; }
+.read b { font-size: 40px; font-weight: 750; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+.pad .btn { min-height: 54px; padding: 0 10px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.facts span { background: var(--soft-bg); border-radius: 999px; padding: 8px 14px; font-size: 14px; }
 
-/* 5 набор: Flip */
-.grid { margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
-.card { display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; cursor: pointer; text-align: left; padding: 0; font: inherit; color: inherit; }
-.card .ph { flex: none; aspect-ratio: 1; background: var(--cream); display: grid; place-items: center; }
-.card img { width: 86%; height: 86%; object-fit: contain; mix-blend-mode: multiply; }
-.card .t { margin-top: auto; padding: 15px 18px; display: flex; justify-content: space-between; gap: 10px; font-size: 15px; }
-.card .t span:last-child { color: var(--soft); font-size: 13px; }
-.card[hidden] { display: none !important; }
-.overlay { position: fixed; inset: 0; z-index: 50; background: rgba(8,10,9,.6); backdrop-filter: blur(8px); display: none; place-items: center; padding: 20px; }
-.overlay.open { display: grid; }
-.sheet { background: var(--panel); border: 1px solid var(--line); border-radius: 30px; width: min(780px, 100%); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
-.sheet .ph { aspect-ratio: 1; background: var(--cream); display: grid; place-items: center; }
-.sheet .ph img { width: 86%; height: 86%; object-fit: contain; mix-blend-mode: multiply; }
-.sheet .tx { padding: 30px; display: grid; align-content: space-between; gap: 18px; }
-.sheet h3 { font-size: 42px; }
-.mykit { margin-top: 26px; border: 1px dashed rgba(240,165,74,.5); border-radius: 20px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-.mykit p { margin: 0; }
-.mykit small { display: block; color: var(--soft); font-size: 13px; margin-top: 4px; }
+/* 5. колесо */
+.game .box { background: var(--ink); color: #fff; border-radius: 40px; padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; overflow: hidden; position: relative; }
+.game .lead { color: #b9bdba; }
+.wheel { position: relative; width: min(500px, 100%); aspect-ratio: 1; margin-inline: auto; touch-action: none; user-select: none; }
+.wheel svg.w { width: 100%; height: 100%; cursor: grab; filter: drop-shadow(0 30px 40px rgba(0,0,0,.45)); }
+.wheel .ptr { position: absolute; left: 50%; top: -10px; margin-left: -22px; width: 44px; height: 54px; z-index: 2; filter: drop-shadow(0 6px 8px rgba(0,0,0,.4)); transform-origin: 50% 20%; }
+.wheel .spin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 28%; aspect-ratio: 1; border-radius: 50%; border: 0; background: var(--warm); color: #1d1206; font-weight: 800; font-size: clamp(15px, 2vw, 19px); cursor: pointer; box-shadow: 0 0 0 8px rgba(255,255,255,.95), 0 10px 26px rgba(0,0,0,.4); z-index: 2; }
+.wheel .spin:disabled { cursor: default; }
+.prize { margin-top: 24px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 18px 20px; min-height: 92px; }
+.prize b { display: block; font-size: 26px; letter-spacing: -.02em; color: var(--warm); }
+.prize code { font: 600 16px var(--f); background: rgba(255,255,255,.12); padding: 3px 8px; border-radius: 8px; }
+.game .note { color: #8d918e; font-size: 13px; margin-top: 14px; }
 
-/* 6 место под Rive */
-.rive { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 6vw, 88px); align-items: center; }
-.rvbox { position: relative; border-radius: 32px; overflow: hidden; border: 1px dashed rgba(240,165,74,.45); background: #0d100e; }
-#rv { width: 100%; aspect-ratio: 16 / 9; display: block; }
-.rvbox .stub { position: absolute; left: 14px; top: 14px; font-size: 12px; background: rgba(13,16,14,.8); border-radius: 999px; padding: 6px 11px; color: var(--warm2); }
+/* 6. каталог */
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 30px; }
+.filters button { min-height: 46px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); cursor: pointer; font-weight: 550; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.grid { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.item { background: var(--card); border-radius: var(--r); padding: 12px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; border: 1px solid transparent; transition: border-color .2s; }
+.item:hover { border-color: var(--line); }
+.item[hidden] { display: none !important; }
+.item .ph { aspect-ratio: 1; border-radius: 20px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; position: relative; }
+.item .ph img { width: 84%; height: 84%; object-fit: contain; }
+.item .seg { position: absolute; left: 10px; top: 10px; background: rgba(17,19,18,.72); color: #fff; font-size: 13px; padding: 4px 10px; border-radius: 999px; }
+.item .nm { font-weight: 650; padding: 0 6px; line-height: 1.25; min-height: 2.5em; }
+.item .ft { display: flex; justify-content: space-between; align-items: center; padding: 0 6px 4px; }
+.item .add { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--warm); font-size: 24px; font-weight: 500; cursor: pointer; display: grid; place-items: center; }
 
-/* 7 документы и противопоказания */
-.docs { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 34px; }
-.docs div { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 22px; }
-.docs code { font: 500 30px/1 var(--serif); color: var(--warm2); display: block; margin-bottom: 10px; }
+/* шторка: товар и корзина. На ПК - панель справа, на телефоне - снизу, всегда с крестиком сверху */
+.ov { position: fixed; inset: 0; z-index: 60; background: rgba(17,19,18,.42); opacity: 0; pointer-events: none; transition: opacity .3s; }
+.ov.open { opacity: 1; pointer-events: auto; }
+.sheet { position: fixed; z-index: 61; top: 0; right: 0; bottom: 0; width: min(480px, 100%); background: var(--card); display: flex; flex-direction: column; transform: translateX(105%); visibility: hidden; transition: transform .45s cubic-bezier(.2,.8,.2,1), visibility 0s .45s; }
+.sheet.open { transform: none; visibility: visible; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+.sheet .sh-h { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px 14px 20px; border-bottom: 1px solid var(--line); }
+.sheet .sh-h b { font-size: 18px; }
+.x { width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--soft-bg); cursor: pointer; font-size: 24px; line-height: 1; flex: none; }
+.sheet .sh-b { flex: 1; overflow: auto; overscroll-behavior: contain; padding: 18px 20px; }
+.sheet .sh-f { padding: 14px 20px calc(14px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); display: flex; gap: 10px; align-items: center; }
+.sheet .sh-f[hidden] { display: none; }
+.sheet .sh-f .btn { flex: 1; justify-content: space-between; }
+.pv .ph { aspect-ratio: 4 / 3; background: #fff; border: 1px solid var(--line); border-radius: 22px; display: grid; place-items: center; }
+.pv .ph img { width: 84%; height: 84%; object-fit: contain; }
+.pv h3 { font-size: 28px; margin-top: 18px; }
+.pv .sub { color: var(--soft); margin: 6px 0 0; }
+.pv .pr { font-size: 26px; font-weight: 750; color: var(--warm-d); margin: 12px 0 0; }
+.opt { margin-top: 18px; display: grid; gap: 10px; }
+.opt .o { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: var(--bg); border-radius: 18px; padding: 12px 14px; }
+.opt .o small { display: block; color: var(--soft); }
+.sw { width: 52px; height: 32px; border-radius: 16px; background: #cfd2cf; border: 0; position: relative; cursor: pointer; flex: none; transition: background .2s; }
+.sw::after { content: ""; position: absolute; top: 4px; left: 4px; width: 24px; height: 24px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.sw[aria-checked="true"] { background: var(--warm); }
+.sw[aria-checked="true"]::after { transform: translateX(20px); }
+.sizes { display: flex; gap: 8px; }
+.sizes button { min-width: 48px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-weight: 600; }
+.sizes button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.qty { display: flex; align-items: center; gap: 4px; }
+.qty button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 18px; }
+.qty span { min-width: 22px; text-align: center; font-weight: 650; }
+.warn { margin-top: 16px; background: var(--bg); border-radius: 16px; padding: 12px 14px; font-size: 14px; color: var(--soft); }
+.cl { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.cl li { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; background: var(--bg); border-radius: 18px; padding: 10px; }
+.cl img { width: 64px; height: 64px; object-fit: contain; background: #fff; border-radius: 12px; }
+.cl .t { font-weight: 600; font-size: 15px; line-height: 1.25; }
+.cl .t small { display: block; color: var(--soft); font-weight: 400; }
+.sum { margin-top: 16px; display: grid; gap: 6px; font-size: 15px; }
+.sum div { display: flex; justify-content: space-between; gap: 10px; }
+.sum .tot { font-size: 22px; font-weight: 750; }
+.form { margin-top: 18px; display: grid; gap: 10px; }
+.form input { height: 52px; border-radius: 14px; border: 1px solid var(--line); padding: 0 14px; font: inherit; }
+.empty { text-align: center; color: var(--soft); padding: 40px 10px; }
+@media (max-width: 760px) {
+  .sheet { top: auto; left: 0; width: 100%; max-height: 92svh; border-radius: 26px 26px 0 0; transform: translateY(105%); }
+  .sheet.open { transform: none; }
+  .sheet .sh-h::before { content: ""; position: absolute; left: 50%; top: 6px; margin-left: -20px; width: 40px; height: 4px; border-radius: 2px; background: #d3d5d3; }
+}
+
+/* 7. документы, вопросы */
+.docs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
+.docs div { background: var(--card); border-radius: 24px; padding: 22px; }
+.docs b { display: block; font-size: 26px; letter-spacing: -.02em; margin-bottom: 10px; }
 .docs p { margin: 0; color: var(--soft); font-size: 15px; }
-.contra { margin-top: 70px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 40px; }
-.contra ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; color: var(--soft); }
-.contra li { border-bottom: 1px solid var(--line); padding: 8px 0; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.panel { background: var(--card); border-radius: 30px; padding: clamp(22px, 3.4vw, 40px); }
+.panel h3 { font-size: 30px; margin-bottom: 16px; }
+.panel ul { margin: 0; padding: 0; list-style: none; }
+.panel li { border-top: 1px solid var(--line); padding: 11px 0; color: var(--soft); }
+details { border-top: 1px solid var(--line); }
+details summary { list-style: none; cursor: pointer; padding: 16px 0; font-weight: 600; display: flex; justify-content: space-between; gap: 12px; }
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: "+"; font-size: 22px; line-height: 1; color: var(--warm-d); transition: transform .25s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { margin: 0 0 16px; color: var(--soft); }
 
 .final { text-align: center; }
-.final h2 { font-size: clamp(48px, 8vw, 120px); max-width: 14ch; margin-inline: auto; }
-footer { padding-block: 40px 60px; border-top: 1px solid var(--line); color: var(--soft); font-size: 13px; }
+.final h2 { font-size: clamp(44px, 7vw, 104px); max-width: 15ch; margin-inline: auto; }
+footer { padding-block: 34px 50px; border-top: 1px solid var(--line); color: var(--soft); font-size: 14px; }
 footer .wrap { display: grid; gap: 6px; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); z-index: 70; background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 999px; font-size: 15px; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; transform: translate(-50%, 10px); white-space: nowrap; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
 
-/* иконки зон */
-.zone .zi { width: 56px; height: 56px; fill: none; stroke: var(--soft); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; position: relative; z-index: 1; margin-top: 6px; }
-.zone .zi .hot { fill: var(--warm); stroke: none; opacity: .85; transform-box: fill-box; transform-origin: center; animation: hot 1.8s ease-in-out infinite; }
-.zone.on .zi, .zone:hover .zi { stroke: var(--ink); }
-@keyframes hot { 50% { transform: scale(1.5); opacity: .35; } }
-
-/* дневник с часами */
-.diary { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 6vw, 88px); margin-top: 40px; }
-.clock { position: sticky; top: 110px; align-self: start; display: grid; justify-items: center; gap: 12px; }
-.clock svg { width: min(300px, 100%); }
-.clock .face { fill: var(--panel); stroke: var(--line); stroke-width: 1.5; }
-.clock .ticks line { stroke: var(--sage); stroke-width: 2; stroke-linecap: round; }
-.clock .hh { stroke: var(--ink); stroke-width: 5; stroke-linecap: round; }
-.clock .mm { stroke: var(--warm); stroke-width: 3; stroke-linecap: round; }
-.clock .pin { fill: var(--warm); }
-.clock b { font: 500 44px/1 var(--serif); color: var(--warm2); font-variant-numeric: tabular-nums; }
-.entries div { min-height: 46vh; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--line); opacity: .28; transition: opacity .5s; }
-.entries div.on { opacity: 1; }
-.entries b { font: 500 52px/1 var(--serif); color: var(--warm2); margin-bottom: 12px; }
-.entries p { margin: 0; font: 500 clamp(28px, 3.4vw, 44px)/1.15 var(--serif); color: var(--ink); max-width: 18ch; }
-
-/* позвоночник (место под Rive) */
-.spine { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 6vw, 88px); align-items: center; }
-.spbox { position: relative; border-radius: 32px; background: radial-gradient(70% 60% at 50% 45%, #232a25, #111513 75%); border: 1px solid var(--line); aspect-ratio: 4 / 5; display: grid; place-items: center; overflow: hidden; }
-.spbox svg { width: 92%; height: 92%; }
-.spbox .cap { position: absolute; left: 18px; bottom: 16px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--sage); }
-.sp-steps { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 8px; color: var(--soft); }
-.sp-steps li { padding-left: 22px; position: relative; transition: color .3s; }
-.sp-steps li::before { content: ""; position: absolute; left: 0; top: .55em; width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--sage); transition: background .3s, border-color .3s; }
-.sp-steps li.on { color: var(--ink); }
-.sp-steps li.on::before { background: var(--warm); border-color: var(--warm); }
-.small { font-size: 13px; color: var(--sage); margin-top: 18px; }
-
-/* игра: что происходит с человеком */
-.game { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 6vw, 72px); align-items: start; }
-.gbox { position: sticky; top: 90px; }
-#body3d { width: 100%; aspect-ratio: 4 / 5; border-radius: 32px; background: radial-gradient(70% 60% at 50% 40%, #29312b, #111513 75%); border: 1px solid var(--line); display: block; touch-action: none; cursor: grab; }
-#body3d.over { cursor: pointer; }
-.gbox .gtip { position: absolute; left: 18px; top: 18px; right: 18px; font-size: 13px; color: var(--ink); pointer-events: none; }
-.gbox .gtip span { background: rgba(17,21,19,.75); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; display: inline-block; }
-.gsteps { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 8px; counter-reset: g; }
-.gsteps li { border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; color: var(--soft); transition: border-color .3s, background .3s, color .3s; }
-.gsteps li b { font-weight: 400; color: var(--ink); display: block; margin-bottom: 8px; }
-.gsteps li b::before { counter-increment: g; content: counter(g) " · "; color: var(--sage); }
-.gsteps li.on { border-color: var(--warm); background: rgba(240,165,74,.07); }
-.gsteps li.done { color: var(--sage); }
-.gsteps li.done b::after { content: "  ✓"; color: var(--warm); }
-.gsteps .row { margin-top: 0; gap: 8px; }
-.gsteps .btn { padding: 10px 14px; font-size: 14px; }
-.gsteps .btn:disabled { opacity: .35; cursor: default; pointer-events: none; }
-.glv { display: inline-flex; align-items: baseline; gap: 6px; margin-left: 6px; }
-.glv b { margin: 0 !important; font: 500 34px/1 var(--serif); color: var(--warm2); min-width: 2ch; }
-.gbar { height: 8px; border-radius: 8px; background: var(--line); overflow: hidden; margin-top: 10px; }
-.gbar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #8d9c89, var(--warm), var(--warm2)); }
-.gsay { margin-top: 18px; min-height: 4.6em; color: var(--ink); font-size: 16px; }
-
-@media (max-width: 860px) {
-  .hero { min-height: auto; padding-block: 104px 36px; }
-  .diary, .spine, .game { grid-template-columns: 1fr; }
-  .clock { top: 64px; z-index: 2; background: linear-gradient(var(--bg2) 82%, transparent); margin: 0 -16px; padding: 8px 16px 18px; grid-template-columns: auto auto; align-items: center; justify-content: center; gap: 16px; }
-  .clock svg { width: 110px; }
-  .clock b { font-size: 36px; }
-  .entries div { min-height: 40vh; }
-  .spbox { aspect-ratio: 1; }
-  #body3d { aspect-ratio: 1; }
-  .gbox { top: 64px; z-index: 2; margin: 0 -16px; padding: 0 16px 10px; background: linear-gradient(var(--bg) 88%, transparent); }
-  #body3d { aspect-ratio: 5 / 4; }
+@media (max-width: 960px) {
   .nav { display: none; }
-  .how, .play, .rive, .contra { grid-template-columns: 1fr; }
-  .how { min-height: auto; }
-  .dropbox { position: sticky; top: 64px; z-index: 2; width: auto; aspect-ratio: auto; height: 220px; margin: 0 -16px; padding: 10px 0 18px; order: -1; background: linear-gradient(var(--bg) 85%, transparent); }
-  .dropbox svg { width: auto; height: 160px; }
-  .steps li { scroll-margin-top: 290px; }
-  .times { grid-template-columns: 1fr 1fr; }
-  .sheet { grid-template-columns: 1fr; }
-  .contra ul { grid-template-columns: 1fr; }
-  .facts b { font-size: 28px; }
-  .meter .lv b { font-size: 72px; }
+  .day .box, .dev, .game .box, .two { grid-template-columns: 1fr; }
+  .how-grid { grid-template-columns: 1fr; }
+  .hc { flex-direction: row; align-items: center; }
+  .hc .art { width: 40%; flex: none; aspect-ratio: 1; }
+  .docs { grid-template-columns: 1fr 1fr; }
+  .stage { aspect-ratio: 1; }
 }
-@media (max-width: 480px) { .arrows { display: none; } header .btn { display: none; } }
+@media (max-width: 520px) {
+  .arrows { display: none; }
+  .hc { flex-direction: column; align-items: stretch; }
+  .hc .art { width: 100%; aspect-ratio: 16 / 9; }
+  .docs { grid-template-columns: 1fr; }
+  .read b { font-size: 32px; }
+  .entries li { grid-template-columns: 64px 1fr; }
+  .stage { aspect-ratio: 4 / 5; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="logo" id="logo" href="#top">ОЗОТЭНС</a>
-    <nav class="nav"><a href="#how">Как работает</a><a href="#play">Прибор</a><a href="#kit">Набор</a><a href="#docs">Документы</a></nav>
-    <a class="btn hot" href="#kit">Подобрать комплект</a>
+    <a class="logo" href="#top"><svg viewBox="0 0 16 20" aria-hidden="true"><path d="M8 0C8 0 0 9 0 13.5a8 8 0 0 0 16 0C16 9 8 0 8 0Z"/></svg>ОЗОТЭНС</a>
+    <nav class="nav"><a href="#how">Как работает</a><a href="#device">Прибор</a><a href="#wheel">Колесо скидок</a><a href="#shop">Каталог</a><a href="#docs">Документы</a></nav>
+    <button class="cartbtn" type="button" id="cartBtn" aria-label="Корзина"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><b id="cartN"></b></button>
   </div>
 </header>
 
 <main id="top">
-  <!-- 1. SplitText «Где болит?» + Draggable-лента зон с подсказкой -->
+  <!-- 1. Где болит: лента зон с настоящими электродами и ценами, нажатие открывает товар -->
   <section class="hero">
-    <div class="glow" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap">
-      <p class="kicker">Поясница · шея · суставы</p>
+      <p class="kick">Поясница · шея · суставы</p>
       <h1 id="title">Где <em>болит?</em></h1>
-      <p class="lead">Встал - тянет. Посидел - зажало. <b>Выбери зону ниже</b> - покажем, какой электрод под неё и как проходит сеанс.</p>
-      <div class="zones-head">
-        <span class="hint" id="hint">
-          <svg viewBox="0 0 32 32" aria-hidden="true"><g class="hand" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V7.5a2 2 0 0 1 4 0V15"/><path d="M16 14.5v-2a2 2 0 0 1 4 0V16"/><path d="M20 15.5a2 2 0 0 1 4 0v4.5a8 8 0 0 1-8 8h-1a7 7 0 0 1-5.6-2.8L6 20.5a2 2 0 0 1 3.2-2.4L12 21"/></g></svg>
-          Тяни ленту влево-вправо или жми на зону
-        </span>
+      <div class="hero-sub">
+        <p class="lead">Выберите зону - покажем электрод под неё, цену и что ещё нужно для сеанса.</p>
         <div class="arrows"><button type="button" id="prev" aria-label="Назад">←</button><button type="button" id="next" aria-label="Вперёд">→</button></div>
       </div>
+      <div class="row" style="margin-top:20px"><span class="hint" id="hint"><svg viewBox="0 0 32 32" aria-hidden="true"><g class="hand" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V7.5a2 2 0 0 1 4 0V15"/><path d="M16 14.5v-2a2 2 0 0 1 4 0V16"/><path d="M20 15.5a2 2 0 0 1 4 0v4.5a8 8 0 0 1-8 8h-1a7 7 0 0 1-5.6-2.8L6 20.5a2 2 0 0 1 3.2-2.4L12 21"/></g></svg>Листайте ленту, нажмите на зону</span></div>
     </div>
-    <div class="viewport" id="vp"><div class="track" id="track">
-      <button class="zone" type="button" data-z="Поясница" data-e="Спина"><span class="n">01<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><rect x="19" y="5" width="18" height="6" rx="2"/><rect x="19" y="14" width="18" height="6" rx="2"/><rect x="19" y="23" width="18" height="6" rx="2"/><rect x="18" y="32" width="20" height="7" rx="2"/><rect x="17" y="42" width="22" height="8" rx="2.5"/><circle class="hot" cx="28" cy="41" r="5"/></svg><b>Поясница</b><p>Прострел при наклоне, ноет после сидения.</p></button>
-      <button class="zone" type="button" data-z="Шея" data-e="Шея"><span class="n">02<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="13" r="8"/><rect x="24" y="24" width="8" height="5" rx="1.5"/><rect x="24" y="31" width="8" height="5" rx="1.5"/><path d="M6 50 Q28 36 50 50"/><circle class="hot" cx="28" cy="30" r="5"/></svg><b>Шея</b><p>Зажим после ноутбука, не повернуть голову.</p></button>
-      <button class="zone" type="button" data-z="Плечо" data-e="Плечо"><span class="n">03<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><path d="M12 52 V26 Q12 16 22 16 H32"/><path d="M38 21 Q47 25 45 37 L43 52"/><circle cx="37" cy="20" r="6"/><circle class="hot" cx="37" cy="20" r="5"/></svg><b>Плечо</b><p>Больно поднять руку, ноет ночью.</p></button>
-      <button class="zone" type="button" data-z="Колено" data-e="Колено"><span class="n">04<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><path d="M25 4 L28 23"/><path d="M28 33 L26 52"/><path d="M21 4 L24 23 M32 33 L30 52" opacity=".5"/><circle cx="29" cy="28" r="5"/><circle class="hot" cx="29" cy="28" r="5"/></svg><b>Колено</b><p>Хрустит на лестнице, тяжело встать.</p></button>
-      <button class="zone" type="button" data-z="Стопа" data-e="Стопа"><span class="n">05<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><path d="M16 6 V34 Q16 46 27 46 H47 Q50 39 42 37 L27 33 Q24 32 24 26 V6"/><circle class="hot" cx="19" cy="42" r="5"/></svg><b>Стопа</b><p>Пятка по утрам, жжёт свод.</p></button>
-    </div></div>
-    <div class="wrap"><p class="picked" id="picked" aria-live="polite"></p></div>
+    <div class="ribbon" id="ribbon"><div class="track" id="track"></div></div>
   </section>
 
-  <!-- 2. Обычный день: слова проявляются (SplitText) -->
+  <!-- 2. Обычный день: часы по прокрутке, коротко -->
   <section class="day">
     <div class="wrap">
-      <p class="kicker">Обычный день</p>
-      <h2 class="words">Больная спина забирает не спину. <em>Она забирает день</em></h2>
-      <div class="diary">
+      <div class="box">
         <div class="clock" aria-hidden="true">
           <svg viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="92" class="face"/>
-            <g class="ticks"><line x1="100" y1="12" x2="100" y2="24" transform="rotate(0 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(30 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(60 100 100)"/><line x1="100" y1="12" x2="100" y2="24" transform="rotate(90 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(120 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(150 100 100)"/><line x1="100" y1="12" x2="100" y2="24" transform="rotate(180 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(210 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(240 100 100)"/><line x1="100" y1="12" x2="100" y2="24" transform="rotate(270 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(300 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(330 100 100)"/></g>
-            <line id="hh" x1="100" y1="100" x2="100" y2="54" class="hh"/>
+            <circle cx="100" cy="100" r="94" class="face"/>
+            <g class="ticks" id="ticks"></g>
+            <line id="hh" x1="100" y1="100" x2="100" y2="56" class="hh"/>
             <line id="mm" x1="100" y1="100" x2="100" y2="30" class="mm"/>
-            <circle cx="100" cy="100" r="5" class="pin"/>
+            <circle cx="100" cy="100" r="6" class="pin"/>
           </svg>
           <b id="clockTxt">07:00</b>
         </div>
-        <div class="entries">
-          <div><b>07:00</b><p>Сползаю с кровати боком, как учили.</p></div>
-          <div><b>13:00</b><p>Третий час за ноутом. Поясница горит.</p></div>
-          <div><b>19:00</b><p>Сын просит поиграть. Говорю: потом.</p></div>
-          <div><b>23:00</b><p>Ищу позу, в которой не ноет. Не нахожу.</p></div>
+        <div>
+          <p class="kick">Обычный день</p>
+          <h2 class="words">Больная спина забирает <em>не спину, а день</em></h2>
+          <ol class="entries" id="entries">
+            <li class="on"><b>07:00</b>Сползаю с кровати боком, как учили.</li>
+            <li><b>13:00</b>Третий час за ноутом. Поясница горит.</li>
+            <li><b>19:00</b>Сын просит поиграть. Говорю: потом.</li>
+            <li><b>23:00</b>Ищу позу, в которой не ноет. Не нахожу.</li>
+          </ol>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. ScrollTrigger pin (единственный на странице) + MorphSVG: капля ОЗОТЭНС -->
+  <!-- 3. Как работает: три карточки, без закрепления -->
   <section id="how">
-    <div class="wrap how" id="howWrap">
-      <div>
-        <p class="kicker">Метод</p>
-        <h2 class="words">Импульс и озоновый крем <em>работают вместе</em></h2>
-        <p class="lead">Слабые электрические импульсы (ТЭНС) и озонсодержащий крем OZOTENS 30% - за один сеанс, в том месте, где беспокоит.</p>
-        <ol class="steps" id="steps">
-          <li class="on"><b>01 · Крем на электрод</b>Тонкий слой OZOTENS 30% - он же проводит ток.</li>
-          <li><b>02 · Импульс</b>Включаете прибор, сила от 0 до 40 - та, что комфортна.</li>
-          <li><b>03 · Электрод на зону</b>Форма под зону: спина, шея, колено, плечо, стопа.</li>
-        </ol>
-        <div class="bar"><i id="bar"></i></div>
-      </div>
-      <div class="dropbox" aria-hidden="true">
-        <svg viewBox="0 0 200 200">
-          <defs>
-            <radialGradient id="gCream" cx="38%" cy="34%" r="75%"><stop offset="0" stop-color="#fffaf0"/><stop offset=".55" stop-color="#f3e6cc"/><stop offset="1" stop-color="#d9b98a"/></radialGradient>
-            <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter>
-          </defs>
-          <circle class="ring" cx="100" cy="112" r="70"/><circle class="ring" cx="100" cy="112" r="70"/><circle class="ring" cx="100" cy="112" r="70"/>
-          <ellipse cx="100" cy="186" rx="52" ry="6" fill="#000" opacity=".35" filter="url(#soft)"/>
-          <path id="shape" fill="url(#gCream)" d="M100 20 C100 20 40 92 40 132 A60 60 0 0 0 160 132 C160 92 100 20 100 20 Z"/>
-          <path id="shine" d="M70 112 C70 98 78 84 86 74" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85"/>
-          <text id="dropTxt" x="100" y="146" text-anchor="middle" font-family="Onest, sans-serif" font-size="10" letter-spacing="2" fill="#6b5634">OZOTENS 30%</text>
-          <path id="sDrop" d="M100 20 C100 20 40 92 40 132 A60 60 0 0 0 160 132 C160 92 100 20 100 20 Z" fill="none"/>
-          <path id="sWave" d="M14.0 96.0 L15.4 96.0 L16.9 96.0 L18.3 96.0 L19.7 96.0 L21.2 96.0 L22.6 96.0 L24.0 96.0 L25.5 96.0 L26.9 96.0 L28.3 96.0 L29.8 96.0 L31.2 96.0 L32.6 96.0 L34.1 96.0 L35.5 96.0 L36.9 96.0 L38.4 96.0 L39.8 96.0 L41.2 96.0 L42.6 96.0 L44.0 96.0 L45.4 95.9 L46.7 95.9 L47.9 95.8 L49.0 95.8 L50.0 95.6 L50.8 95.5 L51.4 95.3 L51.9 95.1 L52.3 94.9 L52.8 94.4 L53.5 93.6 L54.4 92.2 L55.5 90.0 L56.7 87.1 L58.0 83.4 L59.3 78.9 L60.7 73.8 L62.1 68.2 L63.6 62.3 L65.0 56.5 L66.5 51.0 L68.1 46.0 L69.9 41.6 L72.6 37.4 L79.5 34.0 L87.0 37.0 L89.9 41.2 L91.8 45.6 L93.4 50.5 L94.8 56.0 L96.3 61.9 L97.7 67.8 L99.2 73.6 L100.6 78.9 L101.9 83.8 L103.3 88.1 L104.6 91.9 L106.0 95.3 L107.3 98.5 L108.8 101.8 L110.2 105.2 L111.8 108.9 L113.3 113.1 L114.8 117.7 L116.3 122.8 L117.8 128.3 L119.2 134.1 L120.7 140.0 L122.1 145.8 L123.5 151.1 L124.8 155.6 L126.0 158.8 L126.6 160.0 L124.3 158.4 L118.4 159.1 L117.5 159.9 L118.3 158.0 L119.6 154.4 L120.9 149.6 L122.3 144.1 L123.8 138.3 L125.2 132.5 L126.7 126.9 L128.2 121.6 L129.7 116.9 L131.3 112.8 L133.1 109.1 L134.9 106.0 L137.0 103.3 L139.3 101.0 L141.7 99.3 L144.2 98.0 L146.5 97.2 L148.7 96.7 L150.6 96.4 L152.4 96.2 L154.1 96.1 L155.7 96.1 L157.2 96.0 L158.7 96.0 L160.2 96.0 L161.6 96.0 L163.1 96.0 L164.5 96.0 L165.9 96.0 L167.4 96.0 L168.8 96.0 L170.2 96.0 L171.7 96.0 L173.1 96.0 L174.5 96.0 L176.0 96.0 L177.4 96.0 L178.8 96.0 L180.3 96.0 L181.7 96.0 L183.1 96.0 L184.6 96.0 L186.0 96.0 L186.0 112.0 L184.6 112.0 L183.1 112.0 L181.7 112.0 L180.3 112.0 L178.8 112.0 L177.4 112.0 L176.0 112.0 L174.5 112.0 L173.1 112.0 L171.7 112.0 L170.2 112.0 L168.8 112.0 L167.4 112.0 L165.9 112.0 L164.5 112.0 L163.1 112.0 L161.7 112.0 L160.2 112.0 L158.8 112.0 L157.5 112.0 L156.1 112.1 L154.8 112.1 L153.6 112.2 L152.6 112.3 L151.7 112.4 L150.9 112.6 L150.4 112.8 L150.0 113.0 L149.6 113.3 L149.0 113.9 L148.2 114.9 L147.2 116.6 L146.1 119.0 L144.8 122.3 L143.5 126.3 L142.1 131.1 L140.7 136.4 L139.3 142.1 L137.9 148.0 L136.4 153.7 L134.9 159.1 L133.3 163.8 L131.2 168.1 L127.4 172.3 L118.7 173.4 L113.6 169.3 L111.3 165.1 L109.6 160.6 L108.1 155.3 L106.6 149.7 L105.1 143.8 L103.7 137.9 L102.3 132.3 L100.9 127.1 L99.5 122.5 L98.2 118.4 L96.8 114.7 L95.5 111.4 L94.1 108.2 L92.7 104.9 L91.2 101.4 L89.6 97.5 L88.1 93.1 L86.6 88.3 L85.1 83.1 L83.6 77.5 L82.2 71.6 L80.8 65.7 L79.4 60.0 L78.0 55.0 L76.7 50.9 L75.7 48.4 L75.7 48.4 L80.3 50.0 L84.4 48.2 L84.3 48.6 L83.2 51.3 L81.9 55.4 L80.5 60.5 L79.1 66.2 L77.7 72.0 L76.2 77.8 L74.7 83.3 L73.2 88.3 L71.6 92.8 L70.0 96.7 L68.2 100.2 L66.3 103.1 L64.1 105.7 L61.7 107.7 L59.3 109.3 L56.9 110.3 L54.6 111.0 L52.5 111.4 L50.6 111.7 L48.9 111.8 L47.3 111.9 L45.7 111.9 L44.2 112.0 L42.7 112.0 L41.3 112.0 L39.8 112.0 L38.4 112.0 L36.9 112.0 L35.5 112.0 L34.1 112.0 L32.6 112.0 L31.2 112.0 L29.8 112.0 L28.3 112.0 L26.9 112.0 L25.5 112.0 L24.0 112.0 L22.6 112.0 L21.2 112.0 L19.7 112.0 L18.3 112.0 L16.9 112.0 L15.4 112.0 L14.0 112.0 Z" fill="none"/>
-          <path id="sPad" d="M52 40 H148 A22 22 0 0 1 170 62 V138 A22 22 0 0 1 148 160 H52 A22 22 0 0 1 30 138 V62 A22 22 0 0 1 52 40 Z" fill="none"/>
-        </svg>
-        <span class="label" id="dropLabel">Капля крема</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. three.js: прибор как игра -->
-  <section id="play" class="day">
-    <div class="wrap play">
-      <div class="glbox">
-        <canvas id="gl" aria-label="3D-прибор: нажимайте кнопки на корпусе"></canvas>
-        <span class="gltip" id="gltip">Жми оранжевые кнопки на корпусе · тяни, чтобы повернуть</span>
-      </div>
-      <div>
-        <p class="kicker">Прибор в руке</p>
-        <h2 class="words">Попробуй <em>сам</em></h2>
-        <p class="lead">Оранжевые кнопки - сила импульса, серые - канал и программа. Можно и кнопками ниже.</p>
-        <div class="meter">
-          <div class="lv"><b id="lv">0</b><span id="lvTxt">из 40 · выключен</span></div>
-          <div class="scale"><i id="scale"></i></div>
-          <p class="note" id="note">Начните с малого и прибавляйте, пока ощущение комфортное.</p>
-        </div>
-        <div class="row">
-          <button class="btn" type="button" data-k="minus">− Слабее</button>
-          <button class="btn hot" type="button" data-k="plus">+ Сильнее</button>
-          <button class="btn" type="button" data-k="ch">Канал</button>
-          <button class="btn" type="button" data-k="prog">Программа</button>
-        </div>
-        <div class="facts">
-          <div><b>85 г</b>легче смартфона</div>
-          <div><b>2</b>канала, две зоны сразу</div>
-          <div><b>22</b>программы: TENS, EMS, массаж</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4б. Игра: что происходит, когда электрод на зоне -->
-  <section id="game">
-    <div class="wrap game">
-      <div class="gbox">
-        <canvas id="body3d" aria-label="3D-фигура: выберите зону и проведите сеанс"></canvas>
-        <div class="gtip"><span id="gtip">Нажмите на светящуюся точку на фигуре</span></div>
-      </div>
-      <div>
-        <p class="kicker">Сеанс в игре</p>
-        <h2 class="words">Что происходит, <em>когда включаешь</em></h2>
-        <ol class="gsteps" id="gsteps">
-          <li class="on" data-s="zone"><b>Выберите зону</b><div class="row" id="gZones">
-            <button class="btn" type="button" data-z="Поясница">Поясница</button><button class="btn" type="button" data-z="Шея">Шея</button><button class="btn" type="button" data-z="Плечо">Плечо</button><button class="btn" type="button" data-z="Колено">Колено</button><button class="btn" type="button" data-z="Стопа">Стопа</button></div></li>
-          <li data-s="cream"><b>Крем на электрод</b><div class="row"><button class="btn hot" type="button" id="gCreamBtn" disabled>Нанести OZOTENS 30%</button></div></li>
-          <li data-s="place"><b>Электрод на зону</b><div class="row"><button class="btn hot" type="button" id="gPlace" disabled>Приложить</button></div></li>
-          <li data-s="power"><b>Включить и подобрать силу</b><div class="row"><button class="btn" type="button" id="gMinus" disabled>−</button><button class="btn hot" type="button" id="gPlus" disabled>+</button><span class="glv"><b id="gLv">0</b>из 40</span></div>
-            <div class="gbar"><i id="gBar"></i></div></li>
-        </ol>
-        <p class="gsay" id="gSay" aria-live="polite">Нажмите на точку на фигуре или выберите зону.</p>
-        <p class="small">Иллюстрация того, как проходит сеанс, а не обещание результата. Ощущения у каждого свои.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. Flip: собери свой набор -->
-  <section id="kit">
     <div class="wrap">
-      <p class="kicker">Набор</p>
-      <h2 class="words">Собери <em>свой</em> набор</h2>
-      <p class="lead">Фильтр перестраивает карточки, нажатие раскрывает товар.</p>
-      <div class="row" id="filters">
-        <button class="btn" type="button" data-f="all" aria-pressed="true">Всё</button>
-        <button class="btn" type="button" data-f="base">Основа</button>
-        <button class="btn" type="button" data-f="zone">Под зону</button>
-      </div>
-      <div class="grid" id="grid">
-        <button class="card" type="button" data-c="base" data-t="Прибор" data-d="Два канала, 22 программы, сила 0-40. 85 грамм, аккумулятор, зарядка от USB."><div class="ph"><img src="img/device.jpg" alt="Прибор"></div><div class="t">Прибор<span>основа</span></div></button>
-        <button class="card" type="button" data-c="base" data-t="Крем OZOTENS 30%" data-d="Наносится тонким слоем на электрод, он же проводит ток."><div class="ph"><img src="img/cream.jpg" alt="Крем"></div><div class="t">Крем<span>основа</span></div></button>
-        <button class="card" type="button" data-c="zone" data-t="Электрод" data-d="Форма под зону: спина, шея, колено, плечо, стопа." id="cardPad"><div class="ph"><img src="img/electrode.jpg" alt="Электрод"></div><div class="t"><span class="nm">Электрод</span><span>под зону</span></div></button>
-        <button class="card" type="button" data-c="base zone" data-t="Комплект" data-d="Прибор, крем и электрод вместе."><div class="ph"><img src="img/kit-set.jpg" alt="Комплект: прибор, крем OZOTENS 30% и электроды"></div><div class="t">Комплект<span>всё сразу</span></div></button>
-      </div>
-      <div class="mykit">
-        <p>Ваш комплект: <b id="kitTxt">прибор + крем OZOTENS 30% + электрод под зону</b><small>Перед покупкой обсудите метод со своим врачом - особенно если есть грыжа или протрузия.</small></p>
-        <a class="btn hot" href="#top" id="kitBtn">Выбрать зону</a>
+      <p class="kick">Метод</p>
+      <h2 class="words">Крем, импульс, <em>электрод</em></h2>
+      <p class="lead">Слабые электрические импульсы (ТЭНС) и озонсодержащий крем OZOTENS 30% за один сеанс, в том месте, где беспокоит.</p>
+      <div class="how-grid">
+        <div class="hc">
+          <div class="art"><svg viewBox="0 0 200 200" aria-hidden="true">
+            <defs><radialGradient id="gDrop" cx="38%" cy="34%" r="75%"><stop offset="0" stop-color="#fffaf0"/><stop offset=".55" stop-color="#f6e6c8"/><stop offset="1" stop-color="#e2bd84"/></radialGradient></defs>
+            <path id="drop" fill="url(#gDrop)" d="M100 16 C100 16 38 92 38 134 A62 62 0 0 0 162 134 C162 92 100 16 100 16 Z"/>
+            <path d="M70 116 C70 100 78 86 86 76" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+            <text x="100" y="150" text-anchor="middle" font-family="Onest, sans-serif" font-weight="700" font-size="13" fill="#8a6a3a">OZOTENS 30%</text>
+          </svg></div>
+          <div><p class="n">01</p><h3>Крем на электрод</h3><p>Тонкий слой OZOTENS 30%. Он же проводит ток.</p></div>
+        </div>
+        <div class="hc">
+          <div class="art"><svg viewBox="0 0 200 200" aria-hidden="true">
+            <path id="wave" fill="#f39a2b" d="M100 16 C100 16 38 92 38 134 A62 62 0 0 0 162 134 C162 92 100 16 100 16 Z"/>
+            <path id="sWave" fill="none" d="M14 104 Z"/>
+          </svg></div>
+          <div><p class="n">02</p><h3>Импульс</h3><p>Прибор даёт слабые импульсы. Силу 0-40 выбираете сами, по ощущениям.</p></div>
+        </div>
+        <div class="hc">
+          <div class="art"><img src="img/el-back.webp" alt="Электрод «Спина»: эластичный пояс с четырьмя сегментами"></div>
+          <div><p class="n">03</p><h3>Электрод на зону</h3><p>Электрод - пояс или накладка по форме зоны: спина, шея, плечо, колено, стопа.</p></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. Позвоночник распрямляется (GSAP, пока Rive-сцена не нарисована) -->
-  <section class="day" id="spine">
-    <div class="wrap spine">
+  <!-- 4. Прибор: 3D, кнопки нажимаются, на телефоне - вибрация -->
+  <section id="device">
+    <div class="wrap dev">
+      <div class="stage" id="stage">
+        <img class="fallback" id="devFallback" src="img/device.webp" alt="Прибор RoovJoy R-C3">
+        <canvas id="dev3d" aria-label="3D-прибор: нажимайте кнопки на корпусе"></canvas>
+        <span class="tip" id="devTip">Нажмите кнопку питания на приборе</span>
+      </div>
       <div>
-        <p class="kicker">Как выглядит сеанс</p>
-        <h2 class="words">Здесь спина <em>распрямляется</em></h2>
-        <p class="lead">Листайте - электрод ложится на поясницу, идёт импульс, позвоночник выпрямляется.</p>
-        <ol class="sp-steps" id="spSteps">
-          <li class="on">Зажало, спина согнута</li>
-          <li>Электрод с кремом на поясницу</li>
-          <li>Импульс</li>
-          <li>Можно выпрямиться</li>
-        </ol>
-        <p class="small">Иллюстрация того, как проходит сеанс, а не обещание результата. Позже здесь будет сцена из Rive.</p>
-      </div>
-      <div class="spbox">
-        <svg viewBox="0 0 320 400" id="spSvg" aria-hidden="true">
-          <defs><radialGradient id="gTense"><stop offset="0" stop-color="#ff7a45" stop-opacity=".75"/><stop offset="1" stop-color="#ff7a45" stop-opacity="0"/></radialGradient></defs>
-          <circle id="spTense" cx="0" cy="0" r="70" fill="url(#gTense)"/>
-          <g id="spRings"></g>
-          <g id="spVert"></g>
-          <path id="spPelvis" d="M-38 0 Q-44 30 -18 46 L18 46 Q44 30 38 0 Z" fill="#d9cfbd" opacity=".9"/>
-          <circle id="spSkull" r="30" fill="none" stroke="#d9cfbd" stroke-width="3"/>
-          <g id="spPad" opacity="0"><rect x="-22" y="-30" width="44" height="60" rx="12" fill="#e9ebe6"/><rect x="-16" y="-24" width="32" height="48" rx="8" fill="#f3e6cc"/><path d="M0 -30 C0 -60 40 -70 70 -90" stroke="#2b302c" stroke-width="2.5" fill="none"/></g>
-        </svg>
-        <span class="cap" id="spCap">Зажало</span>
+        <p class="kick">Попробуйте сами</p>
+        <h2 class="words">Прибор <em>в руке</em></h2>
+        <p class="lead">Кнопки нажимаются прямо на 3D-модели. С телефона кнопки отвечают вибрацией.</p>
+        <div class="read">
+          <div><span>Канал 1</span><b id="rCh1">0</b></div>
+          <div><span>Канал 2</span><b id="rCh2">0</b></div>
+          <div><span>Режим</span><b id="rMode" style="font-size:28px">выкл</b></div>
+          <div><span>Программа</span><b id="rProg">-</b></div>
+        </div>
+        <div class="pad">
+          <button class="btn dark" type="button" data-k="power">Питание</button>
+          <button class="btn" type="button" data-k="ch1-">CH1 −</button>
+          <button class="btn hot" type="button" data-k="ch1+">CH1 +</button>
+          <button class="btn" type="button" data-k="prog">P</button>
+          <button class="btn" type="button" data-k="ch2-">CH2 −</button>
+          <button class="btn hot" type="button" data-k="ch2+">CH2 +</button>
+        </div>
+        <div class="facts"><span>85 г</span><span>142 × 50 × 21 мм</span><span>2 канала</span><span>22 программы</span><span>TENS · EMS · массаж</span><span>зарядка USB 5 В</span></div>
+        <div class="row"><button class="btn hot" type="button" data-open="85/31">Прибор · <span class="price">19 700 ₽</span></button></div>
       </div>
     </div>
   </section>
 
-  <!-- 7. Документы + противопоказания -->
+  <!-- 5. Колесо скидок -->
+  <section class="game" id="wheel">
+    <div class="wrap">
+      <div class="box">
+        <div>
+          <p class="kick" style="color:#9ba09c">Одна попытка</p>
+          <h2 class="words">Крутите <em>колесо</em></h2>
+          <p class="lead">Нажмите на центр или раскрутите колесо пальцем. Выигрыш сразу ляжет в корзину.</p>
+          <div class="prize" id="prize" aria-live="polite"><span style="color:#b9bdba">Здесь появится ваш приз.</span></div>
+          <p class="note">Демо: призы и коды для примера, условия акции утверждает продавец.</p>
+        </div>
+        <div class="wheel" id="wheelBox">
+          <svg class="ptr" viewBox="0 0 44 54" aria-hidden="true"><path d="M22 54 L2 14 A20 20 0 1 1 42 14 Z" fill="#fff"/><circle cx="22" cy="18" r="8" fill="#f39a2b"/></svg>
+          <svg class="w" id="wheelSvg" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
+          <button class="spin" type="button" id="spinBtn">Крутить</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Каталог: фильтры (Flip), карточки с ценой, добавить в один клик -->
+  <section id="shop">
+    <div class="wrap">
+      <p class="kick">Каталог</p>
+      <h2 class="words">Соберите <em>свой</em> набор</h2>
+      <p class="lead">Для сеанса нужны три вещи: прибор, крем и электрод под зону. Прибор подходит ко всем электродам.</p>
+      <div class="filters" id="filters">
+        <button type="button" data-f="all" aria-pressed="true">Всё</button>
+        <button type="button" data-f="el">Электроды</button>
+        <button type="button" data-f="dev">Прибор</button>
+        <button type="button" data-f="cream">Крем</button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- 7. Документы, противопоказания, вопросы -->
   <section id="docs">
     <div class="wrap">
-      <p class="kicker">Документы</p>
+      <p class="kick">Документы</p>
       <h2 class="words">На чём держится <em>метод</em></h2>
       <div class="docs">
-        <div><code>RU 2714457</code><p>Патент РФ на метод ОЗОТЭНС-терапии</p></div>
-        <div><code>ПИМУ</code><p>Разработан в Ассоциации российских озонотерапевтов, исследован в Приволжском исследовательском медицинском университете</p></div>
-        <div><code>2020</code><p>Учебное пособие для врачей «ОЗОТЭНС-терапия дорсалгий и артралгий» и 5 научных статей</p></div>
-        <div><code>ЕАЭС</code><p>Декларации соответствия на прибор и крем</p></div>
+        <div><b>RU 2714457</b><p>Патент РФ на метод ОЗОТЭНС-терапии</p></div>
+        <div><b>ПИМУ</b><p>Метод разработан в Ассоциации российских озонотерапевтов, исследован в Приволжском исследовательском медицинском университете</p></div>
+        <div><b>2020</b><p>Учебное пособие для врачей «ОЗОТЭНС-терапия дорсалгий и артралгий» и 5 научных статей</p></div>
+        <div><b>ЕАЭС</b><p>Декларации соответствия на прибор и крем</p></div>
       </div>
-      <div class="contra">
-        <div><p class="kicker">Честно и сразу</p><h3 style="font-size:44px">Кому метод не подходит</h3></div>
-        <ul>
-          <li>Кардиостимулятор</li><li>Высокое давление</li><li>Беременность</li><li>Онкология, новообразования</li>
-          <li>Кровотечения и болезни крови</li><li>Температура выше 38 °C, острые гнойные воспаления</li>
-          <li>Острые внутрисуставные травмы</li><li>Раны и кожные заболевания в зоне воздействия</li><li>Непереносимость импульсного тока</li>
-        </ul>
+      <div class="two">
+        <div class="panel">
+          <h3>Кому метод не подходит</h3>
+          <ul>
+            <li>Кардиостимулятор</li><li>Высокое давление</li><li>Беременность</li><li>Онкология, новообразования</li><li>Кровотечения и болезни крови</li>
+            <li>Температура выше 38 °C, острые гнойные воспаления</li><li>Острые внутрисуставные травмы</li><li>Раны и кожные заболевания в зоне воздействия</li><li>Непереносимость импульсного тока</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Вопросы</h3>
+          <details><summary>Какой электрод выбрать?</summary><p>По зоне, где беспокоит: «Спина» - пояс на поясницу, «Шея» - на шейно-воротниковую зону, отдельные электроды для плеча, колена, стопы, бедра. Нажмите на зону в начале страницы - покажем нужный.</p></details>
+          <details><summary>Прибор подходит ко всем электродам?</summary><p>Да, по данным производителя RoovJoy R-C3 подходит ко всем электродам ОЗОТЭНС. У прибора 2 канала: можно работать с двумя зонами сразу.</p></details>
+          <details><summary>Можно пользоваться в дороге?</summary><p>Прибор весит около 85 г и работает от аккумулятора. За рулём пользоваться нельзя, в припаркованной машине можно.</p></details>
+          <details><summary>Нужно ли советоваться с врачом?</summary><p>Да. Имеются противопоказания, перед покупкой обсудите метод с врачом, особенно если есть грыжа или протрузия.</p></details>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="final day">
+  <section class="final">
     <div class="wrap">
-      <h2 class="words">Спина не должна решать, <em>как ты живёшь</em></h2>
-      <div class="row" style="justify-content:center"><a class="btn hot" href="#top">Подобрать под мою боль</a></div>
+      <h2 class="words">Спина не должна решать, <em>как вы живёте</em></h2>
+      <div class="row" style="justify-content:center"><a class="btn hot" href="#top">Выбрать зону</a><a class="btn dark" href="#wheel">Крутить колесо</a></div>
     </div>
   </section>
 </main>
 
 <footer><div class="wrap">
   <span>Имеются противопоказания. Необходимо проконсультироваться со специалистом.</span>
-  <span>Не пользуйтесь прибором за рулём. Черновик для сравнения версий: тексты требуют проверки юристом и производителем.</span>
+  <span>Цены - розничные из каталога ОТРИ (08.10.2026). Изготовитель электродов и крема - ООО «ОТРИ», Нижний Новгород. Черновик для сравнения версий: тексты требуют проверки юристом.</span>
 </div></footer>
+
+<div class="ov" id="ov"></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitle">
+  <div class="sh-h"><b id="shTitle"></b><button class="x" type="button" id="shX" aria-label="Закрыть">×</button></div>
+  <div class="sh-b" id="shBody"></div>
+  <div class="sh-f" id="shFoot"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
 
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
@@ -503,473 +465,260 @@ footer .wrap { display: grid; gap: 6px; }
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/Draggable.min.js"></script>
 <script src="vendor/InertiaPlugin.min.js"></script>
-<script src="vendor/ScrambleTextPlugin.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script>
-(() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  gsap.registerPlugin(ScrollTrigger, Flip, SplitText, MorphSVGPlugin, CustomEase, Draggable, InertiaPlugin, ScrambleTextPlugin);
-  CustomEase.create('soft', 'M0,0 C0.16,1 0.3,1 1,1');
-  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+// волна импульса для морфа: плавный бифазный, считается один раз
+(() => { const f = x => -62 * Math.exp(-(((x - 80) / 13) ** 2)) + 62 * Math.exp(-(((x - 122) / 13) ** 2));
+  const N = 120, pts = [], pt = (x, s) => { const d = (f(x + 0.01) - f(x - 0.01)) / 0.02, n = Math.hypot(1, d); return [x + s * 9 * (-d / n), 104 + f(x) + s * 9 / n]; };
+  for (let i = 0; i <= N; i++) pts.push(pt(14 + i * 172 / N, -1)); for (let i = N; i >= 0; i--) pts.push(pt(14 + i * 172 / N, 1));
+  document.getElementById('sWave').setAttribute('d', 'M' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L') + ' Z'); })();
 
-  // Lenis + якоря
-  let lenis = null;
-  if (!reduce) {
-    lenis = new Lenis({ lerp: 0.09 });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(t => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
+// ===== данные: розничные цены из каталога ОТРИ (как в каталоге v2) =====
+const I = {
+  '85/31': { name: 'Прибор RoovJoy R-C3', sub: '2 канала, TENS / EMS / массаж, 22 программы', price: 19700, img: 'img/device.webp', cat: 'dev' },
+  '5T15': { name: 'Крем OZOTENS 30%', sub: '150 мл, электродный', price: 10750, img: 'img/cream.webp', cat: 'cream' },
+  '85/04': { name: 'Электрод «Спина»', zone: 'Поясница', segs: '4 сегмента', sub: '2 канала, эластичный пояс с манжетой', price: 31750, img: 'img/el-back.webp', sizes: ['M', 'L', 'XL'], sizeHint: 'Обхват талии: M 55-100 см, L 75-120 см, XL 85-130 см.', cat: 'el' },
+  '85/01': { name: 'Электрод «Шея»', zone: 'Шея', segs: '4 сегмента', sub: '2 канала, шейно-воротниковая зона', price: 26775, img: 'img/el-neck.webp', sizes: ['M', 'L'], sizeHint: 'Обхват шеи: M менее 40 см, L более 40 см.', cat: 'el' },
+  '85/02': { name: 'Электрод «Плечо»', zone: 'Плечо', segs: '4 сегмента', sub: '2 канала', price: 36775, img: 'img/el-shoulder.webp', cat: 'el' },
+  '85/07': { name: 'Электрод «Колено»', zone: 'Колено', segs: '4 сегмента', sub: '2 канала', price: 20400, img: 'img/el-knee.webp', cat: 'el' },
+  '85/05': { name: 'Электрод «Тазобедренный»', zone: 'Бедро', segs: '4 сегмента', sub: '2 канала', price: 23450, img: 'img/el-hip.webp', cat: 'el' },
+  '85/09': { name: 'Электрод «Стопа»', zone: 'Стопа', segs: '2 сегмента', sub: '1 канал', price: 19350, img: 'img/el-foot.webp', sizes: ['M', 'L'], cat: 'el' },
+  '85/06': { name: 'Электрод «Кисть - стопа»', zone: 'Кисть', segs: '2 сегмента', sub: '1 канал', price: 18950, img: 'img/el-hand-foot.webp', cat: 'el' },
+  '85/08': { name: 'Электрод «Голень - бедро»', zone: 'Голень', segs: '2 сегмента', sub: '1 канал', price: 23125, img: 'img/el-shin-thigh.webp', sizes: ['M', 'L'], cat: 'el' },
+  '85/03': { name: 'Электрод «Плечо - голень»', segs: '2 сегмента', sub: '1 канал, обхват до 40 см', price: 21750, img: 'img/el-shin-arm.webp', cat: 'el' },
+};
+const ZONES = ['85/04', '85/01', '85/02', '85/07', '85/05', '85/09', '85/06', '85/08'];
+const DEV = '85/31', CREAM = '5T15';
+// призы колеса: пример, условия утверждает продавец
+const PRIZES = [
+  { t: '−3%', d: 3, w: 30 }, { t: '−5%', d: 5, w: 22 }, { t: 'Доставка 0₽', ship: true, w: 12 }, { t: '−7%', d: 7, w: 10 },
+  { t: '−3%', d: 3, w: 30 }, { t: '−5%', d: 5, w: 22 }, { t: '−10%', d: 10, w: 4 }, { t: '−7%', d: 7, w: 10 },
+];
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const rub = n => n.toLocaleString('ru-RU') + ' ₽';
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+
+// ===== вибрация: Android - navigator.vibrate, iPhone (iOS 18+) - тик через системный переключатель =====
+const haptic = (() => {
+  const lbl = document.createElement('label'); const inp = document.createElement('input');
+  inp.type = 'checkbox'; inp.setAttribute('switch', ''); inp.tabIndex = -1; lbl.appendChild(inp);
+  lbl.style.cssText = 'position:fixed;left:-99px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';
+  lbl.setAttribute('aria-hidden', 'true'); document.body.appendChild(lbl);
+  return (ms = 12) => { if (navigator.vibrate) navigator.vibrate(ms); else lbl.click(); };
+})();
+window.ozoHaptic = haptic;
+
+let toastT;
+const toast = t => { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 2200); };
+
+let lenis = null;
+
+// ===== корзина =====
+let cart = store.get('ozo_cart_v12', []);      // [{code, size, q}]
+let bonus = store.get('ozo_wheel_v12', null);   // приз колеса
+const saveCart = () => { store.set('ozo_cart_v12', cart); const n = cart.reduce((a, c) => a + c.q, 0); $('#cartN').textContent = n || ''; };
+const addToCart = (code, size, q = 1) => {
+  const f = cart.find(c => c.code === code && c.size === size);
+  f ? f.q = Math.min(9, f.q + q) : cart.push({ code, size: size || null, q });
+  saveCart(); haptic(15);
+  gsap.fromTo('#cartBtn', { scale: 1 }, { scale: 1.18, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.out' });
+};
+
+// ===== шторка =====
+const sheet = $('#sheet'), ov = $('#ov');
+let lastFocus = null;
+const openSheet = (title, body, foot) => {
+  if (!sheet.classList.contains('open')) lastFocus = document.activeElement;
+  $('#shTitle').textContent = title; $('#shBody').innerHTML = ''; $('#shFoot').innerHTML = '';
+  $('#shBody').append(body); if (foot) { $('#shFoot').append(foot); $('#shFoot').hidden = false; } else $('#shFoot').hidden = true;
+  $('#shBody').scrollTop = 0;
+  sheet.classList.add('open'); ov.classList.add('open'); document.body.classList.add('lock'); lenis && lenis.stop();
+  setTimeout(() => $('#shX').focus({ preventScroll: true }), 60);
+};
+const closeSheet = () => { sheet.classList.remove('open'); ov.classList.remove('open'); document.body.classList.remove('lock'); lenis && lenis.start(); lastFocus && lastFocus.focus && lastFocus.focus({ preventScroll: true }); };
+$('#shX').onclick = closeSheet; ov.onclick = closeSheet;
+addEventListener('keydown', e => { if (e.key === 'Escape' && sheet.classList.contains('open')) closeSheet(); });
+// свайп шторки вниз на телефоне
+(() => { let y0 = null; sheet.addEventListener('touchstart', e => { y0 = $('#shBody').scrollTop <= 0 ? e.touches[0].clientY : null; }, { passive: true });
+  sheet.addEventListener('touchmove', e => { if (y0 !== null && e.touches[0].clientY - y0 > 90) { y0 = null; closeSheet(); } }, { passive: true });
+  sheet.addEventListener('touchend', () => y0 = null); })();
+
+const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+
+function openProduct(code) {
+  const it = I[code]; const st = { size: it.sizes ? it.sizes[0] : null, dev: it.cat === 'el', cream: it.cat === 'el', q: 1 };
+  const b = h('div', 'pv');
+  b.innerHTML = `<div class="ph"><img src="${it.img}" alt="${it.name}"></div><h3>${it.name}</h3><p class="sub">${[it.segs, it.sub].filter(Boolean).join(' · ')}</p><p class="pr">${rub(it.price)}</p>`;
+  const opt = h('div', 'opt'); b.append(opt);
+  if (it.sizes) {
+    const o = h('div', 'o', `<div>Размер<small>${it.sizeHint || ''}</small></div>`); const s = h('div', 'sizes');
+    it.sizes.forEach(z => { const bt = h('button', '', z); bt.type = 'button'; bt.setAttribute('aria-pressed', z === st.size); bt.onclick = () => { st.size = z; s.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === bt)); haptic(8); }; s.append(bt); });
+    o.append(s); opt.append(o);
   }
-  const go = h => lenis ? lenis.scrollTo(h, { offset: -64 }) : document.querySelector(h).scrollIntoView();
-  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); go(a.getAttribute('href')); }));
+  const sw = (label, key, code2) => { const o = h('div', 'o', `<div>${label}<small>+ ${rub(I[code2].price)}</small></div>`); const t = h('button', 'sw'); t.type = 'button'; t.setAttribute('role', 'switch'); t.setAttribute('aria-label', label); t.setAttribute('aria-checked', st[key]); t.onclick = () => { st[key] = !st[key]; t.setAttribute('aria-checked', st[key]); haptic(8); upd(); }; o.append(t); opt.append(o); };
+  if (it.cat === 'el') { sw('Добавить прибор', 'dev', DEV); sw('Добавить крем', 'cream', CREAM); }
+  b.append(h('div', 'warn', 'Имеются противопоказания. Необходимо проконсультироваться со специалистом.'));
+  const f = document.createDocumentFragment();
+  const qty = h('div', 'qty', '<button type="button" aria-label="Меньше">−</button><span>1</span><button type="button" aria-label="Больше">+</button>');
+  const [qm, qp] = qty.querySelectorAll('button'); qm.onclick = () => { st.q = Math.max(1, st.q - 1); haptic(8); upd(); }; qp.onclick = () => { st.q = Math.min(9, st.q + 1); haptic(8); upd(); };
+  const go = h('button', 'btn hot', '<span>В корзину</span><span class="price"></span>'); go.type = 'button';
+  const upd = () => { qty.querySelector('span').textContent = st.q; let t = it.price; if (it.cat === 'el') { if (st.dev) t += I[DEV].price; if (st.cream) t += I[CREAM].price; } go.querySelector('.price').textContent = rub(t * st.q); };
+  go.onclick = () => { addToCart(code, st.size, st.q); if (it.cat === 'el') { if (st.dev) addToCart(DEV, null, st.q); if (st.cream) addToCart(CREAM, null, st.q); } closeSheet(); toast('Добавлено в корзину'); };
+  f.append(qty, go); upd();
+  openSheet(it.cat === 'el' ? 'Электрод' : it.cat === 'dev' ? 'Прибор' : 'Крем', b, f);
+}
 
-  const logo = $('#logo');
-  logo.addEventListener('mouseenter', () => gsap.to(logo, { duration: 0.9, scrambleText: { text: 'ОЗОТЭНС', chars: 'ОЗТЭНС0123456789', speed: 0.6 } }));
+function openCart() {
+  const b = h('div');
+  if (!cart.length) { b.append(h('p', 'empty', 'Корзина пока пустая. Выберите зону в начале страницы.')); openSheet('Корзина', b, null); return; }
+  const ul = h('ul', 'cl');
+  cart.forEach((c, i) => { const it = I[c.code]; const li = h('li', '', `<img src="${it.img}" alt=""><div class="t">${it.name}${c.size ? ` <small>размер ${c.size}</small>` : ''}<small>${rub(it.price)}</small></div>`);
+    const q = h('div', 'qty', `<button type="button" aria-label="Меньше">−</button><span>${c.q}</span><button type="button" aria-label="Больше">+</button>`);
+    const [m, p] = q.querySelectorAll('button'); m.onclick = () => { c.q--; if (c.q <= 0) cart.splice(i, 1); saveCart(); haptic(8); openCart(); }; p.onclick = () => { c.q = Math.min(9, c.q + 1); saveCart(); haptic(8); openCart(); };
+    li.append(q); ul.append(li); });
+  b.append(ul);
+  const sub = cart.reduce((a, c) => a + I[c.code].price * c.q, 0); const disc = bonus && bonus.d ? Math.round(sub * bonus.d / 100) : 0;
+  b.append(h('div', 'sum', `<div><span>Товары</span><span class="price">${rub(sub)}</span></div>${bonus ? `<div><span>Приз колеса: ${bonus.t}</span><span class="price">${disc ? '−' + rub(disc) : 'доставка 0 ₽'}</span></div>` : ''}<div class="tot"><span>Итого</span><span class="price">${rub(sub - disc)}</span></div>`));
+  const form = h('form', 'form', '<input name="n" placeholder="Имя" autocomplete="name" required><input name="p" placeholder="Телефон" type="tel" autocomplete="tel" required>');
+  form.onsubmit = e => { e.preventDefault(); closeSheet(); toast('Черновик: заявка пока не отправляется'); };
+  b.append(form); b.append(h('div', 'warn', 'Имеются противопоказания. Необходимо проконсультироваться со специалистом.'));
+  const go = h('button', 'btn hot', `<span>Оформить заказ</span><span class="price">${rub(sub - disc)}</span>`); go.type = 'button'; go.onclick = () => form.requestSubmit();
+  openSheet('Корзина', b, go);
+}
+$('#cartBtn').onclick = openCart;
+document.addEventListener('click', e => { const o = e.target.closest('[data-open]'); if (o) openProduct(o.dataset.open); });
+saveCart();
 
-  // Выбор зоны: подсветка, текст, электрод в наборе
-  const zones = $$('.zone');
-  const pick = z => {
-    zones.forEach(x => x.classList.toggle('on', x === z));
-    $('#picked').innerHTML = `${z.dataset.z}: электрод <b>«${z.dataset.e}»</b> + крем OZOTENS 30% + прибор. <a href="#kit" class="tokit">Смотреть набор →</a>`;
-    $('#picked .tokit').addEventListener('click', e => { e.preventDefault(); go('#kit'); });
-    $('#kitTxt').textContent = `прибор + крем OZOTENS 30% + электрод «${z.dataset.e}»`;
-    $('#cardPad').dataset.t = `Электрод «${z.dataset.e}»`;
-    $('#cardPad .nm').textContent = `Электрод «${z.dataset.e}»`;
-    $('#kitBtn').textContent = 'Сменить зону';
-    dispatchEvent(new CustomEvent('ozo:zone', { detail: z.dataset.z }));
+// ===== лента зон =====
+const track = $('#track');
+ZONES.forEach(code => { const it = I[code]; const z = h('button', 'zone');
+  z.type = 'button'; z.dataset.code = code; z.setAttribute('aria-label', `${it.zone}: ${it.name}, ${rub(it.price)}`);
+  z.innerHTML = `<div class="ph"><img src="${it.img}" alt="" draggable="false"></div><div class="nm">${it.zone}</div><div class="el">${it.name} · ${it.segs}</div><div class="ft"><span class="price">${rub(it.price)}</span><span class="go">Смотреть</span></div>`;
+  z.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProduct(code); } });
+  track.append(z); });
+
+// ===== каталог =====
+const grid = $('#grid');
+Object.entries(I).forEach(([code, it]) => { const c = h('article', 'item'); c.dataset.cat = it.cat; c.dataset.code = code; c.tabIndex = 0; c.setAttribute('role', 'button'); c.setAttribute('aria-label', `${it.name}, ${rub(it.price)}`);
+  c.innerHTML = `<div class="ph"><img src="${it.img}" alt="" loading="lazy">${it.segs ? `<span class="seg">${it.segs}</span>` : ''}</div><div class="nm">${it.name}</div><div class="ft"><span class="price">${rub(it.price)}</span></div>`;
+  const add = h('button', 'add', '+'); add.type = 'button'; add.setAttribute('aria-label', 'В корзину: ' + it.name);
+  add.onclick = e => { e.stopPropagation(); addToCart(code, it.sizes ? it.sizes[0] : null); toast(`${it.name} в корзине`); };
+  c.querySelector('.ft').append(add);
+  c.onclick = () => openProduct(code); c.onkeydown = e => { if (e.key === 'Enter') openProduct(code); };
+  grid.append(c); });
+
+// ===== часы: деления =====
+$('#ticks').innerHTML = Array.from({ length: 12 }, (_, k) => `<line x1="100" y1="${k % 3 ? 14 : 10}" x2="100" y2="${k % 3 ? 22 : 26}" transform="rotate(${k * 30} 100 100)"/>`).join('');
+
+// ===== колесо: рисуем =====
+(() => { const svg = $('#wheelSvg'), n = PRIZES.length, R = 190, NS = 'http://www.w3.org/2000/svg';
+  const fills = ['#ffffff', '#f39a2b', '#ffffff', '#1f2321', '#ffffff', '#f39a2b', '#ffffff', '#1f2321'];
+  const g = document.createElementNS(NS, 'g'); g.id = 'wheelG'; svg.append(g);
+  g.innerHTML = `<circle r="198" fill="#fff"/><circle r="194" fill="#2a2e2c"/>`;
+  PRIZES.forEach((p, i) => { const a0 = (i / n) * Math.PI * 2 - Math.PI / 2 - Math.PI / n, a1 = a0 + Math.PI * 2 / n;
+    const path = document.createElementNS(NS, 'path'); path.setAttribute('d', `M0 0 L${R * Math.cos(a0)} ${R * Math.sin(a0)} A${R} ${R} 0 0 1 ${R * Math.cos(a1)} ${R * Math.sin(a1)} Z`); path.setAttribute('fill', fills[i]); g.append(path);
+    const am = (a0 + a1) / 2, tx = document.createElementNS(NS, 'text'); tx.setAttribute('transform', `rotate(${am * 180 / Math.PI}) translate(${p.t.length > 5 ? 112 : 122} 0)`); tx.setAttribute('text-anchor', 'middle'); tx.setAttribute('dominant-baseline', 'middle');
+    tx.setAttribute('fill', fills[i] === '#ffffff' ? '#111312' : fills[i] === '#f39a2b' ? '#1d1206' : '#ffffff'); tx.setAttribute('font-family', 'Onest, sans-serif'); tx.setAttribute('font-weight', '800'); tx.setAttribute('font-size', p.t.length > 5 ? 21 : 34); tx.textContent = p.t; g.append(tx); });
+  for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2 - Math.PI / 2 - Math.PI / n; const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', 186 * Math.cos(a)); c.setAttribute('cy', 186 * Math.sin(a)); c.setAttribute('r', 5); c.setAttribute('fill', '#fff'); g.append(c); }
+})();
+
+gsap.registerPlugin(ScrollTrigger, Flip, SplitText, MorphSVGPlugin, CustomEase, Draggable, InertiaPlugin);
+CustomEase.create('soft', 'M0,0 C0.16,1 0.3,1 1,1');
+if (!reduce) { lenis = new Lenis({ lerp: 0.1 }); lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const id = a.getAttribute('href'); const t = id === '#top' ? 0 : document.querySelector(id); if (t === null) return; e.preventDefault(); lenis ? lenis.scrollTo(t, { offset: -68 }) : (t ? t.scrollIntoView() : scrollTo(0, 0)); }));
+
+// Draggable-лента: нажатие без сдвига открывает товар
+const ribbon = $('#ribbon');
+const drag = Draggable.create(track, { type: 'x', inertia: true, bounds: ribbon, edgeResistance: 0.85, dragClickables: true, minimumMovement: 6,
+  onClick: e => { const z = e.target.closest('.zone'); if (z) { haptic(10); openProduct(z.dataset.code); } } })[0];
+const stepRibbon = dir => { const w = track.children[0].offsetWidth + 14; const min = Math.min(0, ribbon.clientWidth - track.scrollWidth); gsap.to(track, { x: gsap.utils.clamp(min, 0, gsap.getProperty(track, 'x') - dir * w * 2), duration: 0.6, ease: 'power3.out', onUpdate: () => drag.update() }); };
+$('#prev').onclick = () => stepRibbon(-1); $('#next').onclick = () => stepRibbon(1);
+
+// ===== колесо: вращение =====
+(() => { const g = $('#wheelG'), btn = $('#spinBtn'), n = PRIZES.length, seg = 360 / n;
+  let spinning = false, lastTick = 0;
+  const show = p => { $('#prize').innerHTML = `<b>${p.t}${p.ship ? '' : ' на заказ'}</b>Код <code>OZO${p.ship ? 'SHIP' : p.d}</code> уже в корзине. Попытка использована.`; };
+  if (bonus) { show(bonus); btn.disabled = true; btn.textContent = bonus.t; }
+  const tickCheck = () => { const r = gsap.getProperty(g, 'rotation'); const k = Math.floor((r + seg / 2) / seg); if (k !== lastTick) { lastTick = k; haptic(6); gsap.fromTo('.wheel .ptr', { rotation: -14 }, { rotation: 0, duration: 0.25, ease: 'power2.out' }); } };
+  const spin = (power = 1) => {
+    if (spinning || bonus) { if (bonus) toast('Попытка уже использована'); return; }
+    spinning = true; btn.disabled = true; haptic(20);
+    const tot = PRIZES.reduce((a, p) => a + p.w, 0); let r = Math.random() * tot, idx = 0; for (; idx < n; idx++) { r -= PRIZES[idx].w; if (r <= 0) break; }
+    idx = Math.min(idx, n - 1);
+    const cur = gsap.getProperty(g, 'rotation'); const base = Math.ceil(cur / 360) * 360;
+    const target = base + 360 * (5 + Math.round(power * 2)) + (360 - idx * seg) % 360 + gsap.utils.random(-seg * 0.3, seg * 0.3);
+    gsap.to(g, { rotation: target, svgOrigin: '0 0', duration: reduce ? 0.01 : 5.2, ease: 'power4.out', onUpdate: tickCheck,
+      onComplete: () => { spinning = false; bonus = PRIZES[idx]; store.set('ozo_wheel_v12', bonus); show(bonus); btn.textContent = bonus.t; haptic(40);
+        gsap.fromTo('#prize', { scale: 0.94 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1,0.5)' }); toast('Приз в корзине: ' + bonus.t); } });
   };
+  btn.onclick = () => spin(1);
+  // раскрутить пальцем: тянем по кругу, отпускаем - крутится
+  let a0 = null, t0 = 0, last = 0;
+  const box = $('#wheelBox');
+  const ang = e => { const r = box.getBoundingClientRect(); return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) * 180 / Math.PI; };
+  box.addEventListener('pointerdown', e => { if (e.target === btn || spinning || bonus) return; a0 = ang(e); last = a0; t0 = performance.now(); box.setPointerCapture(e.pointerId); });
+  box.addEventListener('pointermove', e => { if (a0 === null) return; const a = ang(e); let d = a - last; if (d > 180) d -= 360; if (d < -180) d += 360; last = a; gsap.set(g, { rotation: '+=' + d, svgOrigin: '0 0' }); tickCheck(); });
+  box.addEventListener('pointerup', e => { if (a0 === null) return; const d = ang(e) - a0; a0 = null; const dt = performance.now() - t0; if (Math.abs(d) > 20) spin(Math.min(2, Math.abs(d) / Math.max(dt, 120) * 2)); });
+})();
 
-  // Draggable-лента + стрелки
-  const track = $('#track'), vp = $('#vp');
-  const drag = Draggable.create(track, { type: 'x', inertia: true, bounds: vp, edgeResistance: 0.85, dragClickables: true, minimumMovement: 6,
-    onClick: e => { const z = e.target.closest('.zone'); if (z) pick(z); },
-    onDragStart: () => gsap.to('#hint', { opacity: 0.45, duration: 0.4 }) })[0];
-  const step = dir => {
-    const w = zones[0].offsetWidth + 14;
-    const min = Math.min(0, vp.clientWidth - track.scrollWidth);
-    const x = gsap.utils.clamp(min, 0, gsap.getProperty(track, 'x') - dir * w);
-    gsap.to(track, { x, duration: 0.6, ease: 'power3.out', onUpdate: () => drag.update() });
-  };
-  $('#prev').onclick = () => step(-1); $('#next').onclick = () => step(1);
-  zones.forEach(z => z.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(z); } }));
+// фильтры каталога (Flip)
+$$('#filters button').forEach(b => b.addEventListener('click', () => {
+  $$('#filters button').forEach(x => x.setAttribute('aria-pressed', x === b)); haptic(8);
+  const items = $$('.item'); const state = Flip.getState(items);
+  items.forEach(c => c.hidden = !(b.dataset.f === 'all' || c.dataset.cat === b.dataset.f));
+  Flip.from(state, { duration: reduce ? 0 : 0.55, ease: 'power3.inOut', scale: true, absolute: true,
+    onEnter: el => gsap.fromTo(el, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.4 }),
+    onLeave: el => gsap.to(el, { opacity: 0, scale: 0.85, duration: 0.3 }) });
+}));
 
-  // 6. Позвоночник: согнут -> электрод -> импульс -> выпрямился (рисуется кодом, место под Rive)
-  const NS = 'http://www.w3.org/2000/svg', N = 14, L = 17;
-  const vg = $('#spVert'), verts = [];
-  for (let i = 0; i < N; i++) { const r = document.createElementNS(NS, 'rect'); const w = 42 - i * 1.3; r.setAttribute('x', -w / 2); r.setAttribute('y', -6); r.setAttribute('width', w); r.setAttribute('height', 12); r.setAttribute('rx', 5); r.setAttribute('fill', '#e8dcc6'); vg.appendChild(r); verts.push(r); }
-  const rg = $('#spRings'), spRings = [0, 1, 2].map(() => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('r', 20); c.setAttribute('fill', 'none'); c.setAttribute('stroke', '#f0a54a'); c.setAttribute('stroke-width', 2); c.setAttribute('opacity', 0); rg.appendChild(c); return c; });
-  const ease = gsap.parseEase('power2.inOut'), clamp01 = v => Math.max(0, Math.min(1, v));
-  const spLabels = ['Зажало', 'Электрод на поясницу', 'Импульс', 'Выпрямился'];
-  let spPhase = -1, ringsOn = false;
-  const ringTw = gsap.timeline({ repeat: -1, paused: true });
-  spRings.forEach((c, i) => ringTw.fromTo(c, { attr: { r: 20 }, opacity: 0.9 }, { attr: { r: 90 }, opacity: 0, duration: 1.5, ease: 'power1.out', immediateRender: false }, i * 0.5));
-  function drawSpine(p) {
-    const k = ease(clamp01((p - 0.45) / 0.5));
-    let x = 175, y = 312, a = 0; const pts = [];
-    for (let i = 0; i < N; i++) {
-      const bent = -0.03 - 0.075 * i;                  // горб: каждый позвонок клонится вперёд (влево)
-      const free = 0.16 * Math.sin((i / (N - 1)) * Math.PI * 1.6 + 0.4) - 0.03; // мягкий естественный изгиб
-      a = bent + (free - bent) * k;
-      x += L * Math.sin(a); y -= L * Math.cos(a); pts.push([x, y, a]);
-      verts[i].setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(a * 57.3).toFixed(1)})`);
-    }
-    const top = pts[N - 1];
-    $('#spSkull').setAttribute('cx', (top[0] + 34 * Math.sin(top[2] - 0.25)).toFixed(1)); $('#spSkull').setAttribute('cy', (top[1] - 34 * Math.cos(top[2] - 0.25)).toFixed(1));
-    $('#spPelvis').setAttribute('transform', 'translate(175 318)');
-    const lum = pts[2], nx = Math.cos(lum[2]), ny = Math.sin(lum[2]);
-    const padIn = clamp01((p - 0.2) / 0.18);
-    const px = lum[0] + nx * 36 + (1 - padIn) * 90, py = lum[1] + ny * 36 - (1 - padIn) * 60;
-    const pad = $('#spPad'); pad.setAttribute('opacity', padIn); pad.setAttribute('transform', `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${(lum[2] * 57.3).toFixed(1)})`);
-    rg.setAttribute('transform', `translate(${px.toFixed(1)} ${py.toFixed(1)})`);
-    const tense = $('#spTense'); tense.setAttribute('cx', lum[0]); tense.setAttribute('cy', lum[1]); tense.setAttribute('opacity', (1 - k) * 0.9);
-    const on = p > 0.4 && p < 0.92; if (on !== ringsOn) { ringsOn = on; on && !reduce ? ringTw.play() : (ringTw.pause(0), spRings.forEach(c => c.setAttribute('opacity', 0))); }
-    const ph = p < 0.2 ? 0 : p < 0.4 ? 1 : p < 0.78 ? 2 : 3;
-    if (ph !== spPhase) { spPhase = ph; $$('#spSteps li').forEach((l, i) => l.classList.toggle('on', i <= ph)); $('#spCap').textContent = spLabels[ph]; }
-  }
-  drawSpine(reduce ? 1 : 0);
-  if (reduce) $$('.entries div').forEach(d => d.classList.add('on'));
-
-  if (reduce) return;
-
-  ScrollTrigger.create({ trigger: '#spine .spbox', start: 'top 60%', end: 'bottom 85%', scrub: 0.6, onUpdate: st => drawSpine(st.progress) });
-
-  // 2. Дневник: часы идут от 07:00 до 23:00 по прокрутке, записи загораются по очереди
-  ScrollTrigger.create({ trigger: '.entries', start: 'top 55%', end: 'bottom 55%', scrub: 0.4, onUpdate: st => {
+if (reduce) { $$('.entries li').forEach(l => l.classList.add('on')); gsap.set('#wave', { morphSVG: '#sWave' }); }
+else {
+  // живая подложка
+  $$('.blobs i').forEach((b, i) => gsap.to(b, { x: () => gsap.utils.random(-90, 90), y: () => gsap.utils.random(-60, 60), scale: () => gsap.utils.random(0.85, 1.15), duration: 7 + i * 2, ease: 'sine.inOut', repeat: -1, yoyo: true, repeatRefresh: true }));
+  // «Где болит?» по буквам, лента въезжает и покачивается - видно, что тянется
+  const split = SplitText.create('#title', { type: 'chars', mask: 'chars' });
+  gsap.timeline({ delay: 0.15 })
+    .from(split.chars, { yPercent: 110, duration: 1, ease: 'soft', stagger: 0.05 })
+    .from('.hero .kick, .hero-sub, .hero .hint', { y: 16, opacity: 0, duration: 0.7, ease: 'soft', stagger: 0.08 }, '-=0.7')
+    .from('.zone', { x: 140, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.06 }, '-=0.5')
+    .to(track, { x: -110, duration: 0.6, ease: 'power2.inOut', onUpdate: () => drag.update() })
+    .to(track, { x: 0, duration: 0.9, ease: 'elastic.out(1,0.6)', onUpdate: () => drag.update() });
+  gsap.to('#hint .hand', { x: 5, rotation: 8, svgOrigin: '16 26', duration: 0.6, ease: 'sine.inOut', repeat: -1, yoyo: true });
+  // заголовки секций - по словам
+  $$('h2.words').forEach(t => { const s = SplitText.create(t, { type: 'words', mask: 'words' }); gsap.from(s.words, { yPercent: 100, duration: 0.9, ease: 'soft', stagger: 0.05, scrollTrigger: { trigger: t, start: 'top 88%', once: true } }); });
+  // часы: 07:00 -> 23:00, коротко - пока блок проходит экран
+  ScrollTrigger.create({ trigger: '.day .box', start: 'top 75%', end: 'bottom 45%', scrub: 0.4, onUpdate: st => {
     const m = 7 * 60 + st.progress * 16 * 60;
     gsap.set('#hh', { rotation: (m % 720) / 2, svgOrigin: '100 100' }); gsap.set('#mm', { rotation: (m % 60) * 6, svgOrigin: '100 100' });
     $('#clockTxt').textContent = String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(Math.floor(m % 60)).padStart(2, '0');
+    const k = Math.min(3, Math.floor(st.progress * 4)); $$('#entries li').forEach((l, i) => l.classList.toggle('on', i <= k));
   } });
   gsap.set('#hh', { rotation: 210, svgOrigin: '100 100' });
-  $$('.entries div').forEach(d => ScrollTrigger.create({ trigger: d, start: 'top 62%', end: 'bottom 38%', toggleClass: 'on' }));
-
-  // Живая подложка первого экрана
-  $$('.glow i').forEach((b, i) => gsap.to(b, { x: () => gsap.utils.random(-120, 120), y: () => gsap.utils.random(-80, 80), scale: () => gsap.utils.random(0.85, 1.2), duration: 7 + i * 2, ease: 'sine.inOut', repeat: -1, yoyo: true, repeatRefresh: true }));
-  addEventListener('pointermove', e => gsap.to('.glow', { x: (e.clientX / innerWidth - 0.5) * 40, y: (e.clientY / innerHeight - 0.5) * 30, duration: 1.2, ease: 'power2.out' }));
-
-  // 1. «Где болит?» по буквам, потом лента въезжает и показывает, что её можно тянуть
-  const split = SplitText.create('#title', { type: 'chars', mask: 'chars' });
-  const tl = gsap.timeline({ delay: 0.2 });
-  tl.from(split.chars, { yPercent: 115, rotate: 8, duration: 1.1, ease: 'soft', stagger: 0.06 })
-    .from('.hero .kicker, .hero .lead', { y: 20, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.1 }, '-=0.7')
-    .from('.zones-head', { y: 20, opacity: 0, duration: 0.6, ease: 'soft' }, '-=0.4')
-    .from(zones, { x: 160, opacity: 0, duration: 0.9, ease: 'soft', stagger: 0.07 }, '-=0.4')
-    .to(track, { x: -120, duration: 0.7, ease: 'power2.inOut', onUpdate: () => drag.update() })
-    .to(track, { x: 0, duration: 0.9, ease: 'elastic.out(1,0.6)', onUpdate: () => drag.update() });
-  gsap.to('#hint .hand', { x: 5, rotate: 8, duration: 0.6, ease: 'sine.inOut', repeat: -1, yoyo: true });
-
-  // Заголовки секций проявляются по словам
-  $$('h2.words').forEach(h => {
-    const s = SplitText.create(h, { type: 'words', mask: 'words' });
-    gsap.from(s.words, { yPercent: 100, opacity: 0, duration: 0.9, ease: 'soft', stagger: 0.06, scrollTrigger: { trigger: h, start: 'top 85%', once: true } });
-  });
-  gsap.from('.docs div', { y: 30, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.08, scrollTrigger: { trigger: '.docs', start: 'top 85%', once: true } });
-
-  // 3. Метод: капля ОЗОТЭНС -> импульс -> электрод. Закрепление только тут и только на ПК.
-  const shapes = ['#sDrop', '#sWave', '#sPad'];
-  const labels = ['Капля крема', 'Импульс', 'Электрод на зону'];
-  const steps = $$('#steps li');
-  const rings = $$('.dropbox .ring');
-  const ringTl = gsap.timeline({ repeat: -1, paused: true });
-  rings.forEach((r, i) => ringTl.fromTo(r, { attr: { r: 50 }, opacity: 0.8 }, { attr: { r: 100 }, opacity: 0, duration: 1.6, ease: 'power1.out' }, i * 0.5));
-  let cur = 0;
-  const setStep = i => {
-    if (i === cur) return; cur = i;
-    steps.forEach((s, k) => s.classList.toggle('on', k === i));
-    gsap.to('#shape', { morphSVG: shapes[i], duration: 0.9, ease: 'power3.inOut' });
-    gsap.to('#shine, #dropTxt', { opacity: i === 0 ? 1 : 0, duration: 0.3 });
-    gsap.fromTo('#dropLabel', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, onStart: () => $('#dropLabel').textContent = labels[i] });
-    i === 1 ? ringTl.play() : ringTl.pause(0);
-  };
-  // капля «дышит», пока на шаге 1
-  gsap.to('#shape', { scaleY: 1.03, scaleX: 0.98, transformOrigin: '50% 100%', duration: 1.4, ease: 'sine.inOut', repeat: -1, yoyo: true });
-  steps.forEach((s, k) => s.addEventListener('click', () => setStep(k)));
-  ScrollTrigger.matchMedia({
-    '(min-width: 861px)': () => {
-      gsap.timeline({ scrollTrigger: { trigger: '#howWrap', start: 'top top', end: '+=200%', pin: true, scrub: 0.6, onUpdate: s => setStep(Math.min(2, Math.floor(s.progress * 2.999))) } })
-        .to('#bar', { scaleX: 1, ease: 'none' }, 0);
-    },
-    '(max-width: 860px)': () => {
-      steps.forEach((s, k) => ScrollTrigger.create({ trigger: s, start: 'top 65%', end: 'bottom 65%', onToggle: st => st.isActive && setStep(k) }));
-    }
-  });
-
-  // 5. Flip: фильтр и раскрытие
-  const grid = $('#grid'), cards = [...grid.children];
-  const filterBtns = $$('#filters .btn');
-  filterBtns.forEach(b => b.addEventListener('click', () => {
-    filterBtns.forEach(x => x.setAttribute('aria-pressed', x === b));
-    const state = Flip.getState(cards);
-    cards.forEach(c => c.hidden = !(b.dataset.f === 'all' || c.dataset.c.includes(b.dataset.f)));
-    Flip.from(state, { duration: 0.6, ease: 'power3.inOut', scale: true, absolute: true,
-      onEnter: el => gsap.fromTo(el, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5 }),
-      onLeave: el => gsap.to(el, { opacity: 0, scale: 0.8, duration: 0.4 }) });
-  }));
-  const ov = document.createElement('div'); ov.className = 'overlay';
-  ov.innerHTML = '<div class="sheet"><div class="ph" id="ovPh"></div><div class="tx"><div><p class="kicker">В наборе</p><h3 id="ovT"></h3><p class="lead" id="ovD"></p></div><button class="btn" type="button" id="ovX">Закрыть</button></div></div>';
-  document.body.appendChild(ov);
-  let open = null;
-  const closeOv = () => { if (!open) return; const img = $('#ovPh img'); const st = Flip.getState(img); open.querySelector('.ph').appendChild(img); Flip.from(st, { duration: 0.6, ease: 'power3.inOut', onComplete: () => ov.classList.remove('open') }); gsap.to('.sheet', { opacity: 0, duration: 0.3 }); open = null; lenis && lenis.start(); };
-  cards.forEach(c => c.addEventListener('click', () => {
-    open = c; const img = c.querySelector('img'); const st = Flip.getState(img);
-    $('#ovT').textContent = c.dataset.t; $('#ovD').textContent = c.dataset.d;
-    ov.classList.add('open'); gsap.fromTo('.sheet', { opacity: 0 }, { opacity: 1, duration: 0.3 });
-    $('#ovPh').appendChild(img); Flip.from(st, { duration: 0.7, ease: 'power3.inOut' });
-    lenis && lenis.stop();
-  }));
-  ov.addEventListener('click', e => { if (e.target === ov || e.target.id === 'ovX') closeOv(); });
-  addEventListener('keydown', e => { if (e.key === 'Escape') closeOv(); });
-
-  // закрепление выше по странице сдвигает остальные триггеры - пересчитываем по порядку
-  ScrollTrigger.sort(); ScrollTrigger.refresh();
-  addEventListener('load', () => ScrollTrigger.refresh());
-})();
+  // карточки метода
+  gsap.from('.hc', { y: 40, opacity: 0, duration: 0.9, ease: 'soft', stagger: 0.12, scrollTrigger: { trigger: '.how-grid', start: 'top 85%', once: true } });
+  gsap.to('#drop', { scaleY: 1.04, scaleX: 0.97, transformOrigin: '50% 100%', duration: 1.4, ease: 'sine.inOut', repeat: -1, yoyo: true });
+  // капля перетекает в импульс (MorphSVG), потом импульс «бьётся»
+  ScrollTrigger.create({ trigger: '.how-grid', start: 'top 70%', once: true, onEnter: () => gsap.timeline({ delay: 0.5 }).to('#wave', { morphSVG: '#sWave', duration: 1.1, ease: 'power3.inOut' }).to('#wave', { scaleY: 1.12, transformOrigin: '50% 52%', duration: 0.35, ease: 'power2.out', yoyo: true, repeat: -1, repeatDelay: 0.5 }) });
+  gsap.from('.item', { y: 30, opacity: 0, duration: 0.7, ease: 'soft', stagger: 0.04, scrollTrigger: { trigger: '#grid', start: 'top 85%', once: true } });
+}
+addEventListener('load', () => ScrollTrigger.refresh());
 </script>
 
 <script type="module">
-// 4. three.js: прибор как игра. Кнопки на корпусе нажимаются, экран и импульсы отвечают.
-import * as THREE from './vendor/three.module.min.js';
-const cv = document.getElementById('gl');
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-const scene = new THREE.Scene();
-const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 50); cam.position.set(0, 0.2, 7.4);
-scene.add(new THREE.HemisphereLight(0xffffff, 0x2a3a30, 1.1));
-const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(3, 4, 5); scene.add(key);
-const rim = new THREE.DirectionalLight(0xf0a54a, 1.8); rim.position.set(-4, 1, -3); scene.add(rim);
-const glowLight = new THREE.PointLight(0xf0a54a, 0, 6); glowLight.position.set(0, 0.6, 1.2); scene.add(glowLight);
-
-// корпус
-const shape = new THREE.Shape(); const w = 1.25, h = 2.6, r = 0.32;
-shape.moveTo(-w / 2 + r, -h / 2); shape.lineTo(w / 2 - r, -h / 2); shape.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r);
-shape.lineTo(w / 2, h / 2 - r); shape.quadraticCurveTo(w / 2, h / 2, w / 2 - r, h / 2); shape.lineTo(-w / 2 + r, h / 2);
-shape.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - r); shape.lineTo(-w / 2, -h / 2 + r); shape.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + r, -h / 2);
-const body = new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: 0.32, bevelEnabled: true, bevelSize: 0.06, bevelThickness: 0.06, bevelSegments: 6, curveSegments: 24 }),
-  new THREE.MeshStandardMaterial({ color: 0xf4f3ef, roughness: 0.32, metalness: 0.05 }));
-body.geometry.center();
-const dev = new THREE.Group(); dev.add(body);
-
-// экран
-const sc = document.createElement('canvas'); sc.width = 512; sc.height = 360; const g = sc.getContext('2d');
-const tex = new THREE.CanvasTexture(sc); tex.colorSpace = THREE.SRGBColorSpace;
-const screenMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.2, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.15 });
-const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.95, 0.67), screenMat);
-screen.position.set(0, 0.62, 0.23); dev.add(screen);
-
-// кнопки с подписями на торце
-const cap = txt => { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, 128, 128); x.fillStyle = '#1d221f'; x.font = '600 56px system-ui, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(txt, 64, 68); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.center.set(0.5, 0.5); t.rotation = Math.PI / 2; return t; };
-const btns = [];
-[['minus', '−', -0.3, -0.25, 0xf0a54a], ['plus', '+', 0.3, -0.25, 0xf0a54a], ['ch', 'CH', -0.3, -0.75, 0xd8dad4], ['prog', 'P', 0.3, -0.75, 0xd8dad4]].forEach(([k, label, x, y, col]) => {
-  const side = new THREE.MeshStandardMaterial({ color: col, roughness: 0.4 });
-  const top = new THREE.MeshStandardMaterial({ color: col, roughness: 0.4, map: cap(label) });
-  const b = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.08, 40), [side, top, side]);
-  b.rotation.x = Math.PI / 2; b.position.set(x, y, 0.23); b.userData = { k, z: 0.23 };
-  dev.add(b); btns.push(b);
-});
-
-// провод и электрод сзади-сбоку
-const wire = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, 1.32, 0), new THREE.Vector3(0.2, 1.8, -0.2), new THREE.Vector3(1.2, 1.5, -0.6), new THREE.Vector3(1.45, 0.66, -0.72)]), 40, 0.025, 8), new THREE.MeshStandardMaterial({ color: 0x2b302c, roughness: 0.6 }));
-dev.add(wire);
-function makePad(w, h) {
-  const g = new THREE.Group(), rr = Math.min(w, h) * 0.22, s = new THREE.Shape();
-  s.moveTo(-w / 2 + rr, -h / 2); s.lineTo(w / 2 - rr, -h / 2); s.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + rr); s.lineTo(w / 2, h / 2 - rr); s.quadraticCurveTo(w / 2, h / 2, w / 2 - rr, h / 2);
-  s.lineTo(-w / 2 + rr, h / 2); s.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - rr); s.lineTo(-w / 2, -h / 2 + rr); s.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + rr, -h / 2);
-  const cloth = new THREE.Mesh(new THREE.ExtrudeGeometry(s, { depth: 0.02, bevelEnabled: true, bevelSize: 0.015, bevelThickness: 0.012, bevelSegments: 4, curveSegments: 18 }), new THREE.MeshStandardMaterial({ color: 0xe9ebe6, roughness: 0.85 }));
-  const gel = new THREE.Mesh(new THREE.ShapeGeometry(s, 18), new THREE.MeshStandardMaterial({ color: 0xc9d3cc, roughness: 0.25, metalness: 0.05 }));
-  gel.scale.setScalar(0.86); gel.position.z = -0.006; gel.rotation.y = Math.PI;
-  const snap = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.05, 24), new THREE.MeshStandardMaterial({ color: 0xbfc3c0, roughness: 0.3, metalness: 0.6 }));
-  snap.rotation.x = Math.PI / 2; snap.position.z = 0.05;
-  g.add(cloth, gel, snap); g.userData.mats = [cloth.material, gel.material]; return g;
-}
-const pad = makePad(0.8, 0.8);
-pad.position.set(1.45, 0.3, -0.7); pad.rotation.set(0, -0.6, 0.15); dev.add(pad);
-scene.add(dev);
-
-// кольца импульса вокруг электрода
-const rings = [0, 1, 2].map(() => { const m = new THREE.Mesh(new THREE.RingGeometry(0.46, 0.49, 64), new THREE.MeshBasicMaterial({ color: 0xf0a54a, transparent: true, opacity: 0, side: THREE.DoubleSide })); m.position.copy(pad.position); m.rotation.copy(pad.rotation); dev.add(m); return m; });
-const floor = new THREE.Mesh(new THREE.CircleGeometry(1.7, 48), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.3 }));
-floor.rotation.x = -Math.PI / 2; floor.position.y = -1.8; scene.add(floor);
-
-// состояние прибора: сила 0-40, 2 канала, 22 программы
-const st = { lv: 0, ch: 1, p: 1 };
-const lvEl = document.getElementById('lv'), lvTxt = document.getElementById('lvTxt'), scaleEl = document.getElementById('scale'), note = document.getElementById('note');
-function drawScreen() {
-  const on = st.lv > 0;
-  g.fillStyle = on ? '#d6e7c9' : '#9aa597'; g.fillRect(0, 0, 512, 360); g.fillStyle = '#1d221f'; g.textAlign = 'center';
-  g.font = '600 150px monospace'; g.fillText(String(st.lv).padStart(2, '0'), 256, 200);
-  g.font = '600 38px monospace'; g.fillText(`CH${st.ch} · P${String(st.p).padStart(2, '0')}`, 256, 290);
-  if (on) { g.fillRect(40, 320, 432 * st.lv / 40, 14); }
-  tex.needsUpdate = true;
-  screenMat.emissiveIntensity = on ? 0.45 : 0.1;
-  glowLight.intensity = on ? 0.4 + st.lv / 20 : 0;
-  lvEl.textContent = st.lv; lvTxt.textContent = on ? `из 40 · канал ${st.ch} · программа ${st.p}` : 'из 40 · выключен';
-  scaleEl.style.width = (st.lv / 40 * 100) + '%';
-  note.textContent = !on ? 'Начните с малого и прибавляйте, пока ощущение комфортное.' : st.lv < 15 ? 'Лёгкое покалывание - так и начинают.' : st.lv < 30 ? 'Выбирайте ту силу, что комфортна, не больше.' : 'Если неприятно - убавьте. Комфорт важнее цифры.';
-}
-drawScreen();
-
-let shake = 0;
-function press(k) {
-  if (k === 'plus') st.lv = Math.min(40, st.lv + 2);
-  if (k === 'minus') st.lv = Math.max(0, st.lv - 2);
-  if (k === 'ch') st.ch = st.ch === 1 ? 2 : 1;
-  if (k === 'prog') st.p = st.p % 22 + 1;
-  const b = btns.find(x => x.userData.k === k);
-  if (b) { b.position.z = b.userData.z - 0.04; b.userData.t = performance.now(); }
-  shake = 0.03; navigator.vibrate && navigator.vibrate(12);
-  drawScreen();
-  document.getElementById('gltip').style.opacity = 0;
-}
-document.querySelectorAll('[data-k]').forEach(el => el.addEventListener('click', () => press(el.dataset.k)));
-
-// мышь: вращение или нажатие кнопки
-const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
-const hit = e => { const rc = cv.getBoundingClientRect(); ptr.set((e.clientX - rc.left) / rc.width * 2 - 1, -(e.clientY - rc.top) / rc.height * 2 + 1); ray.setFromCamera(ptr, cam); return ray.intersectObjects(btns)[0]; };
-let rx = 0.08, ry = -0.45, vx = 0, vy = 0.003, drag = false, moved = 0, px = 0, py = 0;
-cv.addEventListener('pointerdown', e => { drag = true; moved = 0; px = e.clientX; py = e.clientY; cv.setPointerCapture(e.pointerId); });
-cv.addEventListener('pointermove', e => {
-  if (!drag) { cv.classList.toggle('over', !!hit(e)); return; }
-  const dx = e.clientX - px, dy = e.clientY - py; moved += Math.abs(dx) + Math.abs(dy);
-  vy = dx * 0.0009; vx = dy * 0.0009; ry += vy * 6; rx += vx * 6; px = e.clientX; py = e.clientY;
-});
-cv.addEventListener('pointerup', e => { drag = false; if (moved < 6) { const h = hit(e); if (h) press(h.object.userData.k); } });
-
-let visible = false; new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(cv);
-const t0 = performance.now();
-function frame() {
-  const now = performance.now(), t = (now - t0) / 1000;
-  const s = cv.clientWidth; if (cv.width !== Math.round(s * renderer.getPixelRatio())) { renderer.setSize(s, s, false); cam.aspect = 1; cam.updateProjectionMatrix(); }
-  if (!drag) { vy += (0.003 - vy) * 0.02; vx *= 0.94; ry += reduce ? 0 : vy; rx += vx; rx += (0.08 - rx) * 0.02; ry = ((ry + Math.PI) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2) - Math.PI; }
-  // возврат кнопок
-  btns.forEach(b => { if (b.userData.t) { const k = Math.min(1, (now - b.userData.t) / 160); b.position.z = b.userData.z - 0.04 * (1 - k); } });
-  // импульс: кольца и дрожь электрода, частота от силы
-  const on = st.lv > 0, speed = 0.6 + st.lv / 25;
-  rings.forEach((m, i) => { const ph = ((t * speed + i / 3) % 1); m.scale.setScalar(1 + ph * 1.6); m.material.opacity = on && !reduce ? (1 - ph) * (0.25 + st.lv / 60) : 0; });
-  const padMat = pad.userData.mats[0]; padMat.emissive.setHex(0xf0a54a); padMat.emissiveIntensity = on ? (0.1 + 0.25 * (0.5 + 0.5 * Math.sin(t * speed * 6.28))) * st.lv / 40 : 0;
-  shake *= 0.85;
-  dev.rotation.set(rx + (Math.random() - 0.5) * shake, ry + (Math.random() - 0.5) * shake, 0);
-  dev.position.y = reduce ? 0 : Math.sin(now / 900) * 0.05;
-  renderer.render(scene, cam);
-}
-renderer.setAnimationLoop(() => { if (visible) frame(); });
-frame();
-</script>
-
-
-<script type="module">
-// 4б. Игра: фигура-манекен, электрод на зону, импульс, поза расслабляется
-import * as THREE from './vendor/three.module.min.js';
-const cv = document.getElementById('body3d');
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-const scene = new THREE.Scene();
-const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
-scene.add(new THREE.HemisphereLight(0xffffff, 0x2a3a30, 1.2));
-const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(2, 4, 4); scene.add(key);
-const rim = new THREE.DirectionalLight(0xf0a54a, 1.6); rim.position.set(-3, 2, -3); scene.add(rim);
-
-const skin = new THREE.MeshStandardMaterial({ color: 0xe7dccb, roughness: 0.55 });
-const joint = new THREE.MeshStandardMaterial({ color: 0xcfc2ad, roughness: 0.5 });
-const J = (parent, x, y, z) => { const g = new THREE.Group(); g.position.set(x, y, z); parent.add(g); return g; };
-const cap = (parent, r, len, dir = -1) => { const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, len, 6, 16), skin); m.position.y = dir * (len / 2 + r * 0.6); parent.add(m); return m; };
-const ball = (parent, r, y = 0) => { const m = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), joint); m.position.y = y; parent.add(m); return m; };
-
-// скелет манекена: суставы - группы, детали - капсулы
-const root = new THREE.Group(); scene.add(root);
-const hips = J(root, 0, 1.0, 0);
-const pel = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 18), skin); pel.scale.set(0.16, 0.11, 0.1); hips.add(pel);
-const lumbar = J(hips, 0, 0.08, 0); cap(lumbar, 0.075, 0.16, 1);
-const chest = J(lumbar, 0, 0.3, 0); const ch = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 18), skin); ch.scale.set(0.18, 0.22, 0.11); ch.position.y = 0.17; chest.add(ch);
-const neck = J(chest, 0, 0.42, 0); cap(neck, 0.05, 0.06, 1);
-const head = J(neck, 0, 0.13, 0); const hd = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 20), skin); hd.scale.set(0.12, 0.15, 0.13); hd.position.y = 0.13; head.add(hd);
-const arm = side => { const sh = J(chest, side * 0.23, 0.33, 0); ball(sh, 0.055); cap(sh, 0.042, 0.22); const el = J(sh, 0, -0.33, 0); ball(el, 0.04); cap(el, 0.036, 0.2); const hand = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), skin); hand.scale.set(0.045, 0.07, 0.035); hand.position.y = -0.34; el.add(hand); return { sh, el }; };
-const leg = side => { const hp = J(hips, side * 0.11, -0.04, 0); ball(hp, 0.065); cap(hp, 0.06, 0.3); const kn = J(hp, 0, -0.45, 0); ball(kn, 0.052); cap(kn, 0.046, 0.32); const an = J(kn, 0, -0.46, 0); ball(an, 0.045); const ft = new THREE.Mesh(new THREE.CapsuleGeometry(0.045, 0.14, 4, 12), skin); ft.rotation.x = Math.PI / 2; ft.position.set(0, -0.04, 0.06); an.add(ft); return { hp, kn, an }; };
-const A = { L: arm(-1), R: arm(1) }, G = { L: leg(-1), R: leg(1) };
-const floor = new THREE.Mesh(new THREE.CircleGeometry(0.8, 48), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.35 }));
-floor.rotation.x = -Math.PI / 2; floor.position.y = 0.005; scene.add(floor);
-
-// позы: «зажато» для каждой зоны и «свободно»
-const J8 = { lumbar, chest, neck, head, shL: A.L.sh, elL: A.L.el, shR: A.R.sh, elR: A.R.el, hpL: G.L.hp, knL: G.L.kn, anL: G.L.an, hpR: G.R.hp, knR: G.R.kn, anR: G.R.an };
-const FREE = { shL: [0, 0, -0.12], shR: [0, 0, 0.12], elL: [-0.15, 0, 0], elR: [-0.15, 0, 0] };
-const TENSE = {
-  'Поясница': { lumbar: [0.42, 0, 0.06], chest: [0.3, 0, 0], neck: [0.15, 0, 0], head: [-0.1, 0, 0], shR: [0.75, 0, 0.25], elR: [-1.5, 0, 0], shL: [-0.2, 0, -0.15], hpL: [-0.25, 0, 0], hpR: [-0.25, 0, 0], knL: [0.3, 0, 0], knR: [0.3, 0, 0], anL: [-0.05, 0, 0], anR: [-0.05, 0, 0] },
-  'Шея': { chest: [0.18, 0, 0], neck: [0.5, 0, 0.12], head: [0.2, 0.15, 0.25], shR: [-2.3, 0, 0.35], elR: [-1.9, 0, 0], shL: [0, 0, -0.08] },
-  'Плечо': { chest: [0.08, 0, -0.08], shR: [-0.35, 0, -0.1], elR: [-1.6, 0, 0], shL: [-1.05, 0, 0.3], elL: [-1.2, 0, 0], head: [0, 0, 0.12] },
-  'Колено': { lumbar: [0.12, 0, -0.06], hpR: [-0.45, 0, 0], knR: [0.85, 0, 0], anR: [-0.3, 0, 0], hpL: [-0.08, 0, 0], knL: [0.1, 0, 0], shR: [-0.5, 0, 0.25], elR: [-0.6, 0, 0] },
-  'Стопа': { lumbar: [0.05, 0, 0.08], hpR: [-0.2, 0, 0], knR: [0.55, 0, 0], anR: [0.45, 0, 0], shL: [0, 0, -0.35], shR: [0, 0, 0.35] },
-};
-// точки зон: сустав, позиция, нормаль наружу, повернуть ли фигуру спиной
-const Z = {
-  'Поясница': { j: lumbar, p: [0, 0.1, -0.085], n: [0, 0, -1], yaw: Math.PI - 0.95, e: 'Спина' },
-  'Шея': { j: neck, p: [0, 0.06, -0.055], n: [0, 0, -1], yaw: Math.PI - 0.8, e: 'Шея' },
-  'Плечо': { j: A.R.sh, p: [0.05, -0.03, 0], n: [1, 0, 0], yaw: -1.0, e: 'Плечо' },
-  'Колено': { j: G.R.kn, p: [0, 0, 0.052], n: [0, 0, 1], yaw: -0.85, e: 'Колено' },
-  'Стопа': { j: G.R.an, p: [0, -0.02, -0.045], n: [0, 0, -1], yaw: Math.PI - 0.9, e: 'Стопа' },
-};
-const glowMat = c => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.8, depthWrite: false, blending: THREE.AdditiveBlending });
-const dots = [];
-for (const [name, z] of Object.entries(Z)) {
-  const m = new THREE.Object3D(); m.position.set(...z.p); m.lookAt(new THREE.Vector3(...z.p).add(new THREE.Vector3(...z.n))); z.j.add(m); z.m = m;
-  const d = new THREE.Mesh(new THREE.SphereGeometry(0.04, 16, 12), glowMat(0xffa860)); d.userData.zone = name; m.add(d); dots.push(d);
-  const halo = new THREE.Mesh(new THREE.SphereGeometry(0.075, 16, 12), glowMat(0xff7a45)); halo.material.opacity = 0.25; d.add(halo);
-}
-// напряжение (красное свечение) и электрод
-const tense = new THREE.Mesh(new THREE.SphereGeometry(0.16, 24, 16), glowMat(0xff5a2a)); tense.material.opacity = 0; scene.add(tense);
-function makePad(w, h) {
-  const g = new THREE.Group(), rr = Math.min(w, h) * 0.22, s = new THREE.Shape();
-  s.moveTo(-w / 2 + rr, -h / 2); s.lineTo(w / 2 - rr, -h / 2); s.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + rr); s.lineTo(w / 2, h / 2 - rr); s.quadraticCurveTo(w / 2, h / 2, w / 2 - rr, h / 2);
-  s.lineTo(-w / 2 + rr, h / 2); s.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - rr); s.lineTo(-w / 2, -h / 2 + rr); s.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + rr, -h / 2);
-  const cloth = new THREE.Mesh(new THREE.ExtrudeGeometry(s, { depth: 0.008, bevelEnabled: true, bevelSize: 0.006, bevelThickness: 0.005, bevelSegments: 3, curveSegments: 14 }), new THREE.MeshStandardMaterial({ color: 0xe9ebe6, roughness: 0.85 }));
-  const gel = new THREE.Mesh(new THREE.ShapeGeometry(s, 14), new THREE.MeshStandardMaterial({ color: 0xc9d3cc, roughness: 0.3 }));
-  gel.scale.setScalar(0.86); gel.position.z = -0.003; gel.rotation.y = Math.PI;
-  const snap = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.02, 16), new THREE.MeshStandardMaterial({ color: 0xbfc3c0, roughness: 0.3, metalness: 0.6 }));
-  snap.rotation.x = Math.PI / 2; snap.position.z = 0.018;
-  g.add(cloth, gel, snap); g.userData = { cloth: cloth.material, gel: gel.material }; return g;
-}
-const pad = makePad(0.2, 0.2); pad.visible = false; scene.add(pad);
-const rings = [0, 1, 2].map(() => { const r = new THREE.Mesh(new THREE.RingGeometry(0.12, 0.13, 48), new THREE.MeshBasicMaterial({ color: 0xf0a54a, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false })); pad.add(r); r.position.z = 0.01; return r; });
-
-// состояние игры
-const st = { zone: null, cream: false, placed: 0, placing: false, lv: 0, prog: 0, rotY: 0 };
-const $ = s => document.querySelector(s);
-const say = t => $('#gSay').textContent = t, tip = t => $('#gtip').textContent = t;
-const stepOn = name => document.querySelectorAll('#gsteps li').forEach(li => { const order = ['zone', 'cream', 'place', 'power']; const i = order.indexOf(li.dataset.s), k = order.indexOf(name); li.classList.toggle('on', i === k); li.classList.toggle('done', i < k); });
-function pick(name) {
-  if (!Z[name]) return;
-  st.zone = name; st.cream = false; st.placed = 0; st.placing = false; st.lv = 0; st.prog = 0; pad.visible = false;
-  pad.userData.gel.color.setHex(0xc9d3cc); pad.userData.gel.roughness = 0.3;
-  document.querySelectorAll('#gZones .btn').forEach(b => b.setAttribute('aria-pressed', b.dataset.z === name));
-  $('#gCreamBtn').disabled = false; $('#gPlace').disabled = true; $('#gMinus').disabled = true; $('#gPlus').disabled = true; $('#gLv').textContent = 0; $('#gBar').style.width = 0;
-  stepOn('cream'); say(`${name}: здесь зажато. Электрод «${Z[name].e}». Сначала крем.`); tip('Нанесите крем на электрод');
-}
-document.querySelectorAll('#gZones .btn').forEach(b => b.addEventListener('click', () => pick(b.dataset.z)));
-addEventListener('ozo:zone', e => pick(e.detail));
-$('#gCreamBtn').onclick = () => { st.cream = true; pad.visible = true; pad.userData.gel.color.setHex(0xf3e6cc); pad.userData.gel.roughness = 0.08; $('#gCreamBtn').disabled = true; $('#gPlace').disabled = false; stepOn('place'); say('Крем OZOTENS 30% тонким слоем на электрод - он проводит ток.'); tip('Приложите электрод'); };
-$('#gPlace').onclick = () => { st.placing = true; st.placed = 0; $('#gPlace').disabled = true; $('#gMinus').disabled = false; $('#gPlus').disabled = false; stepOn('power'); say(`Электрод «${Z[st.zone].e}» лёг на зону. Включайте и прибавляйте понемногу.`); tip('Жмите +'); };
-const setLv = d => { st.lv = Math.max(0, Math.min(40, st.lv + d)); $('#gLv').textContent = st.lv; navigator.vibrate && navigator.vibrate(10); if (st.lv > 0 && st.prog < 0.02) say('Импульс идёт через электрод: ощущается покалывание или лёгкая вибрация.'); if (st.lv > 30) say('Если неприятно - убавьте. Комфорт важнее цифры.'); tip(st.lv ? 'Сеанс идёт' : 'Прибор выключен'); };
-$('#gPlus').onclick = () => setLv(2); $('#gMinus').onclick = () => setLv(-2);
-
-// клик по точке на фигуре / вращение
-const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
-const hit = e => { const rc = cv.getBoundingClientRect(); ptr.set((e.clientX - rc.left) / rc.width * 2 - 1, -(e.clientY - rc.top) / rc.height * 2 + 1); ray.setFromCamera(ptr, cam); return ray.intersectObjects(dots.filter(d => d.visible), false)[0]; };
-let drag = false, moved = 0, px = 0, spin = 0;
-cv.addEventListener('pointerdown', e => { drag = true; moved = 0; px = e.clientX; cv.setPointerCapture(e.pointerId); });
-cv.addEventListener('pointermove', e => { if (!drag) { cv.classList.toggle('over', !!hit(e)); return; } const dx = e.clientX - px; moved += Math.abs(dx); spin += dx * 0.01; px = e.clientX; });
-cv.addEventListener('pointerup', e => { drag = false; if (moved < 6) { const h = hit(e); if (h) { pick(h.object.userData.zone); dispatchEvent(new CustomEvent('ozo:pick3d', { detail: h.object.userData.zone })); } } });
-
-// кадр
-const v = new THREE.Vector3(), q = new THREE.Quaternion(), from = new THREE.Vector3(0.9, 1.9, 0.9), fromQ = new THREE.Quaternion();
-const lerpPose = (a, b, k) => { for (const n in J8) { const ra = (a[n] || FREE[n] || [0, 0, 0]), rb = (b[n] || FREE[n] || [0, 0, 0]); J8[n].rotation.set(ra[0] + (rb[0] - ra[0]) * k, ra[1] + (rb[1] - ra[1]) * k, ra[2] + (rb[2] - ra[2]) * k); } };
-const smooth = x => x * x * (3 - 2 * x);
-let visible = false; new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(cv);
-let last = performance.now(), poseK = 0;
-function frame() {
-  const now = performance.now(), dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
-  const s = cv.clientWidth, h = cv.clientHeight; if (cv.width !== Math.round(s * renderer.getPixelRatio())) { renderer.setSize(s, h, false); cam.aspect = s / h; cam.updateProjectionMatrix(); }
-  const z = st.zone && Z[st.zone];
-  // поза: из «зажато» в «свободно» по ходу сеанса
-  const tenseK = z ? 1 - smooth(st.prog) : 0; poseK += (tenseK - poseK) * Math.min(1, dt * 3);
-  lerpPose(FREE, z ? TENSE[st.zone] : FREE, poseK);
-  // поворот фигуры к зоне + ручное вращение
-  const want = (z ? z.yaw : -0.35) + spin + (reduce || drag || z ? 0 : Math.sin(t * 0.4) * 0.3);
-  st.rotY += (want - st.rotY) * Math.min(1, dt * 3); root.rotation.y = st.rotY;
-  root.updateMatrixWorld(true);
-  // камера: общий план или ближе к зоне
-  const target = new THREE.Vector3(0, 1.05, 0), dist = z ? 4.2 : 5.8;
-  if (z) { z.m.getWorldPosition(v); target.lerp(v, 0.45); }
-  cam.position.lerp(new THREE.Vector3(target.x, target.y + 0.25, target.z + dist), Math.min(1, dt * 2.5)); cam.lookAt(target);
-  // точки зон
-  dots.forEach(d => { d.visible = !(z && st.placing && d.userData.zone === st.zone); const k = 1 + 0.25 * Math.sin(t * 3 + d.id); d.scale.setScalar(z && d.userData.zone !== st.zone ? 0.6 : k); });
-  // напряжение
-  if (z) { z.m.getWorldPosition(v); tense.position.copy(v); tense.material.opacity = 0.45 * poseK * (0.75 + 0.25 * Math.sin(t * 4)); tense.scale.setScalar(0.7 + 0.5 * poseK); } else tense.material.opacity = 0;
-  // электрод летит и прилипает
-  if (z && pad.visible) {
-    z.m.getWorldPosition(v); z.m.getWorldQuaternion(q);
-    if (st.placing) st.placed = Math.min(1, st.placed + dt * 1.4);
-    const k = smooth(st.placed);
-    const hover = cam.position.clone().lerp(v, 0.55).add(new THREE.Vector3(0.25, 0.15, 0));
-    pad.position.lerpVectors(hover, v.clone().add(new THREE.Vector3(0, 0, 0.012).applyQuaternion(q)), k);
-    fromQ.copy(cam.quaternion); pad.quaternion.slerpQuaternions(fromQ, q, k);
-    if (!st.placing) pad.rotation.z += Math.sin(t * 2) * 0.002;
-  }
-  // импульс: кольца, прогресс сеанса
-  const on = st.placed >= 1 && st.lv > 0, speed = 0.7 + st.lv / 25;
-  rings.forEach((r, i) => { const ph = (t * speed + i / 3) % 1; r.scale.setScalar(1 + ph * 2.2); r.material.opacity = on && !reduce ? (1 - ph) * (0.35 + st.lv / 80) : 0; });
-  pad.userData.cloth.emissive.setHex(0xf0a54a); pad.userData.cloth.emissiveIntensity = on ? (0.15 + 0.2 * Math.sin(t * speed * 6.28)) : 0;
-  if (on && st.prog < 1) {
-    const before = st.prog; st.prog = Math.min(1, st.prog + dt / 14);
-    document.getElementById('gBar').style.width = (st.prog * 100) + '%';
-    if (before < 0.4 && st.prog >= 0.4) say('По описанию метода импульсы приглушают болевой сигнал и помогают расслабить зажатые мышцы, а крем проходит глубже.');
-    if (st.prog >= 1) { say('Сеанс в игре окончен. Выберите другую зону - покажем, как с ней.'); tip('Готово · выберите другую зону'); document.querySelectorAll('#gsteps li').forEach(li => { li.classList.remove('on'); li.classList.add('done'); }); }
-  }
-  // мышца «подрагивает» в такт импульсу
-  if (on && z) z.j.rotation.x += Math.sin(t * speed * 6.28) * 0.006 * (st.lv / 40);
-  renderer.render(scene, cam);
-}
-cam.position.set(0, 1.3, 5.6); cam.lookAt(0, 1.05, 0);
-renderer.setAnimationLoop(() => { if (visible) frame(); });
-frame();
+// 3D-прибор: модуль device3d.js (если не загрузился - остаётся фото)
+const rd = (s) => document.getElementById(s);
+try {
+  const { mountDevice } = await import('./device3d.js');
+  const dev = mountDevice(rd('dev3d'), { haptic: () => window.ozoHaptic && window.ozoHaptic(12), onChange: st => {
+    rd('rCh1').textContent = st.on ? st.ch1 : 0; rd('rCh2').textContent = st.on ? st.ch2 : 0;
+    rd('rMode').textContent = st.on ? st.mode : 'выкл'; rd('rProg').textContent = st.on ? String(st.prog).padStart(2, '0') : '-';
+    rd('devTip').textContent = st.on ? (st.ch1 + st.ch2 ? 'Импульс идёт · комфорт важнее цифры' : 'Прибавьте CH1 +') : 'Нажмите кнопку питания на приборе';
+  } });
+  rd('devFallback').hidden = true;
+  document.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => dev.press(b.dataset.k)));
+} catch (e) { console.warn('3D не загрузился', e); rd('dev3d').hidden = true; }
 </script>
 </body>
 </html>
