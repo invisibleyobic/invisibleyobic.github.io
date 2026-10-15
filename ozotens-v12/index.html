@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>ОЗОТЭНС - версия v12 «Движение»</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="vendor/lenis.css">
 <style>
 @font-face { font-family: "Serif"; src: url(fonts/Cormorant-500-cyr.woff2) format("woff2"); font-weight: 500; unicode-range: U+0400-04FF; font-display: swap; }
@@ -109,10 +112,10 @@ header .btn { padding: 10px 16px; font-size: 14px; }
 .steps li.on b { color: #15140f; }
 .bar { height: 3px; background: var(--line); border-radius: 3px; margin-top: 24px; overflow: hidden; }
 .bar i { display: block; height: 100%; width: 100%; background: var(--warm); transform-origin: left; transform: scaleX(0); }
-.dropbox { position: relative; aspect-ratio: 1; display: grid; place-items: center; }
+.dropbox { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .dropbox svg { width: min(100%, 520px); overflow: visible; }
 .dropbox .ring { fill: none; stroke: var(--warm); stroke-width: 1.2; opacity: 0; }
-.dropbox .label { position: absolute; left: 50%; bottom: 4%; translate: -50% 0; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--sage); white-space: nowrap; }
+.dropbox .label { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--sage); white-space: nowrap; }
 
 /* 4 прибор-игра */
 .play { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 6vw, 88px); align-items: center; }
@@ -170,13 +173,78 @@ header .btn { padding: 10px 16px; font-size: 14px; }
 footer { padding-block: 40px 60px; border-top: 1px solid var(--line); color: var(--soft); font-size: 13px; }
 footer .wrap { display: grid; gap: 6px; }
 
+/* иконки зон */
+.zone .zi { width: 56px; height: 56px; fill: none; stroke: var(--soft); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; position: relative; z-index: 1; margin-top: 6px; }
+.zone .zi .hot { fill: var(--warm); stroke: none; opacity: .85; transform-box: fill-box; transform-origin: center; animation: hot 1.8s ease-in-out infinite; }
+.zone.on .zi, .zone:hover .zi { stroke: var(--ink); }
+@keyframes hot { 50% { transform: scale(1.5); opacity: .35; } }
+
+/* дневник с часами */
+.diary { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 6vw, 88px); margin-top: 40px; }
+.clock { position: sticky; top: 110px; align-self: start; display: grid; justify-items: center; gap: 12px; }
+.clock svg { width: min(300px, 100%); }
+.clock .face { fill: var(--panel); stroke: var(--line); stroke-width: 1.5; }
+.clock .ticks line { stroke: var(--sage); stroke-width: 2; stroke-linecap: round; }
+.clock .hh { stroke: var(--ink); stroke-width: 5; stroke-linecap: round; }
+.clock .mm { stroke: var(--warm); stroke-width: 3; stroke-linecap: round; }
+.clock .pin { fill: var(--warm); }
+.clock b { font: 500 44px/1 var(--serif); color: var(--warm2); font-variant-numeric: tabular-nums; }
+.entries div { min-height: 46vh; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--line); opacity: .28; transition: opacity .5s; }
+.entries div.on { opacity: 1; }
+.entries b { font: 500 52px/1 var(--serif); color: var(--warm2); margin-bottom: 12px; }
+.entries p { margin: 0; font: 500 clamp(28px, 3.4vw, 44px)/1.15 var(--serif); color: var(--ink); max-width: 18ch; }
+
+/* позвоночник (место под Rive) */
+.spine { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 6vw, 88px); align-items: center; }
+.spbox { position: relative; border-radius: 32px; background: radial-gradient(70% 60% at 50% 45%, #232a25, #111513 75%); border: 1px solid var(--line); aspect-ratio: 4 / 5; display: grid; place-items: center; overflow: hidden; }
+.spbox svg { width: 92%; height: 92%; }
+.spbox .cap { position: absolute; left: 18px; bottom: 16px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--sage); }
+.sp-steps { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 8px; color: var(--soft); }
+.sp-steps li { padding-left: 22px; position: relative; transition: color .3s; }
+.sp-steps li::before { content: ""; position: absolute; left: 0; top: .55em; width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--sage); transition: background .3s, border-color .3s; }
+.sp-steps li.on { color: var(--ink); }
+.sp-steps li.on::before { background: var(--warm); border-color: var(--warm); }
+.small { font-size: 13px; color: var(--sage); margin-top: 18px; }
+
+/* игра: что происходит с человеком */
+.game { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 6vw, 72px); align-items: start; }
+.gbox { position: sticky; top: 90px; }
+#body3d { width: 100%; aspect-ratio: 4 / 5; border-radius: 32px; background: radial-gradient(70% 60% at 50% 40%, #29312b, #111513 75%); border: 1px solid var(--line); display: block; touch-action: none; cursor: grab; }
+#body3d.over { cursor: pointer; }
+.gbox .gtip { position: absolute; left: 18px; top: 18px; right: 18px; font-size: 13px; color: var(--ink); pointer-events: none; }
+.gbox .gtip span { background: rgba(17,21,19,.75); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; display: inline-block; }
+.gsteps { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 8px; counter-reset: g; }
+.gsteps li { border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; color: var(--soft); transition: border-color .3s, background .3s, color .3s; }
+.gsteps li b { font-weight: 400; color: var(--ink); display: block; margin-bottom: 8px; }
+.gsteps li b::before { counter-increment: g; content: counter(g) " · "; color: var(--sage); }
+.gsteps li.on { border-color: var(--warm); background: rgba(240,165,74,.07); }
+.gsteps li.done { color: var(--sage); }
+.gsteps li.done b::after { content: "  ✓"; color: var(--warm); }
+.gsteps .row { margin-top: 0; gap: 8px; }
+.gsteps .btn { padding: 10px 14px; font-size: 14px; }
+.gsteps .btn:disabled { opacity: .35; cursor: default; pointer-events: none; }
+.glv { display: inline-flex; align-items: baseline; gap: 6px; margin-left: 6px; }
+.glv b { margin: 0 !important; font: 500 34px/1 var(--serif); color: var(--warm2); min-width: 2ch; }
+.gbar { height: 8px; border-radius: 8px; background: var(--line); overflow: hidden; margin-top: 10px; }
+.gbar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #8d9c89, var(--warm), var(--warm2)); }
+.gsay { margin-top: 18px; min-height: 4.6em; color: var(--ink); font-size: 16px; }
+
 @media (max-width: 860px) {
+  .hero { min-height: auto; padding-block: 104px 36px; }
+  .diary, .spine, .game { grid-template-columns: 1fr; }
+  .clock { top: 64px; z-index: 2; background: linear-gradient(var(--bg2) 82%, transparent); margin: 0 -16px; padding: 8px 16px 18px; grid-template-columns: auto auto; align-items: center; justify-content: center; gap: 16px; }
+  .clock svg { width: 110px; }
+  .clock b { font-size: 36px; }
+  .entries div { min-height: 40vh; }
+  .spbox { aspect-ratio: 1; }
+  #body3d { aspect-ratio: 1; }
+  .gbox { top: 64px; z-index: 2; margin: 0 -16px; padding: 0 16px 10px; background: linear-gradient(var(--bg) 88%, transparent); }
+  #body3d { aspect-ratio: 5 / 4; }
   .nav { display: none; }
   .how, .play, .rive, .contra { grid-template-columns: 1fr; }
   .how { min-height: auto; }
-  .dropbox { position: sticky; top: 64px; z-index: 2; width: auto; aspect-ratio: auto; height: 210px; margin: 0 -16px; padding: 10px 0 26px; order: -1; background: linear-gradient(var(--bg) 85%, transparent); }
-  .dropbox svg { width: auto; height: 170px; }
-  .dropbox .label { bottom: 6px; }
+  .dropbox { position: sticky; top: 64px; z-index: 2; width: auto; aspect-ratio: auto; height: 220px; margin: 0 -16px; padding: 10px 0 18px; order: -1; background: linear-gradient(var(--bg) 85%, transparent); }
+  .dropbox svg { width: auto; height: 160px; }
   .steps li { scroll-margin-top: 290px; }
   .times { grid-template-columns: 1fr 1fr; }
   .sheet { grid-template-columns: 1fr; }
@@ -214,11 +282,11 @@ footer .wrap { display: grid; gap: 6px; }
       </div>
     </div>
     <div class="viewport" id="vp"><div class="track" id="track">
-      <button class="zone" type="button" data-z="Поясница" data-e="Спина"><span class="n">01<span>выбрано</span></span><b>Поясница</b><p>Прострел при наклоне, ноет после сидения.</p></button>
-      <button class="zone" type="button" data-z="Шея" data-e="Шея"><span class="n">02<span>выбрано</span></span><b>Шея</b><p>Зажим после ноутбука, не повернуть голову.</p></button>
-      <button class="zone" type="button" data-z="Плечо" data-e="Плечо"><span class="n">03<span>выбрано</span></span><b>Плечо</b><p>Больно поднять руку, ноет ночью.</p></button>
-      <button class="zone" type="button" data-z="Колено" data-e="Колено"><span class="n">04<span>выбрано</span></span><b>Колено</b><p>Хрустит на лестнице, тяжело встать.</p></button>
-      <button class="zone" type="button" data-z="Стопа" data-e="Стопа"><span class="n">05<span>выбрано</span></span><b>Стопа</b><p>Пятка по утрам, жжёт свод.</p></button>
+      <button class="zone" type="button" data-z="Поясница" data-e="Спина"><span class="n">01<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><rect x="19" y="5" width="18" height="6" rx="2"/><rect x="19" y="14" width="18" height="6" rx="2"/><rect x="19" y="23" width="18" height="6" rx="2"/><rect x="18" y="32" width="20" height="7" rx="2"/><rect x="17" y="42" width="22" height="8" rx="2.5"/><circle class="hot" cx="28" cy="41" r="5"/></svg><b>Поясница</b><p>Прострел при наклоне, ноет после сидения.</p></button>
+      <button class="zone" type="button" data-z="Шея" data-e="Шея"><span class="n">02<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="13" r="8"/><rect x="24" y="24" width="8" height="5" rx="1.5"/><rect x="24" y="31" width="8" height="5" rx="1.5"/><path d="M6 50 Q28 36 50 50"/><circle class="hot" cx="28" cy="30" r="5"/></svg><b>Шея</b><p>Зажим после ноутбука, не повернуть голову.</p></button>
+      <button class="zone" type="button" data-z="Плечо" data-e="Плечо"><span class="n">03<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><path d="M12 52 V26 Q12 16 22 16 H32"/><path d="M38 21 Q47 25 45 37 L43 52"/><circle cx="37" cy="20" r="6"/><circle class="hot" cx="37" cy="20" r="5"/></svg><b>Плечо</b><p>Больно поднять руку, ноет ночью.</p></button>
+      <button class="zone" type="button" data-z="Колено" data-e="Колено"><span class="n">04<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><path d="M25 4 L28 23"/><path d="M28 33 L26 52"/><path d="M21 4 L24 23 M32 33 L30 52" opacity=".5"/><circle cx="29" cy="28" r="5"/><circle class="hot" cx="29" cy="28" r="5"/></svg><b>Колено</b><p>Хрустит на лестнице, тяжело встать.</p></button>
+      <button class="zone" type="button" data-z="Стопа" data-e="Стопа"><span class="n">05<span>выбрано</span></span><svg class="zi" viewBox="0 0 56 56" aria-hidden="true"><path d="M16 6 V34 Q16 46 27 46 H47 Q50 39 42 37 L27 33 Q24 32 24 26 V6"/><circle class="hot" cx="19" cy="42" r="5"/></svg><b>Стопа</b><p>Пятка по утрам, жжёт свод.</p></button>
     </div></div>
     <div class="wrap"><p class="picked" id="picked" aria-live="polite"></p></div>
   </section>
@@ -228,11 +296,23 @@ footer .wrap { display: grid; gap: 6px; }
     <div class="wrap">
       <p class="kicker">Обычный день</p>
       <h2 class="words">Больная спина забирает не спину. <em>Она забирает день</em></h2>
-      <div class="times">
-        <div><b>07:00</b><p>Сползаю с кровати боком, как учили.</p></div>
-        <div><b>13:00</b><p>Третий час за ноутом. Поясница горит.</p></div>
-        <div><b>19:00</b><p>Сын просит поиграть. Говорю: потом.</p></div>
-        <div><b>23:00</b><p>Ищу позу, в которой не ноет. Не нахожу.</p></div>
+      <div class="diary">
+        <div class="clock" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="92" class="face"/>
+            <g class="ticks"><line x1="100" y1="12" x2="100" y2="24" transform="rotate(0 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(30 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(60 100 100)"/><line x1="100" y1="12" x2="100" y2="24" transform="rotate(90 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(120 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(150 100 100)"/><line x1="100" y1="12" x2="100" y2="24" transform="rotate(180 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(210 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(240 100 100)"/><line x1="100" y1="12" x2="100" y2="24" transform="rotate(270 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(300 100 100)"/><line x1="100" y1="16" x2="100" y2="24" transform="rotate(330 100 100)"/></g>
+            <line id="hh" x1="100" y1="100" x2="100" y2="54" class="hh"/>
+            <line id="mm" x1="100" y1="100" x2="100" y2="30" class="mm"/>
+            <circle cx="100" cy="100" r="5" class="pin"/>
+          </svg>
+          <b id="clockTxt">07:00</b>
+        </div>
+        <div class="entries">
+          <div><b>07:00</b><p>Сползаю с кровати боком, как учили.</p></div>
+          <div><b>13:00</b><p>Третий час за ноутом. Поясница горит.</p></div>
+          <div><b>19:00</b><p>Сын просит поиграть. Говорю: потом.</p></div>
+          <div><b>23:00</b><p>Ищу позу, в которой не ноет. Не нахожу.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -263,7 +343,7 @@ footer .wrap { display: grid; gap: 6px; }
           <path id="shine" d="M70 112 C70 98 78 84 86 74" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85"/>
           <text id="dropTxt" x="100" y="146" text-anchor="middle" font-family="Onest, sans-serif" font-size="10" letter-spacing="2" fill="#6b5634">OZOTENS 30%</text>
           <path id="sDrop" d="M100 20 C100 20 40 92 40 132 A60 60 0 0 0 160 132 C160 92 100 20 100 20 Z" fill="none"/>
-          <path id="sWave" d="M14 104 L58 104 L58 52 L92 52 L92 148 L124 148 L124 104 L186 104 L186 118 L110 118 L110 162 L78 162 L78 66 L72 66 L72 118 L14 118 Z" fill="none"/>
+          <path id="sWave" d="M14.0 96.0 L15.4 96.0 L16.9 96.0 L18.3 96.0 L19.7 96.0 L21.2 96.0 L22.6 96.0 L24.0 96.0 L25.5 96.0 L26.9 96.0 L28.3 96.0 L29.8 96.0 L31.2 96.0 L32.6 96.0 L34.1 96.0 L35.5 96.0 L36.9 96.0 L38.4 96.0 L39.8 96.0 L41.2 96.0 L42.6 96.0 L44.0 96.0 L45.4 95.9 L46.7 95.9 L47.9 95.8 L49.0 95.8 L50.0 95.6 L50.8 95.5 L51.4 95.3 L51.9 95.1 L52.3 94.9 L52.8 94.4 L53.5 93.6 L54.4 92.2 L55.5 90.0 L56.7 87.1 L58.0 83.4 L59.3 78.9 L60.7 73.8 L62.1 68.2 L63.6 62.3 L65.0 56.5 L66.5 51.0 L68.1 46.0 L69.9 41.6 L72.6 37.4 L79.5 34.0 L87.0 37.0 L89.9 41.2 L91.8 45.6 L93.4 50.5 L94.8 56.0 L96.3 61.9 L97.7 67.8 L99.2 73.6 L100.6 78.9 L101.9 83.8 L103.3 88.1 L104.6 91.9 L106.0 95.3 L107.3 98.5 L108.8 101.8 L110.2 105.2 L111.8 108.9 L113.3 113.1 L114.8 117.7 L116.3 122.8 L117.8 128.3 L119.2 134.1 L120.7 140.0 L122.1 145.8 L123.5 151.1 L124.8 155.6 L126.0 158.8 L126.6 160.0 L124.3 158.4 L118.4 159.1 L117.5 159.9 L118.3 158.0 L119.6 154.4 L120.9 149.6 L122.3 144.1 L123.8 138.3 L125.2 132.5 L126.7 126.9 L128.2 121.6 L129.7 116.9 L131.3 112.8 L133.1 109.1 L134.9 106.0 L137.0 103.3 L139.3 101.0 L141.7 99.3 L144.2 98.0 L146.5 97.2 L148.7 96.7 L150.6 96.4 L152.4 96.2 L154.1 96.1 L155.7 96.1 L157.2 96.0 L158.7 96.0 L160.2 96.0 L161.6 96.0 L163.1 96.0 L164.5 96.0 L165.9 96.0 L167.4 96.0 L168.8 96.0 L170.2 96.0 L171.7 96.0 L173.1 96.0 L174.5 96.0 L176.0 96.0 L177.4 96.0 L178.8 96.0 L180.3 96.0 L181.7 96.0 L183.1 96.0 L184.6 96.0 L186.0 96.0 L186.0 112.0 L184.6 112.0 L183.1 112.0 L181.7 112.0 L180.3 112.0 L178.8 112.0 L177.4 112.0 L176.0 112.0 L174.5 112.0 L173.1 112.0 L171.7 112.0 L170.2 112.0 L168.8 112.0 L167.4 112.0 L165.9 112.0 L164.5 112.0 L163.1 112.0 L161.7 112.0 L160.2 112.0 L158.8 112.0 L157.5 112.0 L156.1 112.1 L154.8 112.1 L153.6 112.2 L152.6 112.3 L151.7 112.4 L150.9 112.6 L150.4 112.8 L150.0 113.0 L149.6 113.3 L149.0 113.9 L148.2 114.9 L147.2 116.6 L146.1 119.0 L144.8 122.3 L143.5 126.3 L142.1 131.1 L140.7 136.4 L139.3 142.1 L137.9 148.0 L136.4 153.7 L134.9 159.1 L133.3 163.8 L131.2 168.1 L127.4 172.3 L118.7 173.4 L113.6 169.3 L111.3 165.1 L109.6 160.6 L108.1 155.3 L106.6 149.7 L105.1 143.8 L103.7 137.9 L102.3 132.3 L100.9 127.1 L99.5 122.5 L98.2 118.4 L96.8 114.7 L95.5 111.4 L94.1 108.2 L92.7 104.9 L91.2 101.4 L89.6 97.5 L88.1 93.1 L86.6 88.3 L85.1 83.1 L83.6 77.5 L82.2 71.6 L80.8 65.7 L79.4 60.0 L78.0 55.0 L76.7 50.9 L75.7 48.4 L75.7 48.4 L80.3 50.0 L84.4 48.2 L84.3 48.6 L83.2 51.3 L81.9 55.4 L80.5 60.5 L79.1 66.2 L77.7 72.0 L76.2 77.8 L74.7 83.3 L73.2 88.3 L71.6 92.8 L70.0 96.7 L68.2 100.2 L66.3 103.1 L64.1 105.7 L61.7 107.7 L59.3 109.3 L56.9 110.3 L54.6 111.0 L52.5 111.4 L50.6 111.7 L48.9 111.8 L47.3 111.9 L45.7 111.9 L44.2 112.0 L42.7 112.0 L41.3 112.0 L39.8 112.0 L38.4 112.0 L36.9 112.0 L35.5 112.0 L34.1 112.0 L32.6 112.0 L31.2 112.0 L29.8 112.0 L28.3 112.0 L26.9 112.0 L25.5 112.0 L24.0 112.0 L22.6 112.0 L21.2 112.0 L19.7 112.0 L18.3 112.0 L16.9 112.0 L15.4 112.0 L14.0 112.0 Z" fill="none"/>
           <path id="sPad" d="M52 40 H148 A22 22 0 0 1 170 62 V138 A22 22 0 0 1 148 160 H52 A22 22 0 0 1 30 138 V62 A22 22 0 0 1 52 40 Z" fill="none"/>
         </svg>
         <span class="label" id="dropLabel">Капля крема</span>
@@ -302,6 +382,30 @@ footer .wrap { display: grid; gap: 6px; }
     </div>
   </section>
 
+  <!-- 4б. Игра: что происходит, когда электрод на зоне -->
+  <section id="game">
+    <div class="wrap game">
+      <div class="gbox">
+        <canvas id="body3d" aria-label="3D-фигура: выберите зону и проведите сеанс"></canvas>
+        <div class="gtip"><span id="gtip">Нажмите на светящуюся точку на фигуре</span></div>
+      </div>
+      <div>
+        <p class="kicker">Сеанс в игре</p>
+        <h2 class="words">Что происходит, <em>когда включаешь</em></h2>
+        <ol class="gsteps" id="gsteps">
+          <li class="on" data-s="zone"><b>Выберите зону</b><div class="row" id="gZones">
+            <button class="btn" type="button" data-z="Поясница">Поясница</button><button class="btn" type="button" data-z="Шея">Шея</button><button class="btn" type="button" data-z="Плечо">Плечо</button><button class="btn" type="button" data-z="Колено">Колено</button><button class="btn" type="button" data-z="Стопа">Стопа</button></div></li>
+          <li data-s="cream"><b>Крем на электрод</b><div class="row"><button class="btn hot" type="button" id="gCreamBtn" disabled>Нанести OZOTENS 30%</button></div></li>
+          <li data-s="place"><b>Электрод на зону</b><div class="row"><button class="btn hot" type="button" id="gPlace" disabled>Приложить</button></div></li>
+          <li data-s="power"><b>Включить и подобрать силу</b><div class="row"><button class="btn" type="button" id="gMinus" disabled>−</button><button class="btn hot" type="button" id="gPlus" disabled>+</button><span class="glv"><b id="gLv">0</b>из 40</span></div>
+            <div class="gbar"><i id="gBar"></i></div></li>
+        </ol>
+        <p class="gsay" id="gSay" aria-live="polite">Нажмите на точку на фигуре или выберите зону.</p>
+        <p class="small">Иллюстрация того, как проходит сеанс, а не обещание результата. Ощущения у каждого свои.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- 5. Flip: собери свой набор -->
   <section id="kit">
     <div class="wrap">
@@ -317,7 +421,7 @@ footer .wrap { display: grid; gap: 6px; }
         <button class="card" type="button" data-c="base" data-t="Прибор" data-d="Два канала, 22 программы, сила 0-40. 85 грамм, аккумулятор, зарядка от USB."><div class="ph"><img src="img/device.jpg" alt="Прибор"></div><div class="t">Прибор<span>основа</span></div></button>
         <button class="card" type="button" data-c="base" data-t="Крем OZOTENS 30%" data-d="Наносится тонким слоем на электрод, он же проводит ток."><div class="ph"><img src="img/cream.jpg" alt="Крем"></div><div class="t">Крем<span>основа</span></div></button>
         <button class="card" type="button" data-c="zone" data-t="Электрод" data-d="Форма под зону: спина, шея, колено, плечо, стопа." id="cardPad"><div class="ph"><img src="img/electrode.jpg" alt="Электрод"></div><div class="t"><span class="nm">Электрод</span><span>под зону</span></div></button>
-        <button class="card" type="button" data-c="base zone" data-t="Комплект" data-d="Прибор, крем и электрод вместе."><div class="ph"><img src="img/kit.jpg" alt="Комплект"></div><div class="t">Комплект<span>всё сразу</span></div></button>
+        <button class="card" type="button" data-c="base zone" data-t="Комплект" data-d="Прибор, крем и электрод вместе."><div class="ph"><img src="img/kit-set.jpg" alt="Комплект: прибор, крем OZOTENS 30% и электроды"></div><div class="t">Комплект<span>всё сразу</span></div></button>
       </div>
       <div class="mykit">
         <p>Ваш комплект: <b id="kitTxt">прибор + крем OZOTENS 30% + электрод под зону</b><small>Перед покупкой обсудите метод со своим врачом - особенно если есть грыжа или протрузия.</small></p>
@@ -326,16 +430,33 @@ footer .wrap { display: grid; gap: 6px; }
     </div>
   </section>
 
-  <!-- 6. Rive: место под нашу сцену -->
-  <section class="day">
-    <div class="wrap rive">
+  <!-- 6. Позвоночник распрямляется (GSAP, пока Rive-сцена не нарисована) -->
+  <section class="day" id="spine">
+    <div class="wrap spine">
       <div>
-        <p class="kicker">Живая иллюстрация · Rive</p>
-        <h2 class="words">Здесь спина <em>распрямится</em></h2>
-        <p class="lead">Место под нашу Rive-сцену: человек сидит согнувшись, электрод ложится на поясницу, прибор «включается» - и он выпрямляется. Сцена реагирует на курсор и на прокрутку.</p>
-        <p class="lead">Сейчас в рамке пример-заглушка из библиотеки Rive, не наш рисунок.</p>
+        <p class="kicker">Как выглядит сеанс</p>
+        <h2 class="words">Здесь спина <em>распрямляется</em></h2>
+        <p class="lead">Листайте - электрод ложится на поясницу, идёт импульс, позвоночник выпрямляется.</p>
+        <ol class="sp-steps" id="spSteps">
+          <li class="on">Зажало, спина согнута</li>
+          <li>Электрод с кремом на поясницу</li>
+          <li>Импульс</li>
+          <li>Можно выпрямиться</li>
+        </ol>
+        <p class="small">Иллюстрация того, как проходит сеанс, а не обещание результата. Позже здесь будет сцена из Rive.</p>
       </div>
-      <div class="rvbox"><canvas id="rv" width="1280" height="720" aria-label="Пример Rive, заглушка"></canvas><span class="stub">заглушка · ждёт нашу сцену</span></div>
+      <div class="spbox">
+        <svg viewBox="0 0 320 400" id="spSvg" aria-hidden="true">
+          <defs><radialGradient id="gTense"><stop offset="0" stop-color="#ff7a45" stop-opacity=".75"/><stop offset="1" stop-color="#ff7a45" stop-opacity="0"/></radialGradient></defs>
+          <circle id="spTense" cx="0" cy="0" r="70" fill="url(#gTense)"/>
+          <g id="spRings"></g>
+          <g id="spVert"></g>
+          <path id="spPelvis" d="M-38 0 Q-44 30 -18 46 L18 46 Q44 30 38 0 Z" fill="#d9cfbd" opacity=".9"/>
+          <circle id="spSkull" r="30" fill="none" stroke="#d9cfbd" stroke-width="3"/>
+          <g id="spPad" opacity="0"><rect x="-22" y="-30" width="44" height="60" rx="12" fill="#e9ebe6"/><rect x="-16" y="-24" width="32" height="48" rx="8" fill="#f3e6cc"/><path d="M0 -30 C0 -60 40 -70 70 -90" stroke="#2b302c" stroke-width="2.5" fill="none"/></g>
+        </svg>
+        <span class="cap" id="spCap">Зажало</span>
+      </div>
     </div>
   </section>
 
@@ -384,7 +505,6 @@ footer .wrap { display: grid; gap: 6px; }
 <script src="vendor/InertiaPlugin.min.js"></script>
 <script src="vendor/ScrambleTextPlugin.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
-<script src="vendor/rive/rive.js"></script>
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -416,6 +536,7 @@ footer .wrap { display: grid; gap: 6px; }
     $('#cardPad').dataset.t = `Электрод «${z.dataset.e}»`;
     $('#cardPad .nm').textContent = `Электрод «${z.dataset.e}»`;
     $('#kitBtn').textContent = 'Сменить зону';
+    dispatchEvent(new CustomEvent('ozo:zone', { detail: z.dataset.z }));
   };
 
   // Draggable-лента + стрелки
@@ -432,7 +553,54 @@ footer .wrap { display: grid; gap: 6px; }
   $('#prev').onclick = () => step(-1); $('#next').onclick = () => step(1);
   zones.forEach(z => z.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(z); } }));
 
+  // 6. Позвоночник: согнут -> электрод -> импульс -> выпрямился (рисуется кодом, место под Rive)
+  const NS = 'http://www.w3.org/2000/svg', N = 14, L = 17;
+  const vg = $('#spVert'), verts = [];
+  for (let i = 0; i < N; i++) { const r = document.createElementNS(NS, 'rect'); const w = 42 - i * 1.3; r.setAttribute('x', -w / 2); r.setAttribute('y', -6); r.setAttribute('width', w); r.setAttribute('height', 12); r.setAttribute('rx', 5); r.setAttribute('fill', '#e8dcc6'); vg.appendChild(r); verts.push(r); }
+  const rg = $('#spRings'), spRings = [0, 1, 2].map(() => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('r', 20); c.setAttribute('fill', 'none'); c.setAttribute('stroke', '#f0a54a'); c.setAttribute('stroke-width', 2); c.setAttribute('opacity', 0); rg.appendChild(c); return c; });
+  const ease = gsap.parseEase('power2.inOut'), clamp01 = v => Math.max(0, Math.min(1, v));
+  const spLabels = ['Зажало', 'Электрод на поясницу', 'Импульс', 'Выпрямился'];
+  let spPhase = -1, ringsOn = false;
+  const ringTw = gsap.timeline({ repeat: -1, paused: true });
+  spRings.forEach((c, i) => ringTw.fromTo(c, { attr: { r: 20 }, opacity: 0.9 }, { attr: { r: 90 }, opacity: 0, duration: 1.5, ease: 'power1.out', immediateRender: false }, i * 0.5));
+  function drawSpine(p) {
+    const k = ease(clamp01((p - 0.45) / 0.5));
+    let x = 175, y = 312, a = 0; const pts = [];
+    for (let i = 0; i < N; i++) {
+      const bent = -0.03 - 0.075 * i;                  // горб: каждый позвонок клонится вперёд (влево)
+      const free = 0.16 * Math.sin((i / (N - 1)) * Math.PI * 1.6 + 0.4) - 0.03; // мягкий естественный изгиб
+      a = bent + (free - bent) * k;
+      x += L * Math.sin(a); y -= L * Math.cos(a); pts.push([x, y, a]);
+      verts[i].setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(a * 57.3).toFixed(1)})`);
+    }
+    const top = pts[N - 1];
+    $('#spSkull').setAttribute('cx', (top[0] + 34 * Math.sin(top[2] - 0.25)).toFixed(1)); $('#spSkull').setAttribute('cy', (top[1] - 34 * Math.cos(top[2] - 0.25)).toFixed(1));
+    $('#spPelvis').setAttribute('transform', 'translate(175 318)');
+    const lum = pts[2], nx = Math.cos(lum[2]), ny = Math.sin(lum[2]);
+    const padIn = clamp01((p - 0.2) / 0.18);
+    const px = lum[0] + nx * 36 + (1 - padIn) * 90, py = lum[1] + ny * 36 - (1 - padIn) * 60;
+    const pad = $('#spPad'); pad.setAttribute('opacity', padIn); pad.setAttribute('transform', `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${(lum[2] * 57.3).toFixed(1)})`);
+    rg.setAttribute('transform', `translate(${px.toFixed(1)} ${py.toFixed(1)})`);
+    const tense = $('#spTense'); tense.setAttribute('cx', lum[0]); tense.setAttribute('cy', lum[1]); tense.setAttribute('opacity', (1 - k) * 0.9);
+    const on = p > 0.4 && p < 0.92; if (on !== ringsOn) { ringsOn = on; on && !reduce ? ringTw.play() : (ringTw.pause(0), spRings.forEach(c => c.setAttribute('opacity', 0))); }
+    const ph = p < 0.2 ? 0 : p < 0.4 ? 1 : p < 0.78 ? 2 : 3;
+    if (ph !== spPhase) { spPhase = ph; $$('#spSteps li').forEach((l, i) => l.classList.toggle('on', i <= ph)); $('#spCap').textContent = spLabels[ph]; }
+  }
+  drawSpine(reduce ? 1 : 0);
+  if (reduce) $$('.entries div').forEach(d => d.classList.add('on'));
+
   if (reduce) return;
+
+  ScrollTrigger.create({ trigger: '#spine .spbox', start: 'top 60%', end: 'bottom 85%', scrub: 0.6, onUpdate: st => drawSpine(st.progress) });
+
+  // 2. Дневник: часы идут от 07:00 до 23:00 по прокрутке, записи загораются по очереди
+  ScrollTrigger.create({ trigger: '.entries', start: 'top 55%', end: 'bottom 55%', scrub: 0.4, onUpdate: st => {
+    const m = 7 * 60 + st.progress * 16 * 60;
+    gsap.set('#hh', { rotation: (m % 720) / 2, svgOrigin: '100 100' }); gsap.set('#mm', { rotation: (m % 60) * 6, svgOrigin: '100 100' });
+    $('#clockTxt').textContent = String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(Math.floor(m % 60)).padStart(2, '0');
+  } });
+  gsap.set('#hh', { rotation: 210, svgOrigin: '100 100' });
+  $$('.entries div').forEach(d => ScrollTrigger.create({ trigger: d, start: 'top 62%', end: 'bottom 38%', toggleClass: 'on' }));
 
   // Живая подложка первого экрана
   $$('.glow i').forEach((b, i) => gsap.to(b, { x: () => gsap.utils.random(-120, 120), y: () => gsap.utils.random(-80, 80), scale: () => gsap.utils.random(0.85, 1.2), duration: 7 + i * 2, ease: 'sine.inOut', repeat: -1, yoyo: true, repeatRefresh: true }));
@@ -454,7 +622,6 @@ footer .wrap { display: grid; gap: 6px; }
     const s = SplitText.create(h, { type: 'words', mask: 'words' });
     gsap.from(s.words, { yPercent: 100, opacity: 0, duration: 0.9, ease: 'soft', stagger: 0.06, scrollTrigger: { trigger: h, start: 'top 85%', once: true } });
   });
-  gsap.from('.times div', { y: 30, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.12, scrollTrigger: { trigger: '.times', start: 'top 85%', once: true } });
   gsap.from('.docs div', { y: 30, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.08, scrollTrigger: { trigger: '.docs', start: 'top 85%', once: true } });
 
   // 3. Метод: капля ОЗОТЭНС -> импульс -> электрод. Закрепление только тут и только на ПК.
@@ -511,6 +678,10 @@ footer .wrap { display: grid; gap: 6px; }
   }));
   ov.addEventListener('click', e => { if (e.target === ov || e.target.id === 'ovX') closeOv(); });
   addEventListener('keydown', e => { if (e.key === 'Escape') closeOv(); });
+
+  // закрепление выше по странице сдвигает остальные триггеры - пересчитываем по порядку
+  ScrollTrigger.sort(); ScrollTrigger.refresh();
+  addEventListener('load', () => ScrollTrigger.refresh());
 })();
 </script>
 
@@ -557,14 +728,25 @@ const btns = [];
 });
 
 // провод и электрод сзади-сбоку
-const wire = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, 1.32, 0), new THREE.Vector3(0.2, 1.8, -0.2), new THREE.Vector3(1.3, 1.6, -0.6), new THREE.Vector3(1.7, 0.6, -0.8)]), 40, 0.025, 8), new THREE.MeshStandardMaterial({ color: 0x2b302c, roughness: 0.6 }));
+const wire = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, 1.32, 0), new THREE.Vector3(0.2, 1.8, -0.2), new THREE.Vector3(1.2, 1.5, -0.6), new THREE.Vector3(1.45, 0.66, -0.72)]), 40, 0.025, 8), new THREE.MeshStandardMaterial({ color: 0x2b302c, roughness: 0.6 }));
 dev.add(wire);
-const pad = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.62, 0.05, 1, 1, 1), new THREE.MeshStandardMaterial({ color: 0x3a4a3e, roughness: 0.7 }));
-pad.position.set(1.75, 0.35, -0.85); pad.rotation.set(0, -0.5, 0.15); dev.add(pad);
+function makePad(w, h) {
+  const g = new THREE.Group(), rr = Math.min(w, h) * 0.22, s = new THREE.Shape();
+  s.moveTo(-w / 2 + rr, -h / 2); s.lineTo(w / 2 - rr, -h / 2); s.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + rr); s.lineTo(w / 2, h / 2 - rr); s.quadraticCurveTo(w / 2, h / 2, w / 2 - rr, h / 2);
+  s.lineTo(-w / 2 + rr, h / 2); s.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - rr); s.lineTo(-w / 2, -h / 2 + rr); s.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + rr, -h / 2);
+  const cloth = new THREE.Mesh(new THREE.ExtrudeGeometry(s, { depth: 0.02, bevelEnabled: true, bevelSize: 0.015, bevelThickness: 0.012, bevelSegments: 4, curveSegments: 18 }), new THREE.MeshStandardMaterial({ color: 0xe9ebe6, roughness: 0.85 }));
+  const gel = new THREE.Mesh(new THREE.ShapeGeometry(s, 18), new THREE.MeshStandardMaterial({ color: 0xc9d3cc, roughness: 0.25, metalness: 0.05 }));
+  gel.scale.setScalar(0.86); gel.position.z = -0.006; gel.rotation.y = Math.PI;
+  const snap = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.05, 24), new THREE.MeshStandardMaterial({ color: 0xbfc3c0, roughness: 0.3, metalness: 0.6 }));
+  snap.rotation.x = Math.PI / 2; snap.position.z = 0.05;
+  g.add(cloth, gel, snap); g.userData.mats = [cloth.material, gel.material]; return g;
+}
+const pad = makePad(0.8, 0.8);
+pad.position.set(1.45, 0.3, -0.7); pad.rotation.set(0, -0.6, 0.15); dev.add(pad);
 scene.add(dev);
 
 // кольца импульса вокруг электрода
-const rings = [0, 1, 2].map(() => { const m = new THREE.Mesh(new THREE.RingGeometry(0.42, 0.45, 64), new THREE.MeshBasicMaterial({ color: 0xf0a54a, transparent: true, opacity: 0, side: THREE.DoubleSide })); m.position.copy(pad.position); m.rotation.copy(pad.rotation); dev.add(m); return m; });
+const rings = [0, 1, 2].map(() => { const m = new THREE.Mesh(new THREE.RingGeometry(0.46, 0.49, 64), new THREE.MeshBasicMaterial({ color: 0xf0a54a, transparent: true, opacity: 0, side: THREE.DoubleSide })); m.position.copy(pad.position); m.rotation.copy(pad.rotation); dev.add(m); return m; });
 const floor = new THREE.Mesh(new THREE.CircleGeometry(1.7, 48), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.3 }));
 floor.rotation.x = -Math.PI / 2; floor.position.y = -1.8; scene.add(floor);
 
@@ -623,7 +805,7 @@ function frame() {
   // импульс: кольца и дрожь электрода, частота от силы
   const on = st.lv > 0, speed = 0.6 + st.lv / 25;
   rings.forEach((m, i) => { const ph = ((t * speed + i / 3) % 1); m.scale.setScalar(1 + ph * 1.6); m.material.opacity = on && !reduce ? (1 - ph) * (0.25 + st.lv / 60) : 0; });
-  pad.material.emissive = pad.material.emissive || new THREE.Color(); pad.material.emissive.setHex(0xf0a54a); pad.material.emissiveIntensity = on ? (0.1 + 0.25 * (0.5 + 0.5 * Math.sin(t * speed * 6.28))) * st.lv / 40 : 0;
+  const padMat = pad.userData.mats[0]; padMat.emissive.setHex(0xf0a54a); padMat.emissiveIntensity = on ? (0.1 + 0.25 * (0.5 + 0.5 * Math.sin(t * speed * 6.28))) * st.lv / 40 : 0;
   shake *= 0.85;
   dev.rotation.set(rx + (Math.random() - 0.5) * shake, ry + (Math.random() - 0.5) * shake, 0);
   dev.position.y = reduce ? 0 : Math.sin(now / 900) * 0.05;
@@ -633,13 +815,161 @@ renderer.setAnimationLoop(() => { if (visible) frame(); });
 frame();
 </script>
 
-<script>
-// 6. Rive: заглушка - официальный пример vehicles.riv, пока нет нашей сцены
-(() => {
-  const cv = document.getElementById('rv');
-  rive.RuntimeLoader.setWasmUrl('vendor/rive/rive.wasm');
-  const r = new rive.Rive({ src: 'assets/vehicles.riv', canvas: cv, autoplay: true, animations: 'curves', onLoad: () => r.resizeDrawingSurfaceToCanvas() });
-})();
+
+<script type="module">
+// 4б. Игра: фигура-манекен, электрод на зону, импульс, поза расслабляется
+import * as THREE from './vendor/three.module.min.js';
+const cv = document.getElementById('body3d');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x2a3a30, 1.2));
+const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(2, 4, 4); scene.add(key);
+const rim = new THREE.DirectionalLight(0xf0a54a, 1.6); rim.position.set(-3, 2, -3); scene.add(rim);
+
+const skin = new THREE.MeshStandardMaterial({ color: 0xe7dccb, roughness: 0.55 });
+const joint = new THREE.MeshStandardMaterial({ color: 0xcfc2ad, roughness: 0.5 });
+const J = (parent, x, y, z) => { const g = new THREE.Group(); g.position.set(x, y, z); parent.add(g); return g; };
+const cap = (parent, r, len, dir = -1) => { const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, len, 6, 16), skin); m.position.y = dir * (len / 2 + r * 0.6); parent.add(m); return m; };
+const ball = (parent, r, y = 0) => { const m = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), joint); m.position.y = y; parent.add(m); return m; };
+
+// скелет манекена: суставы - группы, детали - капсулы
+const root = new THREE.Group(); scene.add(root);
+const hips = J(root, 0, 1.0, 0);
+const pel = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 18), skin); pel.scale.set(0.16, 0.11, 0.1); hips.add(pel);
+const lumbar = J(hips, 0, 0.08, 0); cap(lumbar, 0.075, 0.16, 1);
+const chest = J(lumbar, 0, 0.3, 0); const ch = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 18), skin); ch.scale.set(0.18, 0.22, 0.11); ch.position.y = 0.17; chest.add(ch);
+const neck = J(chest, 0, 0.42, 0); cap(neck, 0.05, 0.06, 1);
+const head = J(neck, 0, 0.13, 0); const hd = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 20), skin); hd.scale.set(0.12, 0.15, 0.13); hd.position.y = 0.13; head.add(hd);
+const arm = side => { const sh = J(chest, side * 0.23, 0.33, 0); ball(sh, 0.055); cap(sh, 0.042, 0.22); const el = J(sh, 0, -0.33, 0); ball(el, 0.04); cap(el, 0.036, 0.2); const hand = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), skin); hand.scale.set(0.045, 0.07, 0.035); hand.position.y = -0.34; el.add(hand); return { sh, el }; };
+const leg = side => { const hp = J(hips, side * 0.11, -0.04, 0); ball(hp, 0.065); cap(hp, 0.06, 0.3); const kn = J(hp, 0, -0.45, 0); ball(kn, 0.052); cap(kn, 0.046, 0.32); const an = J(kn, 0, -0.46, 0); ball(an, 0.045); const ft = new THREE.Mesh(new THREE.CapsuleGeometry(0.045, 0.14, 4, 12), skin); ft.rotation.x = Math.PI / 2; ft.position.set(0, -0.04, 0.06); an.add(ft); return { hp, kn, an }; };
+const A = { L: arm(-1), R: arm(1) }, G = { L: leg(-1), R: leg(1) };
+const floor = new THREE.Mesh(new THREE.CircleGeometry(0.8, 48), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.35 }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = 0.005; scene.add(floor);
+
+// позы: «зажато» для каждой зоны и «свободно»
+const J8 = { lumbar, chest, neck, head, shL: A.L.sh, elL: A.L.el, shR: A.R.sh, elR: A.R.el, hpL: G.L.hp, knL: G.L.kn, anL: G.L.an, hpR: G.R.hp, knR: G.R.kn, anR: G.R.an };
+const FREE = { shL: [0, 0, -0.12], shR: [0, 0, 0.12], elL: [-0.15, 0, 0], elR: [-0.15, 0, 0] };
+const TENSE = {
+  'Поясница': { lumbar: [0.42, 0, 0.06], chest: [0.3, 0, 0], neck: [0.15, 0, 0], head: [-0.1, 0, 0], shR: [0.75, 0, 0.25], elR: [-1.5, 0, 0], shL: [-0.2, 0, -0.15], hpL: [-0.25, 0, 0], hpR: [-0.25, 0, 0], knL: [0.3, 0, 0], knR: [0.3, 0, 0], anL: [-0.05, 0, 0], anR: [-0.05, 0, 0] },
+  'Шея': { chest: [0.18, 0, 0], neck: [0.5, 0, 0.12], head: [0.2, 0.15, 0.25], shR: [-2.3, 0, 0.35], elR: [-1.9, 0, 0], shL: [0, 0, -0.08] },
+  'Плечо': { chest: [0.08, 0, -0.08], shR: [-0.35, 0, -0.1], elR: [-1.6, 0, 0], shL: [-1.05, 0, 0.3], elL: [-1.2, 0, 0], head: [0, 0, 0.12] },
+  'Колено': { lumbar: [0.12, 0, -0.06], hpR: [-0.45, 0, 0], knR: [0.85, 0, 0], anR: [-0.3, 0, 0], hpL: [-0.08, 0, 0], knL: [0.1, 0, 0], shR: [-0.5, 0, 0.25], elR: [-0.6, 0, 0] },
+  'Стопа': { lumbar: [0.05, 0, 0.08], hpR: [-0.2, 0, 0], knR: [0.55, 0, 0], anR: [0.45, 0, 0], shL: [0, 0, -0.35], shR: [0, 0, 0.35] },
+};
+// точки зон: сустав, позиция, нормаль наружу, повернуть ли фигуру спиной
+const Z = {
+  'Поясница': { j: lumbar, p: [0, 0.1, -0.085], n: [0, 0, -1], yaw: Math.PI - 0.95, e: 'Спина' },
+  'Шея': { j: neck, p: [0, 0.06, -0.055], n: [0, 0, -1], yaw: Math.PI - 0.8, e: 'Шея' },
+  'Плечо': { j: A.R.sh, p: [0.05, -0.03, 0], n: [1, 0, 0], yaw: -1.0, e: 'Плечо' },
+  'Колено': { j: G.R.kn, p: [0, 0, 0.052], n: [0, 0, 1], yaw: -0.85, e: 'Колено' },
+  'Стопа': { j: G.R.an, p: [0, -0.02, -0.045], n: [0, 0, -1], yaw: Math.PI - 0.9, e: 'Стопа' },
+};
+const glowMat = c => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.8, depthWrite: false, blending: THREE.AdditiveBlending });
+const dots = [];
+for (const [name, z] of Object.entries(Z)) {
+  const m = new THREE.Object3D(); m.position.set(...z.p); m.lookAt(new THREE.Vector3(...z.p).add(new THREE.Vector3(...z.n))); z.j.add(m); z.m = m;
+  const d = new THREE.Mesh(new THREE.SphereGeometry(0.04, 16, 12), glowMat(0xffa860)); d.userData.zone = name; m.add(d); dots.push(d);
+  const halo = new THREE.Mesh(new THREE.SphereGeometry(0.075, 16, 12), glowMat(0xff7a45)); halo.material.opacity = 0.25; d.add(halo);
+}
+// напряжение (красное свечение) и электрод
+const tense = new THREE.Mesh(new THREE.SphereGeometry(0.16, 24, 16), glowMat(0xff5a2a)); tense.material.opacity = 0; scene.add(tense);
+function makePad(w, h) {
+  const g = new THREE.Group(), rr = Math.min(w, h) * 0.22, s = new THREE.Shape();
+  s.moveTo(-w / 2 + rr, -h / 2); s.lineTo(w / 2 - rr, -h / 2); s.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + rr); s.lineTo(w / 2, h / 2 - rr); s.quadraticCurveTo(w / 2, h / 2, w / 2 - rr, h / 2);
+  s.lineTo(-w / 2 + rr, h / 2); s.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - rr); s.lineTo(-w / 2, -h / 2 + rr); s.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + rr, -h / 2);
+  const cloth = new THREE.Mesh(new THREE.ExtrudeGeometry(s, { depth: 0.008, bevelEnabled: true, bevelSize: 0.006, bevelThickness: 0.005, bevelSegments: 3, curveSegments: 14 }), new THREE.MeshStandardMaterial({ color: 0xe9ebe6, roughness: 0.85 }));
+  const gel = new THREE.Mesh(new THREE.ShapeGeometry(s, 14), new THREE.MeshStandardMaterial({ color: 0xc9d3cc, roughness: 0.3 }));
+  gel.scale.setScalar(0.86); gel.position.z = -0.003; gel.rotation.y = Math.PI;
+  const snap = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.02, 16), new THREE.MeshStandardMaterial({ color: 0xbfc3c0, roughness: 0.3, metalness: 0.6 }));
+  snap.rotation.x = Math.PI / 2; snap.position.z = 0.018;
+  g.add(cloth, gel, snap); g.userData = { cloth: cloth.material, gel: gel.material }; return g;
+}
+const pad = makePad(0.2, 0.2); pad.visible = false; scene.add(pad);
+const rings = [0, 1, 2].map(() => { const r = new THREE.Mesh(new THREE.RingGeometry(0.12, 0.13, 48), new THREE.MeshBasicMaterial({ color: 0xf0a54a, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false })); pad.add(r); r.position.z = 0.01; return r; });
+
+// состояние игры
+const st = { zone: null, cream: false, placed: 0, placing: false, lv: 0, prog: 0, rotY: 0 };
+const $ = s => document.querySelector(s);
+const say = t => $('#gSay').textContent = t, tip = t => $('#gtip').textContent = t;
+const stepOn = name => document.querySelectorAll('#gsteps li').forEach(li => { const order = ['zone', 'cream', 'place', 'power']; const i = order.indexOf(li.dataset.s), k = order.indexOf(name); li.classList.toggle('on', i === k); li.classList.toggle('done', i < k); });
+function pick(name) {
+  if (!Z[name]) return;
+  st.zone = name; st.cream = false; st.placed = 0; st.placing = false; st.lv = 0; st.prog = 0; pad.visible = false;
+  pad.userData.gel.color.setHex(0xc9d3cc); pad.userData.gel.roughness = 0.3;
+  document.querySelectorAll('#gZones .btn').forEach(b => b.setAttribute('aria-pressed', b.dataset.z === name));
+  $('#gCreamBtn').disabled = false; $('#gPlace').disabled = true; $('#gMinus').disabled = true; $('#gPlus').disabled = true; $('#gLv').textContent = 0; $('#gBar').style.width = 0;
+  stepOn('cream'); say(`${name}: здесь зажато. Электрод «${Z[name].e}». Сначала крем.`); tip('Нанесите крем на электрод');
+}
+document.querySelectorAll('#gZones .btn').forEach(b => b.addEventListener('click', () => pick(b.dataset.z)));
+addEventListener('ozo:zone', e => pick(e.detail));
+$('#gCreamBtn').onclick = () => { st.cream = true; pad.visible = true; pad.userData.gel.color.setHex(0xf3e6cc); pad.userData.gel.roughness = 0.08; $('#gCreamBtn').disabled = true; $('#gPlace').disabled = false; stepOn('place'); say('Крем OZOTENS 30% тонким слоем на электрод - он проводит ток.'); tip('Приложите электрод'); };
+$('#gPlace').onclick = () => { st.placing = true; st.placed = 0; $('#gPlace').disabled = true; $('#gMinus').disabled = false; $('#gPlus').disabled = false; stepOn('power'); say(`Электрод «${Z[st.zone].e}» лёг на зону. Включайте и прибавляйте понемногу.`); tip('Жмите +'); };
+const setLv = d => { st.lv = Math.max(0, Math.min(40, st.lv + d)); $('#gLv').textContent = st.lv; navigator.vibrate && navigator.vibrate(10); if (st.lv > 0 && st.prog < 0.02) say('Импульс идёт через электрод: ощущается покалывание или лёгкая вибрация.'); if (st.lv > 30) say('Если неприятно - убавьте. Комфорт важнее цифры.'); tip(st.lv ? 'Сеанс идёт' : 'Прибор выключен'); };
+$('#gPlus').onclick = () => setLv(2); $('#gMinus').onclick = () => setLv(-2);
+
+// клик по точке на фигуре / вращение
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
+const hit = e => { const rc = cv.getBoundingClientRect(); ptr.set((e.clientX - rc.left) / rc.width * 2 - 1, -(e.clientY - rc.top) / rc.height * 2 + 1); ray.setFromCamera(ptr, cam); return ray.intersectObjects(dots.filter(d => d.visible), false)[0]; };
+let drag = false, moved = 0, px = 0, spin = 0;
+cv.addEventListener('pointerdown', e => { drag = true; moved = 0; px = e.clientX; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', e => { if (!drag) { cv.classList.toggle('over', !!hit(e)); return; } const dx = e.clientX - px; moved += Math.abs(dx); spin += dx * 0.01; px = e.clientX; });
+cv.addEventListener('pointerup', e => { drag = false; if (moved < 6) { const h = hit(e); if (h) { pick(h.object.userData.zone); dispatchEvent(new CustomEvent('ozo:pick3d', { detail: h.object.userData.zone })); } } });
+
+// кадр
+const v = new THREE.Vector3(), q = new THREE.Quaternion(), from = new THREE.Vector3(0.9, 1.9, 0.9), fromQ = new THREE.Quaternion();
+const lerpPose = (a, b, k) => { for (const n in J8) { const ra = (a[n] || FREE[n] || [0, 0, 0]), rb = (b[n] || FREE[n] || [0, 0, 0]); J8[n].rotation.set(ra[0] + (rb[0] - ra[0]) * k, ra[1] + (rb[1] - ra[1]) * k, ra[2] + (rb[2] - ra[2]) * k); } };
+const smooth = x => x * x * (3 - 2 * x);
+let visible = false; new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(cv);
+let last = performance.now(), poseK = 0;
+function frame() {
+  const now = performance.now(), dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
+  const s = cv.clientWidth, h = cv.clientHeight; if (cv.width !== Math.round(s * renderer.getPixelRatio())) { renderer.setSize(s, h, false); cam.aspect = s / h; cam.updateProjectionMatrix(); }
+  const z = st.zone && Z[st.zone];
+  // поза: из «зажато» в «свободно» по ходу сеанса
+  const tenseK = z ? 1 - smooth(st.prog) : 0; poseK += (tenseK - poseK) * Math.min(1, dt * 3);
+  lerpPose(FREE, z ? TENSE[st.zone] : FREE, poseK);
+  // поворот фигуры к зоне + ручное вращение
+  const want = (z ? z.yaw : -0.35) + spin + (reduce || drag || z ? 0 : Math.sin(t * 0.4) * 0.3);
+  st.rotY += (want - st.rotY) * Math.min(1, dt * 3); root.rotation.y = st.rotY;
+  root.updateMatrixWorld(true);
+  // камера: общий план или ближе к зоне
+  const target = new THREE.Vector3(0, 1.05, 0), dist = z ? 4.2 : 5.8;
+  if (z) { z.m.getWorldPosition(v); target.lerp(v, 0.45); }
+  cam.position.lerp(new THREE.Vector3(target.x, target.y + 0.25, target.z + dist), Math.min(1, dt * 2.5)); cam.lookAt(target);
+  // точки зон
+  dots.forEach(d => { d.visible = !(z && st.placing && d.userData.zone === st.zone); const k = 1 + 0.25 * Math.sin(t * 3 + d.id); d.scale.setScalar(z && d.userData.zone !== st.zone ? 0.6 : k); });
+  // напряжение
+  if (z) { z.m.getWorldPosition(v); tense.position.copy(v); tense.material.opacity = 0.45 * poseK * (0.75 + 0.25 * Math.sin(t * 4)); tense.scale.setScalar(0.7 + 0.5 * poseK); } else tense.material.opacity = 0;
+  // электрод летит и прилипает
+  if (z && pad.visible) {
+    z.m.getWorldPosition(v); z.m.getWorldQuaternion(q);
+    if (st.placing) st.placed = Math.min(1, st.placed + dt * 1.4);
+    const k = smooth(st.placed);
+    const hover = cam.position.clone().lerp(v, 0.55).add(new THREE.Vector3(0.25, 0.15, 0));
+    pad.position.lerpVectors(hover, v.clone().add(new THREE.Vector3(0, 0, 0.012).applyQuaternion(q)), k);
+    fromQ.copy(cam.quaternion); pad.quaternion.slerpQuaternions(fromQ, q, k);
+    if (!st.placing) pad.rotation.z += Math.sin(t * 2) * 0.002;
+  }
+  // импульс: кольца, прогресс сеанса
+  const on = st.placed >= 1 && st.lv > 0, speed = 0.7 + st.lv / 25;
+  rings.forEach((r, i) => { const ph = (t * speed + i / 3) % 1; r.scale.setScalar(1 + ph * 2.2); r.material.opacity = on && !reduce ? (1 - ph) * (0.35 + st.lv / 80) : 0; });
+  pad.userData.cloth.emissive.setHex(0xf0a54a); pad.userData.cloth.emissiveIntensity = on ? (0.15 + 0.2 * Math.sin(t * speed * 6.28)) : 0;
+  if (on && st.prog < 1) {
+    const before = st.prog; st.prog = Math.min(1, st.prog + dt / 14);
+    document.getElementById('gBar').style.width = (st.prog * 100) + '%';
+    if (before < 0.4 && st.prog >= 0.4) say('По описанию метода импульсы приглушают болевой сигнал и помогают расслабить зажатые мышцы, а крем проходит глубже.');
+    if (st.prog >= 1) { say('Сеанс в игре окончен. Выберите другую зону - покажем, как с ней.'); tip('Готово · выберите другую зону'); document.querySelectorAll('#gsteps li').forEach(li => { li.classList.remove('on'); li.classList.add('done'); }); }
+  }
+  // мышца «подрагивает» в такт импульсу
+  if (on && z) z.j.rotation.x += Math.sin(t * speed * 6.28) * 0.006 * (st.lv / 40);
+  renderer.render(scene, cam);
+}
+cam.position.set(0, 1.3, 5.6); cam.lookAt(0, 1.05, 0);
+renderer.setAnimationLoop(() => { if (visible) frame(); });
+frame();
 </script>
 </body>
 </html>
