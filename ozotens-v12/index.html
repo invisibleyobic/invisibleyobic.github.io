@@ -41,7 +41,7 @@ h2 em, h1 em { font-style: normal; color: var(--warm); }
 .kick { font-size: 15px; color: var(--soft); margin: 0 0 16px; }
 .lead { color: var(--soft); font-size: clamp(17px, 1.5vw, 20px); max-width: 52ch; margin: 18px 0 0; }
 section { padding-block: clamp(72px, 10vw, 130px); }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-weight: 550; font-size: 16px; cursor: pointer; text-decoration: none; transition: transform .15s, background .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
+.btn { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-weight: 550; font-size: 16px; cursor: pointer; text-decoration: none; transition: transform .15s, background .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
 .btn:active { transform: scale(.97); }
 .btn.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
 .btn.hot { background: var(--warm); color: #1d1206; border-color: var(--warm); }
@@ -60,7 +60,7 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .nav { display: flex; gap: 26px; font-size: 15px; }
 .nav a { text-decoration: none; color: var(--soft); }
 .nav a:hover { color: var(--ink); }
-.cartbtn { position: relative; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); cursor: pointer; display: grid; place-items: center; }
+.cartbtn { position: relative; height: 48px; min-width: 48px; padding: 0 14px; gap: 8px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); background: var(--card); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
 .cartbtn svg { width: 20px; height: 20px; }
 .cartbtn b { position: absolute; top: -4px; right: -4px; min-width: 22px; height: 22px; border-radius: 11px; background: var(--warm); font-size: 12px; display: grid; place-items: center; padding: 0 5px; }
 .cartbtn b:empty { display: none; }
@@ -73,10 +73,13 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .blobs i:nth-child(2) { width: 26vmax; height: 26vmax; left: -8vmax; top: 18vh; background: #ffe9cf; opacity: .9; }
 .blobs i:nth-child(3) { width: 22vmax; height: 22vmax; right: 18vw; top: 30vh; background: #f6c9a5; opacity: .35; }
 .hero .wrap { position: relative; z-index: 1; }
-.hero h1 { font-size: clamp(68px, 13vw, 196px); letter-spacing: -.055em; line-height: .86; }
+.hero h1 { font-size: clamp(64px, 10.5vw, 150px); letter-spacing: -.055em; line-height: .86; }
+.hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 32px; align-items: center; }
+.hero-kit { border-radius: 32px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px -36px rgba(80,50,10,.45); }
+.hero-kit img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 .hero-sub { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-top: 26px; }
 .hero-sub .lead { margin: 0; }
-.hint { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; border-radius: 999px; padding: 10px 18px 10px 12px; font-size: 15px; }
+.hint { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.7); color: var(--ink); border: 1px dashed rgba(17,19,18,.25); border-radius: 999px; padding: 10px 18px 10px 12px; font-size: 15px; }
 .hint svg { width: 24px; height: 24px; }
 .ribbon { position: relative; z-index: 1; margin-top: 30px; overflow: hidden; cursor: grab; touch-action: pan-y; }
 .ribbon:active { cursor: grabbing; }
@@ -89,7 +92,7 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .zone .nm { font-weight: 700; font-size: 22px; letter-spacing: -.02em; padding: 0 6px; }
 .zone .el { color: var(--soft); font-size: 14px; padding: 0 6px; }
 .zone .ft { display: flex; justify-content: space-between; align-items: center; padding: 2px 6px 4px; }
-.zone .go { font-size: 14px; font-weight: 600; background: var(--warm-bg); color: var(--warm-d); border-radius: 999px; padding: 7px 12px; }
+.zone .go { font-size: 14px; font-weight: 600; background: var(--ink); color: #fff; border-radius: 999px; padding: 7px 12px; }
 .arrows { display: flex; gap: 8px; }
 .arrows button { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); cursor: pointer; font-size: 18px; }
 
@@ -136,7 +139,11 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 /* 5. колесо */
 .game .box { background: var(--ink); color: #fff; border-radius: 40px; padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; overflow: hidden; position: relative; }
 .game .lead { color: #b9bdba; }
-.wheel { position: relative; width: min(500px, 100%); aspect-ratio: 1; margin-inline: auto; touch-action: none; user-select: none; }
+.wheel { position: relative; width: min(500px, 100%); aspect-ratio: 1; margin-inline: auto; user-select: none; }
+.wheel svg.w { touch-action: pan-y; }
+.wheel .win { transition: opacity .3s; }
+.confetti { position: absolute; inset: 0; pointer-events: none; overflow: visible; z-index: 3; }
+.confetti i { position: absolute; left: 50%; top: 50%; width: 10px; height: 14px; border-radius: 2px; }
 .wheel svg.w { width: 100%; height: 100%; cursor: grab; filter: drop-shadow(0 30px 40px rgba(0,0,0,.45)); }
 .wheel .ptr { position: absolute; left: 50%; top: -10px; margin-left: -22px; width: 44px; height: 54px; z-index: 2; filter: drop-shadow(0 6px 8px rgba(0,0,0,.4)); transform-origin: 50% 20%; }
 .wheel .spin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 28%; aspect-ratio: 1; border-radius: 50%; border: 0; background: var(--warm); color: #1d1206; font-weight: 800; font-size: clamp(15px, 2vw, 19px); cursor: pointer; box-shadow: 0 0 0 8px rgba(255,255,255,.95), 0 10px 26px rgba(0,0,0,.4); z-index: 2; }
@@ -151,13 +158,16 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .filters button { min-height: 46px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); cursor: pointer; font-weight: 550; }
 .filters button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
 .grid { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
-.item { background: var(--card); border-radius: var(--r); padding: 12px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; border: 1px solid transparent; transition: border-color .2s; }
+.item { background: var(--card); border-radius: var(--r); padding: 12px; display: flex; flex-direction: column; gap: 10px; position: relative; border: 1px solid transparent; transition: border-color .2s; }
 .item:hover { border-color: var(--line); }
 .item[hidden] { display: none !important; }
 .item .ph { aspect-ratio: 1; border-radius: 20px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; position: relative; }
 .item .ph img { width: 84%; height: 84%; object-fit: contain; }
 .item .seg { position: absolute; left: 10px; top: 10px; background: rgba(17,19,18,.72); color: #fff; font-size: 13px; padding: 4px 10px; border-radius: 999px; }
-.item .nm { font-weight: 650; padding: 0 6px; line-height: 1.25; min-height: 2.5em; }
+.item .open { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 10px; }
+.item .open:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; border-radius: 20px; }
+.item .nm { font-weight: 650; padding: 0 6px; line-height: 1.25; }
+.item .ds { color: var(--soft); font-size: 13px; padding: 0 6px; line-height: 1.35; min-height: 2.7em; }
 .item .ft { display: flex; justify-content: space-between; align-items: center; padding: 0 6px 4px; }
 .item .add { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--warm); font-size: 24px; font-weight: 500; cursor: pointer; display: grid; place-items: center; }
 
@@ -173,6 +183,14 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .sheet .sh-f { padding: 14px 20px calc(14px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); display: flex; gap: 10px; align-items: center; }
 .sheet .sh-f[hidden] { display: none; }
 .sheet .sh-f .btn { flex: 1; justify-content: space-between; }
+.sheet .sh-f .btn span { white-space: nowrap; }
+.cl .del { width: 44px; height: 44px; border-radius: 50%; border: 0; background: transparent; cursor: pointer; font-size: 20px; color: var(--soft); }
+.cl li { grid-template-columns: 64px 1fr auto auto !important; }
+.kitbox { margin-top: 14px; background: var(--warm-bg); border-radius: 18px; padding: 12px 14px; }
+.kitbox p { margin: 0 0 6px; font-weight: 600; }
+.howto { margin-top: 14px; color: var(--soft); font-size: 15px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.toast.up { bottom: auto; top: calc(14px + env(safe-area-inset-top)); }
 .pv .ph { aspect-ratio: 4 / 3; background: #fff; border: 1px solid var(--line); border-radius: 22px; display: grid; place-items: center; }
 .pv .ph img { width: 84%; height: 84%; object-fit: contain; }
 .pv h3 { font-size: 28px; margin-top: 18px; }
@@ -181,15 +199,15 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .opt { margin-top: 18px; display: grid; gap: 10px; }
 .opt .o { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: var(--bg); border-radius: 18px; padding: 12px 14px; }
 .opt .o small { display: block; color: var(--soft); }
-.sw { width: 52px; height: 32px; border-radius: 16px; background: #cfd2cf; border: 0; position: relative; cursor: pointer; flex: none; transition: background .2s; }
+.sw { width: 52px; height: 32px; margin: 6px 0; outline-offset: 6px; border-radius: 16px; background: #cfd2cf; border: 0; position: relative; cursor: pointer; flex: none; transition: background .2s; }
 .sw::after { content: ""; position: absolute; top: 4px; left: 4px; width: 24px; height: 24px; border-radius: 50%; background: #fff; transition: transform .2s; }
 .sw[aria-checked="true"] { background: var(--warm); }
 .sw[aria-checked="true"]::after { transform: translateX(20px); }
 .sizes { display: flex; gap: 8px; }
-.sizes button { min-width: 48px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-weight: 600; }
+.sizes button { min-width: 48px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-weight: 600; }
 .sizes button[aria-pressed="true"] { background: var(--ink); color: #fff; }
 .qty { display: flex; align-items: center; gap: 4px; }
-.qty button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 18px; }
+.qty button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 18px; }
 .qty span { min-width: 22px; text-align: center; font-weight: 650; }
 .warn { margin-top: 16px; background: var(--bg); border-radius: 16px; padding: 12px 14px; font-size: 14px; color: var(--soft); }
 .cl { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
@@ -234,8 +252,11 @@ footer .wrap { display: grid; gap: 6px; }
 .toast.on { opacity: 1; transform: translate(-50%, 0); }
 
 @media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr 34%; }
+  .cartbtn span { display: none; }
   .nav { display: none; }
-  .day .box, .dev, .game .box, .two { grid-template-columns: 1fr; }
+  .dev, .game .box, .two { grid-template-columns: 1fr; }
+  .day .box { grid-template-columns: 1fr; }
   .how-grid { grid-template-columns: 1fr; }
   .hc { flex-direction: row; align-items: center; }
   .hc .art { width: 40%; flex: none; aspect-ratio: 1; }
@@ -243,6 +264,18 @@ footer .wrap { display: grid; gap: 6px; }
   .stage { aspect-ratio: 1; }
 }
 @media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .item { padding: 8px; border-radius: 22px; }
+  .item .nm { font-size: 14px; }
+  .item .ds { font-size: 12px; }
+  .item .add { width: 40px; height: 40px; }
+  .day .box { grid-template-columns: 96px 1fr; gap: 16px; align-items: start; padding: 22px 18px; }
+  .clock { position: sticky; top: 84px; }
+  .clock svg { width: 96px; }
+  .clock b { font-size: 20px; }
+  .entries li { grid-template-columns: 1fr; gap: 2px; font-size: 17px; }
+  .day h2 { font-size: 30px; }
+  .hero-grid { grid-template-columns: 1fr; }
   .arrows { display: none; }
   .hc { flex-direction: column; align-items: stretch; }
   .hc .art { width: 100%; aspect-ratio: 16 / 9; }
@@ -259,7 +292,7 @@ footer .wrap { display: grid; gap: 6px; }
   <div class="wrap">
     <a class="logo" href="#top"><svg viewBox="0 0 16 20" aria-hidden="true"><path d="M8 0C8 0 0 9 0 13.5a8 8 0 0 0 16 0C16 9 8 0 8 0Z"/></svg>ОЗОТЭНС</a>
     <nav class="nav"><a href="#how">Как работает</a><a href="#device">Прибор</a><a href="#wheel">Колесо скидок</a><a href="#shop">Каталог</a><a href="#docs">Документы</a></nav>
-    <button class="cartbtn" type="button" id="cartBtn" aria-label="Корзина"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><b id="cartN"></b></button>
+    <button class="cartbtn" type="button" id="cartBtn" aria-label="Корзина"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.4 11.2a2 2 0 0 1-2 1.8H7.4a2 2 0 0 1-2-1.8L4 8Z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg><span>Корзина</span><b id="cartN"></b></button>
   </div>
 </header>
 
@@ -269,12 +302,17 @@ footer .wrap { display: grid; gap: 6px; }
     <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap">
       <p class="kick">Поясница · шея · суставы</p>
-      <h1 id="title">Где <em>болит?</em></h1>
+      <div class="hero-grid">
+        <div>
+          <h1 id="title">Где <em>болит?</em></h1>
+          <p class="lead" style="margin-top:22px">Прибор ТЭНС, озоновый крем OZOTENS 30% и электрод по форме больного места. Выберите зону - покажем нужный электрод и цену.</p>
+        </div>
+        <div class="hero-kit"><img src="img/kit-set.jpg" alt="Комплект: прибор RoovJoy, крем OZOTENS 30% и электроды"></div>
+      </div>
       <div class="hero-sub">
-        <p class="lead">Выберите зону - покажем электрод под неё, цену и что ещё нужно для сеанса.</p>
+        <span class="hint" id="hint"><svg viewBox="0 0 32 32" aria-hidden="true"><g class="hand" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V7.5a2 2 0 0 1 4 0V15"/><path d="M16 14.5v-2a2 2 0 0 1 4 0V16"/><path d="M20 15.5a2 2 0 0 1 4 0v4.5a8 8 0 0 1-8 8h-1a7 7 0 0 1-5.6-2.8L6 20.5a2 2 0 0 1 3.2-2.4L12 21"/></g></svg>Листайте ленту и нажмите на свою зону</span>
         <div class="arrows"><button type="button" id="prev" aria-label="Назад">←</button><button type="button" id="next" aria-label="Вперёд">→</button></div>
       </div>
-      <div class="row" style="margin-top:20px"><span class="hint" id="hint"><svg viewBox="0 0 32 32" aria-hidden="true"><g class="hand" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V7.5a2 2 0 0 1 4 0V15"/><path d="M16 14.5v-2a2 2 0 0 1 4 0V16"/><path d="M20 15.5a2 2 0 0 1 4 0v4.5a8 8 0 0 1-8 8h-1a7 7 0 0 1-5.6-2.8L6 20.5a2 2 0 0 1 3.2-2.4L12 21"/></g></svg>Листайте ленту, нажмите на зону</span></div>
     </div>
     <div class="ribbon" id="ribbon"><div class="track" id="track"></div></div>
   </section>
@@ -295,13 +333,14 @@ footer .wrap { display: grid; gap: 6px; }
         </div>
         <div>
           <p class="kick">Обычный день</p>
-          <h2 class="words">Больная спина забирает <em>не спину, а день</em></h2>
+          <h2 class="words">Больная спина <em>забирает весь день</em></h2>
           <ol class="entries" id="entries">
             <li class="on"><b>07:00</b>Сползаю с кровати боком, как учили.</li>
             <li><b>13:00</b>Третий час за ноутом. Поясница горит.</li>
-            <li><b>19:00</b>Сын просит поиграть. Говорю: потом.</li>
+            <li><b>19:00</b>Внук просит поиграть. Говорю: потом.</li>
             <li><b>23:00</b>Ищу позу, в которой не ноет. Не нахожу.</li>
           </ol>
+          <div class="row"><a class="btn hot" href="#top">Подобрать электрод</a></div>
         </div>
       </div>
     </div>
@@ -328,11 +367,11 @@ footer .wrap { display: grid; gap: 6px; }
             <path id="wave" fill="#f39a2b" d="M100 16 C100 16 38 92 38 134 A62 62 0 0 0 162 134 C162 92 100 16 100 16 Z"/>
             <path id="sWave" fill="none" d="M14 104 Z"/>
           </svg></div>
-          <div><p class="n">02</p><h3>Импульс</h3><p>Прибор даёт слабые импульсы. Силу 0-40 выбираете сами, по ощущениям.</p></div>
+          <div><p class="n">02</p><h3>Импульс</h3><p>Прибор даёт слабые импульсы. Силу от 0 до 40 выбираете сами, по ощущениям.</p></div>
         </div>
         <div class="hc">
           <div class="art"><img src="img/el-back.webp" alt="Электрод «Спина»: эластичный пояс с четырьмя сегментами"></div>
-          <div><p class="n">03</p><h3>Электрод на зону</h3><p>Электрод - пояс или накладка по форме зоны: спина, шея, плечо, колено, стопа.</p></div>
+          <div><p class="n">03</p><h3>Пояс на больное место</h3><p>Электрод - это пояс или накладка по форме зоны. Для поясницы - эластичный пояс с липучкой, внутри 4 токопроводящих сегмента.</p></div>
         </div>
       </div>
     </div>
@@ -356,7 +395,7 @@ footer .wrap { display: grid; gap: 6px; }
           <div><span>Режим</span><b id="rMode" style="font-size:28px">выкл</b></div>
           <div><span>Программа</span><b id="rProg">-</b></div>
         </div>
-        <div class="pad">
+        <div class="pad" id="devPad">
           <button class="btn dark" type="button" data-k="power">Питание</button>
           <button class="btn" type="button" data-k="ch1-">CH1 −</button>
           <button class="btn hot" type="button" data-k="ch1+">CH1 +</button>
@@ -377,13 +416,14 @@ footer .wrap { display: grid; gap: 6px; }
         <div>
           <p class="kick" style="color:#9ba09c">Одна попытка</p>
           <h2 class="words">Крутите <em>колесо</em></h2>
-          <p class="lead">Нажмите на центр или раскрутите колесо пальцем. Выигрыш сразу ляжет в корзину.</p>
+          <p class="lead">Нажмите «Крутить» в центре. Выигрыш сразу ляжет в корзину.</p>
           <div class="prize" id="prize" aria-live="polite"><span style="color:#b9bdba">Здесь появится ваш приз.</span></div>
           <p class="note">Демо: призы и коды для примера, условия акции утверждает продавец.</p>
         </div>
         <div class="wheel" id="wheelBox">
           <svg class="ptr" viewBox="0 0 44 54" aria-hidden="true"><path d="M22 54 L2 14 A20 20 0 1 1 42 14 Z" fill="#fff"/><circle cx="22" cy="18" r="8" fill="#f39a2b"/></svg>
           <svg class="w" id="wheelSvg" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
+          <div class="confetti" id="confetti" aria-hidden="true"></div>
           <button class="spin" type="button" id="spinBtn">Крутить</button>
         </div>
       </div>
@@ -412,7 +452,7 @@ footer .wrap { display: grid; gap: 6px; }
       <p class="kick">Документы</p>
       <h2 class="words">На чём держится <em>метод</em></h2>
       <div class="docs">
-        <div><b>RU 2714457</b><p>Патент РФ на метод ОЗОТЭНС-терапии</p></div>
+        <div><b>RU 2714457</b><p>Патент РФ на метод ОЗОТЭНС-терапии. <a href="https://new.fips.ru/registers-doc-view/fips_servlet?DB=RUPAT&amp;DocNumber=2714457" target="_blank" rel="noopener">Открыть в реестре ФИПС</a></p></div>
         <div><b>ПИМУ</b><p>Метод разработан в Ассоциации российских озонотерапевтов, исследован в Приволжском исследовательском медицинском университете</p></div>
         <div><b>2020</b><p>Учебное пособие для врачей «ОЗОТЭНС-терапия дорсалгий и артралгий» и 5 научных статей</p></div>
         <div><b>ЕАЭС</b><p>Декларации соответствия на прибор и крем</p></div>
@@ -446,7 +486,8 @@ footer .wrap { display: grid; gap: 6px; }
 
 <footer><div class="wrap">
   <span>Имеются противопоказания. Необходимо проконсультироваться со специалистом.</span>
-  <span>Цены - розничные из каталога ОТРИ (08.10.2026). Изготовитель электродов и крема - ООО «ОТРИ», Нижний Новгород. Черновик для сравнения версий: тексты требуют проверки юристом.</span>
+  <span>Изготовитель электродов и крема: ООО «ОТРИ», 603089, г. Нижний Новгород, ул. Бориса Панина, 9; тел. 831 421-00-00. Доставка, оплата и возврат: условия уточняются у продавца.</span>
+  <span>Цены - розничные из каталога ОТРИ (08.10.2026). Черновик для сравнения версий: тексты требуют проверки юристом.</span>
 </div></footer>
 
 <div class="ov" id="ov"></div>
@@ -481,17 +522,17 @@ const I = {
   '85/01': { name: 'Электрод «Шея»', zone: 'Шея', segs: '4 сегмента', sub: '2 канала, шейно-воротниковая зона', price: 26775, img: 'img/el-neck.webp', sizes: ['M', 'L'], sizeHint: 'Обхват шеи: M менее 40 см, L более 40 см.', cat: 'el' },
   '85/02': { name: 'Электрод «Плечо»', zone: 'Плечо', segs: '4 сегмента', sub: '2 канала', price: 36775, img: 'img/el-shoulder.webp', cat: 'el' },
   '85/07': { name: 'Электрод «Колено»', zone: 'Колено', segs: '4 сегмента', sub: '2 канала', price: 20400, img: 'img/el-knee.webp', cat: 'el' },
-  '85/05': { name: 'Электрод «Тазобедренный»', zone: 'Бедро', segs: '4 сегмента', sub: '2 канала', price: 23450, img: 'img/el-hip.webp', cat: 'el' },
-  '85/09': { name: 'Электрод «Стопа»', zone: 'Стопа', segs: '2 сегмента', sub: '1 канал', price: 19350, img: 'img/el-foot.webp', sizes: ['M', 'L'], cat: 'el' },
-  '85/06': { name: 'Электрод «Кисть - стопа»', zone: 'Кисть', segs: '2 сегмента', sub: '1 канал', price: 18950, img: 'img/el-hand-foot.webp', cat: 'el' },
-  '85/08': { name: 'Электрод «Голень - бедро»', zone: 'Голень', segs: '2 сегмента', sub: '1 канал', price: 23125, img: 'img/el-shin-thigh.webp', sizes: ['M', 'L'], cat: 'el' },
-  '85/03': { name: 'Электрод «Плечо - голень»', segs: '2 сегмента', sub: '1 канал, обхват до 40 см', price: 21750, img: 'img/el-shin-arm.webp', cat: 'el' },
+  '85/05': { name: 'Электрод «Тазобедренный»', zone: 'Тазобедренный', segs: '4 сегмента', sub: '2 канала', price: 23450, img: 'img/el-hip.webp', cat: 'el' },
+  '85/09': { name: 'Электрод «Стопа»', zone: 'Стопа', segs: '2 сегмента', sub: '1 канал', price: 19350, img: 'img/el-foot.webp', sizes: ['M', 'L'], sizeHint: 'Размер уточните по таблице производителя.', cat: 'el' },
+  '85/06': { name: 'Электрод «Кисть - стопа»', zone: 'Кисть и стопа', segs: '2 сегмента', sub: '1 канал', price: 18950, img: 'img/el-hand-foot.webp', cat: 'el' },
+  '85/08': { name: 'Электрод «Голень - бедро»', zone: 'Голень и бедро', segs: '2 сегмента', sub: '1 канал', price: 23125, img: 'img/el-shin-thigh.webp', sizes: ['M', 'L'], sizeHint: 'Обхват: M 50 см, L 60 см.', cat: 'el' },
+  '85/03': { name: 'Электрод «Плечо - голень»', zone: 'Плечо и голень', segs: '2 сегмента', sub: '1 канал, обхват до 40 см', price: 21750, img: 'img/el-shin-arm.webp', cat: 'el' },
 };
-const ZONES = ['85/04', '85/01', '85/02', '85/07', '85/05', '85/09', '85/06', '85/08'];
+const ZONES = ['85/04', '85/01', '85/02', '85/07', '85/05', '85/09', '85/06', '85/08', '85/03'];
 const DEV = '85/31', CREAM = '5T15';
 // призы колеса: пример, условия утверждает продавец
 const PRIZES = [
-  { t: '−3%', d: 3, w: 30 }, { t: '−5%', d: 5, w: 22 }, { t: 'Доставка 0₽', ship: true, w: 12 }, { t: '−7%', d: 7, w: 10 },
+  { t: '−3%', d: 3, w: 30 }, { t: '−5%', d: 5, w: 22 }, { t: '0₽', t2: 'доставка', name: 'Доставка 0 ₽', ship: true, w: 12 }, { t: '−7%', d: 7, w: 10 },
   { t: '−3%', d: 3, w: 30 }, { t: '−5%', d: 5, w: 22 }, { t: '−10%', d: 10, w: 4 }, { t: '−7%', d: 7, w: 10 },
 ];
 
@@ -511,7 +552,7 @@ const haptic = (() => {
 window.ozoHaptic = haptic;
 
 let toastT;
-const toast = t => { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 2200); };
+const toast = t => { const el = $('#toast'); el.textContent = t; el.classList.toggle('up', $('#sheet').classList.contains('open')); el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 2200); };
 
 let lenis = null;
 
@@ -529,17 +570,21 @@ const addToCart = (code, size, q = 1) => {
 // ===== шторка =====
 const sheet = $('#sheet'), ov = $('#ov');
 let lastFocus = null;
-const openSheet = (title, body, foot) => {
-  if (!sheet.classList.contains('open')) lastFocus = document.activeElement;
+const openSheet = (title, body, foot, keep) => {
+  const wasOpen = sheet.classList.contains('open');
+  if (!wasOpen) { lastFocus = document.activeElement; ov.style.pointerEvents = 'none'; setTimeout(() => ov.style.pointerEvents = '', 450); }
+  const sy = $('#shBody').scrollTop;
   $('#shTitle').textContent = title; $('#shBody').innerHTML = ''; $('#shFoot').innerHTML = '';
   $('#shBody').append(body); if (foot) { $('#shFoot').append(foot); $('#shFoot').hidden = false; } else $('#shFoot').hidden = true;
-  $('#shBody').scrollTop = 0;
+  $('#shBody').scrollTop = keep ? sy : 0;
   sheet.classList.add('open'); ov.classList.add('open'); document.body.classList.add('lock'); lenis && lenis.stop();
-  setTimeout(() => $('#shX').focus({ preventScroll: true }), 60);
+  document.querySelector('main').inert = true; document.querySelector('header.top').inert = true;
+  if (!keep) setTimeout(() => $('#shX').focus({ preventScroll: true }), 60);
 };
-const closeSheet = () => { sheet.classList.remove('open'); ov.classList.remove('open'); document.body.classList.remove('lock'); lenis && lenis.start(); lastFocus && lastFocus.focus && lastFocus.focus({ preventScroll: true }); };
+const closeSheet = () => { document.querySelector('main').inert = false; document.querySelector('header.top').inert = false; sheet.classList.remove('open'); ov.classList.remove('open'); document.body.classList.remove('lock'); lenis && lenis.start(); lastFocus && lastFocus.focus && lastFocus.focus({ preventScroll: true }); };
 $('#shX').onclick = closeSheet; ov.onclick = closeSheet;
-addEventListener('keydown', e => { if (e.key === 'Escape' && sheet.classList.contains('open')) closeSheet(); });
+addEventListener('keydown', e => { if (!sheet.classList.contains('open')) return; if (e.key === 'Escape') closeSheet();
+  if (e.key === 'Tab') { const f = [...sheet.querySelectorAll('button, input, a[href], [tabindex]:not([tabindex="-1"])')].filter(x => !x.disabled && x.offsetParent); if (!f.length) return; const a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } } });
 // свайп шторки вниз на телефоне
 (() => { let y0 = null; sheet.addEventListener('touchstart', e => { y0 = $('#shBody').scrollTop <= 0 ? e.touches[0].clientY : null; }, { passive: true });
   sheet.addEventListener('touchmove', e => { if (y0 !== null && e.touches[0].clientY - y0 > 90) { y0 = null; closeSheet(); } }, { passive: true });
@@ -548,46 +593,49 @@ addEventListener('keydown', e => { if (e.key === 'Escape' && sheet.classList.con
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 
 function openProduct(code) {
-  const it = I[code]; const st = { size: it.sizes ? it.sizes[0] : null, dev: it.cat === 'el', cream: it.cat === 'el', q: 1 };
+  const it = I[code]; const st = { size: it.sizes ? it.sizes[0] : null, dev: false, cream: false, q: 1 };
+  const inCart = c => cart.some(x => x.code === c);
   const b = h('div', 'pv');
   b.innerHTML = `<div class="ph"><img src="${it.img}" alt="${it.name}"></div><h3>${it.name}</h3><p class="sub">${[it.segs, it.sub].filter(Boolean).join(' · ')}</p><p class="pr">${rub(it.price)}</p>`;
+  if (it.cat === 'el') b.append(h('p', 'howto', 'Как надеть: нанесите тонкий слой крема OZOTENS 30% на сегменты, наденьте электрод на зону и подключите к прибору.'));
   const opt = h('div', 'opt'); b.append(opt);
   if (it.sizes) {
     const o = h('div', 'o', `<div>Размер<small>${it.sizeHint || ''}</small></div>`); const s = h('div', 'sizes');
     it.sizes.forEach(z => { const bt = h('button', '', z); bt.type = 'button'; bt.setAttribute('aria-pressed', z === st.size); bt.onclick = () => { st.size = z; s.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === bt)); haptic(8); }; s.append(bt); });
-    o.append(s); opt.append(o);
+    o.append(s); const so = h('div', 'opt'); so.append(o); opt.before(so);
   }
-  const sw = (label, key, code2) => { const o = h('div', 'o', `<div>${label}<small>+ ${rub(I[code2].price)}</small></div>`); const t = h('button', 'sw'); t.type = 'button'; t.setAttribute('role', 'switch'); t.setAttribute('aria-label', label); t.setAttribute('aria-checked', st[key]); t.onclick = () => { st[key] = !st[key]; t.setAttribute('aria-checked', st[key]); haptic(8); upd(); }; o.append(t); opt.append(o); };
-  if (it.cat === 'el') { sw('Добавить прибор', 'dev', DEV); sw('Добавить крем', 'cream', CREAM); }
+  const sw = (label, key, code2) => { if (inCart(code2)) { opt.append(h('div', 'o', `<div>${label.replace('Добавить ', '')[0].toUpperCase() + label.replace('Добавить ', '').slice(1)}<small>уже в корзине</small></div><span>✓</span>`)); return; } const o = h('div', 'o', `<div>${label}<small>+ ${rub(I[code2].price)} · один на весь набор</small></div>`); const t = h('button', 'sw'); t.type = 'button'; t.setAttribute('role', 'switch'); t.setAttribute('aria-label', label); t.setAttribute('aria-checked', st[key]); t.onclick = () => { st[key] = !st[key]; t.setAttribute('aria-checked', st[key]); haptic(8); upd(); }; o.append(t); opt.append(o); };
+  if (it.cat === 'el') { const kb = h('div', 'kitbox', '<p>Для сеанса нужны ещё прибор и крем</p>'); opt.before(kb); kb.append(opt); opt.style.marginTop = '0'; sw('Добавить прибор', 'dev', DEV); sw('Добавить крем', 'cream', CREAM); }
   b.append(h('div', 'warn', 'Имеются противопоказания. Необходимо проконсультироваться со специалистом.'));
   const f = document.createDocumentFragment();
   const qty = h('div', 'qty', '<button type="button" aria-label="Меньше">−</button><span>1</span><button type="button" aria-label="Больше">+</button>');
   const [qm, qp] = qty.querySelectorAll('button'); qm.onclick = () => { st.q = Math.max(1, st.q - 1); haptic(8); upd(); }; qp.onclick = () => { st.q = Math.min(9, st.q + 1); haptic(8); upd(); };
   const go = h('button', 'btn hot', '<span>В корзину</span><span class="price"></span>'); go.type = 'button';
-  const upd = () => { qty.querySelector('span').textContent = st.q; let t = it.price; if (it.cat === 'el') { if (st.dev) t += I[DEV].price; if (st.cream) t += I[CREAM].price; } go.querySelector('.price').textContent = rub(t * st.q); };
-  go.onclick = () => { addToCart(code, st.size, st.q); if (it.cat === 'el') { if (st.dev) addToCart(DEV, null, st.q); if (st.cream) addToCart(CREAM, null, st.q); } closeSheet(); toast('Добавлено в корзину'); };
+  const upd = () => { qty.querySelector('span').textContent = st.q; let t = it.price * st.q; if (st.dev) t += I[DEV].price; if (st.cream) t += I[CREAM].price; go.querySelector('.price').textContent = rub(t); };
+  go.onclick = () => { addToCart(code, st.size, st.q); if (st.dev) addToCart(DEV, null, 1); if (st.cream) addToCart(CREAM, null, 1); closeSheet(); toast('Добавлено в корзину'); };
   f.append(qty, go); upd();
-  openSheet(it.cat === 'el' ? 'Электрод' : it.cat === 'dev' ? 'Прибор' : 'Крем', b, f);
+  openSheet(it.zone ? 'Зона: ' + it.zone : it.cat === 'dev' ? 'Прибор' : 'Крем', b, f);
 }
 
-function openCart() {
+function openCart(keep) {
   const b = h('div');
-  if (!cart.length) { b.append(h('p', 'empty', 'Корзина пока пустая. Выберите зону в начале страницы.')); openSheet('Корзина', b, null); return; }
+  if (!cart.length) { b.append(h('p', 'empty', 'Корзина пока пустая. Выберите зону в начале страницы.')); openSheet('Корзина', b, null, keep); return; }
   const ul = h('ul', 'cl');
   cart.forEach((c, i) => { const it = I[c.code]; const li = h('li', '', `<img src="${it.img}" alt=""><div class="t">${it.name}${c.size ? ` <small>размер ${c.size}</small>` : ''}<small>${rub(it.price)}</small></div>`);
     const q = h('div', 'qty', `<button type="button" aria-label="Меньше">−</button><span>${c.q}</span><button type="button" aria-label="Больше">+</button>`);
-    const [m, p] = q.querySelectorAll('button'); m.onclick = () => { c.q--; if (c.q <= 0) cart.splice(i, 1); saveCart(); haptic(8); openCart(); }; p.onclick = () => { c.q = Math.min(9, c.q + 1); saveCart(); haptic(8); openCart(); };
-    li.append(q); ul.append(li); });
+    const [m, p] = q.querySelectorAll('button'); m.onclick = () => { c.q--; if (c.q <= 0) cart.splice(i, 1); saveCart(); haptic(8); openCart(true); }; p.onclick = () => { c.q = Math.min(9, c.q + 1); saveCart(); haptic(8); openCart(true); };
+    const del = h('button', 'del', '×'); del.type = 'button'; del.setAttribute('aria-label', 'Удалить: ' + it.name); del.onclick = () => { cart.splice(i, 1); saveCart(); haptic(10); openCart(true); };
+    li.append(q, del); ul.append(li); });
   b.append(ul);
   const sub = cart.reduce((a, c) => a + I[c.code].price * c.q, 0); const disc = bonus && bonus.d ? Math.round(sub * bonus.d / 100) : 0;
-  b.append(h('div', 'sum', `<div><span>Товары</span><span class="price">${rub(sub)}</span></div>${bonus ? `<div><span>Приз колеса: ${bonus.t}</span><span class="price">${disc ? '−' + rub(disc) : 'доставка 0 ₽'}</span></div>` : ''}<div class="tot"><span>Итого</span><span class="price">${rub(sub - disc)}</span></div>`));
-  const form = h('form', 'form', '<input name="n" placeholder="Имя" autocomplete="name" required><input name="p" placeholder="Телефон" type="tel" autocomplete="tel" required>');
+  b.append(h('div', 'sum', `<div><span>Товары</span><span class="price">${rub(sub)}</span></div>${bonus && bonus.d ? `<div><span>Приз колеса: ${bonus.t}</span><span class="price">−${rub(disc)}</span></div>` : ''}<div><span>Доставка</span><span>${bonus && bonus.ship ? '0 ₽ (приз колеса)' : 'рассчитаем при подтверждении'}</span></div><div class="tot"><span>Итого</span><span class="price">${rub(sub - disc)}</span></div>`));
+  const form = h('form', 'form', '<label class="sr" for="fN">Имя</label><input id="fN" name="n" placeholder="Имя" autocomplete="name" required><label class="sr" for="fP">Телефон</label><input id="fP" name="p" placeholder="+7 900 000-00-00" type="tel" inputmode="tel" autocomplete="tel" required minlength="10">');
   form.onsubmit = e => { e.preventDefault(); closeSheet(); toast('Черновик: заявка пока не отправляется'); };
   b.append(form); b.append(h('div', 'warn', 'Имеются противопоказания. Необходимо проконсультироваться со специалистом.'));
   const go = h('button', 'btn hot', `<span>Оформить заказ</span><span class="price">${rub(sub - disc)}</span>`); go.type = 'button'; go.onclick = () => form.requestSubmit();
-  openSheet('Корзина', b, go);
+  openSheet('Корзина', b, go, keep);
 }
-$('#cartBtn').onclick = openCart;
+$('#cartBtn').onclick = () => openCart();
 document.addEventListener('click', e => { const o = e.target.closest('[data-open]'); if (o) openProduct(o.dataset.open); });
 saveCart();
 
@@ -601,12 +649,13 @@ ZONES.forEach(code => { const it = I[code]; const z = h('button', 'zone');
 
 // ===== каталог =====
 const grid = $('#grid');
-Object.entries(I).forEach(([code, it]) => { const c = h('article', 'item'); c.dataset.cat = it.cat; c.dataset.code = code; c.tabIndex = 0; c.setAttribute('role', 'button'); c.setAttribute('aria-label', `${it.name}, ${rub(it.price)}`);
-  c.innerHTML = `<div class="ph"><img src="${it.img}" alt="" loading="lazy">${it.segs ? `<span class="seg">${it.segs}</span>` : ''}</div><div class="nm">${it.name}</div><div class="ft"><span class="price">${rub(it.price)}</span></div>`;
+Object.entries(I).forEach(([code, it]) => { const c = h('article', 'item'); c.dataset.cat = it.cat; c.dataset.code = code;
+  const ds = it.cat === 'el' ? [it.zone, it.sub.split(',')[0], it.sizes ? 'размеры ' + it.sizes.join(', ') : ''].filter(Boolean).join(' · ') : it.sub;
+  c.innerHTML = `<button class="open" type="button" aria-label="${it.name}, ${rub(it.price)}"><div class="ph"><img src="${it.img}" alt="" loading="lazy">${it.segs ? `<span class="seg">${it.segs}</span>` : ''}</div><div class="nm">${it.name}</div><div class="ds">${ds}</div></button><div class="ft"><span class="price">${rub(it.price)}</span></div>`;
   const add = h('button', 'add', '+'); add.type = 'button'; add.setAttribute('aria-label', 'В корзину: ' + it.name);
-  add.onclick = e => { e.stopPropagation(); addToCart(code, it.sizes ? it.sizes[0] : null); toast(`${it.name} в корзине`); };
+  add.onclick = () => { if (it.sizes) { openProduct(code); return; } addToCart(code, null); toast(`${it.name} в корзине`); };
   c.querySelector('.ft').append(add);
-  c.onclick = () => openProduct(code); c.onkeydown = e => { if (e.key === 'Enter') openProduct(code); };
+  c.querySelector('.open').onclick = () => openProduct(code);
   grid.append(c); });
 
 // ===== часы: деления =====
@@ -619,27 +668,33 @@ $('#ticks').innerHTML = Array.from({ length: 12 }, (_, k) => `<line x1="100" y1=
   g.innerHTML = `<circle r="198" fill="#fff"/><circle r="194" fill="#2a2e2c"/>`;
   PRIZES.forEach((p, i) => { const a0 = (i / n) * Math.PI * 2 - Math.PI / 2 - Math.PI / n, a1 = a0 + Math.PI * 2 / n;
     const path = document.createElementNS(NS, 'path'); path.setAttribute('d', `M0 0 L${R * Math.cos(a0)} ${R * Math.sin(a0)} A${R} ${R} 0 0 1 ${R * Math.cos(a1)} ${R * Math.sin(a1)} Z`); path.setAttribute('fill', fills[i]); g.append(path);
-    const am = (a0 + a1) / 2, tx = document.createElementNS(NS, 'text'); tx.setAttribute('transform', `rotate(${am * 180 / Math.PI}) translate(${p.t.length > 5 ? 112 : 122} 0)`); tx.setAttribute('text-anchor', 'middle'); tx.setAttribute('dominant-baseline', 'middle');
-    tx.setAttribute('fill', fills[i] === '#ffffff' ? '#111312' : fills[i] === '#f39a2b' ? '#1d1206' : '#ffffff'); tx.setAttribute('font-family', 'Onest, sans-serif'); tx.setAttribute('font-weight', '800'); tx.setAttribute('font-size', p.t.length > 5 ? 21 : 34); tx.textContent = p.t; g.append(tx); });
+    const am = (a0 + a1) / 2, deg = am * 180 / Math.PI, flip = Math.cos(am) < -0.01, tx = document.createElementNS(NS, 'text'); tx.setAttribute('transform', `rotate(${deg}) translate(122 0)${flip ? ' rotate(180)' : ''}`); tx.setAttribute('text-anchor', 'middle'); tx.setAttribute('dominant-baseline', 'middle');
+    tx.setAttribute('fill', fills[i] === '#ffffff' ? '#111312' : fills[i] === '#f39a2b' ? '#1d1206' : '#ffffff'); tx.setAttribute('font-family', 'Onest, sans-serif'); tx.setAttribute('font-weight', '800'); tx.setAttribute('font-size', 34); tx.textContent = p.t; g.append(tx);
+    if (p.t2) { tx.setAttribute('y', -9); const t2 = tx.cloneNode(); t2.setAttribute('y', 18); t2.setAttribute('font-size', 15); t2.setAttribute('font-weight', 600); t2.textContent = p.t2; g.append(t2); }
+    const win = document.createElementNS(NS, 'path'); win.setAttribute('d', path.getAttribute('d')); win.setAttribute('fill', '#fff'); win.setAttribute('opacity', 0); win.setAttribute('class', 'win'); win.dataset.i = i; g.append(win); });
   for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2 - Math.PI / 2 - Math.PI / n; const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', 186 * Math.cos(a)); c.setAttribute('cy', 186 * Math.sin(a)); c.setAttribute('r', 5); c.setAttribute('fill', '#fff'); g.append(c); }
 })();
 
 gsap.registerPlugin(ScrollTrigger, Flip, SplitText, MorphSVGPlugin, CustomEase, Draggable, InertiaPlugin);
 CustomEase.create('soft', 'M0,0 C0.16,1 0.3,1 1,1');
-if (!reduce) { lenis = new Lenis({ lerp: 0.1 }); lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
+if (!reduce) { lenis = new Lenis({ lerp: 0.16 }); lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
 $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const id = a.getAttribute('href'); const t = id === '#top' ? 0 : document.querySelector(id); if (t === null) return; e.preventDefault(); lenis ? lenis.scrollTo(t, { offset: -68 }) : (t ? t.scrollIntoView() : scrollTo(0, 0)); }));
 
 // Draggable-лента: нажатие без сдвига открывает товар
 const ribbon = $('#ribbon');
-const drag = Draggable.create(track, { type: 'x', inertia: true, bounds: ribbon, edgeResistance: 0.85, dragClickables: true, minimumMovement: 6,
-  onClick: e => { const z = e.target.closest('.zone'); if (z) { haptic(10); openProduct(z.dataset.code); } } })[0];
+let dragged = false;
+const drag = Draggable.create(track, { type: 'x', inertia: true, bounds: ribbon, edgeResistance: 0.85, dragClickables: true, minimumMovement: 8,
+  onDragStart: () => { dragged = true; }, onDragEnd: () => setTimeout(() => { dragged = false; }, 60) })[0];
+track.addEventListener('click', e => { const z = e.target.closest('.zone'); if (!z || dragged) return; haptic(10); openProduct(z.dataset.code); });
+ribbon.addEventListener('wheel', e => { if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return; e.preventDefault(); const min = Math.min(0, ribbon.clientWidth - track.scrollWidth); gsap.set(track, { x: gsap.utils.clamp(min, 0, gsap.getProperty(track, 'x') - e.deltaX) }); drag.update(); }, { passive: false });
 const stepRibbon = dir => { const w = track.children[0].offsetWidth + 14; const min = Math.min(0, ribbon.clientWidth - track.scrollWidth); gsap.to(track, { x: gsap.utils.clamp(min, 0, gsap.getProperty(track, 'x') - dir * w * 2), duration: 0.6, ease: 'power3.out', onUpdate: () => drag.update() }); };
 $('#prev').onclick = () => stepRibbon(-1); $('#next').onclick = () => stepRibbon(1);
 
 // ===== колесо: вращение =====
 (() => { const g = $('#wheelG'), btn = $('#spinBtn'), n = PRIZES.length, seg = 360 / n;
   let spinning = false, lastTick = 0;
-  const show = p => { $('#prize').innerHTML = `<b>${p.t}${p.ship ? '' : ' на заказ'}</b>Код <code>OZO${p.ship ? 'SHIP' : p.d}</code> уже в корзине. Попытка использована.`; };
+  const show = p => { $('#prize').innerHTML = `<b>${p.ship ? 'Доставка 0 ₽' : p.t + ' на заказ'}</b>Код <code>OZO${p.ship ? 'SHIP' : p.d}</code> уже в корзине. Попытка использована.<div class="row" style="margin-top:14px"><button class="btn hot" type="button" id="toCart">Перейти в корзину</button></div>`; $('#toCart').onclick = () => openCart(); };
+  const confetti = () => { if (reduce) return; const box = $('#confetti'); const cols = ['#f39a2b', '#ffffff', '#ffd29b', '#3a6ff0']; for (let i = 0; i < 40; i++) { const c = document.createElement('i'); c.style.background = cols[i % 4]; box.append(c); gsap.fromTo(c, { x: 0, y: 0, rotation: 0, opacity: 1 }, { x: gsap.utils.random(-260, 260), y: gsap.utils.random(-260, 200), rotation: gsap.utils.random(-540, 540), opacity: 0, duration: gsap.utils.random(1, 1.8), ease: 'power2.out', onComplete: () => c.remove() }); } };
   if (bonus) { show(bonus); btn.disabled = true; btn.textContent = bonus.t; }
   const tickCheck = () => { const r = gsap.getProperty(g, 'rotation'); const k = Math.floor((r + seg / 2) / seg); if (k !== lastTick) { lastTick = k; haptic(6); gsap.fromTo('.wheel .ptr', { rotation: -14 }, { rotation: 0, duration: 0.25, ease: 'power2.out' }); } };
   const spin = (power = 1) => {
@@ -650,15 +705,15 @@ $('#prev').onclick = () => stepRibbon(-1); $('#next').onclick = () => stepRibbon
     const cur = gsap.getProperty(g, 'rotation'); const base = Math.ceil(cur / 360) * 360;
     const target = base + 360 * (5 + Math.round(power * 2)) + (360 - idx * seg) % 360 + gsap.utils.random(-seg * 0.3, seg * 0.3);
     gsap.to(g, { rotation: target, svgOrigin: '0 0', duration: reduce ? 0.01 : 5.2, ease: 'power4.out', onUpdate: tickCheck,
-      onComplete: () => { spinning = false; bonus = PRIZES[idx]; store.set('ozo_wheel_v12', bonus); show(bonus); btn.textContent = bonus.t; haptic(40);
-        gsap.fromTo('#prize', { scale: 0.94 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1,0.5)' }); toast('Приз в корзине: ' + bonus.t); } });
+      onComplete: () => { spinning = false; bonus = PRIZES[idx]; confetti(); const w = g.querySelector(`.win[data-i="${idx}"]`); gsap.fromTo(w, { opacity: 0.55 }, { opacity: 0, duration: 0.5, repeat: 3, yoyo: true }); store.set('ozo_wheel_v12', bonus); show(bonus); btn.textContent = bonus.t; haptic(40);
+        gsap.fromTo('#prize', { scale: 0.94 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1,0.5)' }); toast('Приз в корзине: ' + (bonus.name || bonus.t)); } });
   };
   btn.onclick = () => spin(1);
   // раскрутить пальцем: тянем по кругу, отпускаем - крутится
   let a0 = null, t0 = 0, last = 0;
   const box = $('#wheelBox');
   const ang = e => { const r = box.getBoundingClientRect(); return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) * 180 / Math.PI; };
-  box.addEventListener('pointerdown', e => { if (e.target === btn || spinning || bonus) return; a0 = ang(e); last = a0; t0 = performance.now(); box.setPointerCapture(e.pointerId); });
+  box.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.target === btn || spinning || bonus) return; a0 = ang(e); last = a0; t0 = performance.now(); box.setPointerCapture(e.pointerId); });
   box.addEventListener('pointermove', e => { if (a0 === null) return; const a = ang(e); let d = a - last; if (d > 180) d -= 360; if (d < -180) d += 360; last = a; gsap.set(g, { rotation: '+=' + d, svgOrigin: '0 0' }); tickCheck(); });
   box.addEventListener('pointerup', e => { if (a0 === null) return; const d = ang(e) - a0; a0 = null; const dt = performance.now() - t0; if (Math.abs(d) > 20) spin(Math.min(2, Math.abs(d) / Math.max(dt, 120) * 2)); });
 })();
@@ -681,10 +736,9 @@ else {
   const split = SplitText.create('#title', { type: 'chars', mask: 'chars' });
   gsap.timeline({ delay: 0.15 })
     .from(split.chars, { yPercent: 110, duration: 1, ease: 'soft', stagger: 0.05 })
-    .from('.hero .kick, .hero-sub, .hero .hint', { y: 16, opacity: 0, duration: 0.7, ease: 'soft', stagger: 0.08 }, '-=0.7')
+    .from('.hero .kick, .hero .lead, .hero-sub', { y: 16, opacity: 0, duration: 0.7, ease: 'soft', stagger: 0.08 }, '-=0.7')
     .from('.zone', { x: 140, opacity: 0, duration: 0.8, ease: 'soft', stagger: 0.06 }, '-=0.5')
-    .to(track, { x: -110, duration: 0.6, ease: 'power2.inOut', onUpdate: () => drag.update() })
-    .to(track, { x: 0, duration: 0.9, ease: 'elastic.out(1,0.6)', onUpdate: () => drag.update() });
+    .from('.hero-kit', { y: 30, opacity: 0, duration: 0.9, ease: 'soft' }, 0.4);
   gsap.to('#hint .hand', { x: 5, rotation: 8, svgOrigin: '16 26', duration: 0.6, ease: 'sine.inOut', repeat: -1, yoyo: true });
   // заголовки секций - по словам
   $$('h2.words').forEach(t => { const s = SplitText.create(t, { type: 'words', mask: 'words' }); gsap.from(s.words, { yPercent: 100, duration: 0.9, ease: 'soft', stagger: 0.05, scrollTrigger: { trigger: t, start: 'top 88%', once: true } }); });
@@ -718,7 +772,7 @@ try {
   } });
   rd('devFallback').hidden = true;
   document.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => dev.press(b.dataset.k)));
-} catch (e) { console.warn('3D не загрузился', e); rd('dev3d').hidden = true; }
+} catch (e) { console.warn('3D не загрузился', e); rd('dev3d').hidden = true; rd('devPad').hidden = true; rd('devTip').hidden = true; document.querySelector('.read').hidden = true; }
 </script>
 </body>
 </html>
