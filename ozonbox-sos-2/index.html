@@ -268,7 +268,7 @@ footer a{color:var(--paper);font-weight:700}
   </section>
 </main>
 <footer><div class="wrap"><span>Макет страницы набора, 14.10.2026 · цены из каталога Tilda, сентябрь 2026</span><a href="/ozonbox-glavnaya-10/">← На главную</a></div></footer>
-<script src="shop.js?v=11b"></script>
+<script src="shop.js?v=11c"></script>
 <script>
 (() => {
   const { byId, rub } = OZB;
@@ -278,6 +278,8 @@ footer a{color:var(--paper);font-weight:700}
   document.getElementById("pGain").textContent = "−" + rub(full - now);
   document.getElementById("gainBig").textContent = rub(full - now);
   document.getElementById("gainTxt").textContent = "Столько вы не доплачиваете по сравнению с покупкой маски (" + rub(byId[parts[0]][2]) + ") и крема (" + rub(byId[parts[1]][2]) + ") по отдельности.";
+  // кнопки Ozon и WB ведут на SOS бокс на площадке, а не в магазин целиком
+  document.querySelectorAll(".mp--ozon, .mp--wb").forEach((l) => (l.href = OZB.mpUrl("sos-boks", l.classList.contains("mp--ozon") ? "ozon" : "wb")));
   document.getElementById("ticker").innerHTML = Array(2).fill(["SOS бокс - два средства в одной коробке", "Выгода 10% по коду из ролика", "Корзина общая с главной", "Можно купить на Ozon и Wildberries"].map((t) => `<span>${t}</span>`).join("")).join("");
   const tk = document.getElementById("ticker");
   let tkAnim;

@@ -43,9 +43,14 @@
   // личный код из окна «Стойте!»: STAY12- и 4 знака, у каждого посетителя свой (размер скидки ждёт решения владельца)
   const EXIT_PCT = 12;
   const codeOf = (v) => CODES[v] || (/^STAY12-[A-Z0-9]{4}$/.test(v || "") ? { pct: EXIT_PCT } : undefined);
-  const MP = { ozon: "https://www.ozon.ru/seller/ip-salmanov-rafael-hazranovich/", wb: "https://www.wildberries.ru/brands/ozonebox" };
 
   const byId = Object.fromEntries(P.map((p) => [p[0], p]));
+  // ссылки на карточку товара на маркетплейсе, один в один. Заполнить по артикулам от Рафаэля (ВОПРОСЫ.md, 1.19):
+  // "dnevnoy-krem": { ozon: "https://www.ozon.ru/product/...", wb: "https://www.wildberries.ru/catalog/АРТИКУЛ/detail.aspx" }
+  const MPL = {};
+  // пока ссылки нет - поиск этого товара на площадке, а не главная страница магазина
+  const mpUrl = (id, m) => MPL[id]?.[m] || (m === "ozon" ? "https://www.ozon.ru/search/?text=" : "https://www.wildberries.ru/catalog/0/search.aspx?search=")
+    + encodeURIComponent("OzoneBox " + (byId[id] ? byId[id][1] : "").replace(/[«»"]/g, ""));
   const rub = (n) => n.toLocaleString("ru-RU") + " ₽";
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const img = (id) => (window.OZB_IMG || "img/") + id + ".webp";
@@ -137,7 +142,7 @@
         <div class="pd__buy"><span class="pd__price">${rub(p[2])}</span>
           <button class="btn btn--acid press" type="button" data-add="${id}">В корзину ${ARR}</button>
           ${inf.page ? `<a class="btn btn--ink btn--sm press" href="${inf.page}">Страница набора</a>` : ""}</div>
-        <div class="pd__mp">Привычнее на маркетплейсе? <a class="mp mp--ozon" href="${MP.ozon}" target="_blank" rel="noopener">Ozon</a><a class="mp mp--wb" href="${MP.wb}" target="_blank" rel="noopener">Wildberries</a></div>
+        <div class="pd__mp">Привычнее на маркетплейсе? <a class="mp mp--ozon" href="${mpUrl(id, "ozon")}" target="_blank" rel="noopener">Ozon</a><a class="mp mp--wb" href="${mpUrl(id, "wb")}" target="_blank" rel="noopener">Wildberries</a></div>
         <div class="pd__with"><h3>С этим берут</h3><div class="mini">${related(id).map((r) => `<button type="button" data-open="${r}"><img src="${img(r)}" alt="" loading="lazy">${esc(byId[r][1])}<span>${rub(byId[r][2])}</span></button>`).join("")}</div></div>
       </div>`;
     pd.scrollTop = 0;
@@ -410,5 +415,5 @@
   sync();
   if (location.hash.startsWith("#p=")) setTimeout(() => open(location.hash.slice(3)), 300);
   if (location.search.includes("exit")) setTimeout(openExit, 400);
-  window.OZB = { P, INFO, byId, rub, open, add, openCart, openPromo, openSearch, openExit };
+  window.OZB = { P, INFO, byId, rub, open, add, openCart, openPromo, openSearch, openExit, mpUrl };
 })();
