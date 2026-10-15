@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OzoneBox - главная 10</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Главная OzoneBox, шаг 10: поиск по каталогу с подсказками и историей.">
+<link rel="stylesheet" href="shop.css?v=10">
+<link rel="preload" href="fonts/Manrope-cyrillic-ffb0f3.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* шрифты лежат рядом со страницей: без запроса к Google, быстрее первый экран */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/Unbounded-cyrillic-c86556.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/Unbounded-latin-06f2e4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Unbounded-cyrillic-c86556.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Unbounded-latin-06f2e4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/Manrope-cyrillic-ffb0f3.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/Manrope-latin-cf48e3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/Manrope-cyrillic-ffb0f3.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/Manrope-latin-cf48e3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Manrope-cyrillic-ffb0f3.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Manrope-latin-cf48e3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(fonts/Manrope-cyrillic-ffb0f3.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(fonts/Manrope-latin-cf48e3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/PlayfairDisplay-cyrillic-51fce2.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/PlayfairDisplay-latin-9385b6.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/PlayfairDisplay-cyrillic-51fce2.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/PlayfairDisplay-latin-9385b6.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root{
+  --acid:#46e62e; --acid-deep:#2fc21a; --acid-ink:#0b2a06;
+  --ink:#0e0f0d; --ink-2:#1b1d1a; --paper:#fff; --mist:#eceeec; --mist-2:#e3e6e3;
+  --line:#dcdfdb; --mute:#6b6f6a;
+  --r:26px; --r-s:16px; --gap:14px; --pad:clamp(16px,3vw,32px);
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:Manrope,system-ui,sans-serif;font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1400px;margin:0 auto;padding:0 var(--pad)}
+
+/* мгновенный отклик: всё нажимаемое чуть сжимается сразу на касание */
+.press{transition:transform .18s var(--ease),background .25s,color .25s}
+.press:active{transform:scale(.96);transition-duration:.06s}
+
+.ticker{position:relative;background:var(--ink);color:var(--paper);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;overflow:hidden;white-space:nowrap;padding:5px 0}
+.ticker::before,.ticker::after{content:"";position:absolute;left:0;right:0;height:5px;background:repeating-linear-gradient(-45deg,var(--acid) 0 10px,var(--ink) 10px 20px)}
+.ticker::before{top:0}.ticker::after{bottom:0}
+.ticker__in{display:inline-flex;padding:9px 0;will-change:transform}
+.ticker span{padding-right:48px}
+.ticker span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acid);margin-right:12px;vertical-align:1px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px)}
+.bar{display:flex;align-items:center;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:19px;letter-spacing:-.02em}
+.logo svg{width:26px;height:27px}
+.logo b{font-weight:800;background:var(--acid);padding:0 5px;border-radius:6px;margin-left:1px}
+.nav{display:flex;gap:4px;margin:0 auto;position:relative}
+.nav a{position:relative;z-index:1;padding:9px 14px;border-radius:99px;font-weight:600;font-size:15px;transition:color .25s}
+.nav a.cur{color:var(--paper)}
+.nav__pill{position:absolute;left:0;top:0;height:100%;border-radius:99px;background:var(--mist);transition:transform .35s var(--ease),width .35s var(--ease),background .25s;pointer-events:none;opacity:0}
+.nav__pill.on{opacity:1}
+.nav__pill.dark{background:var(--ink)}
+.nav a.cur::after{content:"";position:absolute;right:8px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--acid)}
+.icons{display:flex;gap:6px;align-items:center}
+.ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
+.ic:hover{background:var(--mist)}
+.ic svg{width:22px;height:22px}
+.cart{display:flex;align-items:center;gap:8px;height:44px;padding:0 8px 0 16px;border-radius:99px;background:var(--ink);color:var(--paper);font-weight:700;font-size:14px}
+.cnt{min-width:28px;height:28px;border-radius:99px;background:var(--acid);color:var(--ink);display:grid;place-items:center;font-size:13px;font-weight:800;padding:0 6px}
+.cnt.bump{animation:bump .45s var(--ease)}
+@keyframes bump{40%{transform:scale(1.35)}}
+
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:99px;font-weight:700;font-size:15px;white-space:nowrap}
+.btn svg{width:18px;height:18px;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn--acid{background:var(--acid);color:var(--ink)}
+.btn--acid:hover{background:var(--ink);color:var(--acid)}
+.btn--ink{background:var(--ink);color:var(--paper)}
+.btn--ink:hover{background:var(--acid);color:var(--ink)}
+.btn--white{background:var(--paper);color:var(--ink)}
+.btn--white:hover{background:var(--ink);color:var(--paper)}
+.btn--sm{height:40px;padding:0 16px;font-size:14px}
+
+/* объём: сцена с перспективой, товар и его тень - отдельные слои */
+.obj{position:relative;transition:transform .5s var(--ease)}
+.obj img{position:relative;z-index:2}
+.shd{position:absolute;left:50%;bottom:-4%;width:80%;height:9%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(14,15,13,.36),rgba(14,15,13,0));z-index:1;transition:transform .5s var(--ease),opacity .5s}
+.t:hover .obj,.promo:hover .obj{transform:translateY(-14px) rotate(-4deg)}
+.t:hover .shd,.promo:hover .shd{transform:translateX(-50%) scale(.78);opacity:.7}
+
+/* первый экран */
+.hero{touch-action:pan-y;margin-top:var(--gap);background:radial-gradient(60% 70% at 70% 38%,#fff 0,rgba(255,255,255,0) 70%),linear-gradient(180deg,#eceeec 0,#eceeec 62%,#e1e4e1 100%);contain:layout paint;border-radius:var(--r);position:relative;overflow:hidden;min-height:min(80vh,720px);display:grid;grid-template-columns:1fr 1.1fr;align-items:center;padding:56px}
+.hero__ghost{position:absolute;left:0;right:0;top:50%;transform:translateY(-46%);will-change:transform,opacity;text-align:center;font-weight:800;font-size:min(260px,calc((100vw - 64px) * 1.22 / var(--n,4)));letter-spacing:-.06em;line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(14,15,13,.14);white-space:nowrap;user-select:none;pointer-events:none;z-index:0}
+.hero__copy{position:relative;z-index:3;max-width:470px}
+.kick{font-size:15px;font-weight:700;color:var(--mute)}
+.hero h1{font-size:clamp(44px,5.6vw,88px);line-height:.92;letter-spacing:-.055em;font-weight:800;margin:10px 0 18px}
+.hero__cta{display:flex;gap:10px;align-items:center}
+.add--big{width:52px;height:52px}
+.hero__price{font-size:22px;font-weight:800;letter-spacing:-.03em;margin-bottom:22px}
+.hero h1 mark{background:var(--acid);padding:0 .08em;border-radius:.12em;color:var(--ink)}
+.hero__stage{position:relative;z-index:2;height:min(64vh,580px);display:grid;place-items:center}
+.hero__slide{position:absolute;z-index:2;inset:0 0 calc(9% + 73px) 0;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;will-change:transform,opacity}
+.hero__slide.on{opacity:1;visibility:visible}
+.hero__slide .obj{height:92%;display:flex;align-items:flex-end}
+.podium{position:absolute;left:50%;bottom:9%;width:330px;height:110px;transform:translateX(-50%);z-index:1}
+.podium::before{content:"";position:absolute;inset:22% 0 0;border-radius:0 0 50% 50%/0 0 40% 40%;background:linear-gradient(90deg,#d9ddd9,#f7f8f7 45%,#dfe2df)}
+.podium::after{content:"";position:absolute;left:0;right:0;top:0;height:38%;border-radius:50%;background:radial-gradient(70% 70% at 45% 40%,#fff,#e8ebe8);box-shadow:inset 0 -6px 14px rgba(14,15,13,.06)}
+.podium i{position:absolute;left:-12%;right:-12%;bottom:-18%;height:40%;border-radius:50%;background:radial-gradient(closest-side,rgba(14,15,13,.18),rgba(14,15,13,0))}
+.hero__slide .shd{bottom:-1.2%;width:88%;height:auto;aspect-ratio:8/1;background:radial-gradient(closest-side,rgba(14,15,13,.42),rgba(14,15,13,.18) 55%,rgba(14,15,13,0));filter:blur(2px)}
+.hero__slide .obj img{transform-origin:50% 100%;transition:transform .5s var(--ease)}
+.hero__slide .obj img{height:100%;width:auto}
+.hero__desc{position:absolute;right:56px;bottom:40px;z-index:3;max-width:240px;text-align:right;font-size:14px;color:var(--mute)}
+.hero__desc b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+.dots{position:absolute;left:56px;bottom:40px;z-index:3;display:flex;gap:8px}
+.dot{width:36px;height:6px;border-radius:9px;background:rgba(14,15,13,.15);overflow:hidden;position:relative;contain:strict}
+.dot i{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left;will-change:transform}
+.dot.on i{animation:fill 5s linear forwards}
+.dot.past i{transform:scaleX(1)}
+@keyframes fill{to{transform:scaleX(1)}}
+
+/* плитки как у PHLOX */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:var(--gap)}
+.t{position:relative;border-radius:var(--r);overflow:hidden;min-height:300px;padding:30px;display:flex;flex-direction:column;justify-content:center;isolation:isolate}
+.t--4{grid-column:span 3}.t--5{grid-column:span 4}.t--6{grid-column:span 5}.t--7{grid-column:span 6}
+.t--ink{background:var(--ink);color:var(--paper)}
+.t--acid{background:var(--acid);color:var(--ink)}
+.t--mist{background:var(--mist)}
+.t--deep{background:linear-gradient(140deg,#1d3d16,#0e0f0d 70%);color:var(--paper)}
+.t small{font-size:13px;font-weight:700;opacity:.75;position:relative;z-index:3}
+.t h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.04em;line-height:1;margin:6px 0 18px;position:relative;z-index:3;max-width:9ch}
+/* слово за товаром - контуром, внизу справа: не спорит с заголовком и кнопкой */
+.t .ghost{position:absolute;right:-6px;bottom:-.12em;font-size:clamp(46px,5.4vw,88px);font-weight:800;letter-spacing:-.06em;line-height:1;white-space:nowrap;z-index:1;pointer-events:none;color:transparent;-webkit-text-stroke:1.5px rgba(14,15,13,.16)}
+.t--ink .ghost,.t--deep .ghost{-webkit-text-stroke-color:rgba(255,255,255,.16)}
+.t--acid .ghost{-webkit-text-stroke-color:rgba(14,15,13,.2)}
+.t .btn{align-self:flex-start;position:relative;z-index:3}
+.t .obj{position:absolute;right:6%;bottom:10%;height:72%;z-index:2;display:flex;align-items:flex-end}
+.t .obj img{height:100%;width:auto}
+.t--wide .obj{right:8%;height:80%}
+.t .photo{position:absolute;right:0;bottom:0;height:100%;width:auto;z-index:2;mix-blend-mode:multiply}
+.sticker{position:absolute;right:20px;top:20px;z-index:4;height:30px;padding:0 12px;border-radius:99px;background:var(--ink);color:var(--acid);font-size:12px;font-weight:800;display:inline-flex;align-items:center;letter-spacing:.04em}
+.t--ink .sticker,.t--deep .sticker{background:var(--acid);color:var(--ink)}
+
+/* плюсы: типографика, всё нажимается */
+.perks{display:grid;grid-template-columns:repeat(4,1fr);margin:44px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.perk{position:relative;padding:26px 24px;display:flex;flex-direction:column;gap:6px;text-align:left;transition:background .2s}
+.perk+.perk{border-left:1px solid var(--line)}
+.perk__hit{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
+.perk .perk__n{color:var(--ink);font-size:clamp(40px,4vw,60px);font-weight:800;letter-spacing:-.06em;line-height:.9}
+.perk__n em{font-family:"Unbounded",system-ui,sans-serif;font-style:normal;font-weight:700;letter-spacing:-.04em;font-size:.86em}
+.perk b{font-size:15px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.perk .perk__s{font-size:13px;color:var(--mute)}
+.perk__go{font-style:normal;font-size:13px;font-weight:700;opacity:0;transform:translateX(-6px);transition:opacity .2s var(--ease),transform .2s var(--ease)}
+.hand{position:relative;text-decoration:none}
+.hand svg{position:absolute;left:0;right:0;bottom:-7px;width:100%;height:10px;overflow:visible}
+.hand path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:220;stroke-dashoffset:220;transition:stroke-dashoffset .45s var(--ease)}
+@media (hover:hover) and (pointer:fine){
+  .perk:hover{background:#fafbfa}
+  .perk:hover .perk__go{opacity:1;transform:none}
+  .perk:hover .hand path{stroke-dashoffset:0}
+}
+@media (hover:none){.perk__go{opacity:1;transform:none}.hand path{stroke-dashoffset:0}}
+.perk__pop{display:none;flex-wrap:wrap;gap:6px;margin-top:12px}
+.perk--pop.open .perk__pop{display:flex;animation:pop .22s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(-4px)}}
+.chipx{height:30px;padding:0 12px;border-radius:99px;background:var(--mist);font-size:12px;font-weight:700;display:inline-flex;align-items:center}
+.perk__pop .note{width:100%;font-size:12px;color:var(--mute);font-weight:600}
+
+/* баннер, из которого вылезает товар */
+.promo{position:relative;margin-top:170px;background:var(--acid);border-radius:var(--r);min-height:320px;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:40px 48px;overflow:visible}
+.promo__big{font-size:clamp(64px,8vw,128px);font-weight:800;letter-spacing:-.07em;line-height:.82}
+.promo__take{display:flex;margin-top:18px;letter-spacing:0}
+.promo__big small{display:block;font-size:14px;letter-spacing:0;font-weight:700;margin-bottom:12px}
+.promo .obj{justify-self:center;height:430px;margin-top:-190px;display:flex;align-items:flex-end}
+.promo .obj img{height:100%;width:auto}
+.promo .shd{bottom:-2%}
+.promo__side h3{font-size:30px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.promo__side p{margin:10px 0 20px;font-weight:600;max-width:28ch}
+
+/* кто выбирает - портреты */
+.faces{padding-top:clamp(72px,9vw,128px)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.h2{font-size:clamp(38px,5vw,76px);line-height:.92;letter-spacing:-.055em;font-weight:800}
+.h2 mark{background:var(--acid);color:var(--ink);padding:0 .08em;border-radius:.12em}
+.h2 em{font-family:"Unbounded",system-ui,sans-serif;font-style:normal;font-weight:500;letter-spacing:-.05em;font-size:.86em;text-transform:uppercase}
+.head p{max-width:34ch;color:var(--mute);font-weight:600}
+.faces__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.face{position:relative;aspect-ratio:3/4;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.face:nth-child(4n+1){background:var(--acid)}
+.face:nth-child(4n+2){background:var(--ink);color:var(--paper)}
+.face:nth-child(4n+3){background:var(--mist)}
+.face:nth-child(4n+4){background:#f6f7f5}
+.face::before{content:"";position:absolute;right:-30%;top:-10%;width:110%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.35),rgba(255,255,255,0));transition:transform .6s var(--ease)}
+.face:nth-child(4n+2)::before{background:radial-gradient(closest-side,rgba(70,230,46,.22),rgba(70,230,46,0))}
+.face:hover::before{transform:translate(-6%,6%) scale(1.08)}
+.face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.face:hover img{transform:scale(1.05)}
+.face.has{color:var(--paper)}
+.face--wide{grid-column:1/-1;aspect-ratio:auto;min-height:440px;background:var(--acid)!important;padding:36px 40px;justify-content:center}
+.face--wide img{left:auto;right:0;width:min(44%,440px);object-position:50% 25%}
+.face.has.face--wide{color:var(--ink)}
+.face.has.face--wide::after{display:none}
+.face.has.face--wide .face__for{color:var(--ink);max-width:34ch;font-size:15px;margin-top:12px}
+@media (max-width:760px){.face--wide{min-height:0;padding:0 0 18px;justify-content:flex-start;aspect-ratio:auto}.face--wide img{position:static;width:100%;height:auto;aspect-ratio:1;margin-bottom:14px}.face--wide .face__tag,.face--wide .face__age,.face--wide .face__for{padding:0 16px}.face--wide .face__age{font-size:26px}}
+.face--wide .face__tag{position:relative;left:auto;top:auto;font-size:13px;font-weight:800;opacity:1;margin-bottom:8px;z-index:2}
+.face--wide .face__age{font-size:clamp(30px,3.4vw,48px);max-width:16ch}
+.face.has::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(14,15,13,.72));z-index:1}
+.face.has .face__for{color:var(--acid)}
+.face__age{position:relative;z-index:2;font-size:44px;font-weight:800;letter-spacing:-.05em;line-height:1}
+.face__for{position:relative;z-index:2;font-size:14px;font-weight:700;margin-top:6px}
+.face__tag{position:absolute;left:20px;top:20px;z-index:2;font-size:12px;font-weight:700;opacity:.65}
+
+/* хиты продаж */
+.cat{padding-top:clamp(72px,9vw,128px);padding-bottom:40px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{height:42px;padding:0 16px;border-radius:99px;background:var(--mist);font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px}
+.chip span{font-size:12px;color:var(--mute)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.chip[aria-pressed="true"] span{color:var(--acid)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.card{background:var(--mist);border-radius:var(--r);padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px}
+.card[hidden]{display:none}
+.card__img{position:relative;aspect-ratio:1;border-radius:var(--r-s);overflow:hidden}
+.card__img img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.card:hover .card__img img{transform:scale(1.05)}
+.badge{position:absolute;left:10px;top:10px;height:26px;padding:0 10px;border-radius:99px;background:var(--acid);font-size:12px;font-weight:800;display:inline-flex;align-items:center}
+.card__img,.card__name{cursor:pointer}
+.card__name{font-weight:700;font-size:16px;line-height:1.2;min-height:2.4em;padding:0 4px}
+.card__foot{display:flex;align-items:center;justify-content:space-between;padding:0 4px}
+.price{font-size:19px;font-weight:800;letter-spacing:-.03em}
+.add{width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center}
+.add svg{width:20px;height:20px}
+.add:hover,.add.done{background:var(--acid);color:var(--ink)}
+
+.foot__logo{display:block;width:100%;height:auto}
+footer{background:var(--ink);color:var(--paper);margin-top:40px;padding:56px 0 28px;overflow:hidden}
+.foot__big{font-size:clamp(80px,17vw,280px);font-weight:800;letter-spacing:-.075em;line-height:.8;white-space:nowrap}
+.foot__big b{color:var(--acid)}
+.foot__row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:36px;font-size:14px;color:rgba(255,255,255,.6)}
+.foot__row a{color:var(--paper);font-weight:700}
+
+.dock{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 20px;border-radius:99px;background:var(--ink);color:var(--paper);font-weight:700;transform:translateY(140%);transition:transform .45s var(--ease)}
+.dock.on{transform:none}
+.dock b{color:var(--acid)}
+
+/* появление при прокрутке - чистый CSS-класс, JS только ставит .in */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:1100px){
+  .nav{display:none}.bar{justify-content:space-between}
+  .t--4,.t--5{grid-column:span 6}.t--6,.t--7{grid-column:span 12}
+  .grid,.faces__grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:760px){
+  :root{--r:22px;--gap:10px}
+  .hero{grid-template-columns:1fr;padding:28px 20px 72px;min-height:auto}
+  .hero__stage{height:330px;margin-top:8px}
+  .hero__slide .obj{height:230px}
+  .podium{width:230px;height:77px}
+  .hero__slide{bottom:calc(9% + 51px)}
+  .hero__ghost{top:auto;bottom:118px;transform:none;font-size:calc((100vw - 32px) * 1.3 / var(--n,4))}
+  .hero__desc{display:none}
+  .dots{left:20px;bottom:28px}
+  .hero h1{margin-bottom:20px}
+  .t{min-height:230px;padding:22px}
+  .t--4,.t--5{grid-column:span 12}
+  .t h3{font-size:24px}
+  .perks{grid-template-columns:1fr 1fr}
+  .perk{padding:20px 14px}
+  .perk:nth-child(3){border-left:0}
+  .perk:nth-child(n+3){border-top:1px solid var(--line)}
+  .promo{grid-template-columns:1fr;padding:28px 22px;margin-top:150px;text-align:left}
+  .promo .obj{order:-1;height:300px;margin-top:-170px}
+  .faces__grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 calc(-1*var(--pad));padding:0 var(--pad)}
+  .faces__grid{scroll-padding-left:var(--pad)}
+  .faces__grid::-webkit-scrollbar{display:none}
+  .face{flex:0 0 62%;scroll-snap-align:start}
+  .face__age{font-size:34px}
+  .grid{grid-template-columns:1fr 1fr}
+  .card{padding:10px 10px 12px}.card__name{font-size:14px}.price{font-size:16px}.add{width:40px;height:40px}
+  .dock{display:flex}
+  .cart>span:first-child{display:none}.cart{padding:0 8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none}
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true"><div class="ticker__in" id="ticker"></div></div>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="OzoneBox"><svg viewBox="0 0 31 32" aria-hidden="true"><path fill="#46e62e" d="M24.37 17.65c3.57.31 6.32 3.42 6.32 7.16V32h-6.9c-3.58 0-6.57-2.87-6.87-6.59-.35-4.43 3.2-8.13 7.45-7.76Z"/><path fill="currentColor" d="M4.81 16c0-2.86 0-4.71.12-6.12.1-1.35.28-1.85.4-2.1a4.8 4.8 0 0 1 2.14-2.23c.23-.12.71-.3 2-.42 1.36-.11 3.13-.11 5.88-.11s4.52 0 5.87.11c1.3.12 1.78.3 2.01.42a4.8 4.8 0 0 1 2.14 2.23c.12.25.3.75.4 2.1.08 1.06.1 2.38.11 4.19a10.6 10.6 0 0 1 4.82 2.47V16c0-5.56 0-8.35-1.03-10.47A10.1 10.1 0 0 0 25.4 1.07C23.35 0 20.68 0 15.35 0S7.34 0 5.3 1.07a10.1 10.1 0 0 0-4.27 4.46C0 7.65 0 10.44 0 16s0 8.35 1.03 10.47a10.1 10.1 0 0 0 4.27 4.46C7.34 32 10.01 32 15.35 32h.52a11.5 11.5 0 0 1-2.37-5.02c-1.74 0-3-.03-4.02-.12-1.3-.11-1.78-.29-2.01-.42a4.8 4.8 0 0 1-2.14-2.22c-.12-.25-.3-.75-.4-2.1C4.82 20.7 4.81 18.86 4.81 16Z"/></svg><span>Ozone<b>Box</b></span></a>
+    <nav class="nav" aria-label="Разделы" id="nav"><span class="nav__pill" id="pill"></span>
+      <a href="#catalog" data-sec="catalog">Каталог</a>
+      <a href="#top" data-sec="bento">Наборы</a>
+      <a href="#faces" data-sec="faces">Кто выбирает</a>
+      <a href="/ozonbox-osen/">Осенняя коробка</a>
+    </nav>
+    <div class="icons">
+      <button class="ic press" type="button" aria-label="Поиск"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button>
+      <button class="cart press" type="button" id="cartBtn" data-cart aria-label="Корзина, товаров: 0"><span>Корзина</span><span class="cnt" id="cnt">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+  <section class="hero" aria-label="Первый экран">
+    <div class="hero__ghost" aria-hidden="true" id="ghost">ЛИЦО</div>
+    <div class="hero__copy">
+      <p class="kick" id="heroKick">Озоновый уход</p>
+      <h1 id="heroTitle">Дневной крем <mark>для лица</mark></h1>
+      <p class="hero__price" id="heroPrice"></p>
+      <div class="hero__cta"><a class="btn btn--acid press" href="#p=dnevnoy-krem" id="heroMore" data-open="dnevnoy-krem">Подробнее <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><button class="add add--big press" type="button" id="heroAdd" data-add="dnevnoy-krem" aria-label="В корзину"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>
+    </div>
+    <div class="hero__stage" id="stage">
+      <div class="podium" aria-hidden="true"><i></i></div>
+      <div class="hero__slide on"><div class="obj"><img src="img/cut/dnevnoy-krem.webp" alt="Дневной крем" width="335" height="700"><span class="shd"></span></div></div>
+      <div class="hero__slide"><div class="obj"><img src="img/cut/otri-6000.webp" alt="Масло «Отри 6000»" width="452" height="700" style="height:62%"><span class="shd"></span></div></div>
+      <div class="hero__slide"><div class="obj"><img src="img/cut/maska-volosy.webp" alt="Маска для волос" width="203" height="700"><span class="shd"></span></div></div>
+    </div>
+    <div class="dots" id="dots"><button class="dot on" aria-label="Слайд 1"><i></i></button><button class="dot" aria-label="Слайд 2"><i></i></button><button class="dot" aria-label="Слайд 3"><i></i></button></div>
+    <p class="hero__desc" id="heroDesc"><b>Каждый день</b>Лёгкий крем на утро. Наборы собраны под задачу: лицо, волосы, тело.</p>
+  </section>
+
+  <section class="bento" id="bento" aria-label="Разделы">
+    <a class="t t--ink t--4 scene rv press" href="#p=ozodermik-5" data-open="ozodermik-5"><span class="sticker">ХИТ!</span><small>Точечно</small><h3>Озодермик 5%</h3><span class="ghost" aria-hidden="true">КОЖА</span><span class="obj"><img src="img/cut/ozodermik-5.webp" alt="" width="288" height="700" loading="lazy"><span class="shd"></span></span><span class="btn btn--white btn--sm">Смотреть</span></a>
+    <a class="t t--acid t--4 scene rv press" href="#p=shampun" data-open="shampun"><small>Волосы</small><h3>Шампунь Озодермис</h3><span class="ghost" aria-hidden="true">ВОЛОСЫ</span><span class="obj"><img src="img/cut/shampun.webp" alt="" width="200" height="700" loading="lazy"><span class="shd"></span></span><span class="btn btn--ink btn--sm">Смотреть</span></a>
+    <a class="t t--mist t--wide t--6 scene rv press" href="#catalog" data-go="sets" style="grid-column:span 6"><span class="sticker">-10%</span><small>Наборы</small><h3>Супер трио</h3><span class="ghost" aria-hidden="true">НАБОР</span><img class="photo" src="img/super-trio.webp" alt="" width="900" height="900" loading="lazy"><span class="btn btn--acid btn--sm">Собрать</span></a>
+    <a class="t t--mist t--wide t--6 scene rv press" href="#p=otri-6000" data-open="otri-6000" style="grid-column:span 6"><small>Основа всего</small><h3>Масло Отри 6000</h3><span class="ghost" aria-hidden="true">МАСЛО</span><span class="obj"><img src="img/cut/otri-6000.webp" alt="" width="452" height="700" loading="lazy" style="height:70%"><span class="shd"></span></span><span class="btn btn--ink btn--sm">Смотреть</span></a>
+    <a class="t t--acid t--4 scene rv press" href="#p=anticellulit" data-open="anticellulit"><small>Тело</small><h3>Антицеллю&shy;литный крем</h3><span class="ghost" aria-hidden="true">ТЕЛО</span><span class="obj"><img src="img/cut/anticellulit.webp" alt="" width="204" height="700" loading="lazy"><span class="shd"></span></span><span class="btn btn--ink btn--sm">Смотреть</span></a>
+    <a class="t t--deep t--4 scene rv press" href="/ozonbox-sos-2/"><span class="sticker">SOS</span><small>Когда срочно</small><h3>SOS бокс</h3><span class="ghost" aria-hidden="true">SOS</span><span class="obj"><img src="img/cut/ozodermik-3.webp" alt="" width="250" height="700" loading="lazy"><span class="shd"></span></span><span class="btn btn--acid btn--sm">Смотреть</span></a>
+  </section>
+
+  <section class="perks rv" aria-label="Почему у нас">
+    <div class="perk perk--pop"><button class="perk__hit" type="button" aria-expanded="false" data-pop><span class="perk__n">7</span><b>способов доставки <i class="perk__go">→</i></b><span class="perk__s">курьер, пункты выдачи, почта</span></button>
+      <div class="perk__pop" role="region" aria-label="Способы доставки"><span class="chipx">Курьер до двери</span><span class="chipx">Пункты выдачи</span><span class="chipx">Почта</span><p class="note">Все 7 способов, сроки и цены - при оформлении заказа.</p></div></div>
+    <button class="perk" type="button" data-promo><span class="perk__n">−10<em>%</em></span><b>по коду из ролика <i class="perk__go">→</i></b><span class="perk__s">забрать скидку</span></button>
+    <a class="perk" href="#catalog" data-go="sets"><span class="perk__n"><em>В</em> подарок!</span><b><u class="hand">наборы под задачу<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8c30-6 60 2 92-2s62-5 104 1"/></svg></u> <i class="perk__go">перейти →</i></b><span class="perk__s">собраны заранее</span></a>
+    <a class="perk" href="#catalog" data-go="all"><span class="perk__n" data-count="19">19</span><b>средств <i class="perk__go">в каталог →</i></b><span class="perk__s">для лица, волос и тела</span></a>
+  </section>
+
+  <section class="promo scene rv" aria-labelledby="promoTitle">
+    <div class="promo__big"><small>Код из ролика</small>-10%<button class="btn btn--ink btn--sm press promo__take" type="button" data-promo>Забрать скидку</button></div>
+    <div class="obj"><img src="img/cut/dnevnoy-krem.webp" alt="" width="335" height="700" loading="lazy"><span class="shd"></span></div>
+    <div class="promo__side">
+      <h3 id="promoTitle">Осенняя коробка</h3>
+      <p>Подборка для лица и волос на холодный сезон. Код из ролика даёт выгоду на весь заказ.</p>
+      <a class="btn btn--ink press" href="/ozonbox-osen/">Открыть коробку <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+
+  <section class="faces" id="faces" aria-labelledby="facesTitle">
+    <div class="head">
+      <h2 class="h2" id="facesTitle"><em>Кто</em> <mark>выбирает</mark></h2>
+      <p>У каждого средства свой покупатель: от студентки до тех, кому за пятьдесят. Нажмите на портрет - покажем, что выбирают.</p>
+    </div>
+    <div class="faces__grid" id="facesGrid"></div>
+  </section>
+
+  <section class="cat" id="catalog" aria-labelledby="catTitle">
+    <div class="head">
+      <h2 class="h2" id="catTitle"><em>Хиты</em> <mark>продаж</mark></h2>
+      <div class="chips" id="chips" role="group" aria-label="Фильтр"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="foot__logo" role="img" aria-label="OzoneBox" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 32" fill="none"> <g clip-path="url(#clip0_1501_9339)"> <path d="M24.3714 17.6468C27.9454 17.9573 30.6944 21.0721 30.6944 24.811V32H23.7987C20.2123 32 17.2246 29.134 16.9268 25.408C16.5726 20.9777 20.1218 17.2776 24.3714 17.6468Z" fill="#3C6DF0"></path> <path d="M4.81481 16C4.81481 13.1364 4.81848 11.2875 4.92767 9.87966C5.0324 8.52957 5.21025 8.02811 5.32892 7.78234C5.79335 6.82046 6.54219 6.03976 7.46483 5.55558C7.70057 5.43186 8.18157 5.24644 9.47658 5.13727C10.827 5.02343 12.6005 5.01961 15.3472 5.01961C18.094 5.01961 19.8675 5.02343 21.2179 5.13727C22.5129 5.24644 22.9939 5.43187 23.2296 5.55558C24.1523 6.03976 24.9011 6.82046 25.3655 7.78234C25.4842 8.02811 25.6621 8.52957 25.7668 9.87966C25.8492 10.9432 25.8715 12.2586 25.8775 14.073C27.704 14.4553 29.351 15.3266 30.6944 16.546C30.6944 16.3671 30.6944 16.185 30.6944 16C30.6944 10.4367 30.6944 7.65503 29.6662 5.52547C28.7374 3.60168 27.2397 2.0403 25.3944 1.07194C23.3517 0 20.6835 0 15.3472 0C10.0109 0 7.34271 0 5.30004 1.07194C3.45473 2.0403 1.95706 3.60168 1.02821 5.52547C3.58732e-07 7.65503 2.3348e-07 10.4367 2.22127e-10 16C-2.33036e-07 21.5633 -3.58732e-07 24.345 1.02821 26.4745C1.95706 28.3983 3.45473 29.9597 5.30004 30.9281C7.34271 32 10.0109 32 15.3472 32C15.5247 32 15.6992 32 15.8709 31.9999C14.7013 30.5995 13.8656 28.8824 13.4988 26.9781C11.7584 26.9719 10.4967 26.9487 9.47658 26.8627C8.18157 26.7536 7.70057 26.5682 7.46483 26.4444C6.54219 25.9602 5.79334 25.1795 5.32892 24.2177C5.21025 23.9719 5.0324 23.4704 4.92767 22.1203C4.81848 20.7125 4.81481 18.8636 4.81481 16Z" fill="white"></path> <path d="M69.4856 16.762C69.4856 9.86324 64.6142 6.16431 59.4608 6.16431C54.2233 6.16431 49.3518 9.83388 49.3518 16.762C49.3518 23.6901 54.1106 27.389 59.3763 27.389C65.346 27.389 69.4856 23.0149 69.4856 16.762ZM53.6038 16.762C53.6038 12.4172 56.3633 10.2155 59.4608 10.2155C62.53 10.2155 65.2894 12.3879 65.2894 16.762C65.2894 21.2536 62.5017 23.3672 59.4326 23.3672C56.2789 23.3672 53.6038 21.2536 53.6038 16.762Z" fill="white"></path> <path d="M79.5282 6.48706V10.3328H87.5671L78.248 27.0368L93.9311 27.0366V23.1028H84.9202L94.2471 6.48706H79.5282Z" fill="white"></path> <path d="M123.547 16.762C123.547 9.86324 118.676 6.16431 113.523 6.16431C108.285 6.16431 103.413 9.83388 103.413 16.762C103.413 23.6901 108.172 27.389 113.438 27.389C119.407 27.389 123.547 23.0149 123.547 16.762ZM107.665 16.762C107.665 12.4172 110.425 10.2155 113.523 10.2155C116.592 10.2155 119.352 12.3879 119.352 16.762C119.352 21.2536 116.564 23.3672 113.494 23.3672C110.341 23.3672 107.665 21.2536 107.665 16.762Z" fill="white"></path> <path d="M151.222 28.3713V6.48726H146.998V18.1418L134.608 5.01953V27.0368H138.804V15.2942L151.222 28.3713Z" fill="white"></path> <path d="M174.825 6.48706H163.385V27.0366H175.691V23.0441H167.638V18.3471H173.369V14.5014H167.638V10.3328H174.825V6.48706Z" fill="white"></path> <path d="M201.689 12.5934C201.689 8.74769 199.098 6.5166 195.494 6.5166H187.131V27.0368H196.282C200.225 27.0368 202.533 24.5709 202.533 20.96C202.533 18.8463 201.548 17.173 199.718 16.3804C200.956 15.5878 201.689 14.0906 201.689 12.5934ZM195.184 10.2743C196.648 10.2743 197.578 11.243 197.549 12.7402C197.521 14.12 196.62 14.942 195.184 14.942H191.326V10.2743H195.184ZM195.803 18.5234C196.451 18.5234 197.014 18.5822 197.493 18.9344C198.084 19.3748 198.394 20.1381 198.366 20.96C198.282 22.3398 197.437 23.2205 196.001 23.2205H191.326V18.5234H195.803Z" fill="white"></path> <path d="M232.66 16.762C232.66 9.86324 227.788 6.16431 222.635 6.16431C217.398 6.16431 212.527 9.83388 212.527 16.762C212.527 23.6901 217.285 27.389 222.551 27.389C228.521 27.389 232.66 23.0149 232.66 16.762ZM216.779 16.762C216.779 12.4172 219.538 10.2155 222.635 10.2155C225.705 10.2155 228.464 12.3879 228.464 16.762C228.464 21.2536 225.676 23.3672 222.608 23.3672C219.453 23.3672 216.779 21.2536 216.779 16.762Z" fill="white"></path> <path d="M250.186 13.5619L248.384 9.86306L246.328 6.48706H241.219L247.708 16.1747L240.481 27.0368L245.54 27.0366L247.989 23.1909L250.158 19.2278H250.298L252.41 23.0735L254.973 27.0366L260 27.0368L252.777 16.1747L259.174 6.48706H254.156L252.213 9.68687L250.298 13.5619H250.186Z" fill="white"></path> </g> <defs> <clipPath id="clip0_1501_9339"> <rect width="260" height="32" fill="white"></rect> </clipPath> </defs> </svg>
+    <div class="foot__row">
+      <span>Макет главной, шаг 9, 14.10.2026 · <a href="/ozonbox-sos-2/" style="color:#46e62e">SOS бокс →</a> · цены из каталога Tilda, сентябрь 2026</span>
+      <a href="/ozonbox/">Все версии OzoneBox →</a>
+    </div>
+  </div>
+</footer>
+
+<div class="dock" id="dock" role="status"><span>В корзине <b id="dockN">0</b></span><button class="btn btn--acid btn--sm press" type="button" data-cart>Оформить</button></div>
+
+<script src="shop.js?v=10"></script>
+<script>
+// Без GSAP и Lenis: вся анимация на CSS transition и transform, JS только переключает классы.
+// Так страница легче (минус ~150 КБ скриптов) и отклик сразу, без задержки плавной прокрутки.
+(() => {
+  const P = OZB.P;
+  // модели из design/modeli/README.md: возраст, для чего, раздел каталога
+  // портреты моделей: design/modeli/README.md
+  // портреты моделей (design/modeli/README.md): возраст, что выбирают, какую карточку открыть
+  const FACES = [["M01","18-20","Стоп акне","stop-akne"],["M02","19-22","Крем 3%","ozodermik-3"],["M03","22-26","Дневной крем","dnevnoy-krem"],["M08","25-32","Маска и шампунь","maska-shampun"],
+    ["M10","25-32","Идеальное тело","idealnoe-telo"],["M04","26-30","Супер трио","super-trio"],["M05","30-35","День и ночь","chistaya-kozha"],["M09","30-40","SOS бокс","sos-boks"],
+    ["M06","35-40","Супер комбо","super-kombo"],["M07","40-45","Масло Отри","otri-6000"],["M11","48-55","Озодермик 5%","ozodermik-5"],["M12","50-60","Крем для ног","idealnoe-telo"]];
+  const CATS = [["all","Все"],["face","Лицо"],["hair","Волосы"],["body","Тело"],["oils","Масло"],["sets","Наборы"]];
+  const rub = (n) => n.toLocaleString("ru-RU") + " ₽";
+  const plus = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>`;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = (s) => document.querySelector(s);
+
+  $("#ticker").innerHTML = Array(2).fill(["Выгода 10% по коду из ролика","Осенняя коробка уже в каталоге","Наборы - готовый подарок","19 средств в каталоге","7 способов доставки"]
+    .map((t) => `<span>${t}</span>`).join("")).join("");
+
+  // бегущая строка: сдвиг считаем в пикселях от ширины половины ленты.
+  // Перезапуск при смене ширины окна и возврате на вкладку - раньше после перезагрузки лента иногда стояла.
+  const tk = $("#ticker");
+  let tkAnim;
+  const runTicker = () => {
+    if (reduce) return;
+    const half = tk.scrollWidth / 2;
+    if (!half) return;
+    const t = tkAnim ? tkAnim.currentTime || 0 : 0;
+    if (tkAnim) tkAnim.cancel();
+    tkAnim = tk.animate([{ transform: "translateX(0)" }, { transform: `translateX(${-half}px)` }], { duration: half * 28, iterations: Infinity });
+    tkAnim.currentTime = t % (half * 28);
+  };
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(runTicker);
+  addEventListener("load", runTicker);
+  let tkRz; addEventListener("resize", () => { clearTimeout(tkRz); tkRz = setTimeout(runTicker, 200); });
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && tkAnim && tkAnim.playState !== "running") tkAnim.play(); });
+
+  // первый экран: товар наклоняется за курсором влево-вправо, точка опоры - донышко. Только мышь.
+  if (!reduce && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    const hero = $(".hero");
+    let raf = 0, tilt = 0;
+    const apply = () => { raf = 0; const img = $(".hero__slide.on .obj img"); if (img) img.style.transform = `rotate(${tilt.toFixed(2)}deg)`; };
+    hero.addEventListener("pointermove", (e) => {
+      const r = hero.getBoundingClientRect();
+      tilt = ((e.clientX - r.left) / r.width - 0.5) * 12;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+    hero.addEventListener("pointerleave", () => { tilt = 0; document.querySelectorAll(".hero__slide .obj img").forEach((i) => (i.style.transform = "")); });
+  }
+
+  $("#facesGrid").innerHTML = FACES.map(([id, age, forWhat, open]) =>
+    `<a class="face has rv press" href="#p=${open}" data-open="${open}"><img src="img/faces/${id}.webp" alt="" width="800" height="960" loading="lazy"><span class="face__age">${age}</span><span class="face__for">${forWhat} →</span></a>`).join("")
+    + `<a class="face face--wide has rv press" href="#p=super-duet" data-open="super-duet"><img src="img/faces/M13.webp" alt="" width="800" height="960" loading="lazy"><span class="face__tag">Пара, 28-35</span><span class="face__age">Ищут подарок друг другу</span><span class="face__for">Подарочный набор «Супер дуэт» - эмульсия и крем в подарочной упаковке →</span></a>`;
+
+  const grid = $("#grid");
+  grid.innerHTML = P.map(([id, name, price, cats, badge]) => `
+    <article class="card rv" data-cats="${cats.join(" ")}">
+      <div class="card__img" data-open="${id}"><img src="img/${id}.webp" alt="${name}" width="900" height="900" loading="lazy">${badge ? `<span class="badge">${badge}</span>` : ""}</div>
+      <p class="card__name" data-open="${id}">${name}</p>
+      <div class="card__foot"><span class="price">${rub(price)}</span><button class="add press" type="button" data-add="${id}" aria-label="В корзину: ${name}">${plus}</button></div>
+    </article>`).join("");
+
+  const chips = $("#chips");
+  chips.innerHTML = CATS.map(([k, l]) => {
+    const n = k === "all" ? P.length : P.filter((p) => p[3].includes(k)).length;
+    return `<button class="chip press" type="button" data-cat="${k}" aria-pressed="${k === "all"}">${l}<span>${n}</span></button>`;
+  }).join("");
+  const setCat = (k) => {
+    [...grid.children].forEach((c) => { c.hidden = k !== "all" && !c.dataset.cats.split(" ").includes(k); if (!c.hidden) c.classList.add("in"); });
+    chips.querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.cat === k)));
+  };
+  chips.addEventListener("click", (e) => { const b = e.target.closest(".chip"); if (b) setCat(b.dataset.cat); });
+  document.addEventListener("click", (e) => { const a = e.target.closest("[data-go]"); if (a) setCat(a.dataset.go); });
+
+  // появление блоков: один IntersectionObserver на всё
+  const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".rv").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 60 + "ms"; io.observe(el); });
+
+  // первый экран: три товара сменяют друг друга, слово сзади меняется
+  const pr = (id) => rub(P.find((p) => p[0] === id)[2]);
+  const S = [
+    ["ЛИЦО", "Озоновый уход", "Дневной крем <mark>для лица</mark>", pr("dnevnoy-krem"), "<b>Каждый день</b>Лёгкий крем на утро. Наборы собраны под задачу: лицо, волосы, тело."],
+    ["МАСЛО", "Основа линейки", "Масло <mark>Отри 6000</mark>", pr("otri-6000"), "<b>Озонированное масло</b>Оливковое масло, насыщенное озоном. С него начинается вся линейка."],
+    ["ВОЛОСЫ", "Для волос", "Маска <mark>Озодермик</mark>", pr("maska-volosy"), "<b>Волосы</b>Маска и шампунь - набор для длинных волос со скидкой в комплекте."],
+  ];
+  const slides = [...document.querySelectorAll(".hero__slide")], dots = [...document.querySelectorAll(".dot")];
+  const ghost = $("#ghost"), kick = $("#heroKick"), title = $("#heroTitle"), price = $("#heroPrice"), desc = $("#heroDesc");
+  let cur = 0, timer;
+  price.textContent = S[0][3];
+  // смена товара: уходит вбок, новый приходит с другой стороны; можно тянуть пальцем и листать стрелками
+  const HID = ["dnevnoy-krem", "otri-6000", "maska-volosy"];
+  const fit = () => ghost.style.setProperty("--n", ghost.textContent.length);
+  fit();
+  let busy = false;
+  const show = (i, dir = 1, from = 0) => {
+    if (i === cur || busy) return;
+    const out = slides[cur], inn = slides[i];
+    dots.forEach((d, k) => d.classList.toggle("on", k === i));
+    const swap = () => {
+      out.classList.remove("on"); inn.classList.add("on");
+      [ghost.textContent, kick.textContent, title.innerHTML, price.textContent, desc.innerHTML] = S[i];
+      fit();
+      $("#heroMore").dataset.open = HID[i]; $("#heroMore").href = "#p=" + HID[i]; $("#heroAdd").dataset.add = HID[i];
+    };
+    cur = i;
+    if (reduce) return swap();
+    busy = true;
+    const W = stage.offsetWidth;
+    out.animate([{ transform: `translateX(${from}px) rotate(${from / 40}deg)`, opacity: 1 }, { transform: `translateX(${-dir * W * .6}px) rotate(${-dir * 8}deg)`, opacity: 0 }], { duration: 260, easing: "cubic-bezier(.4,0,1,1)", fill: "forwards" });
+    ghost.animate([{ opacity: 1, translate: "0 0" }, { opacity: 0, translate: `${-dir * 40}px 0` }], { duration: 260, fill: "forwards" }).onfinish = () => {
+      out.getAnimations().forEach((a) => a.cancel());
+      ghost.getAnimations().forEach((a) => a.cancel());
+      swap();
+      const ease = "cubic-bezier(.2,.8,.2,1)";
+      inn.animate([{ transform: `translateX(${dir * W * .5}px) rotate(${dir * 8}deg)`, opacity: 0 }, { transform: "none", opacity: 1 }], { duration: 520, easing: ease });
+      ghost.animate([{ opacity: 0, translate: `${dir * 40}px 0` }, { opacity: 1, translate: "0 0" }], { duration: 520, easing: ease }).onfinish = () => (busy = false);
+    };
+  };
+  const step = (d, from) => { show((cur + d + slides.length) % slides.length, d, from); auto(); };
+  const auto = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => show((cur + 1) % slides.length, 1), 5000); };
+  dots.forEach((d, i) => d.addEventListener("click", () => { show(i, i > cur ? 1 : -1); auto(); }));
+  auto();
+
+  // палец: товар едет за ним; отпустил дальше 60 px или резко - следующий, иначе возвращается
+  const stage = $("#stage"), hero = $(".hero");
+  let x0 = 0, y0 = 0, t0 = 0, dx = 0, drag = null;
+  hero.addEventListener("touchstart", (e) => { if (busy) return; const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; t0 = performance.now(); dx = 0; drag = null; }, { passive: true });
+  hero.addEventListener("touchmove", (e) => {
+    if (busy || drag === false) return;
+    const t = e.touches[0]; dx = t.clientX - x0; const dy = t.clientY - y0;
+    if (drag === null) { if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return; drag = Math.abs(dx) > Math.abs(dy); if (!drag) return; clearInterval(timer); }
+    slides[cur].style.transform = `translateX(${dx}px) rotate(${dx / 40}deg)`;
+    ghost.style.translate = `${dx * .3}px 0`;
+  }, { passive: true });
+  hero.addEventListener("touchend", () => {
+    if (!drag) { drag = null; return; }
+    const v = Math.abs(dx) / (performance.now() - t0), el = slides[cur];
+    el.style.transform = ""; ghost.style.translate = "";
+    if (Math.abs(dx) > 60 || v > .4) step(dx < 0 ? 1 : -1, dx);
+    else { el.animate([{ transform: `translateX(${dx}px) rotate(${dx / 40}deg)` }, { transform: "none" }], { duration: 300, easing: "cubic-bezier(.2,.8,.2,1)" }); auto(); }
+    drag = null;
+  });
+  // стрелки ← → на компьютере, пока первый экран на виду и не открыто окно
+  let heroSeen = true;
+  new IntersectionObserver(([en]) => (heroSeen = en.isIntersecting), { threshold: .3 }).observe(hero);
+  addEventListener("keydown", (e) => {
+    if (!heroSeen || e.altKey || e.ctrlKey || e.metaKey || /input|textarea|select/i.test(document.activeElement?.tagName) || document.querySelector(".pd.on,.cd.on,.pm.on")) return;
+    if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+  });
+
+  document.querySelector("[data-pop]")?.addEventListener("click", (e) => { const w = e.currentTarget.closest(".perk--pop"); w.classList.toggle("open"); e.currentTarget.setAttribute("aria-expanded", w.classList.contains("open")); });
+  const cnt19 = document.querySelector("[data-count]");
+  if (cnt19 && !reduce) new IntersectionObserver((es, o) => es.forEach((en) => { if (!en.isIntersecting) return; o.disconnect(); const t0 = performance.now(), to = +cnt19.dataset.count;
+    const f = (t) => { const k = Math.min(1, (t - t0) / 900); cnt19.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); })).observe(cnt19);
+
+  // меню: плашка едет за курсором, а без наведения стоит на текущем разделе
+  const nav = $("#nav"), pill = $("#pill"), links = [...nav.querySelectorAll("a")];
+  let curLink = null;
+  const defLink = () => links.find((l) => l.dataset.sec === "bento");
+  const put = (a, dark) => {
+    if (!a) { pill.classList.remove("on"); return; }
+    pill.style.width = a.offsetWidth + "px"; pill.style.transform = `translateX(${a.offsetLeft}px)`;
+    pill.classList.add("on"); pill.classList.toggle("dark", dark);
+    links.forEach((l) => l.classList.toggle("cur", dark && l === a));
+  };
+  links.forEach((a) => a.addEventListener("pointerenter", () => { links.forEach((l) => l.classList.remove("cur")); put(a, false); }));
+  nav.addEventListener("pointerleave", () => put(curLink || defLink(), true));
+  requestAnimationFrame(() => put(defLink(), true));
+  const secIo = new IntersectionObserver((es) => es.forEach((en) => {
+    if (!en.isIntersecting) return;
+    curLink = links.find((l) => l.dataset.sec === en.target.id) || null;
+    if (!nav.matches(":hover")) put(curLink, true);
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  ["bento", "faces", "catalog"].forEach((id) => { const el = document.getElementById(id); if (el) secIo.observe(el); });
+})();
+</script>
+</body>
+</html>
