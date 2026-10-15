@@ -21,9 +21,9 @@
   --ink: #111312;
   --soft: #5f6461;
   --line: rgba(17,19,18,.1);
-  --warm: #f39a2b;
-  --warm-d: #c86f08;
-  --warm-bg: #fff1e0;
+  --warm: #2f66f5;
+  --warm-d: #1f4fd1;
+  --warm-bg: #e9efff;
   --r: 28px;
   --f: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -44,8 +44,8 @@ section { padding-block: clamp(72px, 10vw, 130px); }
 .btn { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-weight: 550; font-size: 16px; cursor: pointer; text-decoration: none; transition: transform .15s, background .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
 .btn:active { transform: scale(.97); }
 .btn.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
-.btn.hot { background: var(--warm); color: #1d1206; border-color: var(--warm); }
-.btn.hot:hover { background: #f7a945; }
+.btn.hot { background: var(--warm); color: #ffffff; border-color: var(--warm); }
+.btn.hot:hover { background: #4a7dff; }
 .btn:focus-visible, button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
 .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 .price { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -56,26 +56,26 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 750; letter-spacing: .16em; text-decoration: none; font-size: 17px; }
 .logo svg { width: 16px; height: 20px; }
 .logo path { fill: var(--warm); transition: fill .3s; }
-.logo:hover path { fill: #3a6ff0; }
+.logo:hover path { fill: var(--ink); }
 .nav { display: flex; gap: 26px; font-size: 15px; }
 .nav a { text-decoration: none; color: var(--soft); }
 .nav a:hover { color: var(--ink); }
 .cartbtn { position: relative; height: 48px; min-width: 48px; padding: 0 14px; gap: 8px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); background: var(--card); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
 .cartbtn svg { width: 20px; height: 20px; }
-.cartbtn b { position: absolute; top: -4px; right: -4px; min-width: 22px; height: 22px; border-radius: 11px; background: var(--warm); font-size: 12px; display: grid; place-items: center; padding: 0 5px; }
+.cartbtn b { position: absolute; top: -4px; right: -4px; min-width: 22px; height: 22px; border-radius: 11px; background: var(--warm); font-size: 12px; color: #fff; display: grid; place-items: center; padding: 0 5px; }
 .cartbtn b:empty { display: none; }
 
 /* 1. первый экран */
 .hero { position: relative; padding-block: clamp(40px, 7vw, 90px) 40px; overflow: clip; }
 .blobs { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .blobs i { position: absolute; border-radius: 50%; filter: blur(60px); }
-.blobs i:nth-child(1) { width: 38vmax; height: 38vmax; right: -8vmax; top: -12vmax; background: #ffd29b; opacity: .6; }
-.blobs i:nth-child(2) { width: 26vmax; height: 26vmax; left: -8vmax; top: 18vh; background: #ffe9cf; opacity: .9; }
-.blobs i:nth-child(3) { width: 22vmax; height: 22vmax; right: 18vw; top: 30vh; background: #f6c9a5; opacity: .35; }
+.blobs i:nth-child(1) { width: 38vmax; height: 38vmax; right: -8vmax; top: -12vmax; background: #cfdcff; opacity: .6; }
+.blobs i:nth-child(2) { width: 26vmax; height: 26vmax; left: -8vmax; top: 18vh; background: #eef2ff; opacity: .9; }
+.blobs i:nth-child(3) { width: 22vmax; height: 22vmax; right: 18vw; top: 30vh; background: #dde5f7; opacity: .35; }
 .hero .wrap { position: relative; z-index: 1; }
 .hero h1 { font-size: clamp(64px, 10.5vw, 150px); letter-spacing: -.055em; line-height: .86; }
 .hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 32px; align-items: center; }
-.hero-kit { border-radius: 32px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px -36px rgba(80,50,10,.45); }
+.hero-kit { border-radius: 32px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px -36px rgba(20,40,90,.35); }
 .hero-kit img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 .hero-sub { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-top: 26px; }
 .hero-sub .lead { margin: 0; }
@@ -86,7 +86,7 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .track { display: flex; gap: 14px; width: max-content; padding: 6px clamp(16px, 4vw, 48px) 10px; }
 @media (min-width: 1336px) { .track { padding-inline: calc((100vw - 1240px) / 2 + 48px); } }
 .zone { width: clamp(236px, 22vw, 280px); background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; text-align: left; cursor: inherit; user-select: none; display: flex; flex-direction: column; gap: 10px; transition: border-color .25s, box-shadow .25s; }
-.zone:hover { border-color: rgba(243,154,43,.6); box-shadow: 0 14px 30px -18px rgba(217,127,18,.6); }
+.zone:hover { border-color: rgba(47,102,245,.5); box-shadow: 0 14px 30px -18px rgba(47,102,245,.45); }
 .zone .ph { aspect-ratio: 4 / 3; border-radius: 18px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
 .zone .ph img { width: 86%; height: 80%; object-fit: contain; pointer-events: none; }
 .zone .nm { font-weight: 700; font-size: 22px; letter-spacing: -.02em; padding: 0 6px; }
@@ -146,7 +146,7 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .confetti i { position: absolute; left: 50%; top: 50%; width: 10px; height: 14px; border-radius: 2px; }
 .wheel svg.w { width: 100%; height: 100%; cursor: grab; filter: drop-shadow(0 30px 40px rgba(0,0,0,.45)); }
 .wheel .ptr { position: absolute; left: 50%; top: -10px; margin-left: -22px; width: 44px; height: 54px; z-index: 2; filter: drop-shadow(0 6px 8px rgba(0,0,0,.4)); transform-origin: 50% 20%; }
-.wheel .spin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 28%; aspect-ratio: 1; border-radius: 50%; border: 0; background: var(--warm); color: #1d1206; font-weight: 800; font-size: clamp(15px, 2vw, 19px); cursor: pointer; box-shadow: 0 0 0 8px rgba(255,255,255,.95), 0 10px 26px rgba(0,0,0,.4); z-index: 2; }
+.wheel .spin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 28%; aspect-ratio: 1; border-radius: 50%; border: 0; background: var(--warm); color: #ffffff; font-weight: 800; font-size: clamp(15px, 2vw, 19px); cursor: pointer; box-shadow: 0 0 0 8px rgba(255,255,255,.95), 0 10px 26px rgba(0,0,0,.4); z-index: 2; }
 .wheel .spin:disabled { cursor: default; }
 .prize { margin-top: 24px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 18px 20px; min-height: 92px; }
 .prize b { display: block; font-size: 26px; letter-spacing: -.02em; color: var(--warm); }
@@ -169,7 +169,7 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .item .nm { font-weight: 650; padding: 0 6px; line-height: 1.25; }
 .item .ds { color: var(--soft); font-size: 13px; padding: 0 6px; line-height: 1.35; min-height: 2.7em; }
 .item .ft { display: flex; justify-content: space-between; align-items: center; padding: 0 6px 4px; }
-.item .add { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--warm); font-size: 24px; font-weight: 500; cursor: pointer; display: grid; place-items: center; }
+.item .add { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--warm); color: #fff; font-size: 24px; font-weight: 500; cursor: pointer; display: grid; place-items: center; }
 
 /* шторка: товар и корзина. На ПК - панель справа, на телефоне - снизу, всегда с крестиком сверху */
 .ov { position: fixed; inset: 0; z-index: 60; background: rgba(17,19,18,.42); opacity: 0; pointer-events: none; transition: opacity .3s; }
@@ -355,23 +355,23 @@ footer .wrap { display: grid; gap: 6px; }
       <div class="how-grid">
         <div class="hc">
           <div class="art"><svg viewBox="0 0 200 200" aria-hidden="true">
-            <defs><radialGradient id="gDrop" cx="38%" cy="34%" r="75%"><stop offset="0" stop-color="#fffaf0"/><stop offset=".55" stop-color="#f6e6c8"/><stop offset="1" stop-color="#e2bd84"/></radialGradient></defs>
+            <defs><radialGradient id="gDrop" cx="38%" cy="34%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#eef2fb"/><stop offset="1" stop-color="#c3d0ec"/></radialGradient></defs>
             <path id="drop" fill="url(#gDrop)" d="M100 16 C100 16 38 92 38 134 A62 62 0 0 0 162 134 C162 92 100 16 100 16 Z"/>
             <path d="M70 116 C70 100 78 86 86 76" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-            <text x="100" y="150" text-anchor="middle" font-family="Onest, sans-serif" font-weight="700" font-size="13" fill="#8a6a3a">OZOTENS 30%</text>
+            <text x="100" y="150" text-anchor="middle" font-family="Onest, sans-serif" font-weight="700" font-size="13" fill="#3c4a6b">OZOTENS 30%</text>
           </svg></div>
           <div><p class="n">01</p><h3>Крем на электрод</h3><p>Тонкий слой OZOTENS 30%. Он же проводит ток.</p></div>
         </div>
         <div class="hc">
           <div class="art"><svg viewBox="0 0 200 200" aria-hidden="true">
-            <path id="wave" fill="#f39a2b" d="M100 16 C100 16 38 92 38 134 A62 62 0 0 0 162 134 C162 92 100 16 100 16 Z"/>
+            <path id="wave" fill="#2f66f5" d="M100 16 C100 16 38 92 38 134 A62 62 0 0 0 162 134 C162 92 100 16 100 16 Z"/>
             <path id="sWave" fill="none" d="M14 104 Z"/>
           </svg></div>
           <div><p class="n">02</p><h3>Импульс</h3><p>Прибор даёт слабые импульсы. Силу от 0 до 40 выбираете сами, по ощущениям.</p></div>
         </div>
         <div class="hc">
           <div class="art"><img src="img/el-back.webp" alt="Электрод «Спина»: эластичный пояс с четырьмя сегментами"></div>
-          <div><p class="n">03</p><h3>Пояс на больное место</h3><p>Электрод - это пояс или накладка по форме зоны. Для поясницы - эластичный пояс с липучкой, внутри 4 токопроводящих сегмента.</p></div>
+          <div><p class="n">03</p><h3>Пояс на больное место</h3><p>Электрод - это пояс или накладка по форме зоны. Для поясницы - эластичный пояс с манжетой и 4 сегментами.</p></div>
         </div>
       </div>
     </div>
@@ -421,7 +421,7 @@ footer .wrap { display: grid; gap: 6px; }
           <p class="note">Демо: призы и коды для примера, условия акции утверждает продавец.</p>
         </div>
         <div class="wheel" id="wheelBox">
-          <svg class="ptr" viewBox="0 0 44 54" aria-hidden="true"><path d="M22 54 L2 14 A20 20 0 1 1 42 14 Z" fill="#fff"/><circle cx="22" cy="18" r="8" fill="#f39a2b"/></svg>
+          <svg class="ptr" viewBox="0 0 44 54" aria-hidden="true"><path d="M22 54 L2 14 A20 20 0 1 1 42 14 Z" fill="#fff"/><circle cx="22" cy="18" r="8" fill="#2f66f5"/></svg>
           <svg class="w" id="wheelSvg" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
           <div class="confetti" id="confetti" aria-hidden="true"></div>
           <button class="spin" type="button" id="spinBtn">Крутить</button>
@@ -663,13 +663,13 @@ $('#ticks').innerHTML = Array.from({ length: 12 }, (_, k) => `<line x1="100" y1=
 
 // ===== колесо: рисуем =====
 (() => { const svg = $('#wheelSvg'), n = PRIZES.length, R = 190, NS = 'http://www.w3.org/2000/svg';
-  const fills = ['#ffffff', '#f39a2b', '#ffffff', '#1f2321', '#ffffff', '#f39a2b', '#ffffff', '#1f2321'];
+  const fills = ['#ffffff', '#2f66f5', '#ffffff', '#1f2321', '#ffffff', '#2f66f5', '#ffffff', '#1f2321'];
   const g = document.createElementNS(NS, 'g'); g.id = 'wheelG'; svg.append(g);
   g.innerHTML = `<circle r="198" fill="#fff"/><circle r="194" fill="#2a2e2c"/>`;
   PRIZES.forEach((p, i) => { const a0 = (i / n) * Math.PI * 2 - Math.PI / 2 - Math.PI / n, a1 = a0 + Math.PI * 2 / n;
     const path = document.createElementNS(NS, 'path'); path.setAttribute('d', `M0 0 L${R * Math.cos(a0)} ${R * Math.sin(a0)} A${R} ${R} 0 0 1 ${R * Math.cos(a1)} ${R * Math.sin(a1)} Z`); path.setAttribute('fill', fills[i]); g.append(path);
     const am = (a0 + a1) / 2, deg = am * 180 / Math.PI, flip = Math.cos(am) < -0.01, tx = document.createElementNS(NS, 'text'); tx.setAttribute('transform', `rotate(${deg}) translate(122 0)${flip ? ' rotate(180)' : ''}`); tx.setAttribute('text-anchor', 'middle'); tx.setAttribute('dominant-baseline', 'middle');
-    tx.setAttribute('fill', fills[i] === '#ffffff' ? '#111312' : fills[i] === '#f39a2b' ? '#1d1206' : '#ffffff'); tx.setAttribute('font-family', 'Onest, sans-serif'); tx.setAttribute('font-weight', '800'); tx.setAttribute('font-size', 34); tx.textContent = p.t; g.append(tx);
+    tx.setAttribute('fill', fills[i] === '#ffffff' ? '#111312' : fills[i] === '#2f66f5' ? '#ffffff' : '#ffffff'); tx.setAttribute('font-family', 'Onest, sans-serif'); tx.setAttribute('font-weight', '800'); tx.setAttribute('font-size', 34); tx.textContent = p.t; g.append(tx);
     if (p.t2) { tx.setAttribute('y', -9); const t2 = tx.cloneNode(); t2.setAttribute('y', 18); t2.setAttribute('font-size', 15); t2.setAttribute('font-weight', 600); t2.textContent = p.t2; g.append(t2); }
     const win = document.createElementNS(NS, 'path'); win.setAttribute('d', path.getAttribute('d')); win.setAttribute('fill', '#fff'); win.setAttribute('opacity', 0); win.setAttribute('class', 'win'); win.dataset.i = i; g.append(win); });
   for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2 - Math.PI / 2 - Math.PI / n; const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', 186 * Math.cos(a)); c.setAttribute('cy', 186 * Math.sin(a)); c.setAttribute('r', 5); c.setAttribute('fill', '#fff'); g.append(c); }
@@ -694,7 +694,7 @@ $('#prev').onclick = () => stepRibbon(-1); $('#next').onclick = () => stepRibbon
 (() => { const g = $('#wheelG'), btn = $('#spinBtn'), n = PRIZES.length, seg = 360 / n;
   let spinning = false, lastTick = 0;
   const show = p => { $('#prize').innerHTML = `<b>${p.ship ? 'Доставка 0 ₽' : p.t + ' на заказ'}</b>Код <code>OZO${p.ship ? 'SHIP' : p.d}</code> уже в корзине. Попытка использована.<div class="row" style="margin-top:14px"><button class="btn hot" type="button" id="toCart">Перейти в корзину</button></div>`; $('#toCart').onclick = () => openCart(); };
-  const confetti = () => { if (reduce) return; const box = $('#confetti'); const cols = ['#f39a2b', '#ffffff', '#ffd29b', '#3a6ff0']; for (let i = 0; i < 40; i++) { const c = document.createElement('i'); c.style.background = cols[i % 4]; box.append(c); gsap.fromTo(c, { x: 0, y: 0, rotation: 0, opacity: 1 }, { x: gsap.utils.random(-260, 260), y: gsap.utils.random(-260, 200), rotation: gsap.utils.random(-540, 540), opacity: 0, duration: gsap.utils.random(1, 1.8), ease: 'power2.out', onComplete: () => c.remove() }); } };
+  const confetti = () => { if (reduce) return; const box = $('#confetti'); const cols = ['#2f66f5', '#ffffff', '#cfdcff', '#3a6ff0']; for (let i = 0; i < 40; i++) { const c = document.createElement('i'); c.style.background = cols[i % 4]; box.append(c); gsap.fromTo(c, { x: 0, y: 0, rotation: 0, opacity: 1 }, { x: gsap.utils.random(-260, 260), y: gsap.utils.random(-260, 200), rotation: gsap.utils.random(-540, 540), opacity: 0, duration: gsap.utils.random(1, 1.8), ease: 'power2.out', onComplete: () => c.remove() }); } };
   if (bonus) { show(bonus); btn.disabled = true; btn.textContent = bonus.t; }
   const tickCheck = () => { const r = gsap.getProperty(g, 'rotation'); const k = Math.floor((r + seg / 2) / seg); if (k !== lastTick) { lastTick = k; haptic(6); gsap.fromTo('.wheel .ptr', { rotation: -14 }, { rotation: 0, duration: 0.25, ease: 'power2.out' }); } };
   const spin = (power = 1) => {
