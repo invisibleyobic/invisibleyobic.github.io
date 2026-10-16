@@ -451,12 +451,13 @@ function boot(){
  (function(){var h=$('#slamh'),txt=['Тело',' ','всё',' '],em=h.querySelector('em'),emt=em.textContent;h.textContent='';
   function chars(str,parent){if(str===' '){parent.appendChild(document.createTextNode(' '));return}var wd=document.createElement('span');wd.className='wd';str.split('').forEach(function(c){var sp=document.createElement('span');sp.className='ch';sp.textContent=c;wd.appendChild(sp)});parent.appendChild(wd)}
   txt.forEach(function(t){chars(t,h)});var e2=document.createElement('em');chars(emt,e2);h.appendChild(e2);
-  var st=gsap.timeline({scrollTrigger:{trigger:'#slam',start:'top top',end:'+=90%',pin:true,scrub:.4,onLeave:function(){glitch(h)}}});
-  st.fromTo('#slamh .ch',{opacity:0,scale:2.2,y:-30,filter:'blur(12px)'},{opacity:1,scale:1,y:0,filter:'blur(0px)',stagger:.04,ease:'power4.out',duration:.5})
-    .fromTo('#slam .mono',{opacity:0,y:12},{opacity:1,y:0,duration:.3},'<.2')
-    .to('#flash',{opacity:1,duration:.12},'>-.05').to('#flash',{opacity:0,duration:.4})
-    .add(function(){glitch(h)},'<')
-    .to('#slam .in',{scale:1.04,duration:.4,ease:'none'})})();
+  /* срабатывает сразу, как блок показался: собирается сам за ~1,2 с, дальше крутить не нужно */
+  var st=gsap.timeline({paused:true});
+  st.fromTo('#slamh .ch',{opacity:0,scale:2.2,y:-30,filter:'blur(12px)'},{opacity:1,scale:1,y:0,filter:'blur(0px)',stagger:.035,ease:'power4.out',duration:.55})
+    .fromTo('#slam .mono',{opacity:0,y:12},{opacity:1,y:0,duration:.3},'<.15')
+    .to('#flash',{opacity:1,duration:.1},'>-.1').to('#flash',{opacity:0,duration:.45})
+    .add(function(){glitch(h)},'<');
+  ScrollTrigger.create({trigger:'#slam',start:'top 65%',onEnter:function(){st.restart()},onEnterBack:function(){st.progress(1)},onLeaveBack:function(){st.pause(0)}})})();
  /* руки с капсулами: ладони поднимаются из темноты, капсулы появляются по очереди */
  gsap.from('#hands img',{y:50,opacity:0,duration:.9,ease:'expo.out',scrollTrigger:{trigger:'#hands',start:'top 85%'}});
  gsap.from('#hands .cap',{scale:0,opacity:0,duration:.5,ease:'back.out(2)',stagger:.12,delay:.4,scrollTrigger:{trigger:'#hands',start:'top 85%'}});
