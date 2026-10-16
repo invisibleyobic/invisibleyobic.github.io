@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Проба OzoneBox Future: товары стоят на полках стеклянного холодильника-витрины, по нажатию открывается карточка.">
 <meta name="theme-color" content="#0b0c0b">
-<link rel="stylesheet" href="shop.css?v=f2">
+<link rel="stylesheet" href="shop.css?v=f3">
 <link rel="preload" as="image" href="img/fridge-16x9.webp" media="(orientation: landscape)" fetchpriority="high">
 <link rel="preload" as="image" href="img/fridge-9x16.webp" media="(orientation: portrait)" fetchpriority="high">
 <style>
@@ -229,7 +229,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 </main>
 <p class="hint" id="hint" aria-hidden="true"><i></i>Нажмите на товар - откроется карточка</p>
 
-<script src="shop.js?v=f2"></script>
+<script src="shop.js?v=f3"></script>
 <script>
 // Витрина OzoneBox Future. Фон - картинка пустого холодильника (Higgsfield), товары - настоящие вырезки
 // поверх неё: надписи на упаковке нейросеть не рисует. Координаты полок - доли картинки в процентах.
@@ -239,14 +239,21 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   const port = matchMedia("(orientation: portrait)");
   const $ = (s) => document.querySelector(s);
   // относительная высота упаковки: флакон маски самый высокий, банка масла самая низкая
-  const K = { "maska-volosy": .92, "shampun": .92, "anticellulit": .9, "ochischenie": .86, "ozodermik-3": .84, "ozodermik-5": .76, "dnevnoy-krem": .8, "otri-6000": .72 };
+  const K = { "maska-volosy": .92, "shampun": .92, "maska-shampun": .92, "anticellulit": .9, "ochischenie": .86, "ozodermik-3": .8, "ozodermik-5": .76,
+    "dnevnoy-krem": .72, "krem-pryschi": .72, "otri-6000": .64, "stop-akne": .6, "super-duet": .95, "super-trio": .9,
+    "chistaya-kozha": .8, "idealnoe-telo": .8, "sos-boks": .8, "vosstanovlenie-volos": .8, "set-lico": .8, "super-kombo": .82 };
+  // ширина/высота картинок img/shelf/ - чтобы расставить товары по ширине упаковки
+  const RATIO = {"anticellulit": 0.291, "chistaya-kozha": 1.244, "dnevnoy-krem": 0.479, "idealnoe-telo": 1.244, "krem-pryschi": 0.406, "maska-shampun": 0.542, "maska-volosy": 0.29, "ochischenie": 0.326, "otri-6000": 0.646, "ozodermik-3": 0.67, "ozodermik-5": 0.411, "set-lico": 1.546, "shampun": 0.289, "sos-boks": 1.244, "stop-akne": 0.73, "super-duet": 0.658, "super-kombo": 1.51, "super-trio": 0.981, "vosstanovlenie-volos": 1.244};
   const L = {
-    wide: { boxes: [50, 84.5], screen: [50, 13.2, 16], inner: [35.6, 20.5, 28.8, 59], doors: [35.4, 20, 29.2, 60.5], x: [37.6, 62.4], lab: 5, h: 11,
-      shelves: [[34.1, ["maska-volosy", "shampun"], "Волосы"], [47.9, ["dnevnoy-krem", "ochischenie"], "Лицо"],
-                [60.9, ["ozodermik-3", "ozodermik-5"], "Точечно"], [74.8, ["otri-6000", "anticellulit"], "Масло и тело"]] },
-    tall: { boxes: [50, 78.6], screen: [50, 17.2, 40], inner: [21, 21.5, 58, 50.5], doors: [20.6, 21.2, 58.8, 51], x: [24.5, 74.5], lab: 15, h: 8.8,
-      shelves: [[32.8, ["maska-volosy", "shampun"], "Волосы"], [42.7, ["dnevnoy-krem", "ochischenie"], "Лицо"],
-                [52.7, ["ozodermik-3", "ozodermik-5"], "Точечно"], [61.8, ["otri-6000"], "Масло"], [71.5, ["anticellulit"], "Тело"]] },
+    wide: { boxes: [50, 84.5], screen: [50, 13.2, 16], inner: [35.6, 20.5, 28.8, 59], doors: [35.4, 20, 29.2, 60.5], x: [37.4, 62.6], lab: 4.4, h: 11,
+      shelves: [[34.1, ["maska-volosy", "shampun", "maska-shampun", "vosstanovlenie-volos", "sos-boks"], "Волосы"],
+                [47.9, ["dnevnoy-krem", "ochischenie", "super-duet", "chistaya-kozha", "set-lico"], "Лицо"],
+                [60.9, ["ozodermik-5", "krem-pryschi", "ozodermik-3", "stop-akne", "super-kombo"], "Точечно"],
+                [74.8, ["otri-6000", "anticellulit", "super-trio", "idealnoe-telo"], "Тело"]] },
+    tall: { boxes: [50, 78.6], screen: [50, 17.2, 40], inner: [21, 21.5, 58, 50.5], doors: [20.6, 21.2, 58.8, 51], x: [24, 75], lab: 0, h: 8.8,
+      shelves: [[32.8, ["maska-volosy", "shampun", "maska-shampun", "vosstanovlenie-volos"]], [42.7, ["dnevnoy-krem", "ochischenie", "super-duet", "chistaya-kozha"]],
+                [52.7, ["ozodermik-5", "krem-pryschi", "ozodermik-3", "stop-akne", "sos-boks"]], [61.8, ["otri-6000", "anticellulit", "super-trio", "idealnoe-telo"]],
+                [71.5, ["set-lico", "super-kombo"]]] },
   };
   const stage = $("#stage"), shelves = $("#shelves");
   const setBox = (el, p, [x, y, w, h]) => { el.style.setProperty(p + "x", x + "%"); el.style.setProperty(p + "y", y + "%"); el.style.setProperty(p + "w", w + "%"); el.style.setProperty(p + "h", h + "%"); };
@@ -257,10 +264,19 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     const bx = $("#boxes"); bx.style.setProperty("--bx", c.boxes[0] + "%"); bx.style.setProperty("--by", c.boxes[1] + "%");
     setBox($("#light"), "--i", c.inner); setBox($("#sheen"), "--i", c.inner); setBox($("#doors"), "--d", c.doors);
     const [x0, x1] = c.x;
-    shelves.innerHTML = c.shelves.map(([base, ids, tag]) => `<span class="tagx" style="--x:${x0}%;--b:${(100 - base).toFixed(2)}%">${tag}</span>` + ids.map((id, i) => {
-      const p = byId[id], a0 = x0 + c.lab, x = ids.length === 1 ? (a0 + x1) / 2 : a0 + (x1 - a0) * (i + .5) / ids.length;
-      return `<button class="pr${x < x0 + 6 ? " pr--l" : x > x1 - 6 ? " pr--r" : ""}" type="button" data-id="${id}" style="--x:${x.toFixed(2)}%;--b:${(100 - base).toFixed(2)}%;--h:${(c.h * K[id]).toFixed(2)}%" aria-label="${p[1]}, ${rub(p[2])}"><span class="pr__in"><img src="img/cut/${id}.webp" alt="" draggable="false"><span class="pr__tag">${p[1]}<b>${rub(p[2])}</b></span></span></button>`;
-    }).join("")).join("");
+    const asp = port.matches ? 16 / 9 : 9 / 16; // высота сцены / ширина сцены
+    shelves.innerHTML = c.shelves.map(([base, ids, tag]) => {
+      const a0 = x0 + c.lab, room = x1 - a0;
+      let hs = ids.map((id) => c.h * K[id]), ws = ids.map((id, i) => hs[i] * RATIO[id] * asp);
+      const sum = ws.reduce((a, b) => a + b, 0), f = Math.min(1, room * .94 / sum);
+      hs = hs.map((h) => h * f); ws = ws.map((w) => w * f);
+      const gap = (room - sum * f) / (ids.length + 1);
+      let at = a0 + gap;
+      return (tag ? `<span class="tagx" style="--x:${x0}%;--b:${(100 - base).toFixed(2)}%">${tag}</span>` : "") + ids.map((id, i) => {
+        const p = byId[id], x = at + ws[i] / 2; at += ws[i] + gap;
+        return `<button class="pr${i === 0 ? " pr--l" : i === ids.length - 1 ? " pr--r" : ""}" type="button" data-id="${id}" style="--x:${x.toFixed(2)}%;--b:${(100 - base).toFixed(2)}%;--h:${hs[i].toFixed(2)}%" aria-label="${p[1]}, ${rub(p[2])}"><span class="pr__in"><img src="img/shelf/${id}.webp" alt="" draggable="false"><span class="pr__tag">${p[1]}<b>${rub(p[2])}</b></span></span></button>`;
+      }).join("");
+    }).join("");
     items = [...shelves.querySelectorAll(".pr")];
   };
   render();
