@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OzoneBox Future 2 - витрина в небе</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Проба OzoneBox Future 2: холодильник-витрина с товарами парит в небе среди облаков, по нажатию открывается карточка.">
+<meta name="theme-color" content="#8ec3ef">
+<link rel="stylesheet" href="shop.css?v=f2s">
+<link rel="preload" as="image" href="img/sky-16x9.webp" media="(orientation: landscape)" fetchpriority="high">
+<link rel="preload" as="image" href="img/fridge-16x9.webp" media="(orientation: landscape)" fetchpriority="high">
+<link rel="preload" as="image" href="img/sky-9x16.webp" media="(orientation: portrait)" fetchpriority="high">
+<link rel="preload" as="image" href="img/fridge-9x16.webp" media="(orientation: portrait)" fetchpriority="high">
+<style>
+/* шрифты лежат рядом со страницей */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/Unbounded-cyrillic-c86556.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/Unbounded-latin-06f2e4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Unbounded-cyrillic-c86556.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Unbounded-latin-06f2e4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/Manrope-cyrillic-ffb0f3.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/Manrope-latin-cf48e3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/Manrope-cyrillic-ffb0f3.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/Manrope-latin-cf48e3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Manrope-cyrillic-ffb0f3.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Manrope-latin-cf48e3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(fonts/Manrope-cyrillic-ffb0f3.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(fonts/Manrope-latin-cf48e3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root{
+  --acid:#46e62e; --ink:#0e0f0d; --ink-2:#1b1d1a; --paper:#fff; --mist:#eceeec; --mist-2:#e3e6e3;
+  --line:#dcdfdb; --mute:#6b6f6a; --r:26px; --r-s:16px; --ease:cubic-bezier(.2,.8,.2,1);
+  --night:#0b0c0b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:#9cc9ee;color:var(--paper);font-family:Manrope,system-ui,sans-serif;font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--acid);outline-offset:3px;border-radius:8px}
+.press{transition:transform .18s var(--ease),background .25s,color .25s}
+.press:active{transform:scale(.96);transition-duration:.06s}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:99px;font-weight:700;font-size:15px;white-space:nowrap}
+.btn svg{width:18px;height:18px}
+.btn--acid{background:var(--acid);color:var(--ink)}
+.btn--acid:hover{background:var(--ink);color:var(--acid)}
+.btn--ink{background:var(--ink);color:var(--paper)}
+.btn--ink:hover{background:var(--acid);color:var(--ink)}
+.btn--white{background:var(--paper);color:var(--ink)}
+.btn--sm{height:40px;padding:0 16px;font-size:14px}
+.cnt{min-width:28px;height:28px;border-radius:99px;background:var(--acid);color:var(--ink);display:grid;place-items:center;font-size:13px;font-weight:800;padding:0 6px}
+.cnt.bump{animation:bump .45s var(--ease)}
+@keyframes bump{40%{transform:scale(1.35)}}
+/* окна магазина светлые: текст в них тёмный, иначе наследуется белый с тёмной страницы */
+.pd,.cd,.sr{color:var(--ink)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* небо: картинка медленно дрейфует, облака плывут двумя слоями - за холодильником и перед ним */
+.sky{position:fixed;inset:0;overflow:hidden}
+.sky__img{position:absolute;inset:-4%;width:108%;height:108%;max-width:none;object-fit:cover;animation:skydrift 60s ease-in-out infinite alternate}
+@keyframes skydrift{to{transform:translate3d(-2.5%,-1%,0) scale(1.03)}}
+.clouds{position:fixed;left:0;width:300%;background:url(img/clouds.webp) repeat-x 0 0/auto 100%;pointer-events:none;will-change:transform}
+.clouds--back{bottom:4%;height:34%;opacity:.95;animation:clouds 90s linear infinite}
+.clouds--front{z-index:12;bottom:-9%;height:24%;opacity:.92;animation:clouds 55s linear infinite reverse}
+@keyframes clouds{to{transform:translate3d(-33.333%,0,0)}}
+@media (orientation:portrait){.clouds--back{bottom:10%;height:22%}.clouds--front{bottom:-4%;height:15%}}
+/* холодильник парит: плавно поднимается и опускается */
+.stage{animation:hover 7s ease-in-out infinite alternate}
+@keyframes hover{from{translate:0 -.6%}to{translate:0 .9%}}
+@media (prefers-reduced-motion:reduce){.sky__img,.clouds,.stage{animation:none}}
+
+/* верхняя строка поверх сцены */
+.top{position:fixed;z-index:20;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top)) 18px 14px;pointer-events:none}
+.top>*{pointer-events:auto}
+.back{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:99px;background:rgba(14,15,13,.55);border:1px solid rgba(255,255,255,.2);font-size:14px;font-weight:700}
+.back:hover{background:rgba(255,255,255,.16)}
+.back svg{width:16px;height:16px}
+.cart{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 6px 0 16px;border-radius:99px;background:rgba(14,15,13,.55);border:1px solid rgba(255,255,255,.2);font-size:14px;font-weight:700}
+.cart:hover{background:rgba(255,255,255,.16)}
+
+/* сцена: картинка холодильника по размеру экрана без полос, как cover */
+.stage{position:fixed;left:50%;top:50%;aspect-ratio:16/9;width:max(100vw,calc(100svh * 16 / 9));transform:translate(-50%,-50%)}
+.stage>picture img{position:absolute;inset:0;width:100%;height:100%}
+@media (orientation:portrait){.stage{aspect-ratio:9/16;width:max(100vw,calc(100svh * 9 / 16))}}
+
+/* экран с логотипом */
+.screen{position:absolute;left:var(--sx);top:var(--sy);width:var(--sw);transform:translate(-50%,-50%);opacity:0}
+.screen svg{width:100%;height:auto;overflow:visible}
+.screen .glow{position:absolute;inset:-40% -10%;background:radial-gradient(50% 50% at 50% 50%,rgba(70,230,46,.28),rgba(255,255,255,.08) 45%,transparent 70%);opacity:0;pointer-events:none}
+.screen .logo{position:relative;filter:drop-shadow(0 0 6px rgba(255,255,255,.55)) drop-shadow(0 0 18px rgba(70,230,46,.35))}
+
+/* мягкий свет сверху и блик по стеклу */
+.light{position:absolute;left:var(--ix);top:var(--iy);width:var(--iw);height:var(--ih);background:radial-gradient(70% 45% at 50% 0%,rgba(255,255,255,.14),transparent 70%);pointer-events:none;opacity:.6}
+.sheen{position:absolute;left:var(--ix);top:var(--iy);width:var(--iw);height:var(--ih);overflow:hidden;pointer-events:none;border-radius:2%}
+.sheen::before{content:"";position:absolute;top:-10%;bottom:-10%;width:18%;left:-30%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.09),transparent);transform:skewX(-12deg)}
+
+/* товары на полках */
+.pr{position:absolute;bottom:var(--b);left:var(--x);height:var(--h);transform:translateX(-50%);padding:0 3px;opacity:0;-webkit-tap-highlight-color:transparent}
+.pr__in{position:relative;height:100%;display:block;transition:transform .22s cubic-bezier(.2,.8,.2,1)}
+.pr img{height:100%;width:auto;max-width:none;position:relative;z-index:2;user-select:none;-webkit-user-drag:none}
+.pr__in::after{content:"";position:absolute;z-index:1;left:-35%;right:-35%;bottom:-14%;height:42%;background:radial-gradient(closest-side,rgba(70,230,46,.38),rgba(255,255,255,.12) 55%,transparent);opacity:0;transition:opacity .26s ease}
+.pr__in::before{content:"";position:absolute;z-index:1;left:8%;right:8%;bottom:-3%;height:7%;border-radius:50%;background:rgba(0,0,0,.55);filter:blur(2px)}
+.pr__tag{position:absolute;z-index:5;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,6px);white-space:nowrap;padding:7px 12px;border-radius:12px;background:rgba(14,15,13,.82);border:1px solid rgba(70,230,46,.45);font-size:13px;font-weight:700;line-height:1.2;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s var(--ease)}
+.pr--l .pr__tag{left:0;transform:translate(0,6px)}
+.pr--r .pr__tag{left:auto;right:0;transform:translate(0,6px)}
+/* табличка раздела на полке */
+.tagx{position:absolute;left:var(--x);bottom:calc(var(--b) + .6%);padding:4px 9px;border-radius:7px;border:1px solid rgba(70,230,46,.55);background:rgba(10,12,10,.6);color:rgba(255,255,255,.88);font-size:clamp(9px,.75vw,12px);font-weight:800;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;pointer-events:none;opacity:0}
+.pr__tag b{display:block;color:var(--acid);font-weight:800}
+@media (hover:hover){
+  .pr:hover .pr__in{transform:translateY(-6px) scale(1.04)}
+  .pr:hover .pr__in::after,.pr:focus-visible .pr__in::after{opacity:.85}
+  .pr:hover .pr__tag,.pr:focus-visible .pr__tag{opacity:1;transform:translate(-50%,0)}
+  .pr--l:hover .pr__tag,.pr--r:hover .pr__tag,.pr--l:focus-visible .pr__tag,.pr--r:focus-visible .pr__tag{transform:translate(0,0)}
+  .shelves:has(.pr:hover) .pr:not(:hover) .pr__in{opacity:.72}
+}
+.pr:focus-visible{outline:none}
+.pr:focus-visible .pr__in{transform:translateY(-6px) scale(1.04);outline:2px solid var(--acid);outline-offset:4px;border-radius:10px}
+.pr.wink .pr__in::after{animation:wink .9s ease}
+@keyframes wink{30%,60%{opacity:.9}}
+
+/* стеклянные двери, которые распахиваются при входе */
+.doors{position:absolute;left:var(--dx);top:var(--dy);width:var(--dw);height:var(--dh);perspective:1400px;pointer-events:none}
+.door{position:absolute;top:0;bottom:0;width:50%;backface-visibility:hidden;background:linear-gradient(160deg,rgba(40,43,40,.62),rgba(12,13,12,.7) 55%,rgba(26,28,26,.64));border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(0,0,0,.6)}
+.door::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.09) 42%,transparent 52%)}
+.door--l{left:0;transform-origin:left center;border-radius:18px 4px 4px 18px}
+.door--r{right:0;transform-origin:right center;border-radius:4px 18px 18px 4px}
+.door i{position:absolute;top:38%;bottom:38%;width:3px;border-radius:3px;background:rgba(255,255,255,.35)}
+.door--l i{right:8%}.door--r i{left:8%}
+@media (orientation:portrait){.doors{perspective:900px}}
+
+/* табличка «Наборы и боксы» на нижней панели холодильника */
+.boxes{position:absolute;left:var(--bx);top:var(--by);transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:10px;padding:0 18px;height:clamp(36px,3.2vw,46px);border-radius:99px;border:1px solid rgba(70,230,46,.6);background:rgba(10,12,10,.55);color:var(--paper);font-family:Unbounded,Manrope,sans-serif;font-weight:500;font-size:clamp(12px,1vw,15px);letter-spacing:.02em;white-space:nowrap;box-shadow:0 0 18px rgba(70,230,46,.25),inset 0 0 12px rgba(70,230,46,.12);opacity:0;transition:background .25s,color .25s}
+.boxes svg{width:16px;height:16px;color:var(--acid)}
+.boxes:hover{background:var(--acid);color:var(--ink)}
+.boxes:hover svg{color:var(--ink)}
+.hint{position:fixed;z-index:15;backdrop-filter:none;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);padding:10px 16px;border-radius:99px;background:rgba(14,15,13,.7);border:1px solid rgba(255,255,255,.12);font-size:13px;font-weight:700;color:rgba(255,255,255,.85);white-space:nowrap;opacity:0}
+.hint i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acid);margin-right:8px;vertical-align:1px}
+
+@media (prefers-reduced-motion:reduce){.sheen::before{display:none}.pr__in{transition:none}}
+</style>
+</head>
+<body>
+<h1 class="sr-only">OzoneBox Future 2 - витрина-холодильник в небе</h1>
+<div class="sky" aria-hidden="true">
+  <picture><source media="(orientation: portrait)" srcset="img/sky-9x16.webp"><img class="sky__img" src="img/sky-16x9.webp" alt=""></picture>
+  <div class="clouds clouds--back"></div>
+</div>
+<div class="clouds clouds--front" aria-hidden="true"></div>
+<div class="top">
+  <a class="back press" href="/ozonbox-glavnaya-11/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>На главную</a>
+  <button class="cart press" type="button" id="cartBtn" data-cart aria-label="Корзина"><span>Корзина</span><span class="cnt" id="cnt">0</span></button>
+</div>
+
+<main class="stage" id="stage">
+  <picture>
+    <source media="(orientation: portrait)" srcset="img/fridge-9x16-s.webp 900w, img/fridge-9x16.webp 1440w" sizes="120vw">
+    <img src="img/fridge-16x9.webp" srcset="img/fridge-16x9-s.webp 1600w, img/fridge-16x9.webp 2560w" sizes="115vw" alt="" fetchpriority="high" id="bg">
+  </picture>
+  <div class="light" id="light"></div>
+  <div class="sheen" id="sheen"></div>
+  <div class="screen" id="screen"><span class="glow" id="glow"></span><svg class="logo" role="img" aria-label="OzoneBox" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 32" fill="none"> <g> <path d="M24.3714 17.6468C27.9454 17.9573 30.6944 21.0721 30.6944 24.811V32H23.7987C20.2123 32 17.2246 29.134 16.9268 25.408C16.5726 20.9777 20.1218 17.2776 24.3714 17.6468Z" fill="#46e62e"></path> <path d="M4.81481 16C4.81481 13.1364 4.81848 11.2875 4.92767 9.87966C5.0324 8.52957 5.21025 8.02811 5.32892 7.78234C5.79335 6.82046 6.54219 6.03976 7.46483 5.55558C7.70057 5.43186 8.18157 5.24644 9.47658 5.13727C10.827 5.02343 12.6005 5.01961 15.3472 5.01961C18.094 5.01961 19.8675 5.02343 21.2179 5.13727C22.5129 5.24644 22.9939 5.43187 23.2296 5.55558C24.1523 6.03976 24.9011 6.82046 25.3655 7.78234C25.4842 8.02811 25.6621 8.52957 25.7668 9.87966C25.8492 10.9432 25.8715 12.2586 25.8775 14.073C27.704 14.4553 29.351 15.3266 30.6944 16.546C30.6944 16.3671 30.6944 16.185 30.6944 16C30.6944 10.4367 30.6944 7.65503 29.6662 5.52547C28.7374 3.60168 27.2397 2.0403 25.3944 1.07194C23.3517 0 20.6835 0 15.3472 0C10.0109 0 7.34271 0 5.30004 1.07194C3.45473 2.0403 1.95706 3.60168 1.02821 5.52547C3.58732e-07 7.65503 2.3348e-07 10.4367 2.22127e-10 16C-2.33036e-07 21.5633 -3.58732e-07 24.345 1.02821 26.4745C1.95706 28.3983 3.45473 29.9597 5.30004 30.9281C7.34271 32 10.0109 32 15.3472 32C15.5247 32 15.6992 32 15.8709 31.9999C14.7013 30.5995 13.8656 28.8824 13.4988 26.9781C11.7584 26.9719 10.4967 26.9487 9.47658 26.8627C8.18157 26.7536 7.70057 26.5682 7.46483 26.4444C6.54219 25.9602 5.79334 25.1795 5.32892 24.2177C5.21025 23.9719 5.0324 23.4704 4.92767 22.1203C4.81848 20.7125 4.81481 18.8636 4.81481 16Z" fill="white"></path> <path d="M69.4856 16.762C69.4856 9.86324 64.6142 6.16431 59.4608 6.16431C54.2233 6.16431 49.3518 9.83388 49.3518 16.762C49.3518 23.6901 54.1106 27.389 59.3763 27.389C65.346 27.389 69.4856 23.0149 69.4856 16.762ZM53.6038 16.762C53.6038 12.4172 56.3633 10.2155 59.4608 10.2155C62.53 10.2155 65.2894 12.3879 65.2894 16.762C65.2894 21.2536 62.5017 23.3672 59.4326 23.3672C56.2789 23.3672 53.6038 21.2536 53.6038 16.762Z" fill="white"></path> <path d="M79.5282 6.48706V10.3328H87.5671L78.248 27.0368L93.9311 27.0366V23.1028H84.9202L94.2471 6.48706H79.5282Z" fill="white"></path> <path d="M123.547 16.762C123.547 9.86324 118.676 6.16431 113.523 6.16431C108.285 6.16431 103.413 9.83388 103.413 16.762C103.413 23.6901 108.172 27.389 113.438 27.389C119.407 27.389 123.547 23.0149 123.547 16.762ZM107.665 16.762C107.665 12.4172 110.425 10.2155 113.523 10.2155C116.592 10.2155 119.352 12.3879 119.352 16.762C119.352 21.2536 116.564 23.3672 113.494 23.3672C110.341 23.3672 107.665 21.2536 107.665 16.762Z" fill="white"></path> <path d="M151.222 28.3713V6.48726H146.998V18.1418L134.608 5.01953V27.0368H138.804V15.2942L151.222 28.3713Z" fill="white"></path> <path d="M174.825 6.48706H163.385V27.0366H175.691V23.0441H167.638V18.3471H173.369V14.5014H167.638V10.3328H174.825V6.48706Z" fill="white"></path> <path d="M201.689 12.5934C201.689 8.74769 199.098 6.5166 195.494 6.5166H187.131V27.0368H196.282C200.225 27.0368 202.533 24.5709 202.533 20.96C202.533 18.8463 201.548 17.173 199.718 16.3804C200.956 15.5878 201.689 14.0906 201.689 12.5934ZM195.184 10.2743C196.648 10.2743 197.578 11.243 197.549 12.7402C197.521 14.12 196.62 14.942 195.184 14.942H191.326V10.2743H195.184ZM195.803 18.5234C196.451 18.5234 197.014 18.5822 197.493 18.9344C198.084 19.3748 198.394 20.1381 198.366 20.96C198.282 22.3398 197.437 23.2205 196.001 23.2205H191.326V18.5234H195.803Z" fill="white"></path> <path d="M232.66 16.762C232.66 9.86324 227.788 6.16431 222.635 6.16431C217.398 6.16431 212.527 9.83388 212.527 16.762C212.527 23.6901 217.285 27.389 222.551 27.389C228.521 27.389 232.66 23.0149 232.66 16.762ZM216.779 16.762C216.779 12.4172 219.538 10.2155 222.635 10.2155C225.705 10.2155 228.464 12.3879 228.464 16.762C228.464 21.2536 225.676 23.3672 222.608 23.3672C219.453 23.3672 216.779 21.2536 216.779 16.762Z" fill="white"></path> <path d="M250.186 13.5619L248.384 9.86306L246.328 6.48706H241.219L247.708 16.1747L240.481 27.0368L245.54 27.0366L247.989 23.1909L250.158 19.2278H250.298L252.41 23.0735L254.973 27.0366L260 27.0368L252.777 16.1747L259.174 6.48706H254.156L252.213 9.68687L250.298 13.5619H250.186Z" fill="white"></path> </g> </svg></div>
+  <div class="shelves" id="shelves" role="group" aria-label="Товары на полках" inert></div>
+  <a class="boxes" id="boxes" href="/ozonbox-glavnaya-11/#sets"><span>Наборы и боксы</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <div class="doors" id="doors" aria-hidden="true"><div class="door door--l" id="doorL"><i></i></div><div class="door door--r" id="doorR"><i></i></div></div>
+</main>
+<p class="hint" id="hint" aria-hidden="true"><i></i>Нажмите на товар - откроется карточка</p>
+
+<script src="shop.js?v=f2s"></script>
+<script>
+// Витрина OzoneBox Future. Фон - картинка пустого холодильника (Higgsfield), товары - настоящие вырезки
+// поверх неё: надписи на упаковке нейросеть не рисует. Координаты полок - доли картинки в процентах.
+(() => {
+  const { byId, rub, open } = OZB;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const port = matchMedia("(orientation: portrait)");
+  const $ = (s) => document.querySelector(s);
+  // относительная высота упаковки: флакон маски самый высокий, банка масла самая низкая
+  const K = { "maska-volosy": .92, "shampun": .92, "maska-shampun": .92, "anticellulit": .9, "ochischenie": .86, "ozodermik-3": .8, "ozodermik-5": .76,
+    "dnevnoy-krem": .72, "krem-pryschi": .72, "otri-6000": .64, "stop-akne": .6, "super-duet": .95, "super-trio": .9,
+    "chistaya-kozha": .8, "idealnoe-telo": .8, "sos-boks": .8, "vosstanovlenie-volos": .8, "set-lico": .8, "super-kombo": .82 };
+  // ширина/высота картинок img/shelf/ - чтобы расставить товары по ширине упаковки
+  const RATIO = {"anticellulit": 0.291, "chistaya-kozha": 1.244, "dnevnoy-krem": 0.479, "idealnoe-telo": 1.244, "krem-pryschi": 0.406, "maska-shampun": 0.542, "maska-volosy": 0.29, "ochischenie": 0.326, "otri-6000": 0.646, "ozodermik-3": 0.67, "ozodermik-5": 0.411, "set-lico": 1.546, "shampun": 0.289, "sos-boks": 1.244, "stop-akne": 0.73, "super-duet": 0.658, "super-kombo": 1.51, "super-trio": 0.981, "vosstanovlenie-volos": 1.244};
+  const L = {
+    wide: { boxes: [50, 84.5], screen: [50, 13.2, 16], inner: [35.6, 20.5, 28.8, 59], doors: [35.4, 20, 29.2, 60.5], x: [37.4, 62.6], lab: 4.4, h: 11,
+      shelves: [[34.1, ["maska-volosy", "shampun", "maska-shampun", "vosstanovlenie-volos", "sos-boks"], "Волосы"],
+                [47.9, ["dnevnoy-krem", "ochischenie", "super-duet", "chistaya-kozha", "set-lico"], "Лицо"],
+                [60.9, ["ozodermik-5", "krem-pryschi", "ozodermik-3", "stop-akne", "super-kombo"], "Точечно"],
+                [74.8, ["otri-6000", "anticellulit", "super-trio", "idealnoe-telo"], "Тело"]] },
+    tall: { boxes: [50, 78.6], screen: [50, 17.2, 40], inner: [21, 21.5, 58, 50.5], doors: [20.6, 21.2, 58.8, 51], x: [24, 75], lab: 0, h: 8.8,
+      shelves: [[32.8, ["maska-volosy", "shampun", "maska-shampun", "vosstanovlenie-volos"]], [42.7, ["dnevnoy-krem", "ochischenie", "super-duet", "chistaya-kozha"]],
+                [52.7, ["ozodermik-5", "krem-pryschi", "ozodermik-3", "stop-akne", "sos-boks"]], [61.8, ["otri-6000", "anticellulit", "super-trio", "idealnoe-telo"]],
+                [71.5, ["set-lico", "super-kombo"]]] },
+  };
+  const stage = $("#stage"), shelves = $("#shelves");
+  const setBox = (el, p, [x, y, w, h]) => { el.style.setProperty(p + "x", x + "%"); el.style.setProperty(p + "y", y + "%"); el.style.setProperty(p + "w", w + "%"); el.style.setProperty(p + "h", h + "%"); };
+  let items = [];
+  const render = () => {
+    const c = port.matches ? L.tall : L.wide;
+    const s = $("#screen"); s.style.setProperty("--sx", c.screen[0] + "%"); s.style.setProperty("--sy", c.screen[1] + "%"); s.style.setProperty("--sw", c.screen[2] + "%");
+    const bx = $("#boxes"); bx.style.setProperty("--bx", c.boxes[0] + "%"); bx.style.setProperty("--by", c.boxes[1] + "%");
+    setBox($("#light"), "--i", c.inner); setBox($("#sheen"), "--i", c.inner); setBox($("#doors"), "--d", c.doors);
+    const [x0, x1] = c.x;
+    const asp = port.matches ? 16 / 9 : 9 / 16; // высота сцены / ширина сцены
+    shelves.innerHTML = c.shelves.map(([base, ids, tag]) => {
+      const a0 = x0 + c.lab, room = x1 - a0;
+      let hs = ids.map((id) => c.h * K[id]), ws = ids.map((id, i) => hs[i] * RATIO[id] * asp);
+      const sum = ws.reduce((a, b) => a + b, 0), f = Math.min(1, room * .94 / sum);
+      hs = hs.map((h) => h * f); ws = ws.map((w) => w * f);
+      const gap = (room - sum * f) / (ids.length + 1);
+      let at = a0 + gap;
+      return (tag ? `<span class="tagx" style="--x:${x0}%;--b:${(100 - base).toFixed(2)}%">${tag}</span>` : "") + ids.map((id, i) => {
+        const p = byId[id], x = at + ws[i] / 2; at += ws[i] + gap;
+        return `<button class="pr${i === 0 ? " pr--l" : i === ids.length - 1 ? " pr--r" : ""}" type="button" data-id="${id}" style="--x:${x.toFixed(2)}%;--b:${(100 - base).toFixed(2)}%;--h:${hs[i].toFixed(2)}%" aria-label="${p[1]}, ${rub(p[2])}"><span class="pr__in"><img src="img/shelf/${id}.webp" alt="" draggable="false"><span class="pr__tag">${p[1]}<b>${rub(p[2])}</b></span></span></button>`;
+      }).join("");
+    }).join("");
+    items = [...shelves.querySelectorAll(".pr")];
+  };
+  render();
+
+  // открытие сцены: экран разгорается, двери распахиваются, товары встают по полкам сверху вниз
+  const show = (el) => (el.style.opacity = 1);
+  const finale = () => { show($("#boxes")); shelves.inert = false; items.forEach(show); shelves.querySelectorAll(".tagx").forEach(show); show($("#screen")); $("#glow").style.opacity = .7; $("#doors").style.display = "none"; show($("#hint")); };
+  let run = [];
+  const play = () => {
+    if (reduce) { [...items, ...shelves.querySelectorAll(".tagx"), $("#screen"), $("#hint"), $("#boxes")].forEach((e) => e.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250, fill: "forwards" })); $("#doors").style.display = "none"; $("#glow").style.opacity = .7; shelves.inert = false; return; }
+    const A = (el, kf, o) => { const a = el.animate(kf, { fill: "both", ...o }); run.push(a); return a; };
+    A($("#screen"), [{ opacity: 0, transform: "translate(-50%,-50%) scale(.985)" }, { opacity: .9, offset: .12 }, { opacity: .25, offset: .22 }, { opacity: 1, offset: .4 }, { opacity: .6, offset: .55 }, { opacity: 1, transform: "translate(-50%,-50%) scale(1)" }], { duration: 750, delay: 150 });
+    A($("#glow"), [{ opacity: 0 }, { opacity: .7 }], { duration: 900, delay: 300, easing: "cubic-bezier(.3,0,.2,1)" });
+    const dl = $("#doorL"), dr = $("#doorR"), ang = port.matches ? 95 : 105;
+    A(dl, [{ transform: "rotateY(0)" }, { transform: "rotateY(-1.5deg)" }, { transform: "rotateY(0)" }], { duration: 120, delay: 700, easing: "cubic-bezier(.4,0,.6,1)", fill: "none" });
+    A(dl, [{ transform: "rotateY(0)", opacity: 1 }, { opacity: 1, offset: .85 }, { transform: `rotateY(-${ang}deg)`, opacity: 0 }], { duration: 1080, delay: 820, easing: "cubic-bezier(.7,0,.2,1)" });
+    A(dr, [{ transform: "rotateY(0)", opacity: 1 }, { opacity: 1, offset: .85 }, { transform: `rotateY(${ang}deg)`, opacity: 0 }], { duration: 1080, delay: 845, easing: "cubic-bezier(.7,0,.2,1)" }).finished.then(() => ($("#doors").style.display = "none")).catch(() => {});
+    shelves.querySelectorAll(".tagx").forEach((el, i) => A(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 1200 + i * 120 }));
+    items.forEach((el, i) => A(el, [{ opacity: 0, transform: "translateX(-50%) translateY(14px) scale(.96)" }, { opacity: 1, offset: .6 }, { opacity: 1, transform: "translateX(-50%) translateY(0) scale(1)" }],
+      { duration: 520, delay: 1250 + i * 70 + Math.round(Math.random() * 40 - 20), easing: "cubic-bezier(.22,1,.36,1)" }));
+    setTimeout(() => (shelves.inert = false), 1300);
+    A($("#boxes"), [{ opacity: 0 }, { opacity: 1 }], { duration: 500, delay: 2100 });
+    A($("#hint"), [{ opacity: 0, transform: "translate(-50%,8px)" }, { opacity: 1, transform: "translate(-50%,0)" }], { duration: 400, delay: 2300, easing: "cubic-bezier(.2,.8,.2,1)" });
+    // нажатие во время заставки - сразу к концу
+    addEventListener("pointerdown", () => run.forEach((a) => { try { a.finish(); } catch (e) {} }), { once: true });
+    setTimeout(breathe, 2400);
+    setTimeout(() => { const w = items[Math.floor(Math.random() * items.length)]; if (w) w.classList.add("wink"); }, 6000);
+  };
+  const go = () => requestAnimationFrame(play);
+  const bg = $("#bg");
+  (bg.decode ? bg.decode() : Promise.resolve()).then(go, go);
+
+  // едва заметное дыхание света - только opacity и одна полоса блика
+  const breathe = () => {
+    if (reduce) return;
+    $("#light").animate([{ opacity: .55 }, { opacity: .8 }], { duration: 6000, iterations: Infinity, direction: "alternate", easing: "ease-in-out" });
+    $("#glow").animate([{ opacity: .7 }, { opacity: .6 }, { opacity: .7 }, { opacity: .62, offset: .9 }, { opacity: .45, offset: .92 }, { opacity: .7 }], { duration: 10000, iterations: Infinity });
+    $("#sheen").classList.add("go"); // полоса блика - CSS-анимация псевдоэлемента
+  };
+
+  // товар: на компьютере - подъём и подпись при наведении, на телефоне - вспышка и карточка
+  const hideHint = () => { const h = $("#hint"); if (h.dataset.gone) return; h.dataset.gone = 1; h.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: "forwards" }); };
+  setTimeout(hideHint, 9000);
+  shelves.addEventListener("click", (e) => {
+    const b = e.target.closest(".pr"); if (!b) return;
+    hideHint();
+    if (matchMedia("(hover: none)").matches && !reduce) { b.classList.remove("wink"); void b.offsetWidth; b.classList.add("wink"); setTimeout(() => open(b.dataset.id), 140); }
+    else open(b.dataset.id);
+  });
+  port.addEventListener("change", () => { run.forEach((a) => { try { a.finish(); } catch (e) {} }); render(); finale(); });
+  document.addEventListener("visibilitychange", () => document.getAnimations().filter((a) => a.effect && a.effect.getTiming().iterations === Infinity).forEach((a) => (document.hidden ? a.pause() : a.play())));
+})();
+</script>
+<style>
+.sheen.go::before{animation:sheen 15s 1s linear infinite}
+@keyframes sheen{0%{left:-30%}47%{left:120%}100%{left:120%}}
+</style>
+</body>
+</html>
