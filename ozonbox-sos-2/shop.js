@@ -48,9 +48,9 @@
   // ссылки на карточку товара на маркетплейсе, один в один. Заполнить по артикулам от Рафаэля (ВОПРОСЫ.md, 1.19):
   // "dnevnoy-krem": { ozon: "https://www.ozon.ru/product/...", wb: "https://www.wildberries.ru/catalog/АРТИКУЛ/detail.aspx" }
   const MPL = {};
-  // пока ссылки нет - поиск этого товара на площадке, а не главная страница магазина
-  const mpUrl = (id, m) => MPL[id]?.[m] || (m === "ozon" ? "https://www.ozon.ru/search/?text=" : "https://www.wildberries.ru/catalog/0/search.aspx?search=")
-    + encodeURIComponent("OzoneBox " + (byId[id] ? byId[id][1] : "").replace(/[«»"]/g, ""));
+  // пока ссылки на карточку нет - магазин продавца целиком (поиск по площадке выдавал чужие товары)
+  const STORE = { ozon: "https://www.ozon.ru/seller/ip-salmanov-rafael-hazranovich/", wb: "https://www.wildberries.ru/seller/91509" };
+  const mpUrl = (id, m) => MPL[id]?.[m] || STORE[m];
   const rub = (n) => n.toLocaleString("ru-RU") + " ₽";
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const img = (id) => (window.OZB_IMG || "img/") + id + ".webp";
