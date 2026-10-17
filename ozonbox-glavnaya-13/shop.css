@@ -19,6 +19,7 @@
 .pd__inside{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
 .pd__inside li{list-style:none;display:flex;gap:10px;align-items:baseline}
 .pd__inside li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--acid);transform:translateY(-1px)}
+.pd__buy .btn{white-space:nowrap}
 .pd__buy{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .pd__price{font-size:30px;font-weight:800;letter-spacing:-.04em;margin-right:auto}
 .pd__mp{display:flex;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--mute);align-items:center}
@@ -31,7 +32,7 @@
 .pd__more summary::after{content:"+";font-size:20px;font-weight:600;color:var(--mute);transition:transform .25s}
 .pd__more[open] summary::after{transform:rotate(45deg)}
 .pd__more ol,.pd__more ul{padding:0 0 14px 20px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.45}
-.pd__more p{font-size:13px;line-height:1.5;color:var(--mute);padding:0 2px 12px}
+.pd__more p{font-size:14px;line-height:1.55;color:var(--ink);opacity:.8;padding:0 2px 12px}
 .pd__more p b{color:var(--ink)}
 .pd__src{font-size:12px;color:var(--mute);padding-top:8px}
 .pd__with h3{font-size:15px;font-weight:800;margin-bottom:8px}

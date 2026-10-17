@@ -133,7 +133,7 @@
     const comp = t.comp.map((c) => `<p>${c.t ? `<b>${esc(c.t)}:</b> ` : ""}${esc(c.v)}</p>`).join("");
     const notes = t.notes.length ? `<ul>${t.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : "";
     const all = part("Как применять", use) + part("Состав", comp) + part("Важно знать", notes);
-    return all ? `<div class="pd__info">${all}<p class="pd__src">Описание - с сайта ozonbox.ru</p></div>` : "";
+    return all ? `<div class="pd__info">${all}</div>` : "";
   };
   const open = (id) => {
     const p = byId[id]; if (!p) return;

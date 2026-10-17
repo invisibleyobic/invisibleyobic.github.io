@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Главная OzoneBox, шаг 13: жёлтая лента, описания товаров и подвал с контактами с ozonbox.ru, плашка про cookie.">
 <script>try{var t=localStorage.getItem("ozb_theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="stylesheet" href="shop.css?v=13">
+<link rel="stylesheet" href="shop.css?v=13b">
 <link rel="preload" href="fonts/Manrope-cyrillic-ffb0f3.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* шрифты лежат рядом со страницей: без запроса к Google, быстрее первый экран */
@@ -159,12 +159,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .press{transition:transform .18s var(--ease),background .25s,color .25s}
 .press:active{transform:scale(.96);transition-duration:.06s}
 
-.ticker{position:relative;background:#ffd400;color:#0e0f0d;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;overflow:hidden;white-space:nowrap;padding:5px 0}
-.ticker::before,.ticker::after{content:"";position:absolute;left:0;right:0;height:5px;background:repeating-linear-gradient(-45deg,#0e0f0d 0 10px,#ffd400 10px 20px)}
+.ticker{position:relative;background:#ffd400;color:#0e0f0d;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;overflow:hidden;white-space:nowrap;padding:0}
+.ticker::before,.ticker::after{content:none}
 .ticker::before{top:0}.ticker::after{bottom:0}
-.ticker__in{display:inline-flex;padding:9px 0;will-change:transform}
+.ticker__in{display:inline-flex;padding:9px 0;line-height:16px;will-change:transform}
 .ticker span{padding-right:48px}
-.ticker span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#0e0f0d;margin-right:12px;vertical-align:1px}
+.ticker span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#0e0f0d;margin-right:12px;vertical-align:1px}
 @keyframes tick{to{transform:translateX(-50%)}}
 
 header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px)}
@@ -370,11 +370,11 @@ footer{background:var(--ink);color:var(--paper);margin-top:40px;padding:56px 0 2
 .foot__tel{font-size:20px;letter-spacing:-.02em}
 @media (max-width:760px){.foot__cols{grid-template-columns:1fr 1fr;gap:22px}}
 /* плашка про cookie - текст владельца, как на ozonbox.ru */
-.ck{position:fixed;z-index:70;left:16px;bottom:16px;max-width:460px;display:flex;gap:14px;align-items:flex-end;padding:16px 16px 16px 20px;border-radius:20px;background:#0e0f0d;color:rgba(255,255,255,.82);font-size:13px;line-height:1.45;box-shadow:0 12px 40px rgba(0,0,0,.25);transform:translateY(140%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.ck{position:fixed;z-index:70;left:16px;bottom:16px;max-width:660px;display:flex;gap:14px;align-items:flex-end;padding:14px 14px 14px 18px;border-radius:18px;background:#0e0f0d;color:rgba(255,255,255,.82);font-size:13px;line-height:1.45;box-shadow:0 12px 40px rgba(0,0,0,.25);transform:translateY(140%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .ck.on{transform:none}
 .ck a{color:var(--acid);text-decoration:underline;text-underline-offset:2px}
 .ck .btn{flex:none;color:#0e0f0d}
-@media (max-width:760px){.ck{left:10px;right:10px;bottom:10px;max-width:none;flex-direction:column;align-items:stretch}.ck .btn{justify-content:center}}
+@media (max-width:760px){.ck{left:8px;right:8px;bottom:8px;max-width:none;gap:10px;align-items:center;padding:10px 10px 10px 14px;font-size:11px;line-height:1.35}.ck .btn{height:36px;padding:0 14px}}
 
 .dock{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 20px;border-radius:99px;background:var(--ink);color:var(--paper);font-weight:700;transform:translateY(140%);transition:transform .45s var(--ease)}
 .dock.on{transform:none}
@@ -388,6 +388,7 @@ footer{background:var(--ink);color:var(--paper);margin-top:40px;padding:56px 0 2
   .bar{justify-content:space-between;flex-wrap:wrap;height:auto;padding:10px 0 0;row-gap:4px}
   .nav{order:5;width:100%;margin:0 -4px;padding-bottom:8px;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
   .nav::-webkit-scrollbar{display:none}
+  .nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:28px}
   .nav a{flex:none;font-size:14px;padding:7px 12px}
   .nav__pill{display:none}
   .nav a.cur{color:var(--ink);background:var(--mist)}
@@ -622,14 +623,15 @@ html[data-theme="dark"] .theme .sun{color:var(--mute)}html[data-theme="dark"] .t
 
 <div class="dock" id="dock" role="status"><span>В корзине <b id="dockN">0</b></span><button class="btn btn--acid btn--sm press" type="button" data-cart>Оформить</button></div>
 
-<script src="texts.js?v=13"></script>
-<script src="shop.js?v=13"></script>
+<script src="texts.js?v=13b"></script>
+<script src="shop.js?v=13b"></script>
 <script>
 // cookie: показываем через секунду, пока не нажали «Понятно»
 (() => {
   const ck = document.getElementById("ck"); let seen = false;
   try { seen = localStorage.getItem("ozb_cookie") === "1"; } catch (e) {}
-  if (!seen) setTimeout(() => ck.classList.add("on"), 1200);
+  const showCk = () => ck.classList.add("on");
+  if (!seen) { addEventListener("scroll", showCk, { once: true, passive: true }); setTimeout(showCk, 6000); }
   document.getElementById("ckOk").addEventListener("click", () => { ck.classList.remove("on"); try { localStorage.setItem("ozb_cookie", "1"); } catch (e) {} });
 })();
 </script>
@@ -693,10 +695,13 @@ html[data-theme="dark"] .theme .sun{color:var(--mute)}html[data-theme="dark"] .t
     if (!half) return;
     const t = tkAnim ? tkAnim.currentTime || 0 : 0;
     if (tkAnim) tkAnim.cancel();
-    tkAnim = tk.animate([{ transform: "translateX(0)" }, { transform: `translateX(${-half}px)` }], { duration: half * 28, iterations: Infinity });
-    tkAnim.currentTime = t % (half * 28);
+    tkAnim = tk.animate([{ transform: "translateX(0)" }, { transform: `translateX(${-half}px)` }], { duration: half * 40, iterations: Infinity });
+    tkAnim.currentTime = t % (half * 40);
   };
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(runTicker);
+  // под курсором лента стоит - можно дочитать
+  tk.parentElement.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse" && tkAnim) tkAnim.pause(); });
+  tk.parentElement.addEventListener("pointerleave", () => tkAnim && tkAnim.play());
   addEventListener("load", runTicker);
   let tkRz; addEventListener("resize", () => { clearTimeout(tkRz); tkRz = setTimeout(runTicker, 200); });
   document.addEventListener("visibilitychange", () => { if (!document.hidden && tkAnim && tkAnim.playState !== "running") tkAnim.play(); });
