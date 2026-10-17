@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Сезон-бокс «Осень» v2 - OZONEBOX</title>
+<meta name="description" content="Черновик концепции v2: белая коробка OZONEBOX, золотая осень, четыре средства на озонированном масле." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;800&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="assets/img/hero.webp" />
+<style>
+  /* v2 White Box: светлая золотая осень. Цвета - токены здесь. */
+  :root, .sw-root {
+    --sw-bg: #f5ecdc;
+    --sw-ink: #2a1d0e;
+    --sw-ink-soft: #6a5537;
+    --sw-accent: #b8812a;
+    --sw-font-display: "Onest", system-ui, sans-serif;
+    --sw-font-body: "Onest", system-ui, sans-serif;
+
+    --cream: #f7f0e3;
+    --paper: #fbf7ef;
+    --ink: #2a1d0e;
+    --ink-soft: #6a5537;
+    --ink-mute: #9a8566;
+    --gold: #c0892d;
+    --gold-deep: #9a6a1c;
+    --gold-soft: rgba(192,137,45,.32);
+    --ozone: #2f62e6;
+    --glass: rgba(255,250,240,.62);
+    --ease: cubic-bezier(.16,1,.3,1);
+    color-scheme: light;
+  }
+  html, body { background: var(--sw-bg); color: var(--ink); margin: 0; }
+  body { font-family: var(--sw-font-body); -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
+
+  /* ---------- шапка ---------- */
+  .hdr { position: fixed; inset: 0 0 auto 0; z-index: 70; display: flex; align-items: center; justify-content: space-between;
+    padding: clamp(14px,2.2vw,26px) clamp(16px,4.5vw,64px); pointer-events: none; }
+  .hdr > * { pointer-events: auto; }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo img { height: clamp(18px, 1.7vw, 24px); display: block; filter: brightness(0) opacity(.85); }
+  .logo em { font: 600 11px/1 var(--sw-font-body); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep);
+    padding: 5px 8px; border: 1px solid var(--gold-soft); border-radius: 999px; background: var(--glass); }
+  .nav { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 34px); }
+  .nav a:not(.btn) { position: relative; color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500; overflow: hidden; display: inline-block; height: 1.4em; line-height: 1.4em; }
+  .nav a span { display: block; transition: transform .45s var(--ease); }
+  .nav a span::after { content: attr(data-t); display: block; color: var(--gold-deep); }
+  .nav a:hover span, .nav a:focus-visible span { transform: translateY(-100%); }
+
+  .btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 22px;
+    border-radius: 999px; border: 1px solid var(--ink); color: var(--paper); background: var(--ink); font: 600 14px/1 var(--sw-font-body);
+    text-decoration: none; cursor: pointer; transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .3s; }
+  .btn::before { content: ""; position: absolute; inset: 0; transform: translateX(-120%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255,230,170,.45), transparent); transition: transform .8s var(--ease); }
+  .btn:hover::before { transform: translateX(120%) skewX(-20deg); }
+  .btn:hover { box-shadow: 0 12px 36px rgba(154,106,28,.35); transform: translateY(-1px); }
+  .btn .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ozone); box-shadow: 0 0 0 3px rgba(47,98,230,.25); }
+  .btn--light { background: var(--glass); color: var(--ink); border-color: var(--gold-soft); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .btn--light:hover { border-color: var(--gold); }
+
+  /* ---------- первый экран ---------- */
+  .hero { position: fixed; inset: 0; z-index: 30; overflow: hidden; background: var(--sw-bg); }
+  /* Артборд 16:9 накрывает экран так же, как движок (cover, 50% / 42%): слои совпадают с кадром */
+  .board { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -42%);
+    width: max(100vw, 177.78vh); height: max(56.25vw, 100vh); }
+  .board > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+
+  /* светлая дымка слева - под текст, кадр остаётся солнечным */
+  .wash { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(250,243,230,.82) 0%, rgba(250,243,230,.55) 30%, rgba(250,243,230,0) 52%); }
+
+  /* продукты поднимаются из-за верхней кромки коробки */
+  .rise { position: absolute; left: 34%; width: 64%; top: 0; height: 30%; overflow: hidden; pointer-events: none; }
+  .prod { position: absolute; bottom: 0; transform: translate(-50%, 115%) rotate(0deg); transform-origin: 50% 100%;
+    transition: transform 1.1s var(--ease), filter 1.1s var(--ease); filter: drop-shadow(0 18px 24px rgba(90,55,10,.25)); }
+  .prod img { display: block; height: 100%; width: auto; }
+  .p-otri { left: 30%; height: 40%; } .p-feet { left: 42%; height: 64%; }
+  .p-hair { left: 53.5%; height: 64%; } .p-face { left: 65%; height: 64%; }
+  .hero.is-open .p-otri { transform: translate(-50%, -6%) rotate(-7deg); transition-delay: .12s; }
+  .hero.is-open .p-feet { transform: translate(-50%, -12%) rotate(-2.5deg); transition-delay: .2s; }
+  .hero.is-open .p-hair { transform: translate(-50%, -12%) rotate(2.5deg); transition-delay: .28s; }
+  .hero.is-open .p-face { transform: translate(-50%, -6%) rotate(7deg); transition-delay: .36s; }
+  /* лёгкое покачивание, когда продукты наверху */
+  .prod img { animation: bob 5s ease-in-out infinite; animation-play-state: paused; }
+  .hero.is-open .prod img { animation-play-state: running; }
+  .p-feet img { animation-delay: -1.2s; } .p-hair img { animation-delay: -2.4s; } .p-face img { animation-delay: -3.6s; }
+  @keyframes bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -2.5%; } }
+
+  /* вспышка света над коробкой */
+  .glow { position: absolute; left: 64.5%; top: 29%; width: 34%; height: 22%; transform: translate(-50%, -50%) scale(.6); opacity: 0; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(255,236,190,.95), rgba(255,214,140,.45) 45%, transparent);
+    mix-blend-mode: screen; transition: opacity .7s var(--ease), transform 1.2s var(--ease); }
+  .hero.is-open .glow { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+  .tag { position: absolute; transform: translate(-50%, -100%); padding: 7px 12px; border-radius: 999px; white-space: nowrap;
+    font: 600 12px/1 var(--sw-font-body); color: var(--ink); background: var(--glass); border: 1px solid var(--gold-soft);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); opacity: 0; translate: 0 10px;
+    transition: opacity .5s var(--ease), translate .6s var(--ease); pointer-events: none; }
+  .hero.is-open .tag { opacity: 1; translate: 0 0; }
+  /* подписи лежат на белой крышке, под своими продуктами, в шахматном порядке */
+  .t1 { left: 53.2%; top: 37%; } .t2 { left: 60.9%; top: 42.5%; } .t3 { left: 68.2%; top: 37%; } .t4 { left: 75.6%; top: 42.5%; }
+  .hero.is-open .t1 { transition-delay: .7s; } .hero.is-open .t2 { transition-delay: .8s; }
+  .hero.is-open .t3 { transition-delay: .9s; } .hero.is-open .t4 { transition-delay: 1s; }
+
+  .hotspot { position: absolute; left: 47%; top: 4%; width: 36%; height: 80%; cursor: pointer; border-radius: 30px; background: transparent; border: 0; }
+  .cue { position: absolute; left: 64.5%; top: 88%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; white-space: nowrap;
+    padding: 9px 16px; border-radius: 999px; background: var(--glass); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    font: 600 12px/1 var(--sw-font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); transition: opacity .4s; pointer-events: none; }
+  .cue i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: ping 1.8s ease-out infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(192,137,45,.6); } 100% { box-shadow: 0 0 0 10px rgba(192,137,45,0); } }
+  .hero.is-open .cue { opacity: 0; }
+
+  /* левая колонка текста */
+  .lede { position: absolute; z-index: 3; left: clamp(16px,4.5vw,64px); top: 50%; transform: translateY(-46%); width: min(560px, 42vw); }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; font: 600 13px/1 var(--sw-font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--gold-deep); }
+  .eyebrow::before { content: ""; width: 26px; height: 1px; background: currentColor; }
+  .lede h1 { margin: 0; font: 800 clamp(48px, 5.6vw, 100px)/.92 var(--sw-font-display); letter-spacing: -.035em; color: var(--ink); }
+  .lede h1 span { display: block; background: linear-gradient(100deg, #c98a1d 0%, #e2a93b 45%, #a8661a 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lede p { margin: 22px 0 0; font-size: 18px; line-height: 1.55; color: var(--ink-soft); max-width: 44ch; }
+  .lede .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; padding: 0; list-style: none; }
+  .chips li { --mx: 50%; --my: 50%; display: flex; align-items: center; gap: 8px; padding: 9px 14px 9px 10px; border-radius: 14px; font-size: 14px; color: var(--ink);
+    background: radial-gradient(120px circle at var(--mx) var(--my), rgba(255,220,150,.45), transparent 70%), var(--glass);
+    border: 1px solid var(--gold-soft); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform .4s var(--ease), border-color .3s; }
+  .chips li:hover { transform: translateY(-3px); border-color: var(--gold); }
+  .chips b { font-weight: 600; }
+  .chips svg { width: 18px; height: 18px; stroke: var(--gold-deep); fill: none; stroke-width: 1.5; flex: none; }
+
+  /* ---------- секции движка ---------- */
+  .sw-copylayer::before { display: none; }
+  .sw-copy:first-child { display: none; }
+  /* светлая подложка под текстом: флакон остаётся в солнце */
+  .sw-copy::before { content: ""; position: absolute; inset: -32% -30%; z-index: -1;
+    background: radial-gradient(closest-side, rgba(251,245,233,.9), rgba(251,245,233,.62) 55%, transparent); }
+  .sw-copy:nth-child(2), .sw-copy:nth-child(3), .sw-copy:nth-child(4) { left: auto; right: clamp(90px, 7.5vw, 130px); width: min(400px, 30vw); }
+  .sw-copy__num { font: 600 12px/1 var(--sw-font-body); letter-spacing: .14em; color: var(--gold-deep); }
+  .sw-copy__eyebrow { font: 600 12px/1 var(--sw-font-body); letter-spacing: .14em; color: var(--ink-soft); }
+  .sw-copy__title { font: 800 clamp(40px, 4.6vw, 80px)/.95 var(--sw-font-display); letter-spacing: -.03em; color: var(--ink); text-shadow: none; }
+  .sw-copy__body { color: var(--ink-soft); font-size: 18px; text-shadow: none; }
+  .sw-copy__tags li { color: var(--ink); background: var(--glass); border-color: var(--gold-soft); font-weight: 600; transition: border-color .3s, color .3s; }
+  .sw-copy__tags li:hover { border-color: var(--gold); color: var(--gold-deep); }
+  .sw-btn--primary { background: var(--ink); color: var(--paper); } .sw-btn--ghost { color: var(--ink); border-color: var(--gold-soft); background: var(--glass); }
+  .sw-hint { display: none; }
+  .sw-route__label { background: var(--glass); color: var(--ink); }
+  .sw-route__dot i { background: rgba(154,106,28,.35); }
+  .sw-route__dot.is-active:not(:hover) .sw-route__label { opacity: 0; }
+  .sw-scrollbar { z-index: 80; }
+  .sw-route { transition: opacity .4s; }
+  body.at-footer .sw-route { opacity: 0; pointer-events: none; }
+  .sw-copylayer { transition: opacity .5s var(--ease); }
+  body.at-footer .sw-copylayer { opacity: 0; }
+
+  /* ---------- подвал: светлый, с воздухом ---------- */
+  .ftr { position: relative; z-index: 65; background: var(--paper);
+    padding: clamp(64px, 12vh, 140px) clamp(16px,4.5vw,64px) calc(clamp(28px, 5vh, 48px) + env(safe-area-inset-bottom));
+    box-shadow: 0 -40px 80px rgba(120,80,20,.12); border-radius: 28px 28px 0 0; }
+  .ftr__top { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: clamp(28px, 5vw, 80px); align-items: end; }
+  .ftr__title { margin: 0; font: 800 clamp(40px, 5.4vw, 92px)/.92 var(--sw-font-display); letter-spacing: -.035em; color: var(--ink); }
+  .ftr__title span { color: var(--gold); }
+  .ftr__text { margin: 0 0 24px; font-size: 17px; line-height: 1.55; color: var(--ink-soft); max-width: 42ch; }
+  .ftr__nav { display: flex; flex-wrap: wrap; gap: 10px; }
+  .ftr__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: clamp(56px, 10vh, 110px); padding-top: 22px;
+    border-top: 1px solid rgba(154,106,28,.18); font-size: 14px; color: var(--ink-mute); }
+  .ftr__bottom a { color: var(--ink-soft); text-decoration: none; } .ftr__bottom a:hover { color: var(--gold-deep); }
+  .ftr__bottom img { height: 16px; display: block; filter: brightness(0) opacity(.7); }
+
+  @media (max-width: 860px) {
+    .nav a:not(.btn) { display: none; }
+    .btn { padding: 0 16px; font-size: 13px; min-height: 42px; }
+    .logo em { display: none; }
+    /* на телефоне кадр сдвинут к коробке; движок показывает первый кадр с тем же сдвигом */
+    .board { width: 260vw; height: 146.25vw; top: calc(4vh + 10px); left: calc(50vw - 260vw * .645); transform: none; }
+    .wash { background: linear-gradient(0deg, rgba(250,243,230,.95) 0%, rgba(250,243,230,.8) 38%, rgba(250,243,230,0) 62%); }
+    .lede { top: auto; bottom: calc(24px + env(safe-area-inset-bottom)); transform: none; width: auto; right: 16px; }
+    .lede h1 { font-size: 48px; }
+    .lede p { font-size: 15px; margin-top: 14px; }
+    .lede .row { display: none; }
+    .chips { margin-top: 16px; } .chips li { font-size: 13px; padding: 7px 10px 7px 8px; } .chips span { display: none; }
+    .cue { top: 64%; }
+    .tag { font-size: 10px; padding: 5px 8px; }
+    /* кадры 16:9 на узком экране: держим продукт в центре */
+    .sw-stage > .sw-scene:nth-child(1) .sw-scene__still { object-position: 70% 44%; }
+    .sw-stage > .sw-scene:nth-child(2) .sw-scene__still { object-position: 19% 44%; }
+    .sw-stage > .sw-scene:nth-child(3) .sw-scene__still { object-position: 21% 44%; }
+    .sw-stage > .sw-scene:nth-child(4) .sw-scene__still { object-position: 19% 44%; }
+    .sw-stage > .sw-scene:nth-child(5) .sw-scene__still { object-position: 72% 44%; }
+    .sw-stage > .sw-scene:nth-child(6) .sw-scene__still { object-position: 61% 44%; }
+    .sw-copylayer::before { display: block; background: linear-gradient(0deg, rgba(250,243,230,.97) 22%, rgba(250,243,230,.7) 60%, transparent 100%); height: 58%; }
+    .sw-copy::before { display: none; }
+    .sw-copy:nth-child(2), .sw-copy:nth-child(3), .sw-copy:nth-child(4) { left: clamp(18px,5vw,64px); right: clamp(18px,5vw,64px); width: auto; }
+    .ftr__top { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <header class="hdr">
+    <a class="logo" href="/ozonbox-glavnaya-13/" aria-label="OZONEBOX, на главную"><img src="assets/img/logo.webp" alt="OZONEBOX" /><em>Сезон-бокс v2</em></a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="/ozonbox-glavnaya-13/"><span data-t="Главная">Главная</span></a>
+      <a href="#" data-go="1"><span data-t="Внутри">Внутри</span></a>
+      <a href="#" data-go="5"><span data-t="Коробка">Коробка</span></a>
+      <a class="btn" href="#" data-go="5"><i class="dot"></i>Собрать коробку</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top" aria-label="Сезон-бокс «Осень»">
+    <div class="board">
+      <img src="assets/img/hero.webp" alt="Белая коробка OZONE BOX на золотых листьях, солнце светит из-за коробки" />
+      <div class="wash"></div>
+      <div class="glow"></div>
+      <div class="rise" aria-hidden="true">
+        <div class="prod p-otri"><img src="assets/img/otri.webp" alt="" /></div>
+        <div class="prod p-feet"><img src="assets/img/feet.webp" alt="" /></div>
+        <div class="prod p-hair"><img src="assets/img/hair.webp" alt="" /></div>
+        <div class="prod p-face"><img src="assets/img/face.webp" alt="" /></div>
+      </div>
+      <span class="tag t1">Масло «ОТРИ 6000»</span>
+      <span class="tag t2">Крем для ног 12,5%</span>
+      <span class="tag t3">Шампунь 2%</span>
+      <span class="tag t4">Эмульсия для лица</span>
+      <button class="hotspot" type="button" aria-label="Показать, что в коробке" aria-pressed="false"></button>
+      <div class="cue"><i></i><span>Наведите на коробку</span></div>
+    </div>
+
+    <div class="lede">
+      <p class="eyebrow">OZONEBOX · сезон-бокс</p>
+      <h1>Сезон&#8209;бокс<span>Осень</span></h1>
+      <p>Включили отопление - и воздух в квартире стал сухим. Кожу стягивает после душа, шелушатся руки и пятки, волосы электризуются под шапкой. В белой коробке четыре средства на озонированном масле: для лица, волос, ног и масло на всё.</p>
+      <ul class="chips">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l8-8"/></svg><b>Состав</b><span>без гормонов, парабенов и силиконов</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 01-12 0c0-3.5 3-7 6-11z"/></svg><b>Четыре</b><span>лицо, волосы, ноги, масло</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M3 9h18M12 9v11"/></svg><b>Подарок</b><span>дарить можно сразу</span></li>
+      </ul>
+      <div class="row">
+        <a class="btn" href="#" data-go="5"><i class="dot"></i>Собрать коробку</a>
+        <a class="btn btn--light" href="#" data-go="1">Что внутри</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="world"></div>
+
+  <footer class="ftr" id="footer">
+    <div class="ftr__top">
+      <h2 class="ftr__title">Сезон&#8209;бокс<br /><span>Осень</span></h2>
+      <div>
+        <p class="ftr__text">Эмульсия для лица, шампунь, крем для ног и масло «ОТРИ 6000» в одной белой коробке.</p>
+        <div class="ftr__nav">
+          <a class="btn" href="#"><i class="dot"></i>Собрать коробку</a>
+          <a class="btn btn--light" href="/ozonbox-glavnaya-13/">На главную</a>
+          <a class="btn btn--light" href="#top" data-top>Наверх</a>
+        </div>
+      </div>
+    </div>
+    <div class="ftr__bottom">
+      <a href="/ozonbox-glavnaya-13/"><img src="assets/img/logo.webp" alt="OZONEBOX" /></a>
+      <span>Версия 2, белая коробка · <a href="/ozonbox-osen/">версия 1, чёрная коробка</a></span>
+    </div>
+  </footer>
+
+  <script src="scrub-engine.js"></script>
+  <script>
+    mountScrollWorld(document.getElementById('world'), {
+      nav: false,
+      atmosphere: false,
+      hint: 'Листайте',
+      crossfade: 0.35,
+      diveScroll: 1.3,
+      sections: [
+        { id: 'box', label: 'Коробка', still: 'assets/img/hero.webp', scroll: 1.2 },
+        { id: 'otri', label: 'Масло', still: 'assets/img/p1.webp',
+          eyebrow: 'Масло', title: 'ОТРИ 6000',
+          body: 'Озонированное оливковое масло. Капля на сухие локти, кутикулу или пятки - туда, где кожа от батарей сохнет первой.',
+          tags: ['Оливковое масло', 'Озониды'] },
+        { id: 'feet', label: 'Ноги', still: 'assets/img/p2.webp',
+          eyebrow: 'Ноги', title: 'Крем 12,5%',
+          body: 'Крем для ног Ozodermis с озонидами. 12,5% - самая высокая концентрация в наборе. Для пяток, которые до весны живут в тёплых носках.',
+          tags: ['12,5%', 'Помпа'] },
+        { id: 'hair', label: 'Волосы', still: 'assets/img/p3.webp',
+          eyebrow: 'Волосы', title: 'Шампунь 2%',
+          body: 'Шампунь Ozodermis с озонидами. Для кожи головы, которой осенью достаётся от шапки и сухого воздуха.',
+          tags: ['2%', 'Флип-крышка'] },
+        { id: 'face', label: 'Лицо', still: 'assets/img/p4.webp',
+          eyebrow: 'Лицо', title: 'Ozone Cream',
+          body: 'Озоновая эмульсия для лица, 90 мл. Помпа спрятана под колпачком, в сумке ничего не выдавится.',
+          tags: ['90 мл', 'Помпа'] },
+        { id: 'finale', label: 'Вся коробка', still: 'assets/img/finale.webp', scroll: 1.4,
+          eyebrow: 'Сезон-бокс «Осень»', title: 'Все четыре',
+          body: 'Эмульсия, масло, шампунь и крем для ног в одной белой коробке.',
+          cta: { primary: { label: 'Собрать коробку', href: '#' }, secondary: { label: 'На главную', href: '/ozonbox-glavnaya-13/' } } },
+      ],
+      connectors: [],
+    });
+
+    (function () {
+      const hero = document.querySelector('.hero');
+      const hot = hero.querySelector('.hotspot');
+      const canHover = matchMedia('(hover: hover)').matches;
+      if (!canHover) hero.querySelector('.cue span').textContent = 'Нажмите на коробку';
+      const setOpen = (v) => { hero.classList.toggle('is-open', v); hot.setAttribute('aria-pressed', String(v)); };
+      if (canHover) {
+        hot.addEventListener('mouseenter', () => setOpen(true));
+        hot.addEventListener('mouseleave', () => setOpen(false));
+      }
+      // тап даёт и focus, и click: без этой паузы коробка открывалась и тут же закрывалась
+      let openedAt = 0;
+      hot.addEventListener('click', () => { if (Date.now() - openedAt > 400) setOpen(!hero.classList.contains('is-open')); });
+      hot.addEventListener('focus', () => { openedAt = Date.now(); setOpen(true); });
+      hot.addEventListener('blur', () => setOpen(false));
+
+      // продукты чуть следуют за курсором
+      const rise = hero.querySelector('.rise');
+      if (canHover) hero.addEventListener('pointermove', (e) => {
+        const dx = e.clientX / innerWidth - .5, dy = e.clientY / innerHeight - .5;
+        rise.style.translate = `${dx * -14}px ${dy * -8}px`;
+      });
+
+      // первый экран уходит при прокрутке; берём сглаженный скролл движка
+      let lastP = -1;
+      const tick = () => {
+        const y = window.__swY != null ? window.__swY : window.scrollY;
+        const p = Math.min(1, y / (window.innerHeight * 0.35));
+        if (p !== lastP) {
+          lastP = p;
+          hero.style.opacity = String(1 - p);
+          hero.style.visibility = p >= 1 ? 'hidden' : 'visible';
+          hero.style.pointerEvents = p > 0.3 ? 'none' : '';
+          if (p > 0.05) setOpen(false);
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+
+      hero.querySelectorAll('.chips li').forEach((li) => li.addEventListener('pointermove', (e) => {
+        const r = li.getBoundingClientRect();
+        li.style.setProperty('--mx', (e.clientX - r.left) + 'px'); li.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      }));
+
+      new IntersectionObserver(([en]) => document.body.classList.toggle('at-footer', en.isIntersecting), { threshold: 0.05 })
+        .observe(document.getElementById('footer'));
+      document.querySelector('[data-top]').addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+      document.querySelectorAll('[data-go]').forEach((a) => a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dots = document.querySelectorAll('.sw-route__dot');
+        if (dots[+a.dataset.go]) dots[+a.dataset.go].click();
+      }));
+    })();
+  </script>
+</body>
+</html>
