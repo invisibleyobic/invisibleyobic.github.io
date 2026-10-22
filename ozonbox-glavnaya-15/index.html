@@ -460,7 +460,7 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
           <li>Официальный дистрибьютор <span>Ozone Cosmetic Lab</span></li>
           <li>7 способов доставки <span>- курьер, пункты выдачи, почта</span></li>
         </ul>
-        <img class="hero__face" src="img/lica-sky/M04.webp" alt="" width="800" height="960">
+        <img class="hero__face" src="img/lica-pal/M04.webp" alt="" width="800" height="960">
       </div>
       <div class="offer hit">
         <img src="img/sos-boks.webp" alt="Набор «SOS бокс»" width="900" height="900" data-open="sos-boks">
@@ -479,7 +479,7 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
         <a class="link" href="#hits">Хиты продаж</a>
       </div>
     </div>
-    <div class="hero__pic"><img src="img/lica-sky/M04.webp" alt="" width="800" height="960"></div>
+    <div class="hero__pic"><img src="img/lica-pal/M04.webp" alt="" width="800" height="960"></div>
   </section>
 
   <section class="sec" id="tasks" aria-labelledby="tasksT" style="padding-top:28px">
@@ -625,7 +625,7 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
     "ozodermik-5": "Крем, 5% озонированного масла. 50 мл",
     "dnevnoy-krem": "Крем для лица на день, 50 мл",
   };
-  // задачи: заход через проблему, а не через название бренда. Лица - img/lica/ (славянская внешность, 18.10.2026)
+  // задачи: заход через проблему, а не через название бренда. Лица - img/lica-pal/ (славянская внешность, 18.10.2026)
   const TASKS = [
     ["acne", "Кожа склонна к высыпаниям", "M01", ["stop-akne", "super-trio", "ozodermik-3"], "Хит"],
     ["dot", "Точечный уход", "M02", ["krem-pryschi", "otri-6000"], ""],
@@ -636,11 +636,11 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
     ["body", "Уход для тела", "M10", ["idealnoe-telo", "anticellulit"], ""],
     ["gift", "Подарок", "M13", ["super-duet", "super-trio"], ""],
   ];
-  const SKY = ["M01", "M04", "M10", "M13"]; // у этих портретов зелёный фон заменён на голубой
+  // портреты: фон за людьми - цвета палитры (img/lica-pal/, правка владельца 22.10.2026)
   const short = (id) => byId[id][1].replace(/^(Набор|Бокс|Подарочный набор) /, "").replace(/[«»]/g, "");
   const min = (ids) => Math.min(...ids.map((id) => byId[id][2]));
   $("#tasksGrid").innerHTML = TASKS.map(([k, t, face, ids, tag]) => `
-    <button class="task rv press" type="button" data-task="${k}"><img src="img/${SKY.includes(face) ? "lica-sky" : "lica"}/${face}.webp" alt="" width="800" height="960" loading="lazy">${tag ? `<span class="task__tag">${tag}</span>` : ""}
+    <button class="task rv press" type="button" data-task="${k}"><img src="img/lica-pal/${face}.webp" alt="" width="800" height="960" loading="lazy">${tag ? `<span class="task__tag">${tag}</span>` : ""}
       <h3>${t}</h3><small>${ids.map(short).join(" · ")}</small><span class="task__from">от ${rub(min(ids))}</span></button>`).join("");
   document.addEventListener("click", (e) => {
     const b = e.target.closest("[data-task]"); if (!b) return;
