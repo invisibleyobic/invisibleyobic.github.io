@@ -55,8 +55,8 @@ header.top { position: sticky; top: 0; z-index: 40; background: color-mix(in srg
 header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
 .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 750; letter-spacing: .16em; text-decoration: none; font-size: 17px; }
 .logo svg { width: 16px; height: 20px; }
-.logo path { fill: var(--warm); transition: fill .3s; }
-.logo:hover path { fill: var(--ink); }
+.logo path { fill: transparent; stroke: var(--warm); stroke-width: 1.6; transition: fill .3s; }
+.logo:hover path { fill: var(--warm); }
 .nav { display: flex; gap: 26px; font-size: 15px; }
 .nav a { text-decoration: none; color: var(--soft); }
 .nav a:hover { color: var(--ink); }
@@ -87,6 +87,7 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .offer .op { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 .offer .op b { font-size: 30px; letter-spacing: -.02em; } .offer .op s { color: var(--soft); } .offer .op span { color: var(--warm-d); font-weight: 650; font-size: 14px; }
 .offer .ob { display: flex; gap: 8px; flex-wrap: wrap; } .offer .ob .btn { flex: 1; }
+.trust3 { list-style: none; margin: 0; padding: 10px 12px; background: var(--bg); border-radius: 14px; font-size: 13px; color: var(--soft); display: grid; gap: 3px; } .trust3 b { color: var(--ink); font-weight: 600; }
 .offer small { color: var(--soft); font-size: 12px; } .offer a.more { font-size: 14px; }
 .hero-kit { max-height: 52vh; aspect-ratio: 1; justify-self: end; border-radius: 32px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px -36px rgba(20,40,90,.35); }
 .hero-kit img { width: 100%; height: 100%; object-fit: cover; }
@@ -208,6 +209,15 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .lit { background: var(--card); border-radius: 22px; padding: 4px 20px; margin-top: 14px; border: 0; }
 .lit ol { color: var(--soft); font-size: 14px; padding-left: 20px; } .lit li { margin: 8px 0; }
 @media (max-width: 760px) { .hist { grid-template-columns: 1fr; } }
+
+.fit { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.fit > div { background: var(--card); border-radius: 30px; padding: clamp(22px, 3vw, 36px); }
+.fit h3 { font-size: 28px; margin-bottom: 8px; } .fi { color: var(--soft); margin: 0 0 12px; }
+.fit ul { list-style: none; margin: 0; padding: 0; } .fit li { padding: 10px 0 10px 40px; border-top: 1px solid var(--line); position: relative; }
+.fit li::before { position: absolute; left: 0; top: 8px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; }
+.fit-y li::before { content: "+"; background: var(--warm-bg); color: var(--warm-d); }
+.fit-n li::before { content: "−"; background: #fdeaea; color: #b31b22; }
+@media (max-width: 760px) { .fit { grid-template-columns: 1fr; } }
 
 /* 6. каталог */
 .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 30px; }
@@ -370,7 +380,8 @@ footer .wrap { display: grid; gap: 6px; }
       <div class="hero-grid">
         <div>
           <h1 id="title">Где <em>болит?</em></h1>
-          <p class="lead" style="margin-top:18px">Выберите, что беспокоит. Сразу покажем, чем помочь себе дома и сколько это стоит.</p>
+          <p class="lead" style="margin-top:18px">Нажмите туда, где болит. Покажем, что можно сделать дома уже сегодня и сколько это стоит.</p>
+          <p class="kick" style="margin:10px 0 0">Если вы давно живёте с болью, вы здесь не один. У основателя ОЗОТЭНС тоже две грыжи в пояснице.</p>
           <div class="pains" id="pains"></div>
         </div>
         <div class="offer" id="offer" aria-live="polite"></div>
@@ -401,10 +412,10 @@ footer .wrap { display: grid; gap: 6px; }
           <p class="kick">Обычный день</p>
           <h2 class="words">Больная спина <em>забирает весь день</em></h2>
           <ol class="entries" id="entries">
-            <li class="on"><b>07:00</b>Сползаю с кровати боком, как учили.</li>
+            <li class="on"><b>07:00</b>Сползаю с кровати боком. Так уже привычно.</li>
             <li><b>13:00</b>Третий час за ноутом. Поясница горит.</li>
             <li><b>19:00</b>Внук просит поиграть. Говорю: потом.</li>
-            <li><b>23:00</b>Ищу позу, в которой не ноет. Не нахожу.</li>
+            <li><b>23:00</b>Ищу позу, в которой не ноет. Засыпаю в той, где ноет меньше.</li>
           </ol>
           <div class="row"><a class="btn hot" href="#top">Подобрать электрод</a></div>
         </div>
@@ -476,26 +487,6 @@ footer .wrap { display: grid; gap: 6px; }
   </section>
 
   <!-- 5. Колесо скидок -->
-  <section class="game" id="wheel">
-    <div class="wrap">
-      <div class="box">
-        <div>
-          <p class="kick" style="color:#9ba09c">Одна попытка</p>
-          <h2 class="words">Крутите <em>колесо</em></h2>
-          <p class="lead">Нажмите «Крутить» в центре. Выигрыш сразу ляжет в корзину.</p>
-          <div class="prize" id="prize" aria-live="polite"><span style="color:#b9bdba">Здесь появится ваш приз.</span></div>
-          <p class="note">Демо: призы и коды для примера, условия акции утверждает продавец.</p>
-        </div>
-        <div class="wheel" id="wheelBox">
-          <svg class="ptr" viewBox="0 0 44 54" aria-hidden="true"><path d="M22 54 L2 14 A20 20 0 1 1 42 14 Z" fill="#fff"/><circle cx="22" cy="18" r="8" fill="#2f66f5"/></svg>
-          <svg class="w" id="wheelSvg" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
-          <div class="confetti" id="confetti" aria-hidden="true"></div>
-          <button class="spin" type="button" id="spinBtn">Крутить</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 5б. Наборы: дешевле, чем по отдельности (предложение экономиста, утверждает продавец) -->
   <section id="bundles">
     <div class="wrap">
@@ -524,6 +515,26 @@ footer .wrap { display: grid; gap: 6px; }
     </div>
   </section>
 
+  <section class="game" id="wheel">
+    <div class="wrap">
+      <div class="box">
+        <div>
+          <p class="kick" style="color:#9ba09c">Одна попытка</p>
+          <h2 class="words">Крутите <em>колесо</em></h2>
+          <p class="lead">Нажмите «Крутить» в центре. Выигрыш сразу ляжет в корзину.</p>
+          <div class="prize" id="prize" aria-live="polite"><span style="color:#b9bdba">Здесь появится ваш приз.</span></div>
+          <p class="note">Демо: призы и коды для примера, условия акции утверждает продавец.</p>
+        </div>
+        <div class="wheel" id="wheelBox">
+          <svg class="ptr" viewBox="0 0 44 54" aria-hidden="true"><path d="M22 54 L2 14 A20 20 0 1 1 42 14 Z" fill="#fff"/><circle cx="22" cy="18" r="8" fill="#2f66f5"/></svg>
+          <svg class="w" id="wheelSvg" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
+          <div class="confetti" id="confetti" aria-hidden="true"></div>
+          <button class="spin" type="button" id="spinBtn">Крутить</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Самопомощь: видео и разборы «болит X - что делать». Каркас под SEO-страницы -->
   <section id="help">
     <div class="wrap">
@@ -539,6 +550,7 @@ footer .wrap { display: grid; gap: 6px; }
         <a class="hl" href="#device"><span class="vd">▶ видео готовится</span><b>Первый сеанс</b><small>Включить прибор, выбрать программу и силу</small></a>
         <a class="hl" href="#docs"><span class="vd">▶ видео готовится</span><b>Кому нельзя</b><small>Противопоказания простыми словами</small></a>
       </div>
+      <p class="lead" style="margin-top:22px">Мы знаем, как боль съедает силы и каждый день решает за вас. Если сейчас вы не готовы к покупке, загляните в «Самопомощь» - пусть жизнь станет чуточку проще.</p>
     </div>
   </section>
 
@@ -546,8 +558,8 @@ footer .wrap { display: grid; gap: 6px; }
   <section id="docs">
     <div class="wrap">
       <p class="kick">Документы</p>
-      <h2 class="words">Мы не обещаем чудес. <em>Мы показываем документы</em></h2>
-      <p class="lead">За методом - патент, пособие для врачей, научные статьи и тридцать лет озонотерапии в Нижнем Новгороде.</p>
+      <h2 class="words">Всё, что стоит <em>за методом</em></h2>
+      <p class="lead">Патент, пособие для врачей, научные статьи и тридцать лет озонотерапии в Нижнем Новгороде. Каждый документ можно открыть и проверить.</p>
       <div class="docs">
         <div><b>Патент RU 2714457</b><p>«Способ лечения дистрофических заболеваний позвоночника и суставов». Авторы: С.П. Перетягин, С.А. Соколов. Заявлен 18.09.2018, опубликован 17.02.2020. <a href="https://new.fips.ru/registers-doc-view/fips_servlet?DB=RUPAT&amp;DocNumber=2714457" target="_blank" rel="noopener">Открыть в реестре ФИПС</a></p></div>
         <div><b>Пособие для врачей</b><p>«ОЗОТЭНС-терапия дорсалгий и артралгий» (боль в спине и суставах). Перетягин С.П., Новиков А.В., Соколов С.А., Хрулёв С.Е. Издательский дом Академии Естествознания, 2020, 80 с., ISBN 978-5-91327-644-5.</p></div>
@@ -571,14 +583,19 @@ footer .wrap { display: grid; gap: 6px; }
         </ol>
         <p class="small-note">Полный перечень - на сайте производителя ООО «ОТРИ» (ozonecosmetics.ru), раздел «Терапия». История - по данным группы компаний ОТРИ и МЕДОЗОНС.</p>
       </details>
-      <div class="two">
-        <div class="panel">
-          <h3>Кому метод не подходит</h3>
-          <ul>
-            <li>Кардиостимулятор</li><li>Высокое давление</li><li>Беременность</li><li>Онкология, новообразования</li><li>Кровотечения и болезни крови</li>
-            <li>Температура выше 38 °C, острые гнойные воспаления</li><li>Острые внутрисуставные травмы</li><li>Раны и кожные заболевания в зоне воздействия</li><li>Непереносимость импульсного тока</li>
-          </ul>
-        </div>
+      <div class="fit">
+        <div class="fit-y"><h3>Подходит, если</h3><p class="fi">Вы давно живёте с болью в спине, шее или суставах и хотите делать что-то для себя дома, в своём темпе.</p><ul>
+          <li>болит спина, шея, плечо или колено, и врач не против физиопроцедур</li>
+          <li>хочется провести сеанс дома, без записи и дороги</li>
+          <li>много часов сидите: руль, монтаж, офис</li>
+          <li>беспокоят две зоны сразу: у прибора 2 канала</li>
+        </ul></div>
+        <div class="fit-n"><h3>Не подходит, если</h3><p class="fi">Эти ограничения нужны, чтобы вам не навредить. Если что-то из списка про вас, обсудите с врачом, какие варианты подойдут.</p><ul>
+          <li>кардиостимулятор</li><li>высокое давление</li><li>беременность</li><li>онкология, новообразования</li><li>кровотечения и болезни крови</li>
+          <li>температура выше 38 °C, острые гнойные воспаления</li><li>острая травма сустава</li><li>раны и кожные заболевания в зоне электрода</li><li>непереносимость импульсного тока</li>
+        </ul></div>
+      </div>
+      <div class="two" style="grid-template-columns:1fr">
         <div class="panel">
           <h3>Вопросы</h3>
           <details><summary>Какой электрод выбрать?</summary><p>По зоне, где беспокоит: «Спина» - пояс на поясницу, «Шея» - на шейно-воротниковую зону, отдельные электроды для плеча, колена, стопы, бедра. Нажмите на зону в начале страницы - покажем нужный.</p></details>
@@ -592,7 +609,8 @@ footer .wrap { display: grid; gap: 6px; }
 
   <section class="final">
     <div class="wrap">
-      <h2 class="words">Спина не должна решать, <em>как вы живёте</em></h2>
+      <h2 class="words">Пусть боль <em>решает меньше</em></h2>
+      <p class="lead" style="margin-inline:auto">Выберите зону, посмотрите разборы, обсудите с врачом. Двигайтесь в своём темпе.</p>
       <div class="row" style="justify-content:center"><a class="btn hot" href="#top">Выбрать зону</a><a class="btn dark" href="#wheel">Крутить колесо</a></div>
     </div>
   </section>
@@ -771,19 +789,20 @@ ZONES.forEach(code => { const it = I[code]; const z = h('button', 'zone');
 
 // ===== боль -> ответ -> офер =====
 const PAINS = [
-  { t: 'Болит поясница', el: '85/04', a: 'Пояс «Спина» ложится на поясницу: импульс и крем работают там, где болит. Сеанс дома, 85 г прибор.', pg: 'poyasnica-chto-delat' },
-  { t: 'Грыжа, протрузия', el: '85/04', a: 'Метод описан в пособии для врачей «ОЗОТЭНС-терапия дорсалгий» - так называют боль в спине. Тактику при грыже согласуйте с неврологом.', pg: 'gryzha-poyasnichnogo-otdela' },
-  { t: 'Защемило, заклинило', el: '85/04', a: 'Когда прихватило, сеанс можно провести сразу дома, без записи и дороги в физиокабинет.', pg: 'zaklinilo-poyasnicu' },
-  { t: 'Шея и плечи', el: '85/01', a: 'Электрод «Шея» - на шейно-воротниковую зону, там, где зажимает после ноутбука и руля.', pg: 'sheya-i-plechi-za-kompyuterom' },
-  { t: 'Колено, артроз', el: '85/07', a: 'В пособии для врачей метод описан и для артралгий - боли в суставах. Электрод «Колено» обхватывает сустав.', pg: 'bolit-koleno' },
-  { t: 'Плечо', el: '85/02', a: 'Электрод «Плечо» закрывает плечевой сустав. Если больно поднять руку - сначала к врачу, потом сеансы дома.', pg: 'bolit-plecho' },
+  { t: 'Болит поясница', el: '85/04', a: 'Когда поясница болит каждый день, устаёшь уже от самой боли. Для поясницы есть пояс «Спина»: он садится на всю зону, а силу импульса вы выбираете сами.', pg: 'poyasnica-chto-delat' },
+  { t: 'Грыжа, протрузия', el: '85/04', a: 'С таким заключением страшно лишний раз наклониться - это знакомо основателю, у него две грыжи. Пояс «Спина» надевается на поясницу. До первого сеанса поговорите с врачом.', pg: 'gryzha-poyasnichnogo-otdela' },
+  { t: 'Защемило, заклинило', el: '85/04', a: 'Заклинило прямо сейчас? Сначала выдохните: резкий спазм пугает, но чаще всего проходит. Начните с трёх шагов в разборе ниже, а пояс «Спина» пригодится для сеансов дома.', pg: 'zaklinilo-poyasnicu' },
+  { t: 'Шея и плечи', el: '85/01', a: 'Шея тянет к вечеру, голову не повернуть - так бывает после долгого дня за экраном. Электрод «Шея» ложится на шейно-воротниковую зону и подбирается по обхвату.', pg: 'sheya-i-plechi-za-kompyuterom' },
+  { t: 'Колено, артроз', el: '85/07', a: 'Когда колено ноет, каждая лестница даётся с боем. Электрод «Колено» обхватывает сустав, крем наносится прямо на сегменты.', pg: 'bolit-koleno' },
+  { t: 'Плечо', el: '85/02', a: 'Тянуться к полке или надевать куртку бывает больно. Электрод «Плечо» закрепляется на суставе, сеанс можно провести дома, в удобное время.', pg: 'bolit-plecho' },
 ];
 const renderOffer = k => { const pn = PAINS[k], e = I[pn.el], full = I[DEV].price + I[CREAM].price + e.price, price = floor10(full * 0.95);
   $$('#pains button').forEach((b, i) => b.setAttribute('aria-pressed', i === k));
-  $('#offer').innerHTML = `<div class="oph"><img src="${e.img}" alt="${e.name}"></div><p class="oa">${pn.a}</p><div class="ot">Набор «Старт»: прибор + крем OZOTENS 30% + ${e.name.toLowerCase()}</div>
+  $('#offer').innerHTML = `<div class="oph"><img src="${e.img}" alt="${e.name}"></div><p class="oa">${pn.a}</p><div class="ot">В наборе всё для сеансов дома: прибор RoovJoy, крем OZOTENS 30% и ${e.name.replace('Электрод', 'электрод')}. Прибор подходит ко всем электродам.</div>
     <div class="op"><b class="price">${rub(price)}</b><s class="price">${rub(full)}</s><span>выгода ${rub(full - price)}</span></div>
-    <div class="ob"><button class="btn hot" type="button" id="oBuy">В корзину</button><button class="btn" type="button" id="oMore">Подробнее</button></div>
-    <a class="more" href="pomosch/${pn.pg}.html">${pn.t}: что делать сегодня →</a><small>Имеются противопоказания. Необходимо проконсультироваться со специалистом.</small>`;
+    <div class="ob"><button class="btn hot" type="button" id="oBuy">Купить набор</button><button class="btn" type="button" id="oMore">Что в наборе</button></div>
+    <ul class="trust3"><li><b>Доставка:</b> срок уточняется у продавца</li><li><b>Возврат:</b> по закону о защите прав потребителей</li><li><b>Спросить человека:</b> контакт продавца уточняется</li></ul>
+    <a class="more" href="pomosch/${pn.pg}.html">${pn.t}: что можно сделать прямо сейчас →</a><small>Имеются противопоказания. Необходимо проконсультироваться со специалистом.</small>`;
   $('#oMore').onclick = () => openProduct(pn.el);
   $('#oBuy').onclick = () => { cart.push({ b: 'start', title: 'Старт', items: [{ code: DEV, size: null, q: 1 }, { code: CREAM, size: null, q: 1 }, { code: pn.el, size: e.sizes ? e.sizes[0] : null, q: 1 }], full, price, q: 1 }); saveCart(); haptic(15); toast('Набор в корзине'); };
 };
