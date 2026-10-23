@@ -54,7 +54,7 @@ section { padding-block: clamp(72px, 10vw, 130px); }
 header.top { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
 header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
 .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 750; letter-spacing: .16em; text-decoration: none; font-size: 17px; }
-.logo svg { width: 16px; height: 20px; }
+.logo svg { width: 18px; height: 23px; overflow: visible; }
 .logo path { fill: transparent; stroke: var(--warm); stroke-width: 1.6; transition: fill .3s; }
 .logo:hover path { fill: var(--warm); }
 .nav { display: flex; gap: 26px; font-size: 15px; }
@@ -147,7 +147,9 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 /* 4. прибор */
 .dev { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
 .stage { position: relative; border-radius: 36px; background: radial-gradient(80% 70% at 50% 35%, #ffffff, #e7e8e6); aspect-ratio: 4 / 5; overflow: hidden; }
+.stage .lying { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 24%; object-fit: cover; object-position: 30% 100%; opacity: .45; filter: grayscale(.3); -webkit-mask-image: linear-gradient(transparent, #000 60%); mask-image: linear-gradient(transparent, #000 60%); }
 .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage .fallback[hidden] { display: none !important; }
 .stage .fallback { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; mix-blend-mode: multiply; }
 .stage .tip { position: absolute; left: 16px; bottom: 16px; background: rgba(255,255,255,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 14px; pointer-events: none; }
 .read { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
@@ -205,6 +207,7 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 
 .hist { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
 .tl { background: var(--card); border-radius: 20px; padding: 16px 18px; display: grid; gap: 4px; }
+.tl { text-decoration: none; color: inherit; transition: transform .2s, box-shadow .2s; } .tl:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px rgba(20,40,90,.4); } .tl i { font-style: normal; font-size: 13px; color: var(--warm-d); }
 .tl b { font-size: 26px; letter-spacing: -.02em; color: var(--warm); } .tl span { color: var(--soft); font-size: 15px; }
 .lit { background: var(--card); border-radius: 22px; padding: 4px 20px; margin-top: 14px; border: 0; }
 .lit ol { color: var(--soft); font-size: 14px; padding-left: 20px; } .lit li { margin: 8px 0; }
@@ -360,13 +363,60 @@ footer .wrap { display: grid; gap: 6px; }
   .stage { aspect-ratio: 4 / 5; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* v13-дизайн: цветные подложки, зерно, подсветка за курсором */
+:root { --bg: #eef2f8; --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+body { background: var(--grain), linear-gradient(180deg, #f4f7fc 0%, #eef2f8 100%); }
+section { position: relative; isolation: isolate; }
+section > .wrap { position: relative; z-index: 1; }
+.hero { background: var(--grain), radial-gradient(60% 70% at 85% 10%, #d9e4ff 0%, transparent 60%), radial-gradient(50% 60% at 5% 60%, #e4f3ef 0%, transparent 60%), radial-gradient(40% 50% at 55% 95%, #ece6fb 0%, transparent 65%), #f7f9fd; }
+.blobs i:nth-child(1) { background: #c9d8ff; opacity: .55; }
+.blobs i:nth-child(2) { background: #d6efe7; opacity: .7; }
+.blobs i:nth-child(3) { background: #e3dcfa; opacity: .55; }
+.day { background: var(--grain), radial-gradient(70% 80% at 0% 0%, #dfe8ff, transparent 60%), radial-gradient(60% 70% at 100% 100%, #e2f4ee, transparent 60%), #eef3fb; }
+#how { background: var(--grain), radial-gradient(60% 70% at 100% 0%, #e7e1fb, transparent 60%), radial-gradient(60% 60% at 0% 100%, #dbe7ff, transparent 60%), #f1f2fb; }
+#device { background: var(--grain), radial-gradient(55% 70% at 15% 40%, #d7e3ff, transparent 65%), radial-gradient(50% 60% at 95% 90%, #def2ec, transparent 60%), #f3f6fb; }
+#bundles { background: var(--grain), radial-gradient(60% 70% at 90% 10%, #dcf0ea, transparent 60%), radial-gradient(60% 70% at 5% 95%, #dfe6ff, transparent 60%), #eff5f4; }
+#shop { background: var(--grain), radial-gradient(60% 60% at 10% 0%, #e6e0fa, transparent 60%), radial-gradient(60% 70% at 100% 70%, #d9e5ff, transparent 60%), #f2f3fa; }
+#help, #docs { background: var(--grain), linear-gradient(180deg, #f4f7fc, #edf1f8); }
+.final { background: var(--grain), radial-gradient(60% 80% at 50% 100%, #cfdcff, transparent 70%), #f2f5fc; }
+/* мягкое пятно за курсором (переменные ставит скрипт) */
+.glow::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: var(--go, 0); transition: opacity .5s; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(47,102,245,.13), transparent 70%); }
+/* карточки: стекло, тени, подсветка */
+.day .box, .hc, .bc, .item, .panel, .hl, .tl, .lit, .zone { background: rgba(255,255,255,.78); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); border: 1px solid rgba(255,255,255,.9); box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 24px 48px -32px rgba(30,50,110,.35); }
+.hc, .bc, .item { position: relative; overflow: hidden; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .3s; }
+.hc::after, .bc::after, .item::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s; background: radial-gradient(260px circle at var(--cx, 50%) var(--cy, 0%), rgba(47,102,245,.12), transparent 70%); }
+.hc > *, .bc > *, .item > * { position: relative; z-index: 1; }
+@media (hover: hover) {
+  .hc:hover, .bc:hover, .item:hover { transform: translateY(-4px); border-color: rgba(47,102,245,.28); box-shadow: 0 1px 0 #fff inset, 0 34px 60px -34px rgba(30,60,160,.45); }
+  .hc:hover::after, .bc:hover::after, .item:hover::after { opacity: 1; }
+  .zone:hover { border-color: rgba(47,102,245,.35); }
+}
+.bc { gap: 14px; }
+.bc::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(180deg, rgba(220,232,255,.7), transparent); pointer-events: none; }
+.bc:nth-child(2)::before { background: linear-gradient(180deg, rgba(214,240,231,.75), transparent); }
+.bc:nth-child(3)::before { background: linear-gradient(180deg, rgba(231,224,250,.75), transparent); }
+.bc:nth-child(4)::before { background: linear-gradient(180deg, rgba(221,236,250,.8), transparent); }
+.bc.hit { border: 2px solid var(--warm); box-shadow: 0 30px 60px -30px rgba(47,102,245,.5); }
+.bc .th img { background: #fff; box-shadow: 0 6px 14px -10px rgba(30,50,110,.4); }
+.item .ph { background: #fff; box-shadow: inset 0 -30px 40px -30px rgba(47,102,245,.10); border-color: rgba(30,50,110,.06); }
+.item .ph img { transition: transform .5s cubic-bezier(.2,.8,.2,1); mix-blend-mode: multiply; }
+@media (hover: hover) { .item:hover .ph img { transform: scale(1.05); } }
+.item .add { box-shadow: 0 10px 20px -10px rgba(47,102,245,.8); transition: transform .2s, background .2s; }
+.item .add:hover { background: var(--warm-d); transform: scale(1.06); }
+.filters button { background: rgba(255,255,255,.75); }
+/* прибор: стол с электродами */
+.stage { background: radial-gradient(70% 55% at 50% 30%, #ffffff, #e9eef8 70%); box-shadow: 0 40px 80px -50px rgba(30,50,110,.5), 0 1px 0 #fff inset; }
+.stage .table { position: absolute; left: -10%; right: -10%; bottom: 0; height: 34%; background: linear-gradient(180deg, rgba(225,231,242,0) 0%, #e3e9f4 30%, #d6deec 100%); border-top: 1px solid rgba(255,255,255,.8); transform: perspective(600px) rotateX(18deg); transform-origin: bottom; }
+.stage .lying { left: auto; right: 8%; bottom: 5%; width: 34%; height: auto; aspect-ratio: 1; object-fit: contain; opacity: .9; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; transform: perspective(500px) rotateX(55deg) rotate(-18deg); -webkit-mask-image: none; mask-image: none; }
+@media (prefers-reduced-motion: reduce) { .hc, .bc, .item, .item .ph img { transition: none; } .glow::before { display: none; } }
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="#top"><svg viewBox="0 0 16 20" aria-hidden="true"><path d="M8 0C8 0 0 9 0 13.5a8 8 0 0 0 16 0C16 9 8 0 8 0Z"/></svg>ОЗОТЭНС</a>
-    <nav class="nav"><a href="#how">Как работает</a><a href="#device">Прибор</a><a href="#wheel">Колесо скидок</a><a href="#bundles">Наборы</a><a href="#shop">Каталог</a><a href="#help">Самопомощь</a><a href="#docs">Документы</a></nav>
+    <a class="logo" href="#top"><svg viewBox="-1.5 -1.5 19 24" aria-hidden="true"><path d="M8 0C8 0 0 9 0 13.5a8 8 0 0 0 16 0C16 9 8 0 8 0Z"/></svg>ОЗОТЭНС</a>
+    <nav class="nav"><a href="#how">Как работает</a><a href="#device">Прибор</a><a href="#bundles">Наборы</a><a href="#shop">Каталог</a><a href="#help">Самопомощь</a><a href="znaniya/">Знания</a><a href="#docs">Документы</a></nav>
     <button class="cartbtn" type="button" id="cartBtn" aria-label="Корзина"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.4 11.2a2 2 0 0 1-2 1.8H7.4a2 2 0 0 1-2-1.8L4 8Z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg><span>Корзина</span><b id="cartN"></b></button>
   </div>
 </header>
@@ -458,6 +508,7 @@ footer .wrap { display: grid; gap: 6px; }
     <div class="wrap dev">
       <div class="stage" id="stage">
         <img class="fallback" id="devFallback" src="img/device.webp" alt="Прибор RoovJoy R-C3">
+        <span class="table" aria-hidden="true"></span><img class="lying" src="img/electrode.jpg" alt="" aria-hidden="true">
         <canvas id="dev3d" aria-label="3D-прибор: нажимайте кнопки на корпусе"></canvas>
         <button class="btn dark" type="button" id="devOn" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;min-height:60px;padding:0 30px;font-size:18px" hidden>Включить прибор</button>
         <span class="tip" id="devTip">Нажмите кнопку питания на приборе</span>
@@ -493,7 +544,7 @@ footer .wrap { display: grid; gap: 6px; }
       <p class="kick">Наборы</p>
       <h2 class="words">Подобрать <em>набор</em></h2>
       <p class="kick" style="margin-top:10px">Вместе дешевле</p>
-      <p class="lead">Чем больше вещей в наборе, тем больше скидка: 2 позиции −3%, 3 позиции −5%, 4 позиции −7%. Скидка набора суммируется с призом колеса, но всего не больше 12%.</p>
+      <p class="lead">Чем больше вещей в наборе, тем больше скидка: 2 позиции −3%, 3 позиции −5%, 4 позиции −7%. </p>
       <div class="bgrid" id="bgrid"></div>
       <p class="small-note">Предложение: размеры скидок и наборы утверждает продавец.</p>
     </div>
@@ -515,25 +566,6 @@ footer .wrap { display: grid; gap: 6px; }
     </div>
   </section>
 
-  <section class="game" id="wheel">
-    <div class="wrap">
-      <div class="box">
-        <div>
-          <p class="kick" style="color:#9ba09c">Одна попытка</p>
-          <h2 class="words">Крутите <em>колесо</em></h2>
-          <p class="lead">Нажмите «Крутить» в центре. Выигрыш сразу ляжет в корзину.</p>
-          <div class="prize" id="prize" aria-live="polite"><span style="color:#b9bdba">Здесь появится ваш приз.</span></div>
-          <p class="note">Демо: призы и коды для примера, условия акции утверждает продавец.</p>
-        </div>
-        <div class="wheel" id="wheelBox">
-          <svg class="ptr" viewBox="0 0 44 54" aria-hidden="true"><path d="M22 54 L2 14 A20 20 0 1 1 42 14 Z" fill="#fff"/><circle cx="22" cy="18" r="8" fill="#2f66f5"/></svg>
-          <svg class="w" id="wheelSvg" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
-          <div class="confetti" id="confetti" aria-hidden="true"></div>
-          <button class="spin" type="button" id="spinBtn">Крутить</button>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Самопомощь: видео и разборы «болит X - что делать». Каркас под SEO-страницы -->
   <section id="help">
@@ -558,7 +590,7 @@ footer .wrap { display: grid; gap: 6px; }
   <section id="docs">
     <div class="wrap">
       <p class="kick">Документы</p>
-      <h2 class="words">Всё, что стоит <em>за методом</em></h2>
+      <h2 class="words">Что стоит <em>за методом</em></h2>
       <p class="lead">Патент, пособие для врачей, научные статьи и тридцать лет озонотерапии в Нижнем Новгороде. Каждый документ можно открыть и проверить.</p>
       <div class="docs">
         <div><b>Патент RU 2714457</b><p>«Способ лечения дистрофических заболеваний позвоночника и суставов». Авторы: С.П. Перетягин, С.А. Соколов. Заявлен 18.09.2018, опубликован 17.02.2020. <a href="https://new.fips.ru/registers-doc-view/fips_servlet?DB=RUPAT&amp;DocNumber=2714457" target="_blank" rel="noopener">Открыть в реестре ФИПС</a></p></div>
@@ -567,12 +599,12 @@ footer .wrap { display: grid; gap: 6px; }
         <div><b>Декларации ЕАЭС</b><p>Прибор RoovJoy R-C3 и крем OZOTENS 30% имеют декларации соответствия ЕАЭС (номера по каталогу производителя, сверяются со сканами).</p></div>
       </div>
       <div class="hist">
-        <div class="tl"><b>1994</b><span>первый аппарат озонотерапии МЕДОЗОНС, вместе с РФЯЦ-ВНИИЭФ (Саров)</span></div>
-        <div class="tl"><b>1995</b><span>первые препараты ОТРИ на озонированном оливковом масле</span></div>
-        <div class="tl"><b>2008</b><span>концентрат O'THREE 20000 - основа крема OZOTENS 30%</span></div>
-        <div class="tl"><b>2017-2019</b><span>5 научных статей о методе в журнале «Биорадикалы и антиоксиданты»</span></div>
-        <div class="tl"><b>2019</b><span>7000-й аппарат МЕДОЗОНС: аппараты работают во всех регионах России и в 39 странах</span></div>
-        <div class="tl"><b>2020</b><span>патент на метод ОЗОТЭНС и учебное пособие для врачей</span></div>
+        <a class="tl" href="znaniya/istoriya.html#y1994"><b>1994</b><span>первый аппарат озонотерапии МЕДОЗОНС, вместе с РФЯЦ-ВНИИЭФ (Саров)</span><i>подробнее →</i></a>
+        <a class="tl" href="znaniya/istoriya.html#y1995"><b>1995</b><span>первые препараты ОТРИ на озонированном оливковом масле</span><i>подробнее →</i></a>
+        <a class="tl" href="znaniya/istoriya.html#y2008"><b>2008</b><span>концентрат O'THREE 20000 - основа крема OZOTENS 30%</span><i>подробнее →</i></a>
+        <a class="tl" href="znaniya/istoriya.html#y2017"><b>2017-2019</b><span>5 научных статей о методе в журнале «Биорадикалы и антиоксиданты»</span><i>подробнее →</i></a>
+        <a class="tl" href="znaniya/istoriya.html#y2019"><b>2019</b><span>7000-й аппарат МЕДОЗОНС: аппараты работают во всех регионах России и в 39 странах</span><i>подробнее →</i></a>
+        <a class="tl" href="znaniya/istoriya.html#y2020"><b>2020</b><span>патент на метод ОЗОТЭНС и учебное пособие для врачей</span><i>подробнее →</i></a>
       </div>
       <details class="lit"><summary>Научные статьи о методе (журнал «Биорадикалы и антиоксиданты»)</summary>
         <ol>
@@ -611,7 +643,7 @@ footer .wrap { display: grid; gap: 6px; }
     <div class="wrap">
       <h2 class="words">Пусть боль <em>решает меньше</em></h2>
       <p class="lead" style="margin-inline:auto">Выберите зону, посмотрите разборы, обсудите с врачом. Двигайтесь в своём темпе.</p>
-      <div class="row" style="justify-content:center"><a class="btn hot" href="#top">Выбрать зону</a><a class="btn dark" href="#wheel">Крутить колесо</a></div>
+      <div class="row" style="justify-content:center"><a class="btn hot" href="#top">Выбрать зону</a><a class="btn dark" href="#bundles">Подобрать набор</a></div>
     </div>
   </section>
 </main>
@@ -847,7 +879,7 @@ Object.entries(I).forEach(([code, it]) => { const c = h('article', 'item'); c.da
 $('#ticks').innerHTML = Array.from({ length: 12 }, (_, k) => `<line x1="100" y1="${k % 3 ? 14 : 10}" x2="100" y2="${k % 3 ? 22 : 26}" transform="rotate(${k * 30} 100 100)"/>`).join('');
 
 // ===== колесо: рисуем =====
-(() => { const svg = $('#wheelSvg'), n = PRIZES.length, R = 190, NS = 'http://www.w3.org/2000/svg';
+(() => { if (!$('#wheelSvg')) return; const svg = $('#wheelSvg'), n = PRIZES.length, R = 190, NS = 'http://www.w3.org/2000/svg';
   const fills = ['#ffffff', '#2f66f5', '#ffffff', '#1f2321', '#ffffff', '#2f66f5', '#ffffff', '#1f2321'];
   const g = document.createElementNS(NS, 'g'); g.id = 'wheelG'; svg.append(g);
   g.innerHTML = `<circle r="198" fill="#fff"/><circle r="194" fill="#2a2e2c"/>`;
@@ -876,7 +908,7 @@ const stepRibbon = dir => { const w = track.children[0].offsetWidth + 14; const 
 $('#prev').onclick = () => stepRibbon(-1); $('#next').onclick = () => stepRibbon(1);
 
 // ===== колесо: вращение =====
-(() => { const g = $('#wheelG'), btn = $('#spinBtn'), n = PRIZES.length, seg = 360 / n;
+(() => { if (!$('#wheelG')) return; const g = $('#wheelG'), btn = $('#spinBtn'), n = PRIZES.length, seg = 360 / n;
   let spinning = false, lastTick = 0;
   const show = p => { $('#prize').innerHTML = `<b>${p.ship ? 'Доставка 0 ₽' : p.t + ' на заказ'}</b>Код <code>OZO${p.ship ? 'SHIP' : p.d}</code> уже в корзине. Попытка использована.<div class="row" style="margin-top:14px"><button class="btn hot" type="button" id="toCart">Перейти в корзину</button><button class="btn" type="button" id="again">Ещё раз (демо)</button></div>`; $('#toCart').onclick = () => openCart(); $('#again').onclick = () => { bonus = null; store.set('ozo_wheel_v12', null); btn.disabled = false; btn.textContent = 'Крутить'; $('#prize').innerHTML = '<span style="color:#b9bdba">Здесь появится ваш приз.</span>'; }; };
   const confetti = () => { if (reduce) return; const box = $('#confetti'); const cols = ['#2f66f5', '#ffffff', '#cfdcff', '#3a6ff0']; for (let i = 0; i < 40; i++) { const c = document.createElement('i'); c.style.background = cols[i % 4]; box.append(c); gsap.fromTo(c, { x: 0, y: 0, rotation: 0, opacity: 1 }, { x: gsap.utils.random(-260, 260), y: gsap.utils.random(-260, 200), rotation: gsap.utils.random(-540, 540), opacity: 0, duration: gsap.utils.random(1, 1.8), ease: 'power2.out', onComplete: () => c.remove() }); } };
@@ -986,11 +1018,26 @@ try {
     rd('rMode').textContent = st.on ? st.mode : 'выкл'; rd('rProg').textContent = st.on ? String(st.prog).padStart(2, '0') : '-';
     rd('devTip').textContent = st.on ? (st.ch1 + st.ch2 ? 'Импульс идёт · смена программы (P) сбрасывает силу' : 'Жмите + на CH1 или CH2') : 'Нажмите кнопку питания';
   } });
-  rd('devFallback').hidden = true; rd('devOn').hidden = dev.state.on; rd('devOn').onclick = () => dev.press('power');
+  rd('devFallback').hidden = true; rd('devOn').hidden = dev.state.on; rd('devOn').onclick = () => dev.press('power'); setInterval(() => { rd('devOn').hidden = !!dev.state.on; }, 300);
   // включаем сам, когда прибор впервые показался на экране - чтобы «+» сразу работал
   new IntersectionObserver((en, ob) => { if (en[0].isIntersecting) { ob.disconnect(); if (!dev.state.on) dev.press('power'); } }, { threshold: 0.5 }).observe(rd('dev3d'));
   document.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.k; if (!dev.state.on && k !== 'power') { dev.press('power'); setTimeout(() => dev.press(k), 750); } else dev.press(k); }));
 } catch (e) { console.warn('3D не загрузился', e); rd('dev3d').hidden = true; rd('devPad').hidden = true; rd('devTip').hidden = true; document.querySelector('.read').hidden = true; }
+</script>
+<script>
+(function(){
+  if (!matchMedia('(hover: hover)').matches) return;
+  var secs = document.querySelectorAll('.day, #how, #device, #bundles, #shop');
+  secs.forEach(function(sec){
+    sec.classList.add('glow');
+    sec.addEventListener('pointermove', function(e){ var r = sec.getBoundingClientRect(); sec.style.setProperty('--mx', (e.clientX - r.left) + 'px'); sec.style.setProperty('--my', (e.clientY - r.top) + 'px'); sec.style.setProperty('--go', 1); });
+    sec.addEventListener('pointerleave', function(){ sec.style.setProperty('--go', 0); });
+  });
+  document.addEventListener('pointermove', function(e){
+    var c = e.target.closest && e.target.closest('.hc, .bc, .item'); if (!c) return;
+    var r = c.getBoundingClientRect(); c.style.setProperty('--cx', (e.clientX - r.left) + 'px'); c.style.setProperty('--cy', (e.clientY - r.top) + 'px');
+  }, { passive: true });
+})();
 </script>
 </body>
 </html>
