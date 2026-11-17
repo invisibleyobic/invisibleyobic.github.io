@@ -179,6 +179,14 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdro
 .nav__pill.on{opacity:1}
 .nav__pill.dark{background:var(--ink)}
 .nav a.cur::after{content:"";position:absolute;right:8px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--acid)}
+@font-face{font-family:"Onest";src:url("../ozotens/fonts/Onest-var-cyr.woff2") format("woff2");font-weight:400 800;font-display:swap;unicode-range:U+0400-045F}
+.nav .nav__ozotens{display:inline-flex;align-items:center;justify-content:center;gap:5px;margin-left:4px;border:1px solid #cbd8ff;background:#edf2ff;color:#254fc9;font:800 13px/1.15 "Onest",sans-serif;letter-spacing:.065em;white-space:nowrap;transition:background-color .2s,border-color .2s}
+.nav .nav__ozotens svg{width:10px;height:13px;flex:none;fill:currentColor}
+.nav .nav__ozotens:is(:hover,:focus-visible){background:#dfe8ff;border-color:#8ba9ff;color:#163caa}
+.nav .nav__ozotens:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
+html[data-theme="dark"] .nav .nav__ozotens{background:#273358;border-color:#5169a2;color:#d9e3ff}
+html[data-theme="dark"] .nav .nav__ozotens:is(:hover,:focus-visible){background:#364775;border-color:#8ba9ff}
+@media(prefers-reduced-motion:reduce){.nav .nav__ozotens{transition:none}}
 .icons{display:flex;gap:6px;align-items:center}
 .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
 .ic:hover{background:var(--mist)}
@@ -262,30 +270,41 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdro
 .sticker{position:absolute;right:20px;top:20px;z-index:4;height:30px;padding:0 12px;border-radius:99px;background:var(--ink);color:var(--acid);font-size:12px;font-weight:800;display:inline-flex;align-items:center;letter-spacing:.04em}
 .t--ink .sticker,.t--deep .sticker{background:var(--acid);color:var(--ink)}
 
-/* плюсы: типографика, всё нажимается */
-.perks{display:grid;grid-template-columns:repeat(4,1fr);margin:44px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.perk{position:relative;padding:26px 24px;display:flex;flex-direction:column;gap:6px;text-align:left;transition:background .2s}
-.perk+.perk{border-left:1px solid var(--line)}
-.perk__hit{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
-.perk .perk__n{color:var(--ink);font-size:clamp(40px,4vw,60px);font-weight:800;letter-spacing:-.06em;line-height:.9}
-.perk__n em{font-family:"Unbounded",system-ui,sans-serif;font-style:normal;font-weight:700;letter-spacing:-.04em;font-size:.86em}
-.perk b{font-size:15px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.perk .perk__s{font-size:13px;color:var(--mute)}
-.perk__go{white-space:nowrap;font-style:normal;font-size:13px;font-weight:700;opacity:0;transform:translateX(-6px);transition:opacity .2s var(--ease),transform .2s var(--ease)}
-.hand{position:relative;text-decoration:none}
-.hand svg{position:absolute;left:0;right:0;bottom:-7px;width:100%;height:10px;overflow:visible}
-.hand path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:220;stroke-dashoffset:220;transition:stroke-dashoffset .45s var(--ease)}
-@media (hover:hover) and (pointer:fine){
-  .perk:hover{background:#fafbfa}
-  .perk:hover .perk__go{opacity:1;transform:none}
-  .perk:hover .hand path{stroke-dashoffset:0}
+/* Карточки каталога и магазинов */
+.perks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:44px 0 0}
+.perk{position:relative;isolation:isolate;overflow:hidden;min-width:0;padding:24px 20px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-content:center;column-gap:8px;row-gap:5px;text-align:left;border:1px solid var(--line);border-radius:20px;background:var(--paper);color:var(--ink)}
+.perk::before{content:"";position:absolute;z-index:-1;inset:0;background:var(--perk-fill);clip-path:circle(0 at calc(100% - 24px) 50%);transition:clip-path .42s var(--ease);pointer-events:none}
+.perk--sets{--perk-fill:linear-gradient(125deg,#fff8d2,#f5e89d);--perk-ink:#292309}
+.perk--season{--perk-fill:linear-gradient(125deg,#f7e9d8,#dce7ef);--perk-ink:#36291f}
+.perk--ozon{--perk-fill:linear-gradient(125deg,#0047d7,#0058f0);--perk-ink:#fff}
+.perk--wb{--perk-fill:linear-gradient(125deg,#7c238d,#ba226b);--perk-ink:#fff}
+.perk b{font-size:15px;line-height:1.3}
+.perk .perk__s{grid-column:1;font-size:13px;color:var(--mute)}
+.perk__go{grid-column:2;grid-row:1/span 2;align-self:center;font-size:20px;line-height:1}
+.perk:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.perk:is(:focus-visible,:active){color:var(--perk-ink)}
+.perk:is(:focus-visible,:active)::before{clip-path:circle(150% at calc(100% - 24px) 50%)}
+.perk:is(:focus-visible,:active) .perk__s{color:inherit}
+.perk__weather{position:absolute;z-index:-1;inset:0;overflow:hidden;pointer-events:none}
+.perk__weather i{position:absolute;top:-12px;left:var(--x);width:var(--size);height:var(--size);opacity:0;animation-delay:var(--delay)}
+.perk__leaf{border-radius:72% 0 72% 0;background:#ad6f32}
+.perk__snow{border-radius:50%;background:#fff;box-shadow:0 0 3px #84a5b8}
+@keyframes perk-weather{
+  0%{transform:translate(0,-4px) rotate(0);opacity:0}
+  20%,65%{opacity:.72}
+  100%{transform:translate(var(--drift),135px) rotate(var(--turn));opacity:0}
 }
-@media (hover:none){.perk__go{opacity:1;transform:none}.hand path{stroke-dashoffset:0}}
-.perk__pop{display:none;flex-wrap:wrap;gap:6px;margin-top:12px}
-.perk--pop.open .perk__pop{display:flex;animation:pop .22s var(--ease)}
-@keyframes pop{from{opacity:0;transform:translateY(-4px)}}
-.chipx{height:30px;padding:0 12px;border-radius:99px;background:var(--mist);font-size:12px;font-weight:700;display:inline-flex;align-items:center}
-.perk__pop .note{width:100%;font-size:12px;color:var(--mute);font-weight:600}
+@media (hover:hover) and (pointer:fine){
+  .perk:hover{color:var(--perk-ink)}
+  .perk:hover::before{clip-path:circle(150% at calc(100% - 24px) 50%)}
+  .perk:hover .perk__s{color:inherit}
+  .perk--season:hover .perk__weather i{animation:perk-weather 1.15s var(--delay) ease-in both}
+}
+.perk--season:focus-visible .perk__weather i{animation:perk-weather 1.15s var(--delay) ease-in both}
+@media (prefers-reduced-motion:reduce){
+  .perk::before{transition:none}
+  .perk .perk__weather{display:none}
+}
 
 /* баннер, из которого вылезает товар */
 .promo{position:relative;margin-top:170px;background:var(--acid);border-radius:var(--r);min-height:320px;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:40px 48px;overflow:visible}
@@ -411,10 +430,8 @@ footer{background:var(--ink);color:var(--paper);margin-top:40px;padding:56px 0 2
   .t{min-height:230px;padding:22px}
   .t--4,.t--5{grid-column:span 12}
   .t h3{font-size:24px}
-  .perks{grid-template-columns:1fr 1fr}
+  .perks{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   .perk{padding:20px 14px}
-  .perk:nth-child(3){border-left:0}
-  .perk:nth-child(n+3){border-top:1px solid var(--line)}
   .promo{grid-template-columns:1fr;padding:28px 22px;margin-top:150px;text-align:left}
   .promo .obj{order:-1;height:300px;margin-top:-170px}
   .faces__grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 calc(-1*var(--pad));padding:0 var(--pad)}
@@ -441,7 +458,6 @@ html[data-theme="dark"]{--paper:#151318;--ink:#f3f1f6;--ink-2:#2a2533;--mist:#24
 html[data-theme="dark"] body{background:radial-gradient(90% 520px at 18% 0,#4b1d6b 0,rgba(75,29,107,0) 100%),radial-gradient(70% 560px at 82% 120px,#a3378f 0,rgba(163,55,143,0) 100%),linear-gradient(180deg,#2c1240 0,#151318 980px)}
 html[data-theme="dark"] header{background:rgba(32,16,46,.72)}
 html[data-theme="dark"] .hero{background:radial-gradient(60% 70% at 70% 38%,rgba(255,255,255,.12) 0,rgba(255,255,255,0) 70%),rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-html[data-theme="dark"] .perk:hover{background:#1d1a22}
 html[data-theme="dark"] .face:nth-child(4n+4){background:#241f2d}
 html[data-theme="dark"] .ghost,html[data-theme="dark"] .hero__ghost{-webkit-text-stroke-color:rgba(255,255,255,.16)}
 html[data-theme="dark"] .t--acid .ghost{-webkit-text-stroke-color:rgba(14,15,13,.2)}
@@ -520,6 +536,9 @@ html[data-theme="dark"] .theme .sun{color:var(--mute)}html[data-theme="dark"] .t
   .sos-feature,html[data-theme="dark"] .sos-feature{background:var(--paper);border:1px solid var(--line)}
   .sos-feature .photo{object-fit:contain;object-position:right center;inset:auto 8px 8px auto;width:58%;height:76%}
   @media(max-width:420px){.nav{mask-image:none;-webkit-mask-image:none;padding-right:0;gap:2px}.nav a{padding-inline:7px;font-size:12px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{min-width:0}.card__name{overflow-wrap:anywhere}}
+  @media(max-width:1100px){.nav{mask-image:none;-webkit-mask-image:none;padding-right:0;flex-wrap:wrap;overflow:visible;margin-inline:0}.nav a{display:inline-flex;align-items:center;min-height:44px}}
+  @media(max-width:420px){.nav .nav__ozotens{font-size:12px;margin-left:1px;letter-spacing:.03em}}
+  @media(max-width:360px){.nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));row-gap:2px}.nav a{grid-column:span 2;justify-content:center}.nav a:nth-last-child(-n+2){grid-column:span 3}.nav .nav__ozotens{margin-left:0}}
 </style>
 </head>
 <body>
@@ -534,6 +553,7 @@ html[data-theme="dark"] .theme .sun{color:var(--mute)}html[data-theme="dark"] .t
       <a href="#catalog" data-go="sets">Наборы</a>
       <a href="#faces" data-sec="faces">Подборки</a>
       <a href="../season-box/index.html">Сезон-бокс</a>
+      <a class="nav__ozotens" href="../ozotens/index.html" aria-label="ОЗОТЭНС — сайт о ТЭНС-терапии"><svg viewBox="0 0 16 22" aria-hidden="true"><path d="M8 0c0 0-8 9-8 14a8 8 0 0 0 16 0C16 9 8 0 8 0Z"/></svg>ОЗОТЭНС</a>
     </nav>
     <div class="icons">
       <button class="theme press" type="button" id="themeBtn" aria-label="Тёмная тема" aria-pressed="false"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
@@ -572,10 +592,21 @@ html[data-theme="dark"] .theme .sun{color:var(--mute)}html[data-theme="dark"] .t
   </section>
 
   <section class="perks rv" aria-label="Каталог и магазины">
-    <a class="perk" href="#catalog" data-go="sets"><b>Наборы под задачу →</b><span class="perk__s">Готовые сочетания для лица, волос и тела</span></a>
-    <a class="perk" href="../season-box/index.html"><b>Осень–зима →</b><span class="perk__s">Подборка на холодный сезон</span></a>
-    <a class="perk" href="https://www.ozon.ru/seller/ip-salmanov-rafael-hazranovich/" target="_blank" rel="noopener"><b>Магазин на Ozon ↗</b></a>
-    <a class="perk" href="https://www.wildberries.ru/seller/91509" target="_blank" rel="noopener"><b>Магазин на Wildberries ↗</b></a>
+    <a class="perk perk--sets" href="#catalog" data-go="sets"><b>Наборы под задачу</b><span class="perk__s">Готовые сочетания для лица, волос и тела</span><span class="perk__go" aria-hidden="true">→</span></a>
+    <a class="perk perk--season" href="../season-box/index.html">
+      <b>Осень–зима</b><span class="perk__s">Подборка на холодный сезон</span><span class="perk__go" aria-hidden="true">→</span>
+      <span class="perk__weather" aria-hidden="true">
+        <i class="perk__leaf" style="--x:62%;--size:8px;--delay:130ms;--drift:14px;--turn:145deg"></i>
+        <i class="perk__leaf" style="--x:80%;--size:9px;--delay:30ms;--drift:-12px;--turn:185deg"></i>
+        <i class="perk__leaf" style="--x:90%;--size:6px;--delay:190ms;--drift:14px;--turn:-135deg"></i>
+        <i class="perk__snow" style="--x:55%;--size:3px;--delay:260ms;--drift:10px;--turn:0deg"></i>
+        <i class="perk__snow" style="--x:71%;--size:4px;--delay:225ms;--drift:7px;--turn:0deg"></i>
+        <i class="perk__snow" style="--x:84%;--size:3px;--delay:310ms;--drift:-12px;--turn:0deg"></i>
+        <i class="perk__snow" style="--x:95%;--size:4px;--delay:250ms;--drift:-6px;--turn:0deg"></i>
+      </span>
+    </a>
+    <a class="perk perk--ozon" href="https://www.ozon.ru/seller/ip-salmanov-rafael-hazranovich/" target="_blank" rel="noopener"><b>Магазин на Ozon</b><span class="perk__go" aria-hidden="true">↗</span></a>
+    <a class="perk perk--wb" href="https://www.wildberries.ru/seller/91509" target="_blank" rel="noopener"><b>Магазин на Wildberries</b><span class="perk__go" aria-hidden="true">↗</span></a>
   </section>
 
   <section class="faces" id="faces" aria-labelledby="facesTitle">
