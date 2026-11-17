@@ -125,12 +125,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .press{transition:transform .18s var(--ease),background .25s,color .25s}
 .press:active{transform:scale(.96);transition-duration:.06s}
 
-.ticker{position:relative;background:var(--ink);color:var(--paper);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;overflow:hidden;white-space:nowrap;padding:5px 0}
-.ticker::before,.ticker::after{content:"";position:absolute;left:0;right:0;height:5px;background:repeating-linear-gradient(-45deg,var(--acid) 0 10px,var(--ink) 10px 20px)}
-.ticker::before{top:0}.ticker::after{bottom:0}
+.ticker{position:relative;background:rgba(255,255,255,.9);color:var(--ink);border-bottom:1px solid #e9e7e6;backdrop-filter:blur(14px);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;overflow:hidden;white-space:nowrap;padding:2px 0}
 .ticker__in{display:inline-flex;padding:9px 0;will-change:transform}
 .ticker span{padding-right:48px}
-.ticker span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acid);margin-right:12px;vertical-align:1px}
+.ticker span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#a3313e;margin-right:12px;vertical-align:1px}
 
 header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px)}
 .bar{display:flex;align-items:center;gap:24px;height:68px}
@@ -173,17 +171,17 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdro
 
 
 /* SOS бокс */
-.sos{margin-top:var(--gap);border-radius:var(--r);background:radial-gradient(60% 70% at 70% 40%,#22471a 0,rgba(14,15,13,0) 70%),var(--ink);color:var(--paper);position:relative;overflow:hidden;min-height:min(84vh,760px);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:56px}
-.sos__ghost{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-size:clamp(200px,30vw,460px);font-weight:800;letter-spacing:-.08em;line-height:.8;color:rgba(70,230,46,.12);pointer-events:none;user-select:none}
+.sos{margin-top:var(--gap);border-radius:var(--r);background:#f3f1f0;color:var(--ink);position:relative;overflow:hidden;min-height:min(84vh,760px);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:56px}
+.sos__ghost{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-size:clamp(200px,30vw,460px);font-weight:800;letter-spacing:-.08em;line-height:.8;color:rgba(45,40,41,.07);pointer-events:none;user-select:none}
 .sos__copy{position:relative;z-index:2;max-width:520px}
-.sos__copy .kick{color:var(--acid);font-weight:700}
+.sos__copy .kick{color:#922b36;font-weight:700}
 .sos h1{font-size:clamp(52px,7vw,110px);line-height:.88;letter-spacing:-.06em;font-weight:800;margin:10px 0 20px}
-.sos h1 em{font-family:"Unbounded",sans-serif;font-style:normal;font-weight:500;letter-spacing:-.03em;color:var(--acid)}
-.sos__lead{font-size:18px;font-weight:600;color:rgba(255,255,255,.75);max-width:34ch;margin-bottom:26px}
+.sos h1 em{font-family:"Unbounded",sans-serif;font-style:normal;font-weight:500;letter-spacing:-.03em;color:#922b36}
+.sos__lead{font-size:18px;font-weight:600;color:#504a49;max-width:34ch;margin-bottom:26px}
 .sos__price{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap}
 .sos__price b{font-size:44px;letter-spacing:-.05em}
-.sos__price span{font-size:15px;color:rgba(255,255,255,.6);font-weight:600}
-.sos__price i{font-style:normal;background:var(--acid);color:var(--ink);font-weight:800;font-size:14px;padding:4px 10px;border-radius:99px}
+.sos__price span{font-size:15px;color:#625957;font-weight:600}
+.sos__price i{font-style:normal;background:#f0dfe0;color:#832631;font-weight:800;font-size:14px;padding:4px 10px;border-radius:99px}
 .sos__cta{display:flex;gap:10px;flex-wrap:wrap}
 .sos__stage{position:relative;z-index:2;height:min(60vh,540px)}
 .sos__stage .obj{position:absolute;bottom:8%;display:flex;align-items:flex-end}
@@ -206,7 +204,7 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdro
 .who__txt{border-radius:var(--r);background:var(--mist);padding:40px;display:flex;flex-direction:column;justify-content:center;gap:16px}
 .h2{font-size:clamp(36px,4.6vw,68px);line-height:.92;letter-spacing:-.055em;font-weight:800}
 .h2 em{font-family:"Unbounded",sans-serif;font-style:normal;font-weight:500;letter-spacing:-.03em;text-transform:uppercase;font-size:.82em}
-.h2 mark{background:var(--acid);padding:0 .08em;border-radius:.12em}
+.h2 mark{background:#f0dfe0;padding:0 .08em;border-radius:.12em}
 .mp{display:flex;gap:8px;flex-wrap:wrap;align-items:center;color:var(--mute);font-weight:600;font-size:14px}
 .mp a{height:40px;padding:0 16px;border-radius:99px;border:1.5px solid var(--line);display:inline-flex;align-items:center;font-weight:700;color:var(--ink)}
 .mp a{transition:background .2s,color .2s,border-color .2s}
@@ -232,7 +230,6 @@ footer a{color:var(--paper);font-weight:700}
   <div class="wrap bar">
     <a class="logo" href="../ozonebox/index.html" aria-label="OzoneBox, на главную"><svg viewBox="0 0 31 32" aria-hidden="true"><path fill="#46e62e" d="M24.37 17.65c3.57.31 6.32 3.42 6.32 7.16V32h-6.9c-3.58 0-6.57-2.87-6.87-6.59-.35-4.43 3.2-8.13 7.45-7.76Z"/><path fill="currentColor" d="M4.81 16c0-2.86 0-4.71.12-6.12.1-1.35.28-1.85.4-2.1a4.8 4.8 0 0 1 2.14-2.23c.23-.12.71-.3 2-.42 1.36-.11 3.13-.11 5.88-.11s4.52 0 5.87.11c1.3.12 1.78.3 2.01.42a4.8 4.8 0 0 1 2.14 2.23c.12.25.3.75.4 2.1.08 1.06.1 2.38.11 4.19a10.6 10.6 0 0 1 4.82 2.47V16c0-5.56 0-8.35-1.03-10.47A10.1 10.1 0 0 0 25.4 1.07C23.35 0 20.68 0 15.35 0S7.34 0 5.3 1.07a10.1 10.1 0 0 0-4.27 4.46C0 7.65 0 10.44 0 16s0 8.35 1.03 10.47a10.1 10.1 0 0 0 4.27 4.46C7.34 32 10.01 32 15.35 32h.52a11.5 11.5 0 0 1-2.37-5.02c-1.74 0-3-.03-4.02-.12-1.3-.11-1.78-.29-2.01-.42a4.8 4.8 0 0 1-2.14-2.22c-.12-.25-.3-.75-.4-2.1C4.82 20.7 4.81 18.86 4.81 16Z"/></svg><span>Ozone<b>Box</b></span></a>
     <nav class="nav" aria-label="Разделы"><a href="../ozonebox/index.html#catalog">Каталог</a><a href="#inside">Что внутри</a><a href="#who">Кому</a></nav>
-    <div class="icons"><button class="cart press" type="button" id="cartBtn" data-cart aria-label="Корзина, товаров: 0"><span>Корзина</span><span class="cnt" id="cnt">0</span></button></div>
   </div>
 </header>
 <main class="wrap">
@@ -242,8 +239,8 @@ footer a{color:var(--paper);font-weight:700}
       <p class="kick">Набор OzoneBox</p>
       <h1>SOS <em>бокс</em></h1>
       <p class="sos__lead">Маска для волос и крем Озодермик 5% в одной коробке. Когда нужно всё и сразу - берёте одну вещь вместо двух.</p>
-      <div class="sos__price"><b id="pNow"></b><span id="pSep"></span><i id="pGain"></i></div>
-      <div class="sos__cta"><button class="btn btn--acid press" type="button" data-add="sos-boks">В корзину <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="btn btn--white press" type="button" data-open="sos-boks">Подробнее</button></div>
+      <div class="sos__price"><b>1 900 ₽</b><span>по отдельности 2 609 ₽</span><i>−709 ₽</i></div>
+      <div class="sos__cta"><a class="btn btn--ink press" href="#buy">Где купить</a><a class="btn btn--white press" href="#inside">Что внутри</a></div>
     </div>
     <div class="sos__stage" aria-hidden="true">
       <div class="obj sos__a"><img src="img/cut/maska-volosy.webp" alt="" width="200" height="700"><span class="shd"></span></div>
@@ -252,9 +249,9 @@ footer a{color:var(--paper);font-weight:700}
   </section>
 
   <section class="blocks" id="inside" aria-label="Что внутри">
-    <div class="b b--acid rv"><small>Что внутри</small><h3>Два средства</h3><ul><li>Маска для волос - 150 мл</li><li>Крем Озодермик 5% - 50 мл</li></ul></div>
-    <div class="b b--ink rv"><small>Выгода</small><h3 id="gainBig"></h3><p id="gainTxt"></p></div>
-    <div class="b rv"><small>Где купить</small><h3>Здесь или на маркетплейсе</h3><div class="mp"><a class="mp--ozon" href="https://www.ozon.ru/seller/ip-salmanov-rafael-hazranovich/" target="_blank" rel="noopener">Ozon</a><a class="mp--wb" href="https://www.wildberries.ru/brands/ozonebox" target="_blank" rel="noopener">Wildberries</a></div></div>
+    <div class="b rv"><small>Что внутри</small><h3>Два средства</h3><ul><li>Маска для волос - 150 мл</li><li>Крем Озодермик 5% - 50 мл</li></ul></div>
+    <div class="b b--ink rv"><small>Выгода</small><h3>709 ₽</h3><p>Разница с суммой цен маски и крема по отдельности.</p></div>
+    <div class="b rv" id="buy"><small>Где искать набор</small><h3>Магазины продавца</h3><div class="mp"><a class="mp--ozon" href="https://www.ozon.ru/seller/ip-salmanov-rafael-hazranovich/" target="_blank" rel="noopener">Ozon</a><a class="mp--wb" href="https://www.wildberries.ru/seller/91509" target="_blank" rel="noopener">Wildberries</a></div></div>
   </section>
 
   <section class="who" id="who" aria-label="Кому">
@@ -263,24 +260,14 @@ footer a{color:var(--paper);font-weight:700}
       <h2 class="h2"><em>Кому</em> <mark>подойдёт</mark></h2>
       <p>Тем, кто хочет уход для кожи и для волос, но не хочет собирать его по отдельности. Набор лежит в одной коробке - удобно взять с собой или подарить.</p>
       <p class="note">Как пользоваться каждым средством - на упаковке и во вкладыше.</p>
-      <div class="sos__cta"><button class="btn btn--ink press" type="button" data-add="sos-boks">Добавить набор</button><button class="btn press" type="button" data-promo>−10% по коду из ролика</button></div>
+      <div class="sos__cta"><a class="btn btn--ink press" href="#buy">Магазины продавца</a></div>
     </div>
   </section>
 </main>
 <footer><div class="wrap"><span>OzoneBox</span><a href="../ozonebox/index.html">← На главную</a></div></footer>
-<script src="shop.js?v=11d"></script>
 <script>
 (() => {
-  const { byId, rub } = OZB;
-  const parts = ["maska-volosy", "ozodermik-5"], full = parts.reduce((a, c) => a + byId[c][2], 0), now = byId["sos-boks"][2];
-  document.getElementById("pNow").textContent = rub(now);
-  document.getElementById("pSep").textContent = "по отдельности " + rub(full);
-  document.getElementById("pGain").textContent = "−" + rub(full - now);
-  document.getElementById("gainBig").textContent = rub(full - now);
-  document.getElementById("gainTxt").textContent = "Столько вы не доплачиваете по сравнению с покупкой маски (" + rub(byId[parts[0]][2]) + ") и крема (" + rub(byId[parts[1]][2]) + ") по отдельности.";
-  // кнопки Ozon и WB ведут на SOS бокс на площадке, а не в магазин целиком
-  document.querySelectorAll(".mp--ozon, .mp--wb").forEach((l) => (l.href = OZB.mpUrl("sos-boks", l.classList.contains("mp--ozon") ? "ozon" : "wb")));
-  document.getElementById("ticker").innerHTML = Array(2).fill(["SOS бокс - два средства в одной коробке", "Выгода 10% по коду из ролика", "Корзина общая с главной", "Можно купить на Ozon и Wildberries"].map((t) => `<span>${t}</span>`).join("")).join("");
+  document.getElementById("ticker").innerHTML = Array(2).fill(["SOS бокс", "Маска для волос · 150 мл", "Крем Озодермик 5% · 50 мл"].map((t) => `<span>${t}</span>`).join("")).join("");
   const tk = document.getElementById("ticker");
   let tkAnim;
   const runTicker = () => {

@@ -4,14 +4,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="robots" content="noindex,nofollow" />
-<title>Сезон-бокс «Осень» v2 - OZONEBOX</title>
-<meta name="description" content="Черновик концепции v2: белая коробка OZONEBOX, золотая осень, четыре средства на озонированном масле." />
+<title>Сезон-бокс «Осень–зима» — OZONEBOX</title>
+<meta name="description" content="Четыре средства OZONEBOX в белой коробке: озоновая эмульсия для лица, шампунь, крем для ног и озонированное масло." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;800&display=swap" rel="stylesheet" />
 <link rel="preload" as="image" href="assets/img/hero.webp" />
 <style>
-  /* v2 White Box: светлая золотая осень. Цвета - токены здесь. */
   :root, .sw-root {
     --sw-bg: #f5ecdc;
     --sw-ink: #2a1d0e;
@@ -116,21 +115,11 @@
 
   /* левая колонка текста */
   .lede { position: absolute; z-index: 3; left: clamp(16px,4.5vw,64px); top: 50%; transform: translateY(-46%); width: min(560px, 42vw); }
-  .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; font: 600 13px/1 var(--sw-font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--gold-deep); }
-  .eyebrow::before { content: ""; width: 26px; height: 1px; background: currentColor; }
   .lede h1 { margin: 0; font: 800 clamp(48px, 5.6vw, 100px)/.92 var(--sw-font-display); letter-spacing: -.035em; color: var(--ink); }
   .lede h1 span { display: block; background: linear-gradient(100deg, #c98a1d 0%, #e2a93b 45%, #a8661a 100%);
     -webkit-background-clip: text; background-clip: text; color: transparent; }
   .lede p { margin: 22px 0 0; font-size: 18px; line-height: 1.55; color: var(--ink-soft); max-width: 44ch; }
   .lede .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; padding: 0; list-style: none; }
-  .chips li { --mx: 50%; --my: 50%; display: flex; align-items: center; gap: 8px; padding: 9px 14px 9px 10px; border-radius: 14px; font-size: 14px; color: var(--ink);
-    background: radial-gradient(120px circle at var(--mx) var(--my), rgba(255,220,150,.45), transparent 70%), var(--glass);
-    border: 1px solid var(--gold-soft); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform .4s var(--ease), border-color .3s; }
-  .chips li:hover { transform: translateY(-3px); border-color: var(--gold); }
-  .chips b { font-weight: 600; }
-  .chips svg { width: 18px; height: 18px; stroke: var(--gold-deep); fill: none; stroke-width: 1.5; flex: none; }
 
   /* ---------- секции движка ---------- */
   .sw-copylayer::before { display: none; }
@@ -160,15 +149,22 @@
   .ftr { position: relative; z-index: 65; background: var(--paper);
     padding: clamp(64px, 12vh, 140px) clamp(16px,4.5vw,64px) calc(clamp(28px, 5vh, 48px) + env(safe-area-inset-bottom));
     box-shadow: 0 -40px 80px rgba(120,80,20,.12); border-radius: 28px 28px 0 0; }
-  .ftr__top { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: clamp(28px, 5vw, 80px); align-items: end; }
-  .ftr__title { margin: 0; font: 800 clamp(40px, 5.4vw, 92px)/.92 var(--sw-font-display); letter-spacing: -.035em; color: var(--ink); }
-  .ftr__title span { color: var(--gold); }
-  .ftr__text { margin: 0 0 24px; font-size: 17px; line-height: 1.55; color: var(--ink-soft); max-width: 42ch; }
+  .ftr { scroll-margin-top: 72px; }
+  .ftr__title { margin: 0; font: 800 clamp(36px, 5vw, 72px)/1 var(--sw-font-display); letter-spacing: -.04em; }
+  .essentials { list-style: none; padding: 0; margin: clamp(22px,4vw,40px) 0 28px; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+  .essentials li { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: 8px; padding: clamp(12px,2vw,22px); border-radius: 18px; border: 1px solid var(--gold-soft); background: #fffaf2; }
+  .essentials img { align-self: center; max-width: 100%; object-fit: contain; object-position: center bottom; margin-bottom: 4px; }
+  .essentials b { line-height: 1.2; }
+  .essentials span { color: var(--ink-soft); font-size: 14px; }
   .ftr__nav { display: flex; flex-wrap: wrap; gap: 10px; }
-  .ftr__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: clamp(56px, 10vh, 110px); padding-top: 22px;
-    border-top: 1px solid rgba(154,106,28,.18); font-size: 14px; color: var(--ink-mute); }
-  .ftr__bottom a { color: var(--ink-soft); text-decoration: none; } .ftr__bottom a:hover { color: var(--gold-deep); }
-  .ftr__bottom img { height: 16px; display: block; filter: brightness(0) opacity(.7); }
+  .snow { position: absolute; z-index: 2; inset: 4% 15% 17% 48%; overflow: hidden; pointer-events: none; }
+  .snow i { position: absolute; top: -8%; left: var(--x); width: var(--size); height: var(--size); border-radius: 50%; background: #fffdf8; box-shadow: 0 0 3px #a4a8b66b; opacity: 0; }
+  .hero.is-open .snow i { animation: first-snow 2.4s linear var(--delay) both; }
+  @keyframes first-snow {
+    0% { opacity: 0; top: 4%; transform: translateX(-8px); }
+    15%, 60% { opacity: .9; }
+    100% { opacity: 0; top: 84%; transform: translateX(17px); }
+  }
 
   @media (max-width: 860px) {
     .nav a:not(.btn) { display: none; }
@@ -178,10 +174,10 @@
     .board { width: 260vw; height: 146.25vw; top: calc(4vh + 10px); left: calc(50vw - 260vw * .645); transform: none; }
     .wash { background: linear-gradient(0deg, rgba(250,243,230,.95) 0%, rgba(250,243,230,.8) 38%, rgba(250,243,230,0) 62%); }
     .lede { top: auto; bottom: calc(24px + env(safe-area-inset-bottom)); transform: none; width: auto; right: 16px; }
-    .lede h1 { font-size: 48px; }
+    .lede h1 { font-size: clamp(38px, 11vw, 54px); }
     .lede p { font-size: 15px; margin-top: 14px; }
-    .lede .row { display: none; }
-    .chips { margin-top: 16px; } .chips li { font-size: 13px; padding: 7px 10px 7px 8px; } .chips span { display: none; }
+    .lede .row { gap: 8px; margin-top: 16px; }
+    .lede .row .btn--light { display: none; }
     .cue { top: 64%; }
     .tag { font-size: 10px; padding: 5px 8px; }
     /* кадры 16:9 на узком экране: держим продукт в центре */
@@ -194,7 +190,12 @@
     .sw-copylayer::before { display: block; background: linear-gradient(0deg, rgba(250,243,230,.97) 22%, rgba(250,243,230,.7) 60%, transparent 100%); height: 58%; }
     .sw-copy::before { display: none; }
     .sw-copy:nth-child(2), .sw-copy:nth-child(3), .sw-copy:nth-child(4) { left: clamp(18px,5vw,64px); right: clamp(18px,5vw,64px); width: auto; }
-    .ftr__top { grid-template-columns: 1fr; }
+    .essentials { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  }
+  @media (max-width: 860px) and (max-height: 650px) {
+    .board { width: 230vw; height: 129.375vw; left: calc(50vw - 230vw * .645); }
+    .lede { bottom: max(12px, env(safe-area-inset-bottom)); }
+    .lede h1 { font-size: clamp(32px, 9vw, 42px); }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; animation: none !important; }
@@ -203,20 +204,30 @@
 </head>
 <body>
   <header class="hdr">
-    <a class="logo" href="../ozonebox/index.html" aria-label="OZONEBOX, на главную"><img src="assets/img/logo.webp" alt="OZONEBOX" /><em>Сезон-бокс v2</em></a>
+    <a class="logo" href="../ozonebox/index.html" aria-label="OZONEBOX, на главную"><img src="assets/img/logo.webp" alt="OZONEBOX" /><em>Сезон-бокс</em></a>
     <nav class="nav" aria-label="Разделы">
       <a href="../ozonebox/index.html"><span data-t="Главная">Главная</span></a>
-      <a href="#" data-go="1"><span data-t="Внутри">Внутри</span></a>
-      <a href="#" data-go="5"><span data-t="Коробка">Коробка</span></a>
-      <a class="btn" href="#" data-go="5"><i class="dot"></i>Собрать коробку</a>
+      <a href="../ozonebox/index.html#catalog"><span data-t="Каталог">Каталог</span></a>
+      <a class="btn" href="#contents"><i class="dot" aria-hidden="true"></i>Что внутри</a>
     </nav>
   </header>
 
-  <section class="hero" id="top" aria-label="Сезон-бокс «Осень»">
+  <section class="hero" id="top" aria-label="Сезон-бокс «Осень–зима»">
     <div class="board">
       <img src="assets/img/hero.webp" alt="Белая коробка OZONE BOX на золотых листьях, солнце светит из-за коробки" />
       <div class="wash"></div>
       <div class="glow"></div>
+      <div class="snow" aria-hidden="true">
+        <i style="--x:8%;--delay:0ms;--size:4px"></i>
+        <i style="--x:19%;--delay:500ms;--size:2px"></i>
+        <i style="--x:31%;--delay:140ms;--size:3px"></i>
+        <i style="--x:42%;--delay:680ms;--size:5px"></i>
+        <i style="--x:48%;--delay:180ms;--size:2px"></i>
+        <i style="--x:65%;--delay:520ms;--size:3px"></i>
+        <i style="--x:73%;--delay:150ms;--size:5px"></i>
+        <i style="--x:85%;--delay:360ms;--size:3px"></i>
+        <i style="--x:94%;--delay:220ms;--size:2px"></i>
+      </div>
       <div class="rise" aria-hidden="true">
         <div class="prod p-otri"><img src="assets/img/otri.webp" alt="" /></div>
         <div class="prod p-feet"><img src="assets/img/feet.webp" alt="" /></div>
@@ -232,38 +243,29 @@
     </div>
 
     <div class="lede">
-      <p class="eyebrow">OZONEBOX · сезон-бокс</p>
-      <h1>Сезон&#8209;бокс<span>Осень</span></h1>
-      <p>Включили отопление - и воздух в квартире стал сухим. Кожу стягивает после душа, шелушатся руки и пятки, волосы электризуются под шапкой. В белой коробке четыре средства на озонированном масле: для лица, волос, ног и масло на всё.</p>
-      <ul class="chips">
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l8-8"/></svg><b>Состав</b><span>без гормонов, парабенов и силиконов</span></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 01-12 0c0-3.5 3-7 6-11z"/></svg><b>Четыре</b><span>лицо, волосы, ноги, масло</span></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M3 9h18M12 9v11"/></svg><b>Подарок</b><span>дарить можно сразу</span></li>
-      </ul>
+      <h1>Сезон&#8209;бокс <span>Осень–зима</span></h1>
+      <p>Четыре средства для лица, волос и ног на сезон холодного воздуха и отопления. Собрали их в белой коробке OZONEBOX.</p>
       <div class="row">
-        <a class="btn" href="#" data-go="5"><i class="dot"></i>Собрать коробку</a>
-        <a class="btn btn--light" href="#" data-go="1">Что внутри</a>
+        <a class="btn" href="#contents"><i class="dot" aria-hidden="true"></i>Что внутри</a>
+        <a class="btn btn--light" href="#contents" data-go="1">Посмотреть крупным планом</a>
       </div>
     </div>
   </section>
 
   <div id="world"></div>
 
-  <footer class="ftr" id="footer">
-    <div class="ftr__top">
-      <h2 class="ftr__title">Сезон&#8209;бокс<br /><span>Осень</span></h2>
-      <div>
-        <p class="ftr__text">Эмульсия для лица, шампунь, крем для ног и масло «ОТРИ 6000» в одной белой коробке.</p>
-        <div class="ftr__nav">
-          <a class="btn" href="#"><i class="dot"></i>Собрать коробку</a>
-          <a class="btn btn--light" href="../ozonebox/index.html">На главную</a>
-          <a class="btn btn--light" href="#top" data-top>Наверх</a>
-        </div>
-      </div>
-    </div>
-    <div class="ftr__bottom">
-      <a href="../ozonebox/index.html"><img src="assets/img/logo.webp" alt="OZONEBOX" /></a>
-      <span>Версия 2, белая коробка · </span>
+  <footer class="ftr" id="contents">
+    <h2 class="ftr__title">Что внутри</h2>
+    <ul class="essentials">
+      <li><img src="assets/img/face.webp" alt="" loading="lazy" width="100" height="136" /><b>Озоновая эмульсия для лица</b><span>Ozone Cream, 90 мл</span></li>
+      <li><img src="assets/img/hair.webp" alt="" loading="lazy" width="100" height="136" /><b>Шампунь «Озодермис»</b><span>С озонидами 2%</span></li>
+      <li><img src="assets/img/feet.webp" alt="" loading="lazy" width="100" height="136" /><b>Крем «Озодермис» для ног</b><span>С озонидами 12,5%</span></li>
+      <li><img src="assets/img/otri.webp" alt="" loading="lazy" width="100" height="136" /><b>Масло «ОТРИ 6000»</b><span>Озонированное оливковое масло</span></li>
+    </ul>
+    <div class="ftr__nav">
+      <a class="btn" href="../ozonebox/index.html#catalog"><i class="dot" aria-hidden="true"></i>Смотреть каталог OZONEBOX</a>
+      <a class="btn btn--light" href="../ozonebox/index.html">На главную</a>
+      <a class="btn btn--light" href="#top" data-top>Наверх</a>
     </div>
   </footer>
 
@@ -279,24 +281,24 @@
         { id: 'box', label: 'Коробка', still: 'assets/img/hero.webp', scroll: 1.2 },
         { id: 'otri', label: 'Масло', still: 'assets/img/p1.webp',
           eyebrow: 'Масло', title: 'ОТРИ 6000',
-          body: 'Озонированное оливковое масло. Капля на сухие локти, кутикулу или пятки - туда, где кожа от батарей сохнет первой.',
+          body: 'Озонированное оливковое масло.',
           tags: ['Оливковое масло', 'Озониды'] },
         { id: 'feet', label: 'Ноги', still: 'assets/img/p2.webp',
           eyebrow: 'Ноги', title: 'Крем 12,5%',
-          body: 'Крем для ног Ozodermis с озонидами. 12,5% - самая высокая концентрация в наборе. Для пяток, которые до весны живут в тёплых носках.',
+          body: 'Крем для ног Ozodermis с озонидами 12,5%.',
           tags: ['12,5%', 'Помпа'] },
         { id: 'hair', label: 'Волосы', still: 'assets/img/p3.webp',
           eyebrow: 'Волосы', title: 'Шампунь 2%',
-          body: 'Шампунь Ozodermis с озонидами. Для кожи головы, которой осенью достаётся от шапки и сухого воздуха.',
+          body: 'Шампунь Ozodermis с озонидами 2% для волос и кожи головы.',
           tags: ['2%', 'Флип-крышка'] },
         { id: 'face', label: 'Лицо', still: 'assets/img/p4.webp',
           eyebrow: 'Лицо', title: 'Ozone Cream',
-          body: 'Озоновая эмульсия для лица, 90 мл. Помпа спрятана под колпачком, в сумке ничего не выдавится.',
+          body: 'Озоновая эмульсия для лица, 90 мл, с дозатором-помпой.',
           tags: ['90 мл', 'Помпа'] },
         { id: 'finale', label: 'Вся коробка', still: 'assets/img/finale.webp', scroll: 1.4,
-          eyebrow: 'Сезон-бокс «Осень»', title: 'Все четыре',
+          eyebrow: 'Сезон-бокс «Осень–зима»', title: 'Все четыре',
           body: 'Эмульсия, масло, шампунь и крем для ног в одной белой коробке.',
-          cta: { primary: { label: 'Собрать коробку', href: '#' }, secondary: { label: 'На главную', href: '/ozonbox-glavnaya-13/' } } },
+          cta: { primary: { label: 'Что внутри', href: '#contents' }, secondary: { label: 'Смотреть каталог', href: '../ozonebox/index.html#catalog' } } },
       ],
       connectors: [],
     });
@@ -340,19 +342,15 @@
       };
       requestAnimationFrame(tick);
 
-      hero.querySelectorAll('.chips li').forEach((li) => li.addEventListener('pointermove', (e) => {
-        const r = li.getBoundingClientRect();
-        li.style.setProperty('--mx', (e.clientX - r.left) + 'px'); li.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      }));
-
       new IntersectionObserver(([en]) => document.body.classList.toggle('at-footer', en.isIntersecting), { threshold: 0.05 })
-        .observe(document.getElementById('footer'));
-      document.querySelector('[data-top]').addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        .observe(document.getElementById('contents'));
+      document.querySelector('[data-top]').addEventListener('click', (e) => { e.preventDefault(); history.replaceState(null, '', location.pathname + location.search); window.scrollTo({ top: 0, behavior: 'instant' }); });
 
       document.querySelectorAll('[data-go]').forEach((a) => a.addEventListener('click', (e) => {
+        const dot = document.querySelectorAll('.sw-route__dot')[Number(a.dataset.go)];
+        if (!dot) return;
         e.preventDefault();
-        const dots = document.querySelectorAll('.sw-route__dot');
-        if (dots[+a.dataset.go]) dots[+a.dataset.go].click();
+        dot.click();
       }));
     })();
   </script>
