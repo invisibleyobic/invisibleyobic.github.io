@@ -32,7 +32,7 @@
     "idealnoe-telo": { kind: "Набор для тела", inside: ["Антицеллюлитный массажный крем - 150 мл", "Крем для ног - 150 мл", "Озонированное масло - 25 мл"] },
     "super-kombo": { kind: "Набор", inside: ["Дневной крем", "Ночной крем", "Крем Озодермик 3%", "Озонированное масло «Отри»"] },
     "maska-shampun": { kind: "Набор для волос", inside: ["Шампунь «Озодермис» - 200 мл", "Маска для волос - 150 мл"] },
-    "sos-boks": { kind: "Набор", inside: ["Маска для волос - 150 мл", "Крем Озодермик 5% - 50 мл"], page: "/ozonbox-sos-2/" },
+    "sos-boks": { kind: "Набор", inside: ["Маска для волос - 150 мл", "Крем Озодермик 5% - 50 мл"], page: "../sos-box/index.html" },
     "set-lico": { kind: "Большой набор для лица", inside: ["Набор «Безупречно чистая кожа»", "Бокс «Стоп акне»"] },
   };
   // наборы, где состав точно совпадает с отдельными товарами: только по ним считаем выгоду в рублях
@@ -286,7 +286,7 @@
     if (d.cart !== undefined) { e.preventDefault(); openCart(); return; }
     if (d.promo !== undefined) { e.preventDefault(); openPromo(); return; }
     if (d.tg !== undefined) { e.preventDefault(); say("Ссылка на канал появится вместе с ботом"); return; }
-    if (d.close !== undefined) { const goCat = d.goCat !== undefined; if (openEl === cd && step === "done") { step = "cart"; } hide(); if (goCat) document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth" }); return; }
+    if (d.close !== undefined) { const goCat = d.goCat !== undefined; if (openEl === cd && step === "done") { step = "cart"; } hide(); if (goCat) document.getElementById("catalog")?.scrollIntoView({ behavior: "instant" }); return; }
     if (d.q) { setQ(d.q, (st.items[d.q] || 0) + +d.d); return; }
     if (d.swap) { (EXACT[d.swap] || []).forEach((c) => { if (st.items[c]) setQ(c, st.items[c] - 1); }); add(d.swap); return; }
     if (d.reveal !== undefined) { $("#ozbPmCode").classList.add("on"); return; }

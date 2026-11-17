@@ -39,6 +39,9 @@ h1, h2, h3 { margin: 0; font-weight: 750; letter-spacing: -.035em; line-height: 
 h2 { font-size: clamp(38px, 5.4vw, 76px); }
 h2 em, h1 em { font-style: normal; color: var(--warm); }
 .kick { font-size: 15px; color: var(--soft); margin: 0 0 16px; }
+.resource-links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: 12px; }
+.resource-links a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; }
+#cream { scroll-margin-top: 5rem; }
 .lead { color: var(--soft); font-size: clamp(17px, 1.5vw, 20px); max-width: 52ch; margin: 18px 0 0; }
 section { padding-block: clamp(72px, 10vw, 130px); }
 .btn { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-weight: 550; font-size: 16px; cursor: pointer; text-decoration: none; transition: transform .15s, background .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
@@ -479,6 +482,11 @@ section > .wrap { position: relative; z-index: 1; }
       <p class="kick">Метод</p>
       <h2 class="words">Крем, импульс, <em>электрод</em></h2>
       <p class="lead">Слабые электрические импульсы (ТЭНС) и озонсодержащий крем OZOTENS 30% за один сеанс, в том месте, где беспокоит.</p>
+      <div class="resource-links">
+        <a href="#shop">Что входит в комплект</a>
+        <a href="#help">Разборы по зонам</a>
+        <a href="#docs">Документы и история метода</a>
+      </div>
       <div class="how-grid">
         <div class="hc">
           <div class="art cream-art" aria-hidden="true">
@@ -552,11 +560,14 @@ section > .wrap { position: relative; z-index: 1; }
 
   <!-- 6. Каталог: фильтры (Flip), карточки с ценой, добавить в один клик -->
   <section id="shop">
-    <aside id="cream" style="scroll-margin-top: 6rem; margin: 0 auto 1.5rem; max-width: 70rem; padding: 1rem"><h2>Крем OZOTENS 30%</h2><p>Электродный крем, 150 мл. Артикул 5T15.</p><button type="button" onclick="openProduct('5T15')">Открыть карточку крема</button><p>Уход за кожей и волосами — в <a href="../ozonebox/index.html#tasks">каталоге косметики OzoneBox</a>.</p></aside>
     <div class="wrap">
       <p class="kick">Каталог</p>
       <h2 class="words">Подобрать <em>электрод</em> и всё для сеанса</h2>
       <p class="lead">Для сеанса нужны три вещи: прибор, крем и электрод под зону. Прибор подходит ко всем электродам.</p>
+      <div class="resource-links">
+        <a href="#cream">Крем OZOTENS 30%</a>
+        <a href="#bundles">Готовые наборы</a>
+      </div>
       <div class="filters" id="filters">
         <button type="button" data-f="all" aria-pressed="true">Всё</button>
         <button type="button" data-f="el">Электроды</button>
@@ -564,6 +575,10 @@ section > .wrap { position: relative; z-index: 1; }
         <button type="button" data-f="cream">Крем</button>
       </div>
       <div class="grid" id="grid"></div>
+      <aside id="cream" class="row" aria-label="Крем OZOTENS 30%">
+        <button class="btn" type="button" data-open="5T15">Крем OZOTENS 30% · 150 мл</button>
+        <a class="btn" href="#how">Как устроен метод</a>
+      </aside>
     </div>
   </section>
 
@@ -574,7 +589,11 @@ section > .wrap { position: relative; z-index: 1; }
       <p class="kick">Самопомощь</p>
       <h2 class="words">Что делать, <em>когда болит</em></h2>
       <p class="lead">Короткие видео и разборы по зонам: как надеть электрод, сколько крема, как подобрать силу. </p>
-      <p><a href="pomosch/index.html">Все разборы: поясница, грыжа, протрузия, колено, плечо →</a></p>
+      <div class="resource-links">
+        <a href="pomosch/index.html">Все разборы по зонам</a>
+        <a href="#shop">Прибор, крем и электроды</a>
+        <a href="znaniya/index.html">Материалы о методе</a>
+      </div>
       <div class="grid help-grid">
         <a class="hl" href="pomosch/poyasnica-chto-delat.html"><span class="vd">▶ видео готовится</span><b>Болит поясница</b><small>Как надеть пояс «Спина» и провести сеанс</small></a>
         <a class="hl" href="pomosch/sheya-i-plechi-za-kompyuterom.html"><span class="vd">▶ видео готовится</span><b>Болит шея</b><small>Электрод «Шея»: размер и посадка</small></a>
@@ -593,6 +612,10 @@ section > .wrap { position: relative; z-index: 1; }
       <p class="kick">Документы</p>
       <h2 class="words">Что стоит <em>за методом</em></h2>
       <p class="lead">Патент, пособие для врачей, научные статьи и тридцать лет озонотерапии в Нижнем Новгороде. Каждый документ можно открыть и проверить.</p>
+      <div class="resource-links">
+        <a href="znaniya/index.html">База знаний</a>
+        <a href="znaniya/nauka.html">Публикации и материалы</a>
+      </div>
       <div class="docs">
         <div><b>Патент RU 2714457</b><p>«Способ лечения дистрофических заболеваний позвоночника и суставов». Авторы: С.П. Перетягин, С.А. Соколов. Заявлен 18.09.2018, опубликован 17.02.2020. <a href="https://new.fips.ru/registers-doc-view/fips_servlet?DB=RUPAT&amp;DocNumber=2714457" target="_blank" rel="noopener">Открыть в реестре ФИПС</a></p></div>
         <div><b>Пособие для врачей</b><p>«ОЗОТЭНС-терапия дорсалгий и артралгий» (боль в спине и суставах). Перетягин С.П., Новиков А.В., Соколов С.А., Хрулёв С.Е. Издательский дом Академии Естествознания, 2020, 80 с., ISBN 978-5-91327-644-5.</p></div>
