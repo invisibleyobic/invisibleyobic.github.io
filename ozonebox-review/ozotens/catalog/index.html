@@ -8,6 +8,11 @@
   <title>Каталог компонентов | ОЗОТЭНС</title>
   <link rel="icon" href="../favicon-32.png">
   <link rel="stylesheet" href="../site.css">
+  <style>
+    .catalog-filters .button { cursor: pointer; }
+    .catalog-filters [aria-pressed="true"] { outline: 2px solid currentColor; outline-offset: 2px; }
+    .catalog-filters[hidden], .catalog-results [hidden] { display: none; }
+  </style>
 </head>
 <body>
   <a class="skip" href="#content">К содержанию</a><header class="site-header"><div class="wrap"><a class="brand" href="../index.html">ОЗОТЭНС</a><nav class="site-nav" aria-label="Основная навигация"><a href="../index.html">Главная</a><a href="../method/">О методе</a><a href="../catalog/" aria-current="page">Каталог</a><a href="../pomosch/">Помощь</a><a href="../znaniya/">Документы</a></nav></div></header>
@@ -19,13 +24,25 @@
           <h1>Каталог компонентов</h1>
           <p class="lede">Модели, фотографии и артикулы прибора, крема и электродов.</p>
           <div class="actions">
-            <a class="button" href="#components">Прибор и крем</a>
-            <a class="button button-secondary" href="#electrodes">Электроды</a>
+            <a class="button" href="#catalog">Найти компонент</a>
+            <a class="button button-secondary" href="#availability">Уточнить наличие</a>
           </div>
         </div>
         <img src="../img/hero.webp" alt="Прибор, крем и электрод ОЗОТЭНС" width="1168" height="880" fetchpriority="high">
       </div>
     </section>
+    <section class="section" id="catalog" aria-labelledby="catalog-title">
+      <div class="wrap">
+        <h2 id="catalog-title">Что ищете?</h2>
+        <div class="actions catalog-filters" role="group" aria-label="Тип компонента" hidden>
+          <button class="button button-secondary" type="button" data-filter="all" aria-pressed="true">Все компоненты</button>
+          <button class="button button-secondary" type="button" data-filter="device" aria-pressed="false">Прибор</button>
+          <button class="button button-secondary" type="button" data-filter="cream" aria-pressed="false">Крем</button>
+          <button class="button button-secondary" type="button" data-filter="electrodes" aria-pressed="false">Электроды</button>
+        </div>
+      </div>
+    </section>
+    <div class="catalog-results">
     <section class="section" id="components" aria-labelledby="components-title">
       <div class="wrap">
         <h2 id="components-title">Прибор и крем</h2>
@@ -94,9 +111,17 @@
             <p>Два канала, два сегмента. Артикул 85/03.</p>
           </article>
         </div>
+
+      </div>
+    </section>
+    </div>
+    <section class="section" id="availability" aria-labelledby="otri-title">
+      <div class="wrap">
+        <h2 id="otri-title">Уточнить наличие у ОТРИ</h2>
+        <p class="lede">Назовите отделу продаж модель или артикул из каталога. Уточните наличие, комплектацию и способ заказа.</p>
         <div class="actions">
-          <a class="button" href="../method/">Как устроен метод</a>
-          <a class="button button-secondary" href="../start/">С чего начать</a>
+          <a class="button" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1">Запросить цену и наличие у ОТРИ</a>
+          <a class="button button-secondary" href="https://ozonecosmetics.ru/ozotens">ОЗОТЭНС на сайте производителя</a>
         </div>
       </div>
     </section>
@@ -107,5 +132,35 @@
       <a href="../znaniya/">Источники и публикации</a>
     </div>
   </footer>
+  <script>
+    const filters = document.querySelector(".catalog-filters");
+    const components = document.getElementById("components");
+    const electrodes = document.getElementById("electrodes");
+    const device = document.getElementById("device");
+    const cream = document.getElementById("cream");
+
+    function applyFilter(filter) {
+      components.hidden = filter === "electrodes";
+      electrodes.hidden = filter !== "all" && filter !== "electrodes";
+      device.hidden = filter === "cream";
+      cream.hidden = filter === "device";
+      filters.querySelectorAll("[data-filter]").forEach(button => {
+        button.setAttribute("aria-pressed", String(button.dataset.filter === filter));
+      });
+    }
+
+    filters.hidden = false;
+    filters.addEventListener("click", event => {
+      const button = event.target.closest("[data-filter]");
+      if (button) applyFilter(button.dataset.filter);
+    });
+    window.addEventListener("hashchange", () => {
+      const target = document.getElementById(location.hash.slice(1));
+      if (target && target.closest("[hidden]")) {
+        applyFilter("all");
+        target.scrollIntoView();
+      }
+    });
+  </script>
 </body>
 </html>
