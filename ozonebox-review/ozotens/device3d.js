@@ -1029,6 +1029,14 @@ float pulseBand(){
 
   return {
     press,
+    rotate(delta) {
+      if (!Number.isFinite(delta)) return;
+      userYaw += delta;
+      yawVel = 0;
+      pitchVel = 0;
+      lastInteract = performance.now();
+      wake();
+    },
     get state() { return { ...st }; },
     dispose,
   };
