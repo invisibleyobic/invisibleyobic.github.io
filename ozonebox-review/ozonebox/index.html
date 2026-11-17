@@ -423,7 +423,14 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
   *{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
 </style>
-</head>
+<style>
+.shop-sections{display:flex;flex-wrap:wrap;gap:.55rem;margin:1rem 0}
+.shop-sections a{display:inline-flex;align-items:center;min-height:44px;padding:.35rem .9rem;border:1px solid #ccd6ce;border-radius:99px;color:inherit;background:#fff;font-weight:700}
+.shop-sections a:hover,.shop-sections a:focus-visible{background:var(--mist)}
+.hero__pic img{width:100%;max-height:380px;object-fit:contain}
+#sets .offer{margin-block:0 1rem}
+@media(max-width:760px){.hero{grid-template-columns:minmax(0,1fr) minmax(76px,25%);gap:.5rem}.hero__pic{display:block}.hero__pic img{width:100%;height:auto}.hero__cta .btn--big{flex:none;padding-inline:.8rem}.shop-sections{gap:.35rem}.shop-sections a{padding-inline:.65rem}}
+</style></head>
 <body>
 
 <header id="hd">
@@ -444,40 +451,22 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
 </header>
 
 <main id="top" class="wrap">
-  <p class="note">Предпросмотр. Корзина демонстрационная, оплатить заказ в этой сборке нельзя.</p>
   <!-- ЧТО / ЗАЧЕМ / ПОЧЕМУ / ОФФЕР - на одном экране телефона -->
   <section class="hero" aria-labelledby="h1">
     <div class="hero__copy">
-      <h1 id="h1">Озоновая косметика <mark>для проблемной кожи</mark>, волос и тела</h1>
-      <p class="hero__sub">Выберите задачу - покажем готовый набор и как им пользоваться</p>
-      <div class="hero__row">
-        <ul class="why">
-          <li>Наборы под задачу <span>- собраны заранее</span></li>
-          <li>Официальный дистрибьютор <span>Ozone Cosmetic Lab</span></li>
-          <li>7 способов доставки <span>- курьер, пункты выдачи, почта</span></li>
-        </ul>
-        <img class="hero__face" src="img/lica/M04.webp" alt="" width="800" height="960">
-      </div>
-      <div class="offer hit">
-        <img src="img/sos-boks.webp" alt="Набор «SOS бокс»" width="900" height="900" data-open="sos-boks">
-        <div>
-          <p class="offer__k">Наборы выгоднее</p>
-          <p class="offer__t">SOS бокс: маска для волос + крем 5%</p>
-          <p class="offer__p"><b id="ofP"></b><span id="ofW"></span></p>
-        </div>
-        <div class="offer__go">
-          <span class="offer__code">И ещё −10% по <button type="button" data-promo>коду из ролика</button></span>
-          <button class="btn btn--ink btn--sm press" type="button" data-add="sos-boks">В корзину</button>
-        </div>
-      </div>
+      <h1 id="h1">Озоновый уход <mark>за кожей и волосами</mark></h1>
+      <p class="hero__sub">Подберите средство для лица, тела или волос. Состав, способ применения и цена — в карточке.</p>
       <div class="hero__cta">
         <a class="btn btn--acid btn--big press" href="#tasks">Подобрать уход <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="link" href="#hits">Хиты продаж</a><a class="link" href="../sos-box/index.html">Что входит в SOS бокс</a>
+        <a class="link" href="#catalog">Весь каталог</a>
       </div>
     </div>
-    <div class="hero__pic"><img src="img/lica/M04.webp" alt="" width="800" height="960"></div>
+    <div class="hero__pic"><img src="img/sos-boks.webp" alt="Набор OzoneBox SOS Box" width="900" height="900"></div>
   </section>
 
+  <nav class="shop-sections" aria-label="Быстрые переходы">
+    <a href="#catalog">Каталог</a><a href="#sets">Наборы</a><a href="../sos-box/index.html">SOS Box</a><a href="../season-box/index.html">Сезон-бокс</a><a href="../ozotens/index.html#cream">ОЗОТЭНС</a><a href="../future/index.html">Витрина Future</a>
+  </nav>
   <section class="sec" id="tasks" aria-labelledby="tasksT" style="padding-top:28px">
     <div class="sec__head"><h2 class="h2" id="tasksT">Какая у вас <mark>задача?</mark></h2><p>Нажмите на плитку - покажем, что подойдёт, с ценой и кнопкой «В корзину».</p></div>
     <div class="tasks" id="tasksGrid"></div>
@@ -490,6 +479,18 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
 
   <section class="sec" id="sets" aria-labelledby="setsT">
     <div class="sec__head"><h2 class="h2" id="setsT">Наборы <mark>выгоднее</mark></h2><p>Цена набора ниже, чем у тех же средств по отдельности.</p></div>
+      <div class="offer hit">
+        <img src="img/sos-boks.webp" alt="Набор «SOS бокс»" width="900" height="900" data-open="sos-boks">
+        <div>
+          <p class="offer__k">Наборы выгоднее</p>
+          <p class="offer__t">SOS бокс: маска для волос + крем 5%</p>
+          <p class="offer__p"><b id="ofP"></b><span id="ofW"></span></p>
+        </div>
+        <div class="offer__go">
+          <span class="offer__code">И ещё −10% по <button type="button" data-promo>коду из ролика</button></span>
+          <button class="btn btn--ink btn--sm press" type="button" data-add="sos-boks">В корзину</button>
+        </div>
+      </div>
     <div class="sets" id="setsBig"></div>
     <div class="more" id="setsMore" aria-label="Ещё наборы под задачу"></div>
   </section>
@@ -503,7 +504,6 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="relatedT"><div class="sec__head"><h2 class="h2" id="relatedT">Каталог <mark>ОЗОТЭНС</mark></h2><p>Прибор, электроды и крем OZOTENS 30% собраны в отдельном каталоге.</p></div><a class="btn btn--ink press" href="../ozotens/index.html#cream">Посмотреть крем и комплектацию</a></section>
   <section class="sec" id="how" aria-labelledby="howT">
     <div class="sec__head"><h2 class="h2" id="howT">Как <mark>пользоваться</mark></h2></div>
     <ol class="steps">
@@ -574,7 +574,7 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
     </div>
     <div class="foot__row">
       <span>© 2015-2026 OZONEBOX</span>
-      <span><a href="../future/index.html">Витрина Future</a> · <a href="../review/index.html">Карта предпросмотра</a></span>
+      <span><a href="../future/index.html">Future</a> · <a href="../ozotens/index.html">ОЗОТЭНС</a></span>
     </div>
   </div>
 </footer>
@@ -710,3 +710,4 @@ footer{background:var(--ink);color:var(--paper);margin-top:clamp(56px,7vw,96px);
 </script>
 </body>
 </html>
+
