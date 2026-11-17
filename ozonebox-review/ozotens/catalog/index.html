@@ -7,114 +7,157 @@
   <meta name="description" content="Прибор, электродный крем и виды электродов ОЗОТЭНС.">
   <title>Каталог компонентов | ОЗОТЭНС</title>
   <link rel="icon" href="../favicon-32.png">
-  <link rel="stylesheet" href="../site.css?v=2">
+  <link rel="stylesheet" href="../site.css?v=3">
   <style>
     .catalog-filters .button { cursor: pointer; }
-    .catalog-filters [aria-pressed="true"] { outline: 2px solid currentColor; outline-offset: 2px; }
+    .catalog-filters [aria-pressed="true"] { background: var(--acid, #356dff); color: #fff; }
     .catalog-filters[hidden], .catalog-results [hidden] { display: none; }
+    .card { transition: transform .2s, box-shadow .2s; }
+    .card:focus-within { outline: 2px solid #356dff; outline-offset: 3px; }
+    .card__img img { width: 100%; height: 100%; object-fit: contain; padding: 0; }
+    .card__img { display: grid; place-items: center; aspect-ratio: 1; padding: 22px; border-radius: 22px; overflow: hidden; background: #eef0ef; }
+    .product-dialog { width: min(92vw, 760px); max-height: 90vh; border: 0; border-radius: 28px; padding: 28px; overflow: auto; }
+    .product-dialog::backdrop { background: rgba(14, 15, 13, .45); backdrop-filter: blur(5px); }
+    .product-dialog img { width: 100%; height: min(44vh, 340px); object-fit: contain; margin: 20px 0; }
+    .product-dialog .dialog-close { float: right; min-width: 44px; min-height: 44px; }
+    .card__desc { color: #626b70; font-size: 14px; margin: 10px 0 18px; }
+    .card__add { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; border-radius: 99px; padding: 8px 14px; background: #356dff; color: white; font-weight: 700; }
+    @media (hover: hover) { .card:hover { transform: translateY(-4px); } }
   </style>
 </head>
 <body>
-  <a class="skip" href="#content">К содержанию</a><header class="site-header"><div class="wrap"><a class="brand" href="../index.html">ОЗОТЭНС</a><nav class="site-nav" aria-label="Основная навигация"><a href="../index.html">Главная</a><a href="../method/">О методе</a><a href="../catalog/" aria-current="page">Каталог</a><a href="../pomosch/">Помощь</a><a href="../znaniya/">Документы</a></nav></div></header>
+  <a class="skip" href="#content">К содержанию</a><header class="site-header"><div class="wrap"><a class="brand" href="../index.html" aria-label="ОЗОТЭНС, главная">ОЗО<b>ТЭНС</b></a><nav class="site-nav" aria-label="Основная навигация"><a href="../index.html">Главная</a><a href="../catalog/" aria-current="page">Каталог</a><a href="../method/">Как работает</a><a href="../pomosch/">Помощь</a><a href="../znaniya/">Документы</a></nav><a class="sibling" href="../../ozonebox/index.html">OzoneBox ↗</a></div></header>
   <main id="content">
-    <section class="section hero">
-      <div class="wrap hero-grid">
+    <section class="hero">
+      <div class="wrap"><div class="hero-grid">
         <div>
           <p class="eyebrow">ОЗОТЭНС</p>
-          <h1>Каталог компонентов</h1>
-          <p class="lede">Модели, фотографии и артикулы прибора, крема и электродов.</p>
+          <h1>Прибор, крем<br> и <mark>электроды</mark></h1>
+          <p class="lede">Всё для комплекта ОЗОТЭНС. Выберите нужные компоненты и уточните цену у производителя.</p>
           <div class="actions">
             <a class="button" href="#catalog">Найти компонент</a>
             <a class="button button-secondary" href="#availability">Уточнить наличие</a>
           </div>
         </div>
-        <img src="../img/hero.webp" alt="Прибор, крем и электрод ОЗОТЭНС" width="1168" height="880" fetchpriority="high">
-      </div>
+        <div class="hardware-stage"><img src="../img/cream.webp" alt="Крем OZOTENS 30%" width="1024" height="1024" fetchpriority="high"></div>
+      </div></div>
     </section>
     <section class="section" id="catalog" aria-labelledby="catalog-title">
       <div class="wrap">
-        <h2 id="catalog-title">Что ищете?</h2>
-        <div class="actions catalog-filters" role="group" aria-label="Тип компонента" hidden>
-          <button class="button button-secondary" type="button" data-filter="all" aria-pressed="true">Все компоненты</button>
-          <button class="button button-secondary" type="button" data-filter="device" aria-pressed="false">Прибор</button>
-          <button class="button button-secondary" type="button" data-filter="cream" aria-pressed="false">Крем</button>
-          <button class="button button-secondary" type="button" data-filter="electrodes" aria-pressed="false">Электроды</button>
+        <div class="head">
+          <h2 id="catalog-title">Каталог</h2>
+          <p>Выберите компонент. Модель и артикул попадут в запрос производителю.</p>
+        </div>
+        <div class="chips catalog-filters" role="group" aria-label="Тип компонента" hidden>
+          <button class="chip" type="button" data-filter="all" aria-pressed="true">Все <span>11</span></button>
+          <button class="chip" type="button" data-filter="device" aria-pressed="false">Прибор <span>1</span></button>
+          <button class="chip" type="button" data-filter="cream" aria-pressed="false">Крем <span>1</span></button>
+          <button class="chip" type="button" data-filter="electrodes" aria-pressed="false">Электроды <span>9</span></button>
+        </div>
+        <span id="electrodes" aria-hidden="true"></span>
+        <div class="grid catalog-results" id="products">
+          <article class="card" id="device" data-category="device">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/device.webp" alt="Прибор RoovJoy R-C3" width="1024" height="1024" loading="lazy"></button>
+            <h3 class="card__name">Прибор RoovJoy R-C3</h3>
+            <p class="card__desc">Два канала, режимы TENS, EMS и массажа.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/31</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%9F%D1%80%D0%B8%D0%B1%D0%BE%D1%80%20RoovJoy%20R-C3%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/31" aria-label="Запросить цену и наличие Прибор RoovJoy R-C3">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="cream" data-category="cream">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/cream.webp" alt="Крем OZOTENS 30%" width="1024" height="1024" loading="lazy"></button>
+            <h3 class="card__name">Крем OZOTENS 30%</h3>
+            <p class="card__desc">Электродный крем, 150 мл.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 5T15</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%9A%D1%80%D0%B5%D0%BC%20OZOTENS%2030%25%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%205T15" aria-label="Запросить цену и наличие Крем OZOTENS 30%">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="back" data-category="electrodes">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/el-back.webp" alt="Электрод «Спина»" width="380" height="174" loading="lazy"></button>
+            <h3 class="card__name">Электрод «Спина»</h3>
+            <p class="card__desc">Два канала, четыре сегмента.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/04</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%20%C2%AB%D0%A1%D0%BF%D0%B8%D0%BD%D0%B0%C2%BB%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/04" aria-label="Запросить цену и наличие Электрод «Спина»">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="neck" data-category="electrodes">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/el-neck.webp" alt="Электрод «Шея»" width="370" height="329" loading="lazy"></button>
+            <h3 class="card__name">Электрод «Шея»</h3>
+            <p class="card__desc">Два канала, четыре сегмента.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/01</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%20%C2%AB%D0%A8%D0%B5%D1%8F%C2%BB%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/01" aria-label="Запросить цену и наличие Электрод «Шея»">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="shoulder" data-category="electrodes">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/el-shoulder.webp" alt="Электрод «Плечо»" width="386" height="258" loading="lazy"></button>
+            <h3 class="card__name">Электрод «Плечо»</h3>
+            <p class="card__desc">Два канала, четыре сегмента.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/02</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%20%C2%AB%D0%9F%D0%BB%D0%B5%D1%87%D0%BE%C2%BB%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/02" aria-label="Запросить цену и наличие Электрод «Плечо»">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="knee" data-category="electrodes">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/el-knee.webp" alt="Электрод «Колено»" width="322" height="233" loading="lazy"></button>
+            <h3 class="card__name">Электрод «Колено»</h3>
+            <p class="card__desc">Два канала, четыре сегмента.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/07</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%20%C2%AB%D0%9A%D0%BE%D0%BB%D0%B5%D0%BD%D0%BE%C2%BB%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/07" aria-label="Запросить цену и наличие Электрод «Колено»">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="hip" data-category="electrodes">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/el-hip.webp" alt="Электрод «Тазобедренный»" width="486" height="364" loading="lazy"></button>
+            <h3 class="card__name">Электрод «Тазобедренный»</h3>
+            <p class="card__desc">Два канала, четыре сегмента.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/05</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%20%C2%AB%D0%A2%D0%B0%D0%B7%D0%BE%D0%B1%D0%B5%D0%B4%D1%80%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9%C2%BB%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/05" aria-label="Запросить цену и наличие Электрод «Тазобедренный»">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="foot" data-category="electrodes">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/el-foot.webp" alt="Электрод «Стопа»" width="432" height="296" loading="lazy"></button>
+            <h3 class="card__name">Электрод «Стопа»</h3>
+            <p class="card__desc">Один канал, два сегмента.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/09</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%20%C2%AB%D0%A1%D1%82%D0%BE%D0%BF%D0%B0%C2%BB%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/09" aria-label="Запросить цену и наличие Электрод «Стопа»">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="hand-foot" data-category="electrodes">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/el-hand-foot.webp" alt="Электрод «Кисть и стопа»" width="378" height="229" loading="lazy"></button>
+            <h3 class="card__name">Электрод «Кисть и стопа»</h3>
+            <p class="card__desc">Два канала, два сегмента.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/06</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%20%C2%AB%D0%9A%D0%B8%D1%81%D1%82%D1%8C%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BF%D0%B0%C2%BB%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/06" aria-label="Запросить цену и наличие Электрод «Кисть и стопа»">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="shin-thigh" data-category="electrodes">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/el-shin-thigh.webp" alt="Электрод «Голень и бедро»" width="263" height="175" loading="lazy"></button>
+            <h3 class="card__name">Электрод «Голень и бедро»</h3>
+            <p class="card__desc">Два канала, два сегмента.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/08</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%20%C2%AB%D0%93%D0%BE%D0%BB%D0%B5%D0%BD%D1%8C%20%D0%B8%20%D0%B1%D0%B5%D0%B4%D1%80%D0%BE%C2%BB%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/08" aria-label="Запросить цену и наличие Электрод «Голень и бедро»">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card" id="shin-arm" data-category="electrodes">
+            <button class="card__img" type="button" data-detail aria-haspopup="dialog" aria-label="Подробнее о товаре"><img src="../img/el-shin-arm.webp" alt="Электрод «Плечо и голень»" width="354" height="116" loading="lazy"></button>
+            <h3 class="card__name">Электрод «Плечо и голень»</h3>
+            <p class="card__desc">Два канала, два сегмента.</p>
+            <div class="card__foot">
+              <span class="card__price">Арт. 85/03</span>
+              <a class="card__add" href="mailto:info@ozonecosmetics.ru?subject=%D0%9E%D0%97%D0%9E%D0%A2%D0%AD%D0%9D%D0%A1%20%E2%80%94%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%20%C2%AB%D0%9F%D0%BB%D0%B5%D1%87%D0%BE%20%D0%B8%20%D0%B3%D0%BE%D0%BB%D0%B5%D0%BD%D1%8C%C2%BB%2C%20%D0%B0%D1%80%D1%82%D0%B8%D0%BA%D1%83%D0%BB%2085/03" aria-label="Запросить цену и наличие Электрод «Плечо и голень»">Запросить <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
-    <div class="catalog-results">
-    <section class="section" id="components" aria-labelledby="components-title">
-      <div class="wrap">
-        <h2 id="components-title">Прибор и крем</h2>
-        <div class="grid">
-          <article class="card" id="device">
-            <img src="../img/device.webp" alt="Прибор RoovJoy R-C3" width="1024" height="1024" loading="lazy">
-            <h3>Прибор RoovJoy R-C3</h3>
-            <p>Два канала, режимы TENS, EMS и массажа. Артикул 85/31.</p>
-          </article>
-          <article class="card" id="cream">
-            <img src="../img/cream.webp" alt="Крем OZOTENS 30%" width="1024" height="1024" loading="lazy">
-            <h3>Крем OZOTENS 30%</h3>
-            <p>Электродный крем, 150 мл. Артикул 5T15.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-    <section class="section" id="electrodes" aria-labelledby="electrodes-title">
-      <div class="wrap">
-        <h2 id="electrodes-title">Электроды</h2>
-        <p class="notice">Названия описывают форму и маркировку. Назначение, совместимость и размер сверяйте по инструкции производителя к конкретному артикулу.</p>
-        <div class="grid">
-          <article class="card" id="back">
-            <img src="../img/el-back.webp" alt="Электрод «Спина»" width="380" height="174" loading="lazy">
-            <h3>Электрод «Спина»</h3>
-            <p>Два канала, четыре сегмента. Артикул 85/04.</p>
-          </article>
-          <article class="card" id="neck">
-            <img src="../img/el-neck.webp" alt="Электрод «Шея»" width="370" height="329" loading="lazy">
-            <h3>Электрод «Шея»</h3>
-            <p>Два канала, четыре сегмента. Артикул 85/01.</p>
-          </article>
-          <article class="card" id="shoulder">
-            <img src="../img/el-shoulder.webp" alt="Электрод «Плечо»" width="386" height="258" loading="lazy">
-            <h3>Электрод «Плечо»</h3>
-            <p>Два канала, четыре сегмента. Артикул 85/02.</p>
-          </article>
-          <article class="card" id="knee">
-            <img src="../img/el-knee.webp" alt="Электрод «Колено»" width="322" height="233" loading="lazy">
-            <h3>Электрод «Колено»</h3>
-            <p>Два канала, четыре сегмента. Артикул 85/07.</p>
-          </article>
-          <article class="card" id="hip">
-            <img src="../img/el-hip.webp" alt="Электрод «Тазобедренный»" width="486" height="364" loading="lazy">
-            <h3>Электрод «Тазобедренный»</h3>
-            <p>Два канала, четыре сегмента. Артикул 85/05.</p>
-          </article>
-          <article class="card" id="foot">
-            <img src="../img/el-foot.webp" alt="Электрод «Стопа»" width="432" height="296" loading="lazy">
-            <h3>Электрод «Стопа»</h3>
-            <p>Один канал, два сегмента. Артикул 85/09.</p>
-          </article>
-          <article class="card" id="hand-foot">
-            <img src="../img/el-hand-foot.webp" alt="Электрод «Кисть и стопа»" width="378" height="229" loading="lazy">
-            <h3>Электрод «Кисть и стопа»</h3>
-            <p>Два канала, два сегмента. Артикул 85/06.</p>
-          </article>
-          <article class="card" id="shin-thigh">
-            <img src="../img/el-shin-thigh.webp" alt="Электрод «Голень и бедро»" width="263" height="175" loading="lazy">
-            <h3>Электрод «Голень и бедро»</h3>
-            <p>Два канала, два сегмента. Артикул 85/08.</p>
-          </article>
-          <article class="card" id="shin-arm">
-            <img src="../img/el-shin-arm.webp" alt="Электрод «Плечо и голень»" width="354" height="116" loading="lazy">
-            <h3>Электрод «Плечо и голень»</h3>
-            <p>Два канала, два сегмента. Артикул 85/03.</p>
-          </article>
-        </div>
-
-      </div>
-    </section>
-    </div>
     <section class="section" id="availability" aria-labelledby="otri-title">
       <div class="wrap">
         <h2 id="otri-title">Уточнить наличие у ОТРИ</h2>
@@ -126,24 +169,41 @@
       </div>
     </section>
   </main>
-  <footer class="site-footer">
-    <div class="wrap">
-      <a class="brand" href="../index.html">ОЗОТЭНС</a>
-      <a href="../znaniya/">Источники и публикации</a>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="wrap"><a class="brand" href="../index.html">ОЗО<b>ТЭНС</b></a><nav class="site-nav" aria-label="Навигация в подвале"><a href="../catalog/">Каталог</a><a href="../method/">Как работает</a><a href="../znaniya/">Документы</a></nav></div></footer>
+  <dialog class="product-dialog" id="product-dialog" aria-labelledby="product-title">
+    <form method="dialog">
+      <button class="button button-secondary dialog-close" autofocus aria-label="Закрыть карточку">Закрыть</button>
+    </form>
+    <img id="product-image" alt="">
+    <h2 id="product-title"></h2>
+    <p id="product-description"></p>
+    <p id="product-sku"></p>
+    <a class="button" id="product-request">Запросить цену и наличие</a>
+  </dialog>
   <script>
+    const dialog = document.getElementById("product-dialog");
+    document.querySelectorAll("[data-detail]").forEach(button => {
+      const card = button.closest(".card");
+      button.setAttribute("aria-label", "Подробнее: " + card.querySelector(".card__name").textContent);
+      button.addEventListener("click", () => {
+        const image = card.querySelector("img");
+        const detailImage = document.getElementById("product-image");
+        detailImage.src = image.src;
+        detailImage.alt = image.alt;
+        document.getElementById("product-title").textContent = card.querySelector(".card__name").textContent;
+        document.getElementById("product-description").textContent = card.querySelector(".card__desc").textContent;
+        document.getElementById("product-sku").textContent = card.querySelector(".card__price").textContent;
+        document.getElementById("product-request").href = card.querySelector(".card__add").href;
+        dialog.showModal();
+      });
+    });
     const filters = document.querySelector(".catalog-filters");
-    const components = document.getElementById("components");
-    const electrodes = document.getElementById("electrodes");
-    const device = document.getElementById("device");
-    const cream = document.getElementById("cream");
+    const cards = [...document.querySelectorAll("[data-category]")];
 
     function applyFilter(filter) {
-      components.hidden = filter === "electrodes";
-      electrodes.hidden = filter !== "all" && filter !== "electrodes";
-      device.hidden = filter === "cream";
-      cream.hidden = filter === "device";
+      cards.forEach(card => {
+        card.hidden = filter !== "all" && card.dataset.category !== filter;
+      });
       filters.querySelectorAll("[data-filter]").forEach(button => {
         button.setAttribute("aria-pressed", String(button.dataset.filter === filter));
       });
@@ -154,13 +214,21 @@
       const button = event.target.closest("[data-filter]");
       if (button) applyFilter(button.dataset.filter);
     });
-    window.addEventListener("hashchange", () => {
-      const target = document.getElementById(location.hash.slice(1));
-      if (target && target.closest("[hidden]")) {
+    function showHashTarget() {
+      const anchor = location.hash.slice(1);
+      if (anchor === "electrodes") {
+        applyFilter("electrodes");
+        document.getElementById("catalog").scrollIntoView();
+        return;
+      }
+      const target = document.getElementById(anchor);
+      if (target && target.hidden) {
         applyFilter("all");
         target.scrollIntoView();
       }
-    });
+    }
+    window.addEventListener("hashchange", showHashTarget);
+    showHashTarget();
   </script>
 </body>
 </html>

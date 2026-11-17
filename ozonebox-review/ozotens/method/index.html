@@ -5,53 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <meta name="description" content="Что такое ТЭНС и какую роль выполняют компоненты ОЗОТЭНС.">
-  <title>Как устроен метод | ОЗОТЭНС</title>
+  <title>Как устроен ОЗОТЭНС — прибор, электрод и крем</title>
   <link rel="icon" href="../favicon-32.png">
-  <link rel="stylesheet" href="../site.css?v=2">
+  <link rel="stylesheet" href="../site.css?v=3">
+  <style>
+    .method-hero .hero-media{position:relative;isolation:isolate;background:#eceeec;border:0}
+    .method-hero .hero-media img{aspect-ratio:1;object-fit:contain;max-height:540px;padding:24px}
+    .method-components .card{display:flex;flex-direction:column;padding:0;overflow:hidden}
+    .method-components .card img{width:100%;aspect-ratio:1.15;object-fit:contain;border-radius:0;padding:26px;background:#eceeec;margin:0}
+    .method-components .card>div{padding:clamp(18px,2.4vw,28px);display:flex;flex-direction:column;flex:1;align-items:flex-start}
+    .method-components .card p{margin-bottom:18px}
+    .method-components .card a{margin-top:auto}
+    .method-components .card:first-child{background:#edf3ff}
+    .method-components .card:first-child img{background:#edf3ff}
+    .method-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:0;list-style:none}
+    .method-steps h3{max-width:20ch}
+    .method-steps p{max-width:36ch;color:var(--muted)}
+    .method-steps li{padding-top:20px;border-top:2px solid var(--line)}
+    @media(max-width:720px){
+      .method-hero .hero-media img{max-height:320px;padding:14px}
+      .method-components .card{display:flex}
+      .method-components .card img{height:220px;max-height:220px;aspect-ratio:auto;padding:18px}
+      .method-components .card>div{padding:20px}
+      .method-steps{grid-template-columns:1fr;gap:4px}
+    }
+    @media(max-width:380px){
+      .method-components .card{grid-template-columns:1fr}
+      .method-components .card img{height:180px}
+      .method-components .card>div{padding:18px}
+    }
+  </style>
 </head>
 <body>
-  <a class="skip" href="#content">К содержанию</a><header class="site-header"><div class="wrap"><a class="brand" href="../index.html">ОЗОТЭНС</a><nav class="site-nav" aria-label="Основная навигация"><a href="../index.html">Главная</a><a href="../method/" aria-current="page">О методе</a><a href="../catalog/">Каталог</a><a href="../pomosch/">Помощь</a><a href="../znaniya/">Документы</a></nav></div></header>
+  <a class="skip" href="#content">К содержанию</a><header class="site-header"><div class="wrap"><a class="brand" href="../index.html" aria-label="ОЗОТЭНС, главная">ОЗО<b>ТЭНС</b></a><nav class="site-nav" aria-label="Основная навигация"><a href="../index.html">Главная</a><a href="../catalog/">Каталог</a><a href="../method/" aria-current="page">Как работает</a><a href="../pomosch/">Помощь</a><a href="../znaniya/">Документы</a></nav><a class="sibling" href="../../ozonebox/index.html">OzoneBox ↗</a></div></header>
   <main id="content">
-    <section class="section hero">
-      <div class="wrap hero-grid">
+    <section class="section hero method-hero">
+      <div class="wrap"><div class="hero-grid">
         <div>
           <p class="eyebrow">Метод ОЗОТЭНС</p>
-          <h1>Прибор, электрод и крем</h1>
-          <p class="lede">ТЭНС расшифровывается как чрескожная электронейростимуляция. В описании ОЗОТЭНС к ТЭНС-прибору и фигурному электроду добавлен электродный крем OZOTENS 30%.</p>
+          <h1>Три части<br> одного <mark>комплекта</mark></h1>
+          <p class="lede">Прибор формирует импульсы, электрод задаёт область контакта, а для процедуры используют крем OZOTENS 30%. Посмотрите каждый компонент крупным планом.</p>
           <div class="actions">
-            <a class="button" href="../catalog/">Посмотреть компоненты</a>
-            <a class="button button-secondary" href="../start/">С чего начать</a>
+            <a class="button" href="#components">Что входит в комплект</a>
+            <a class="button button-secondary" href="../catalog/#electrodes">Выбрать электрод</a>
           </div>
         </div>
-        <figure class="hero-media"><img src="../img/hero.webp" alt="Прибор, крем и электрод ОЗОТЭНС" width="1168" height="880" fetchpriority="high"></figure>
-      </div>
+        <figure class="hero-media"><img src="../img/device.webp" alt="Стимулятор RoovJoy R-C3 с подключёнными проводами и электродами" width="1024" height="1024" fetchpriority="high"></figure>
+      </div></div>
     </section>
-    <section class="section" aria-labelledby="roles">
+    <section class="section method-components" id="components" aria-labelledby="roles">
       <div class="wrap">
-        <h2 id="roles">Роль каждого компонента</h2>
+        <h2 id="roles">У каждого —<br> своя задача</h2>
         <div class="grid">
           <article class="card">
-            <h3>ТЭНС-прибор</h3>
-            <p>Формирует электрические импульсы. Режимы и параметры зависят от модели прибора.</p>
-            <a href="../catalog/#device">Прибор в каталоге</a>
+            <img src="../img/device.webp" alt="Прибор RoovJoy R-C3" width="1024" height="1024" loading="lazy">
+            <div><h3>Прибор</h3>
+            <p>RoovJoy R-C3 формирует электрические импульсы. Два выходных канала, 22 программы, регулировка интенсивности на корпусе.</p>
+            <a class="text-link" href="../catalog/#device">Посмотреть прибор →</a></div>
           </article>
           <article class="card">
-            <h3>Фигурный электрод</h3>
+            <img src="../img/el-back.webp" alt="Фигурный электрод «Спина» в форме пояса" width="900" height="900" loading="lazy">
+            <div><h3>Электрод</h3>
             <p>Подключается к прибору и передаёт импульсы через контакт с кожей. В каталоге собраны электроды разных форм и размеров.</p>
-            <a href="../catalog/#electrodes">Виды электродов</a>
+            <a class="text-link" href="../catalog/#electrodes">Выбрать форму →</a></div>
           </article>
           <article class="card">
-            <h3>Электродный крем</h3>
-            <p>OZOTENS 30% указан в описании метода как компонент для электродов. На упаковке и в каталоге его можно сверить по артикулу 5T15.</p>
-            <a href="../catalog/#cream">Крем в каталоге</a>
+            <img src="../img/cream.webp" alt="Флакон электродного крема OZOTENS 30%" width="900" height="900" loading="lazy">
+            <div><h3>Крем OZOTENS 30%</h3>
+            <p>Электродный крем из описания метода ОЗОТЭНС. Артикул 5T15 поможет сверить его с упаковкой и инструкцией.</p>
+            <a class="text-link" href="../catalog/#cream">Посмотреть крем →</a></div>
           </article>
         </div>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="sequence-title">
+      <div class="wrap">
+        <h2 id="sequence-title">Как выглядит процедура</h2>
+        <ol class="method-steps">
+          <li><h3>Крем на электрод</h3><p>Подготовка контактной поверхности описана в инструкции к электроду.</p></li>
+          <li><h3>Электрод на область</h3><p>Электрод закрепляют и подключают к прибору по схеме производителя.</p></li>
+          <li><h3>Настройка прибора</h3><p>Программа, интенсивность и длительность подбираются по инструкции и рекомендации специалиста.</p></li>
+        </ol>
+        <div class="actions"><a class="button" href="../catalog/">Посмотреть все компоненты</a><a class="button button-secondary" href="../znaniya/">Открыть документы</a></div>
       </div>
     </section>
     <section class="section" aria-labelledby="source-materials">
       <div class="wrap">
-        <h2 id="source-materials">Документы и применение</h2>
-        <p>В разделе «Документы» собраны независимые рекомендации и сведения о патенте.</p>
+        <h2 id="source-materials">Перед применением</h2>
+        <p>ТЭНС — чрескожная электронейростимуляция. В описании ОЗОТЭНС её сочетают с электродным кремом. Подробности устройства метода и применения представлены в <a href="https://ozonetherapy.ru/wp-content/uploads/2022/06/Instructions_OZOTENS_v3.pdf" target="_blank" rel="noopener">руководстве производителя</a>.</p>
         <p class="notice">Есть противопоказания. Применение обсудите с врачом и сверяйте с инструкцией производителя именно к вашей модели прибора и электрода.</p>
         <div class="actions">
           <a class="button" href="../znaniya/">Источники и публикации</a>
@@ -60,11 +101,6 @@
       </div>
     </section>
   </main>
-  <footer class="site-footer">
-    <div class="wrap">
-      <a class="brand" href="../index.html">ОЗОТЭНС</a>
-      <a href="../znaniya/">Источники и публикации</a>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="wrap"><a class="brand" href="../index.html">ОЗО<b>ТЭНС</b></a><nav class="site-nav" aria-label="Навигация в подвале"><a href="../catalog/">Каталог</a><a href="../method/">Как работает</a><a href="../znaniya/">Документы</a></nav></div></footer>
 </body>
 </html>
