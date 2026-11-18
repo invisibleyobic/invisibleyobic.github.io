@@ -8,6 +8,7 @@ if (form) {
   const empty = document.querySelector('[data-knowledge-empty]');
   const filters = [...document.querySelectorAll('[data-category-filter]')];
   const assistant = Boolean(grid?.hasAttribute('data-assistant-results'));
+  filters.forEach(button => { button.disabled = true; });
   let articles = [];
   let categories = new Map();
   let matches = [];
@@ -189,6 +190,7 @@ if (form) {
     const data = await response.json();
     articles = data.articles;
     categories = new Map(data.categories.map(category => [category.id, category.label]));
+    filters.forEach(button => { button.disabled = false; });
     update(document.activeElement === input);
   } catch {
     count.textContent = 'Поиск временно недоступен. Статьи можно открыть из списка.';
