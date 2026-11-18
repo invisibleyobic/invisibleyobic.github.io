@@ -14,6 +14,7 @@ if (form) {
   let selectedCategory = 'all';
   let active = -1;
   let blurTimer;
+  input.value = new URLSearchParams(location.search).get("q") || "";
 
   const normalize = value => value.toLocaleLowerCase('ru').replaceAll('ё', 'е').trim();
   const tokens = value => normalize(value).split(/[^a-zа-я0-9/]+/).filter(Boolean);
@@ -188,8 +189,7 @@ if (form) {
     const data = await response.json();
     articles = data.articles;
     categories = new Map(data.categories.map(category => [category.id, category.label]));
-    input.value = new URLSearchParams(location.search).get('q') || '';
-    update(false);
+    update(document.activeElement === input);
   } catch {
     count.textContent = 'Поиск временно недоступен. Статьи можно открыть из списка.';
   }
