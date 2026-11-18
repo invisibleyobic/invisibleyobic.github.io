@@ -13,6 +13,9 @@
 
 [data-checkout-form] .consent{display:block;font-weight:400}[data-checkout-form] .consent input{width:20px;min-height:20px;vertical-align:middle;margin-right:8px}
 .pdp-grid>*{min-width:0}.pdp-grid h1{overflow-wrap:anywhere}.product-details{overflow-wrap:anywhere}.product-details table{table-layout:fixed}
+.pdp-image:has(.device-viewer){padding:16px}
+.pdp-image .device-viewer{width:100%}
+.pdp-image .hardware-stage img{width:100%;height:100%}
 
 [data-kit-form] label{display:grid;gap:8px;margin:14px 0}[data-kit-form] select{font:inherit;width:100%;min-width:0;padding:12px;border:1px solid #cbd0ce;border-radius:12px;background:white}[data-kit-form] .cart-total{font-size:28px}[data-kit-form] [hidden]{display:none}
 

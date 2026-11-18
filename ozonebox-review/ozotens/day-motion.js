@@ -11,11 +11,19 @@ if (clock && entries.length) {
   entryList.before(progress);
   progress.appendChild(entryList);
   const mobile = matchMedia('(max-width: 760px)');
+  let refreshFrame;
+
+  function refreshAfterLayout() {
+    cancelAnimationFrame(refreshFrame);
+    refreshFrame = requestAnimationFrame(() => {
+      refreshFrame = requestAnimationFrame(() => window.ScrollTrigger?.refresh());
+    });
+  }
 
   function placeClock() {
     if (mobile.matches) progress.prepend(clockPanel);
     else originalClockParent.appendChild(clockPanel);
-    window.ScrollTrigger?.refresh();
+    refreshAfterLayout();
   }
 
   mobile.addEventListener('change', placeClock);
@@ -45,6 +53,17 @@ if (clock && entries.length) {
   }
 
   try {
+    const refinements = [...document.querySelectorAll('link[rel="stylesheet"]')]
+      .find(link => new URL(link.href).pathname.endsWith('/home-refinements.css'));
+    if (refinements && !refinements.sheet && document.readyState !== 'complete') {
+      await new Promise(resolve => {
+        refinements.addEventListener('load', resolve, { once: true });
+        refinements.addEventListener('error', resolve, { once: true });
+        window.addEventListener('load', resolve, { once: true });
+      });
+    }
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    await document.fonts.ready;
     if (!window.gsap) await loadLibrary('gsap.min.js');
     if (!window.ScrollTrigger) await loadLibrary('ScrollTrigger.min.js');
     const { gsap, ScrollTrigger } = window;
@@ -72,6 +91,12 @@ if (clock && entries.length) {
       minutes.slice(1).forEach(minute => timeline.to(state, { minute, duration: 1, ease: 'none' }));
       render();
     });
+    refreshAfterLayout();
+    document.fonts.ready.then(refreshAfterLayout);
+    const layoutObserver = new ResizeObserver(refreshAfterLayout);
+    for (const element of document.querySelectorAll('.hero, .site-header')) layoutObserver.observe(element);
+    if (document.readyState === 'complete') refreshAfterLayout();
+    else window.addEventListener('load', refreshAfterLayout, { once: true });
   } catch {
     clock.textContent = entries[0].querySelector('b').textContent;
     entries.forEach(entry => entry.classList.add('is-current'));

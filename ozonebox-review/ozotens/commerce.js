@@ -5,6 +5,9 @@
   const key = "ozotens_cart_v1";
   const money = value => value.toLocaleString("ru-RU") + " ₽";
   const path = value => new URL(value, base).href;
+  document.querySelectorAll("[data-add-form],[data-kit-form]").forEach(form => {
+    form.addEventListener("submit", event => event.preventDefault());
+  });
   const catalogPromise = fetch(path("commerce-catalog.json")).then(response => {
     if (!response.ok) throw new Error("Не удалось загрузить каталог.");
     return response.json();
@@ -140,6 +143,11 @@
       const message = form.querySelector("[data-add-message]");
       message.replaceChildren(document.createTextNode("Добавлено. "), link("Открыть корзину", path("cart/")));
     });
+    enableForm(form, "[data-add-message]");
+  }
+  function enableForm(form, selector) {
+    form.querySelector(selector).textContent = "";
+    form.querySelector('button[type="submit"]').disabled = false;
   }
   function setupKits() {
     document.querySelectorAll("[data-kit-form]").forEach(form => {
@@ -174,6 +182,7 @@
           message.replaceChildren(document.createTextNode("Комплект добавлен. "), link("Открыть корзину", path("cart/")));
         } catch (error) { message.textContent = error.message; }
       });
+      enableForm(form, "[data-kit-message]");
     });
   }
   function setupCheckout() {
@@ -193,7 +202,10 @@
       sum.replaceChildren(node("p", "", "Корзина пуста."), link("Открыть каталог", path("catalog/"), "button"));
     }
     let inFlight = false;
-    const idempotency = crypto.randomUUID ? crypto.randomUUID() : Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, "0")).join("");
+    let successfulDigest = "";
+    form.oninput = () => {
+      if (!inFlight && enabled) button.disabled = false;
+    };
     form.onsubmit = async event => {
       event.preventDefault();
       if (!enabled || inFlight || !form.reportValidity()) return;
@@ -209,7 +221,7 @@
       if (!items.length) { setupCheckout(); return; }
       inFlight = true;
       button.disabled = true;
-      message.textContent = "Отправляем заказ…";
+      let currentDigest = "";
       const customer = {
         name: String(values.get("name")).trim(),
         phone: String(values.get("phone")).trim(),
@@ -219,20 +231,36 @@
         consents: {personal_data: form.elements.consent_pd.checked, offer: form.elements.consent_offer.checked, marketing: form.elements.consent_mk.checked}
       };
       try {
+        const body = JSON.stringify({items, customer, delivery: {method: values.get("delivery"), address: String(values.get("address")).trim()}, source: location.search.slice(1) || "unknown", website: values.get("website") || ""});
+        const bytes = new TextEncoder().encode(catalog.orders.endpoint + "\n" + body);
+        if (!crypto.subtle) throw new Error("Для оформления заказа откройте сайт по HTTPS.");
+        const hash = await crypto.subtle.digest("SHA-256", bytes);
+        const digest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, "0")).join("");
+        currentDigest = digest;
+        if (digest === successfulDigest) return;
+        message.textContent = "Отправляем заказ…";
+        const attemptKey = "ozotens_order_attempt_v1";
+        let previous;
+        try { previous = JSON.parse(sessionStorage.getItem(attemptKey) || "null"); } catch { previous = null; }
+        const idempotency = previous?.digest === digest && /^[A-Za-z0-9_-]{16,64}$/.test(previous.key)
+          ? previous.key
+          : crypto.randomUUID();
+        sessionStorage.setItem(attemptKey, JSON.stringify({digest, key: idempotency}));
         const response = await fetch(catalog.orders.endpoint, {
           method: "POST",
           headers: {"Content-Type": "application/json", "Idempotency-Key": idempotency},
-          body: JSON.stringify({items, customer, delivery: {method: values.get("delivery"), address: String(values.get("address")).trim()}, source: location.search.slice(1) || "unknown", website: values.get("website") || ""})
+          body
         });
         const result = await response.json();
         if (!response.ok || !result.order_id) throw new Error(result.error || "Не удалось подтвердить заказ. Попробуйте ещё раз.");
+        successfulDigest = digest;
         if (result.payment_url) {
           const payment = new URL(result.payment_url, location.href);
           if (payment.protocol !== "https:") throw new Error("Не удалось открыть оплату.");
           message.replaceChildren(node("p", "", "Заказ " + result.order_id), link("Перейти к оплате", payment.href, "button"));
         } else message.textContent = "Заказ " + result.order_id + ". Ожидает подтверждения.";
       } catch (error) { message.textContent = error.message || "Нет связи. Попробуйте ещё раз."; }
-      finally { inFlight = false; button.disabled = !enabled; }
+      finally { inFlight = false; button.disabled = !enabled || Boolean(currentDigest && currentDigest === successfulDigest); }
     };
   }
   window.OzotensShop = {
@@ -285,6 +313,6 @@
       if (event.key === key) { updateCounts(); renderCart(); setupCheckout(); }
     });
   }).catch(error => {
-    document.querySelectorAll("[data-cart-body],[data-checkout-status],[data-add-message]").forEach(element => { element.textContent = error.message; });
+    document.querySelectorAll("[data-cart-body],[data-checkout-status],[data-add-message],[data-kit-message]").forEach(element => { element.textContent = error.message; });
   });
 })();

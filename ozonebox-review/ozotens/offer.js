@@ -1,9 +1,14 @@
 const root = document.querySelector('[data-offer-area]')?.closest('.offer-copy');
 if (root) {
-  const stylesheet = document.createElement('link');
-  stylesheet.rel = 'stylesheet';
-  stylesheet.href = new URL('./home-refinements.css', import.meta.url).href;
-  document.head.appendChild(stylesheet);
+  const refinementUrl = new URL('./home-refinements.css', import.meta.url);
+  const hasRefinements = [...document.querySelectorAll('link[rel="stylesheet"]')]
+    .some(link => new URL(link.href).pathname === refinementUrl.pathname);
+  if (!hasRefinements) {
+    const stylesheet = document.createElement('link');
+    stylesheet.rel = 'stylesheet';
+    stylesheet.href = refinementUrl.href;
+    document.head.appendChild(stylesheet);
+  }
   const buttons = [...root.querySelectorAll('[data-problem]')];
   const area = root.querySelector('[data-offer-area]');
   const title = root.querySelector('[data-offer-title]');
@@ -82,4 +87,4 @@ if (root) {
   render();
 }
 
-if (document.querySelector('.day-section')) import('./day-motion.js');
+if (document.querySelector('.day-section')) import('./day-motion.js?v=2');
