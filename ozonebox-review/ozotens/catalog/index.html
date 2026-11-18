@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
+  <meta name="robots" content="index,follow">
   <meta name="description" content="Прибор, электродный крем и виды электродов ОЗОТЭНС.">
   <title>Каталог компонентов | ОЗОТЭНС</title>
   <link rel="icon" href="../favicon-32.png">
-  <link rel="stylesheet" href="../site.css?v=5">
+  <link rel="stylesheet" href="../site.css?v=6">
   <style>
     .catalog-filters .button { cursor: pointer; }
     .catalog-filters [aria-pressed="true"] { background: var(--acid, #356dff); color: #fff; }
@@ -19,15 +19,23 @@
     .product-dialog { width: min(92vw, 760px); max-height: 90vh; border: 0; border-radius: 28px; padding: 28px; overflow: auto; }
     .product-dialog::backdrop { background: rgba(14, 15, 13, .45); backdrop-filter: blur(5px); }
     .product-dialog img { width: 100%; height: min(44vh, 340px); object-fit: contain; margin: 20px 0; }
+    #product-add-form label{display:grid;gap:8px;margin:16px 0}
+    #product-add-form input,#product-add-form select{font:inherit;max-width:260px;min-height:48px;padding:12px;border:1px solid #cbd0ce;border-radius:12px;background:white}
+    #product-add-form [hidden]{display:none}
     .product-dialog .dialog-close { float: right; min-width: 44px; min-height: 44px; }
     .card__sku, .card__sizes { color: #626b70; font-size: 13px; }
     .card__desc { color: #626b70; font-size: 14px; margin: 10px 0 18px; }
     .card__add { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; border-radius: 99px; padding: 8px 14px; background: #356dff; color: white; font-weight: 700; }
     @media (hover: hover) { .card:hover { transform: translateY(-4px); } }
   </style>
-</head>
+<link rel="stylesheet" href="../commerce.css?v=3"><link rel="canonical" href="https://asherbakov.ru/ozonebox-review/ozotens/catalog/"></head>
 <body>
-  <a class="skip" href="#content">К содержанию</a><header class="site-header"><div class="wrap"><a class="brand" href="../index.html" aria-label="ОЗОТЭНС, главная">ОЗО<b>ТЭНС</b></a><nav class="site-nav" aria-label="Основная навигация"><a href="../index.html">Главная</a><a href="../catalog/" aria-current="page">Каталог</a><a href="../method/">Как работает</a><a href="../pomosch/">Помощь</a><a href="../znaniya/">Документы</a></nav><a class="sibling" href="../../ozonebox/index.html">OzoneBox ↗</a></div></header>
+  <a class="skip" href="#content">К содержанию</a><header class="site-header"><div class="wrap"><a class="brand" href="../index.html" aria-label="ОЗОТЭНС, главная">ОЗО<b>ТЭНС</b></a>
+<nav class="site-nav main-nav" id="main-menu" data-main-menu aria-label="Основная навигация"><a href="../catalog/" aria-current="page">Каталог</a><a href="../how-to/">Как пользоваться</a><a href="../how-to/video/">Видео</a><a href="../articles/">Статьи</a><a href="../assistant/">Помощник</a><a href="../znaniya/">Документы</a></nav>
+<form class="header-search" role="search" action="../search/" method="get"><label class="visually-hidden" for="header-query">Поиск по сайту</label><input id="header-query" name="q" type="search" placeholder="Товар, артикул, вопрос" autocomplete="off" required><button type="submit" aria-label="Найти"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg></button></form>
+<div class="header-tools"><a class="sibling" href="../../ozonebox/index.html">OzoneBox ↗</a><a class="cart-link" href="../cart/" aria-label="Корзина"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 7h14l-1 14H6L5 7Z"/><path d="M9 8V5a3 3 0 0 1 6 0v3"/></svg><span class="header-cart-count" data-cart-count></span></a></div>
+<button class="nav-toggle" type="button" data-menu-toggle aria-label="Меню разделов" aria-expanded="false" aria-controls="main-menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+</div></header>
   <main id="content">
     <section class="hero">
       <div class="wrap"><div class="hero-grid">
@@ -48,31 +56,31 @@
 <li><a href="#back">Электрод «СПИНА», 4 сегмента</a><p>85/04 · Набор 62 200 ₽</p></li>
 <li><a href="#elektrod-85-24">Электрод «СПИНА на остистые», 6 сегментов</a><p>85/24 · Набор 68 700 ₽</p></li>
 <li><a href="#elektrod-85-34">Электрод «СПИНА на остистые», 3 сегмента</a><p>85/34 · Набор 66 550 ₽</p></li>
-</ul></article>
+</ul><form data-kit-form><label>Электрод<select name="electrode"><option value="85/04">Электрод «СПИНА», 4 сегмента · 85/04</option><option value="85/24">Электрод «СПИНА на остистые», 6 сегментов · 85/24</option><option value="85/34">Электрод «СПИНА на остистые», 3 сегмента · 85/34</option></select></label><label data-kit-size-label>Размер<select name="size" required></select></label><p class="cart-total" data-kit-total></p><div class="actions"><button class="button" type="submit">В корзину</button><a class="button button-secondary" href="../cart/">Корзина</a></div><p data-kit-message role="status"></p></form></article>
 <article class="card" id="kit-leg"><h3>Боль в ноге из поясницы</h3><p>Прибор + крем + электрод:</p><ul>
 <li><a href="#back">Электрод «СПИНА», 4 сегмента</a><p>85/04 · Набор 62 200 ₽</p></li>
 <li><a href="#elektrod-85-24">Электрод «СПИНА на остистые», 6 сегментов</a><p>85/24 · Набор 68 700 ₽</p></li>
 <li><a href="#elektrod-85-34">Электрод «СПИНА на остистые», 3 сегмента</a><p>85/34 · Набор 66 550 ₽</p></li>
-</ul></article>
+</ul><form data-kit-form><label>Электрод<select name="electrode"><option value="85/04">Электрод «СПИНА», 4 сегмента · 85/04</option><option value="85/24">Электрод «СПИНА на остистые», 6 сегментов · 85/24</option><option value="85/34">Электрод «СПИНА на остистые», 3 сегмента · 85/34</option></select></label><label data-kit-size-label>Размер<select name="size" required></select></label><p class="cart-total" data-kit-total></p><div class="actions"><button class="button" type="submit">В корзину</button><a class="button button-secondary" href="../cart/">Корзина</a></div><p data-kit-message role="status"></p></form></article>
 <article class="card" id="kit-neck"><h3>Шея</h3><p>Прибор + крем + электрод:</p><ul>
 <li><a href="#neck">Электрод «ШЕЯ», 4 сегмента</a><p>85/01 · Набор 57 225 ₽</p></li>
 <li><a href="#elektrod-85-21">Электрод «ШЕЯ на остистые», 6 сегментов</a><p>85/21 · Набор 65 400 ₽</p></li>
-</ul></article>
+</ul><form data-kit-form><label>Электрод<select name="electrode"><option value="85/01">Электрод «ШЕЯ», 4 сегмента · 85/01</option><option value="85/21">Электрод «ШЕЯ на остистые», 6 сегментов · 85/21</option></select></label><label data-kit-size-label>Размер<select name="size" required></select></label><p class="cart-total" data-kit-total></p><div class="actions"><button class="button" type="submit">В корзину</button><a class="button button-secondary" href="../cart/">Корзина</a></div><p data-kit-message role="status"></p></form></article>
 <article class="card" id="kit-shoulder"><h3>Плечо</h3><p>Прибор + крем + электрод:</p><ul>
 <li><a href="#shoulder">Электрод «ПЛЕЧО», 4 сегмента</a><p>85/02 · Набор 67 225 ₽</p></li>
-</ul></article>
+</ul><form data-kit-form><label>Электрод<select name="electrode"><option value="85/02">Электрод «ПЛЕЧО», 4 сегмента · 85/02</option></select></label><label data-kit-size-label>Размер<select name="size" required></select></label><p class="cart-total" data-kit-total></p><div class="actions"><button class="button" type="submit">В корзину</button><a class="button button-secondary" href="../cart/">Корзина</a></div><p data-kit-message role="status"></p></form></article>
 <article class="card" id="kit-knee"><h3>Колено</h3><p>Прибор + крем + электрод:</p><ul>
 <li><a href="#knee">Электрод «КОЛЕНО», 4 сегмента</a><p>85/07 · Набор 50 850 ₽</p></li>
 <li><a href="#elektrod-85-17">Электрод «КОЛЕНО», 4 сегмента</a><p>85/17 · Набор 50 850 ₽</p></li>
-</ul></article>
+</ul><form data-kit-form><label>Электрод<select name="electrode"><option value="85/07">Электрод «КОЛЕНО», 4 сегмента · 85/07</option><option value="85/17">Электрод «КОЛЕНО», 4 сегмента · 85/17</option></select></label><label data-kit-size-label>Размер<select name="size" required></select></label><p class="cart-total" data-kit-total></p><div class="actions"><button class="button" type="submit">В корзину</button><a class="button button-secondary" href="../cart/">Корзина</a></div><p data-kit-message role="status"></p></form></article>
 <article class="card" id="kit-foot"><h3>Стопа</h3><p>Прибор + крем + электрод:</p><ul>
 <li><a href="#foot">Электрод «СТОПА», 2 сегмента</a><p>85/09 · Набор 49 800 ₽</p></li>
-</ul></article>
+</ul><form data-kit-form><label>Электрод<select name="electrode"><option value="85/09">Электрод «СТОПА», 2 сегмента · 85/09</option></select></label><label data-kit-size-label>Размер<select name="size" required></select></label><p class="cart-total" data-kit-total></p><div class="actions"><button class="button" type="submit">В корзину</button><a class="button button-secondary" href="../cart/">Корзина</a></div><p data-kit-message role="status"></p></form></article>
 </div></div></section>
     <section class="section" id="catalog" aria-labelledby="catalog-title">
       <div class="wrap">
         <div class="head">
-          <h2 id="catalog-title">Каталог</h2>
+          <h2 id="catalog-title">Каталог</h2><a class="button button-secondary" href="../cart/">Корзина <span data-cart-count></span></a>
           <p>Выберите компонент, модель электрода и размер. Цены ориентировочные.</p>
         </div>
         <div class="chips catalog-filters" role="group" aria-label="Тип компонента" hidden>
@@ -91,7 +99,7 @@
             <p class="card__sizes"></p>
             <div class="card__foot">
               <span class="card__price">19 700 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/pribor-roovjoy/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="pribor-roovjoy/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="cream" data-category="cream">
@@ -102,7 +110,7 @@
             <p class="card__sizes"></p>
             <div class="card__foot">
               <span class="card__price">10 750 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/krem-ozotens-30/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="krem-ozotens-30/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="neck" data-category="electrodes">
@@ -113,7 +121,7 @@
             <p class="card__sizes">M / L. Размер по обхвату шеи: M менее 40 см, L более 40 см.</p>
             <div class="card__foot">
               <span class="card__price">26 775 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-01/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-01/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="elektrod-85-21" data-category="electrodes">
@@ -124,7 +132,7 @@
             <p class="card__sizes">M / L. Размер по обхвату шеи: M менее 40 см, L более 40 см.</p>
             <div class="card__foot">
               <span class="card__price">34 950 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-21/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-21/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="shoulder" data-category="electrodes">
@@ -135,7 +143,7 @@
             <p class="card__sizes"></p>
             <div class="card__foot">
               <span class="card__price">36 775 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-02/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-02/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="shin-arm" data-category="electrodes">
@@ -146,7 +154,7 @@
             <p class="card__sizes"></p>
             <div class="card__foot">
               <span class="card__price">21 750 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-03/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-03/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="back" data-category="electrodes">
@@ -157,7 +165,7 @@
             <p class="card__sizes">M / L / XL. Размер по обхвату талии: M 55-100 см, L 75-120 см, XL 85-130 см.</p>
             <div class="card__foot">
               <span class="card__price">31 750 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-04/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-04/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="elektrod-85-24" data-category="electrodes">
@@ -168,7 +176,7 @@
             <p class="card__sizes">M / L / XL. Размер по обхвату талии: M 55-100 см, L 75-120 см, XL 85-130 см.</p>
             <div class="card__foot">
               <span class="card__price">38 250 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-24/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-24/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="elektrod-85-34" data-category="electrodes">
@@ -179,7 +187,7 @@
             <p class="card__sizes">M / L / XL. Размер по обхвату талии: M 55-100 см, L 75-120 см, XL 85-130 см.</p>
             <div class="card__foot">
               <span class="card__price">36 100 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-34/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-34/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="hip" data-category="electrodes">
@@ -190,7 +198,7 @@
             <p class="card__sizes"></p>
             <div class="card__foot">
               <span class="card__price">23 450 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-05/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-05/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="hand-foot" data-category="electrodes">
@@ -201,7 +209,7 @@
             <p class="card__sizes"></p>
             <div class="card__foot">
               <span class="card__price">18 950 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-06/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-06/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="knee" data-category="electrodes">
@@ -212,7 +220,7 @@
             <p class="card__sizes"></p>
             <div class="card__foot">
               <span class="card__price">20 400 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-07/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-07/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="elektrod-85-17" data-category="electrodes">
@@ -223,7 +231,7 @@
             <p class="card__sizes"></p>
             <div class="card__foot">
               <span class="card__price">20 400 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-17/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-17/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="shin-thigh" data-category="electrodes">
@@ -234,7 +242,7 @@
             <p class="card__sizes">M / L. Размер по обхвату: M 50 см, L 60 см.</p>
             <div class="card__foot">
               <span class="card__price">23 125 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-08/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-08/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
           <article class="card" id="foot" data-category="electrodes">
@@ -245,14 +253,14 @@
             <p class="card__sizes">M / L. Размер по размеру обуви: M 34-39, L 40-45. Больше 45 - по заказу.</p>
             <div class="card__foot">
               <span class="card__price">19 350 ₽</span>
-              <button class="card__add" type="button" data-detail data-source="https://asherbakov.ru/ozotens-shop-preview/catalog/elektrod-85-09/">Подробнее <span aria-hidden="true">→</span></button>
+              <button class="card__add" type="button" data-detail data-source="elektrod-85-09/">Подробнее <span aria-hidden="true">→</span></button>
             </div>
           </article>
         </div>
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wrap"><a class="brand" href="../index.html">ОЗО<b>ТЭНС</b></a><nav class="site-nav" aria-label="Навигация в подвале"><a href="../catalog/">Каталог</a><a href="../method/">Как работает</a><a href="../znaniya/">Документы</a></nav></div></footer>
+  <footer class="site-footer"><div class="wrap"><a class="brand" href="../index.html">ОЗО<b>ТЭНС</b></a><nav class="site-nav" aria-label="Навигация в подвале"><a href="../catalog/">Каталог</a><a href="../how-to/">Как пользоваться</a><a href="../how-to/video/">Видео</a><a href="../articles/">Статьи</a><a href="../assistant/">Помощник</a><a href="../znaniya/">Документы</a><a href="../support/">Поддержка</a><a href="../about/">О проекте</a><a href="../legal/privacy/">Данные</a><a href="../legal/offer/">Условия заказа</a></nav></div></footer>
   <dialog class="product-dialog" id="product-dialog" aria-labelledby="product-title">
     <form method="dialog">
       <button class="button button-secondary dialog-close" autofocus aria-label="Закрыть карточку">Закрыть</button>
@@ -263,14 +271,23 @@
     <p id="product-sku"></p>
     <p id="product-price" class="card__price"></p>
     <p id="product-sizes"></p>
-    <a class="button" id="product-request">Открыть полную карточку</a>
+    <form id="product-add-form">
+      <label id="product-size-label" for="product-size">Размер<select id="product-size" name="size" required></select></label>
+      <label for="product-quantity">Количество<input id="product-quantity" name="quantity" type="number" min="1" max="9" value="1" required inputmode="numeric"></label>
+      <div class="actions"><button class="button" type="submit">В корзину</button><a class="button button-secondary" href="../cart/">Перейти в корзину</a></div>
+      <p id="product-add-message" role="status"></p>
+    </form>
+    <a class="text-link" id="product-request">Характеристики →</a>
   </dialog>
-  <script>
+  <script defer src="../commerce.js?v=3"></script><script>
     const dialog = document.getElementById("product-dialog");
+    let detailSequence = 0;
+    dialog.addEventListener("close", () => { detailSequence += 1; });
     document.querySelectorAll("[data-detail]").forEach(button => {
       const card = button.closest(".card");
       button.setAttribute("aria-label", "Подробнее: " + card.querySelector(".card__name").textContent);
-      button.addEventListener("click", () => {
+      button.addEventListener("click", async () => {
+        const sequence = ++detailSequence;
         const image = card.querySelector("img");
         const detailImage = document.getElementById("product-image");
         detailImage.src = image.src;
@@ -281,8 +298,61 @@
         document.getElementById("product-price").textContent = card.querySelector(".card__price").textContent;
         document.getElementById("product-sizes").textContent = card.querySelector(".card__sizes").textContent;
         document.getElementById("product-request").href = card.querySelector(".card__add").dataset.source;
-        dialog.showModal();
+        const form = document.getElementById("product-add-form");
+        const code = card.querySelector(".card__sku").textContent.replace("Артикул ", "").trim();
+        const message = document.getElementById("product-add-message");
+        form.hidden = true;
+        let loadStatus = document.getElementById("product-load-status");
+        if (!loadStatus) {
+          loadStatus = document.createElement("p");
+          loadStatus.id = "product-load-status";
+          loadStatus.setAttribute("role", "status");
+          form.before(loadStatus);
+        }
+        loadStatus.textContent = "Загружаем размеры и возможность добавления…";
+        if (!dialog.open) dialog.showModal();
+        try {
+          if (!window.OzotensShop?.product) throw new Error("Каталог недоступен.");
+          const product = await window.OzotensShop.product(code);
+          if (sequence !== detailSequence || !dialog.open) return;
+          if (!product) throw new Error("Товар недоступен.");
+
+        form.dataset.code = code;
+        form.elements.quantity.value = "1";
+        document.getElementById("product-add-message").textContent = "";
+        const select = form.elements.size;
+        select.replaceChildren();
+        document.getElementById("product-size-label").hidden = !product.sizes.length;
+        select.required = Boolean(product.sizes.length);
+        if (product.sizes.length) {
+          const placeholder = document.createElement("option");
+          placeholder.value = "";
+          placeholder.textContent = "Выберите размер";
+          select.append(placeholder);
+          product.sizes.forEach(size => {
+            const option = document.createElement("option");
+            option.value = size;
+            option.textContent = size;
+            select.append(option);
+          });
+        }
+          form.hidden = false;
+          loadStatus.textContent = "";
+        } catch (error) {
+          if (sequence !== detailSequence || !dialog.open) return;
+          loadStatus.textContent = "Не удалось загрузить параметры товара. Откройте характеристики или попробуйте ещё раз.";
+        }
       });
+    });
+    document.getElementById("product-add-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+      const message = document.getElementById("product-add-message");
+      try {
+        await window.OzotensShop.add({code: form.dataset.code, size: form.elements.size.value, qty: Number(form.elements.quantity.value)});
+        message.textContent = "Добавлено в корзину.";
+      } catch (error) { message.textContent = error.message; }
     });
     const filters = document.querySelector(".catalog-filters");
     const cards = [...document.querySelectorAll("[data-category]")];
@@ -317,5 +387,5 @@
     window.addEventListener("hashchange", showHashTarget);
     showHashTarget();
   </script>
-</body>
+<script defer src="../navigation.js?v=1"></script></body>
 </html>

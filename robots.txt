@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://asherbakov.ru/sitemap.xml
+Sitemap: https://asherbakov.ru/ozonebox-review/ozotens/sitemap.xml

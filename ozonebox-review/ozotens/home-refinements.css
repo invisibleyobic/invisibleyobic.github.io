@@ -1,0 +1,68 @@
+.hero-grid:has(.offer-copy) {
+  isolation: isolate;
+}
+
+.offer-copy {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.offer-copy h1 mark {
+  background: none;
+  color: var(--accent);
+  padding: 0;
+}
+
+.offer-copy .problem-chip {
+  min-width: 0;
+  padding-inline: 8px;
+}
+
+.hero-grid:has(.offer-copy) .device-viewer {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+@media (min-width: 761px) {
+  .day-title {
+    position: sticky;
+    top: 100px;
+  }
+}
+
+.day-progress {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .day-progress .day-clock {
+    position: sticky;
+    top: calc(var(--header-height, 112px) + 8px);
+    z-index: 3;
+    width: fit-content;
+    margin: 0 0 12px;
+    padding: 9px 18px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 0 4px 18px #17334e0c;
+  }
+
+  .day-progress .day-clock span {
+    display: block;
+    font-size: 30px;
+    line-height: 1.15;
+  }
+
+  .day-progress .day-clock small {
+    display: none;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .offer-copy .problem-chips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,5 +1,9 @@
 const root = document.querySelector('[data-offer-area]')?.closest('.offer-copy');
 if (root) {
+  const stylesheet = document.createElement('link');
+  stylesheet.rel = 'stylesheet';
+  stylesheet.href = new URL('./home-refinements.css', import.meta.url).href;
+  document.head.appendChild(stylesheet);
   const buttons = [...root.querySelectorAll('[data-problem]')];
   const area = root.querySelector('[data-offer-area]');
   const title = root.querySelector('[data-offer-title]');
@@ -23,14 +27,34 @@ if (root) {
     arthritis: '<mark>Артрит?</mark>',
     arthrosis: '<mark>Артроз?</mark>'
   };
+  const prompts = {
+    back: {
+      name: 'Какая область спины вас беспокоит?',
+      description: 'Выберите область — покажем электрод, состав и цену комплекта.'
+    },
+    pinch: {
+      name: 'Защемление: где вас беспокоит?',
+      description: 'Сначала укажите область. Комплектации различаются формой электрода.'
+    },
+    arthritis: {
+      name: 'Артрит: какую область хотите посмотреть?',
+      description: 'Выберите сустав или область тела, чтобы сравнить комплектацию.'
+    },
+    arthrosis: {
+      name: 'Артроз: какую область хотите посмотреть?',
+      description: 'Выберите сустав или область тела — покажем компоненты и их общую стоимость.'
+    }
+  };
+  const placeholder = area.querySelector('option[value=""]');
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
 
   function render() {
     title.innerHTML = titles[problem];
     buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.problem === problem)));
     const selected = areas[area.value];
     if (!selected) {
-      name.textContent = 'Какую область вы хотите посмотреть?';
-      parts.textContent = 'Выберите область — покажем электрод, состав и цену комплекта.';
+      name.textContent = prompts[problem].name;
+      parts.textContent = prompts[problem].description;
       price.textContent = '—';
       link.href = catalog.href + '#kits';
       link.textContent = 'Все комплектации ↗';
@@ -46,23 +70,16 @@ if (root) {
 
   buttons.forEach(button => button.addEventListener('click', () => {
     problem = button.dataset.problem;
+    placeholder.textContent = problem === 'arthritis' || problem === 'arthrosis' ? 'Выберите сустав или область' : 'Выберите область';
     if (problem === 'back') area.value = 'back';
     else area.value = '';
     render();
+    if (!motion.matches && window.gsap) {
+      gsap.fromTo(root.querySelector('.quick-offer'), { opacity: .55 }, { opacity: 1, duration: .22, overwrite: true });
+    }
   }));
   area.addEventListener('change', render);
   render();
 }
 
-const dayClock = document.querySelector('[data-day-time]');
-const dayEntries = document.querySelectorAll('.day-entries li');
-if (dayClock && dayEntries.length) {
-  const observer = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      dayClock.textContent = entry.target.querySelector('b').textContent;
-      dayEntries.forEach(item => item.classList.toggle('is-current', item === entry.target));
-    }
-  }, { rootMargin: '-25% 0px -35% 0px', threshold: 0 });
-  dayEntries.forEach(entry => observer.observe(entry));
-}
+if (document.querySelector('.day-section')) import('./day-motion.js');
