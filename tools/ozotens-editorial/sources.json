@@ -1,0 +1,258 @@
+[
+  {
+    "id": "association-guide-2020",
+    "title": "Выполнение процедур ОЗОТЭНС-терапии. Руководство пользователя, 2020",
+    "url": "https://ozonetherapy.ru/wp-content/uploads/2022/06/Instructions_OZOTENS_v3.pdf",
+    "primary": true,
+    "type": "manufacturer-instructions",
+    "scope": "Историческое руководство по методу. Сверять модель и редакцию с конкретным комплектом."
+  },
+  {
+    "id": "association-journal-2017-4",
+    "title": "Биорадикалы и антиоксиданты. 2017. Том 4, № 4",
+    "url": "https://ozonetherapy.ru/wp-content/uploads/2021/04/t4n4.pdf",
+    "primary": true,
+    "type": "research-publication",
+    "scope": "Экспериментальные работы. Популяцию и оборудование проверять в статье."
+  },
+  {
+    "id": "association-journal-2019-2",
+    "title": "Биорадикалы и антиоксиданты. 2019. Том 6, № 2",
+    "url": "https://ozonetherapy.ru/wp-content/uploads/2021/04/t6n2.pdf",
+    "primary": true,
+    "type": "research-publication",
+    "scope": "Первичная публикация. Сам факт публикации не обосновывает рекламное обещание."
+  },
+  {
+    "id": "medozons-device",
+    "title": "МЕДОЗОНС. Прибор RoovJoy R-C3",
+    "url": "https://www.medozons.ru/products/ozotens/ozotens-pribor/",
+    "primary": true,
+    "type": "manufacturer-product",
+    "scope": "Характеристики и сведения производителя. Проверять дату, модель и действующий документ."
+  },
+  {
+    "id": "niams-back",
+    "title": "NIAMS — Back Pain",
+    "url": "https://www.niams.nih.gov/health-topics/back-pain",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "niams-back-care",
+    "title": "NIAMS — Back Pain: Diagnosis, Treatment, and Steps to Take",
+    "url": "https://www.niams.nih.gov/health-topics/back-pain/diagnosis-treatment-and-steps-to-take",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-back",
+    "title": "NHS — Back pain",
+    "url": "https://www.nhs.uk/conditions/back-pain/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-sciatica",
+    "title": "NHS — Sciatica",
+    "url": "https://www.nhs.uk/conditions/sciatica/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nice-back",
+    "title": "NICE NG59 — Low back pain and sciatica",
+    "url": "https://www.nice.org.uk/guidance/ng59/chapter/Recommendations",
+    "primary": true,
+    "type": "clinical-guideline",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-disc",
+    "title": "NHS — Slipped disc",
+    "url": "https://www.nhs.uk/conditions/slipped-disc/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "who-back",
+    "title": "ВОЗ — Low back pain",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/low-back-pain",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "who-guide",
+    "title": "ВОЗ — рекомендации при хронической первичной боли в пояснице",
+    "url": "https://www.who.int/publications/i/item/9789240081789",
+    "primary": true,
+    "type": "clinical-guideline",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "hse-work",
+    "title": "HSE — Working safely with display screen equipment",
+    "url": "https://www.hse.gov.uk/msd/dse/",
+    "primary": true,
+    "type": "official-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "hse-breaks",
+    "title": "HSE — Work routine and breaks",
+    "url": "https://www.hse.gov.uk/msd/dse/work-routine.htm",
+    "primary": true,
+    "type": "official-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-neck",
+    "title": "NHS — Neck pain",
+    "url": "https://www.nhs.uk/symptoms/neck-pain-and-stiff-neck/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "aaos-neck",
+    "title": "AAOS — Cervical Radiculopathy",
+    "url": "https://www.orthoinfo.org/bodypart/neck/cervical-radiculopathy-pinched-nerve/",
+    "primary": true,
+    "type": "professional-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-shoulder",
+    "title": "NHS — Shoulder pain",
+    "url": "https://www.nhs.uk/symptoms/shoulder-pain/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-frozen",
+    "title": "NHS — Frozen shoulder",
+    "url": "https://www.nhs.uk/conditions/frozen-shoulder/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-knee",
+    "title": "NHS — Knee pain",
+    "url": "https://www.nhs.uk/symptoms/knee-pain/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "aaos-knee",
+    "title": "AAOS — Arthritis of the Knee",
+    "url": "https://www.orthoinfo.org/bodypart/kneelower-leg/arthritis-of-the-knee/",
+    "primary": true,
+    "type": "professional-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "niams-oa-care",
+    "title": "NIAMS — Osteoarthritis: Diagnosis, Treatment, and Steps to Take",
+    "url": "https://www.niams.nih.gov/health-topics/osteoarthritis/diagnosis-treatment-and-steps-to-take",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "niams-oa",
+    "title": "NIAMS — Osteoarthritis",
+    "url": "https://www.niams.nih.gov/health-topics/osteoarthritis",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-infection",
+    "title": "NHS — Septic arthritis",
+    "url": "https://www.nhs.uk/conditions/septic-arthritis/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nice-oa",
+    "title": "NICE NG226 — Osteoarthritis",
+    "url": "https://www.nice.org.uk/guidance/ng226/chapter/Recommendations",
+    "primary": true,
+    "type": "clinical-guideline",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "aaos-hip",
+    "title": "AAOS — Osteoarthritis of the Hip",
+    "url": "https://www.orthoinfo.org/bodypart/hip-thigh/osteoarthritis-of-the-hip/",
+    "primary": true,
+    "type": "professional-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-arthritis",
+    "title": "NHS — Arthritis",
+    "url": "https://www.nhs.uk/conditions/arthritis/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "niams-ra",
+    "title": "NIAMS — Rheumatoid Arthritis",
+    "url": "https://www.niams.nih.gov/health-topics/rheumatoid-arthritis",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "niams-ra-care",
+    "title": "NIAMS — Rheumatoid Arthritis: Diagnosis, Treatment, and Steps to Take",
+    "url": "https://www.niams.nih.gov/health-topics/rheumatoid-arthritis/diagnosis-treatment-and-steps-to-take",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nice-ra",
+    "title": "NICE NG100 — Rheumatoid arthritis in adults",
+    "url": "https://www.nice.org.uk/guidance/ng100/chapter/Recommendations/",
+    "primary": true,
+    "type": "clinical-guideline",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "who-tens",
+    "title": "ВОЗ — Evidence and recommendations, TENS",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK599213/",
+    "primary": true,
+    "type": "clinical-guideline",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "nhs-tens",
+    "title": "NHS — TENS",
+    "url": "https://www.nhs.uk/tests-and-treatments/transcutaneous-electrical-nerve-stimulation-tens/",
+    "primary": true,
+    "type": "official-patient-guidance",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  },
+  {
+    "id": "tens-review",
+    "title": "Verville et al., 2023 — систематический обзор ТЭНС для рекомендаций ВОЗ",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10684422/",
+    "primary": true,
+    "type": "systematic-review",
+    "scope": "Первичный источник из редакционного реестра. Учитывать тип, ограничения и контекст; общие рекомендации не подтверждают эффективность конкретного товара."
+  }
+]

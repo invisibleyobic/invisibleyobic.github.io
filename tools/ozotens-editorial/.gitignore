@@ -1,0 +1,9 @@
+drafts/
+staging/
+packets/
+*.tmp
+.env
+.env.*
+!.env.example
+.pdf-*.pdf
+.test-*/

@@ -1,0 +1,116 @@
+[
+  {
+    "file": "img/studio/cream.webp",
+    "sha256": "cf756eb0bfe674bd9eb6b739f20ef93ef41c2720ac5ec9f7d750ef5d4d9e3ac3",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "b7d5b725-73bb-4e89-a545-8841268b6b05"
+  },
+  {
+    "file": "img/studio/device.webp",
+    "sha256": "cd024a335978b5866165b4a4a6ead4e213594c29c57a881c411ff9775e686429",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "1370b666-ffbc-43d9-8b4b-143176fd13a6"
+  },
+  {
+    "file": "img/studio/el-back.webp",
+    "sha256": "4c78590a768ca7b2c533e2f6a589fff1c7a6bd9524a2f36c52e900e07e242bdb",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "42ddc3d6-42c3-47b9-bb5e-1f480ff29e21"
+  },
+  {
+    "file": "img/studio/el-foot.webp",
+    "sha256": "315374f6d753ad0e4ad4bcb81c97daeca8666644261e400f44eabe8e574849c2",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "e3c5a6bf-20df-4bc6-9615-523e5c980985"
+  },
+  {
+    "file": "img/studio/el-hand-foot.webp",
+    "sha256": "fbc2d351c02cf122687b8bc2d7dd82126d330f2d01a7391198a8a050b46068cf",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "d93682ab-abfb-406c-b444-abcb3dd03b28"
+  },
+  {
+    "file": "img/studio/el-hip.webp",
+    "sha256": "ff5964200e1ff3831f9f846596cb3f4df18e279443848738d18a53361f63a9ba",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "59c20e4a-8ff1-4583-a965-6cde9b3543da"
+  },
+  {
+    "file": "img/studio/el-knee.webp",
+    "sha256": "63e748fd1004f2f456eeabf20701441d0ca4f2421ac33948bdb4cbb008c3364a",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "c2909a57-1236-40a8-a95b-5bca92a76e24"
+  },
+  {
+    "file": "img/studio/el-neck.webp",
+    "sha256": "4169919ac5bdfd67e4c22551b99276db2c4e2c849bc92453775b1c7a86cfa639",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "a9da1954-29e9-445e-948a-602eaf56b34b"
+  },
+  {
+    "file": "img/studio/el-shin-arm.webp",
+    "sha256": "451992b0f110bbf4a77a305553cc6a115edfc62c4c41202082018808d41fd0ea",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "96c20fcd-ac73-43f0-97bc-36eae97ce2fe"
+  },
+  {
+    "file": "img/studio/el-shin-thigh.webp",
+    "sha256": "f69014bb4270f290f5a5fa4c88b311ca5f39c826d59950941052034c233eb12d",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "e8b6b2d9-b99b-4a8f-8901-b3a7875f1de2"
+  },
+  {
+    "file": "img/studio/el-shoulder.webp",
+    "sha256": "40bc0d039815a792ad434b779a1c5105990509229f3bf2030531bc53e3906217",
+    "source": "Higgsfield studio retouch of original catalog photo, 2026-11-18",
+    "job_id": "017e3482-ac89-40cb-a49e-139e7b929ce3"
+  },
+  {
+    "file": "img/editorial/back.webp",
+    "sha256": "ef72e9aedf2bc539cc811dee761c155c1ba86ec4fc15f5757689524dab72d089",
+    "source": "AI-generated contextual illustration, not a patient outcome or clinical evidence, 2026-11-18",
+    "job_id": "8a151388-5865-49a4-95d7-e4c47ae084a6"
+  },
+  {
+    "file": "img/editorial/consultation.webp",
+    "sha256": "5274e2d5051d779897ae3ae29bab0b861fdd7df27462ce4f1ab205d006f27b92",
+    "source": "AI-generated contextual illustration, not a patient outcome or clinical evidence, 2026-11-18",
+    "job_id": "9d3148fb-232d-4178-ba1e-21a6e51a40fa"
+  },
+  {
+    "file": "img/editorial/knee.webp",
+    "sha256": "095184ce1ccf18e93da37712f3bfc4c1888345fc7216c0b8ec4e9bfca879ce98",
+    "source": "AI-generated contextual illustration, not a patient outcome or clinical evidence, 2026-11-18",
+    "job_id": "047f99a0-bbf7-4ebc-9282-c04b36436f05"
+  },
+  {
+    "file": "img/editorial/movement.webp",
+    "sha256": "a5116ac04dade2ddc77a1351045f5fe5afe7906cbad9a0ebaee9fe165acc1f69",
+    "source": "AI-generated contextual illustration, not a patient outcome or clinical evidence, 2026-11-18",
+    "job_id": "00925dfa-1278-4a69-b7bb-48c93e7006cd"
+  },
+  {
+    "file": "img/editorial/neck.webp",
+    "sha256": "782d2cfc3108c7965123f957a67a1e95ff1ea570f9423705498666c5bf5859c4",
+    "source": "AI-generated contextual illustration, not a patient outcome or clinical evidence, 2026-11-18",
+    "job_id": "5f004cc4-388a-4a10-aa63-f179b91aa76b"
+  },
+  {
+    "file": "img/editorial/sciatica.webp",
+    "sha256": "1bc01697d04a048a861c481559c7f5d090e743b6ae0ff5043e40ccc2e3b322bf",
+    "source": "AI-generated contextual illustration, not a patient outcome or clinical evidence, 2026-11-18",
+    "job_id": "528f3db5-1095-4801-8c16-cb5306795285"
+  },
+  {
+    "file": "img/editorial/sleep.webp",
+    "sha256": "f55517d7da13716f082d89304e3d1022a5368c189d53bf1dcd612b17cc696d85",
+    "source": "AI-generated contextual illustration, not a patient outcome or clinical evidence, 2026-11-18",
+    "job_id": "747748fc-6968-49e8-bd6a-69d60599e1a0"
+  },
+  {
+    "file": "img/editorial/workstation.webp",
+    "sha256": "5146cedb5c9bf7047b05cecb155e01f8ff06b58b81794f4e38cc2d280a1d0d0a",
+    "source": "AI-generated contextual illustration, not a patient outcome or clinical evidence, 2026-11-18",
+    "job_id": "bb06a9ab-65f3-495e-a6ac-117116dd4777"
+  }
+]

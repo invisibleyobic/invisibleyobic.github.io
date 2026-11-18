@@ -1,1 +1,167 @@
-{"orders": {"enabled": false, "endpoint": ""}, "items": {"85/31": {"name": "Прибор RoovJoy", "price": 19700, "sizes": [], "slug": "pribor-roovjoy", "description": "мод. R-C3, 2 канала, TENS / EMS / Massage", "size_description": "", "image": "device.jpg"}, "5T15": {"name": "Крем OZOTENS 30%", "price": 10750, "sizes": [], "slug": "krem-ozotens-30", "description": "150 мл, электродный", "size_description": "", "image": "cream.jpg"}, "85/01": {"name": "Электрод «ШЕЯ», 4 сегмента", "price": 26775, "sizes": ["M", "L"], "slug": "elektrod-85-01", "description": "2 канала, шейно-воротниковая зона", "size_description": "M / L. Размер по обхвату шеи: M менее 40 см, L более 40 см.", "image": "el-neck.webp"}, "85/21": {"name": "Электрод «ШЕЯ на остистые», 6 сегментов", "price": 34950, "sizes": ["M", "L"], "slug": "elektrod-85-21", "description": "2 канала, шейно-воротниковая зона", "size_description": "M / L. Размер по обхвату шеи: M менее 40 см, L более 40 см.", "image": "el-neck.webp"}, "85/02": {"name": "Электрод «ПЛЕЧО», 4 сегмента", "price": 36775, "sizes": [], "slug": "elektrod-85-02", "description": "2 канала", "size_description": "", "image": "el-shoulder.webp"}, "85/03": {"name": "Электрод «ПЛЕЧО - ГОЛЕНЬ», 2 сегмента", "price": 21750, "sizes": [], "slug": "elektrod-85-03", "description": "1 канал, обхват до 40 см", "size_description": "", "image": "el-shin-arm.webp"}, "85/04": {"name": "Электрод «СПИНА», 4 сегмента", "price": 31750, "sizes": ["M", "L", "XL"], "slug": "elektrod-85-04", "description": "2 канала, эластичный пояс с манжетой", "size_description": "M / L / XL. Размер по обхвату талии: M 55-100 см, L 75-120 см, XL 85-130 см.", "image": "el-back.webp"}, "85/24": {"name": "Электрод «СПИНА на остистые», 6 сегментов", "price": 38250, "sizes": ["M", "L", "XL"], "slug": "elektrod-85-24", "description": "2 канала, эластичный пояс с манжетой", "size_description": "M / L / XL. Размер по обхвату талии: M 55-100 см, L 75-120 см, XL 85-130 см.", "image": "el-back.webp"}, "85/34": {"name": "Электрод «СПИНА на остистые», 3 сегмента", "price": 36100, "sizes": ["M", "L", "XL"], "slug": "elektrod-85-34", "description": "2 канала, эластичный пояс с манжетой", "size_description": "M / L / XL. Размер по обхвату талии: M 55-100 см, L 75-120 см, XL 85-130 см.", "image": "el-back.webp"}, "85/05": {"name": "Электрод «ТАЗОБЕДРЕННЫЙ», 4 сегмента", "price": 23450, "sizes": [], "slug": "elektrod-85-05", "description": "2 канала (85/15 - 1 канал)", "size_description": "", "image": "el-hip.webp"}, "85/06": {"name": "Электрод «КИСТЬ - СТОПА», 2 сегмента", "price": 18950, "sizes": [], "slug": "elektrod-85-06", "description": "1 канал", "size_description": "", "image": "el-hand-foot.webp"}, "85/07": {"name": "Электрод «КОЛЕНО», 4 сегмента", "price": 20400, "sizes": [], "slug": "elektrod-85-07", "description": "2 канала", "size_description": "", "image": "el-knee.webp"}, "85/17": {"name": "Электрод «КОЛЕНО», 4 сегмента", "price": 20400, "sizes": [], "slug": "elektrod-85-17", "description": "1 канал", "size_description": "", "image": "el-knee.webp"}, "85/08": {"name": "Электрод «ГОЛЕНЬ - БЕДРО», 2 сегмента", "price": 23125, "sizes": ["M", "L"], "slug": "elektrod-85-08", "description": "1 канал, размеры M, L", "size_description": "M / L. Размер по обхвату: M 50 см, L 60 см.", "image": "el-shin-thigh.webp"}, "85/09": {"name": "Электрод «СТОПА», 2 сегмента", "price": 19350, "sizes": ["M", "L"], "slug": "elektrod-85-09", "description": "1 канал", "size_description": "M / L. Размер по размеру обуви: M 34-39, L 40-45. Больше 45 - по заказу.", "image": "el-foot.webp"}}}
+{
+  "orders": {
+    "enabled": false,
+    "endpoint": ""
+  },
+  "items": {
+    "85/31": {
+      "name": "Прибор RoovJoy",
+      "price": 19700,
+      "sizes": [],
+      "slug": "pribor-roovjoy",
+      "description": "мод. R-C3, 2 канала, TENS / EMS / Massage",
+      "size_description": "",
+      "image": "studio/device.webp"
+    },
+    "5T15": {
+      "name": "Крем OZOTENS 30%",
+      "price": 10750,
+      "sizes": [],
+      "slug": "krem-ozotens-30",
+      "description": "150 мл, электродный",
+      "size_description": "",
+      "image": "studio/cream.webp"
+    },
+    "85/01": {
+      "name": "Электрод «ШЕЯ», 4 сегмента",
+      "price": 26775,
+      "sizes": [
+        "M",
+        "L"
+      ],
+      "slug": "elektrod-85-01",
+      "description": "2 канала, шейно-воротниковая зона",
+      "size_description": "M / L. Размер по обхвату шеи: M менее 40 см, L более 40 см.",
+      "image": "studio/el-neck.webp"
+    },
+    "85/21": {
+      "name": "Электрод «ШЕЯ на остистые», 6 сегментов",
+      "price": 34950,
+      "sizes": [
+        "M",
+        "L"
+      ],
+      "slug": "elektrod-85-21",
+      "description": "2 канала, шейно-воротниковая зона",
+      "size_description": "M / L. Размер по обхвату шеи: M менее 40 см, L более 40 см.",
+      "image": "studio/el-neck.webp"
+    },
+    "85/02": {
+      "name": "Электрод «ПЛЕЧО», 4 сегмента",
+      "price": 36775,
+      "sizes": [],
+      "slug": "elektrod-85-02",
+      "description": "2 канала",
+      "size_description": "",
+      "image": "studio/el-shoulder.webp"
+    },
+    "85/03": {
+      "name": "Электрод «ПЛЕЧО - ГОЛЕНЬ», 2 сегмента",
+      "price": 21750,
+      "sizes": [],
+      "slug": "elektrod-85-03",
+      "description": "1 канал, обхват до 40 см",
+      "size_description": "",
+      "image": "studio/el-shin-arm.webp"
+    },
+    "85/04": {
+      "name": "Электрод «СПИНА», 4 сегмента",
+      "price": 31750,
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "slug": "elektrod-85-04",
+      "description": "2 канала, эластичный пояс с манжетой",
+      "size_description": "M / L / XL. Размер по обхвату талии: M 55-100 см, L 75-120 см, XL 85-130 см.",
+      "image": "studio/el-back.webp"
+    },
+    "85/24": {
+      "name": "Электрод «СПИНА на остистые», 6 сегментов",
+      "price": 38250,
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "slug": "elektrod-85-24",
+      "description": "2 канала, эластичный пояс с манжетой",
+      "size_description": "M / L / XL. Размер по обхвату талии: M 55-100 см, L 75-120 см, XL 85-130 см.",
+      "image": "studio/el-back.webp"
+    },
+    "85/34": {
+      "name": "Электрод «СПИНА на остистые», 3 сегмента",
+      "price": 36100,
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "slug": "elektrod-85-34",
+      "description": "2 канала, эластичный пояс с манжетой",
+      "size_description": "M / L / XL. Размер по обхвату талии: M 55-100 см, L 75-120 см, XL 85-130 см.",
+      "image": "studio/el-back.webp"
+    },
+    "85/05": {
+      "name": "Электрод «ТАЗОБЕДРЕННЫЙ», 4 сегмента",
+      "price": 23450,
+      "sizes": [],
+      "slug": "elektrod-85-05",
+      "description": "2 канала (85/15 - 1 канал)",
+      "size_description": "",
+      "image": "studio/el-hip.webp"
+    },
+    "85/06": {
+      "name": "Электрод «КИСТЬ - СТОПА», 2 сегмента",
+      "price": 18950,
+      "sizes": [],
+      "slug": "elektrod-85-06",
+      "description": "1 канал",
+      "size_description": "",
+      "image": "studio/el-hand-foot.webp"
+    },
+    "85/07": {
+      "name": "Электрод «КОЛЕНО», 4 сегмента",
+      "price": 20400,
+      "sizes": [],
+      "slug": "elektrod-85-07",
+      "description": "2 канала",
+      "size_description": "",
+      "image": "studio/el-knee.webp"
+    },
+    "85/17": {
+      "name": "Электрод «КОЛЕНО», 4 сегмента",
+      "price": 20400,
+      "sizes": [],
+      "slug": "elektrod-85-17",
+      "description": "1 канал",
+      "size_description": "",
+      "image": "studio/el-knee.webp"
+    },
+    "85/08": {
+      "name": "Электрод «ГОЛЕНЬ - БЕДРО», 2 сегмента",
+      "price": 23125,
+      "sizes": [
+        "M",
+        "L"
+      ],
+      "slug": "elektrod-85-08",
+      "description": "1 канал, размеры M, L",
+      "size_description": "M / L. Размер по обхвату: M 50 см, L 60 см.",
+      "image": "studio/el-shin-thigh.webp"
+    },
+    "85/09": {
+      "name": "Электрод «СТОПА», 2 сегмента",
+      "price": 19350,
+      "sizes": [
+        "M",
+        "L"
+      ],
+      "slug": "elektrod-85-09",
+      "description": "1 канал",
+      "size_description": "M / L. Размер по размеру обуви: M 34-39, L 40-45. Больше 45 - по заказу.",
+      "image": "studio/el-foot.webp"
+    }
+  }
+}

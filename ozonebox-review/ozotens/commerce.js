@@ -8,7 +8,7 @@
   document.querySelectorAll("[data-add-form],[data-kit-form]").forEach(form => {
     form.addEventListener("submit", event => event.preventDefault());
   });
-  const catalogPromise = fetch(path("commerce-catalog.json")).then(response => {
+  const catalogPromise = fetch(path("commerce-catalog.json?v=5")).then(response => {
     if (!response.ok) throw new Error("Не удалось загрузить каталог.");
     return response.json();
   });
@@ -155,6 +155,19 @@
       const size = form.elements.size;
       const refresh = () => {
         const item = catalog.items[electrode.value];
+        const card = form.closest(".kit-card");
+        if (card) {
+          const image = card.querySelector("[data-kit-image]");
+          image.src = path("img/" + item.image);
+          image.alt = item.name;
+          form.querySelector("[data-kit-spec]").textContent = item.description;
+          form.querySelector("[data-kit-sku]").textContent = "Артикул " + electrode.value;
+          form.querySelector("[data-kit-product]").href = path("catalog/" + item.slug + "/");
+          const sizeHelp = form.querySelector("[data-kit-size-help]");
+          sizeHelp.hidden = !item.size_description;
+          form.querySelector("[data-kit-size-text]").textContent = item.size_description || "";
+          form.querySelector(".kit-variant").hidden = electrode.options.length === 1;
+        }
         size.replaceChildren();
         const label = form.querySelector("[data-kit-size-label]");
         label.hidden = !item.sizes.length;
